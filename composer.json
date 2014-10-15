@@ -1,0 +1,18 @@
+{
+    "name": "netgen/ez-forms-bundle",
+    "description": "Integration of Symfony's Form component with eZ Publish 5 Public API",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Netgen",
+            "homepage": "http://www.netgenlabs.com"
+        }
+    ],
+    "require": {
+        "ezsystems/ezpublish-kernel": "*"
+    },
+    "autoload": {
+        "psr-0": { "Netgen\\Bundle\\EzFormsBundle": "" }
+    },
+    "target-dir": "Netgen/Bundle/EzFormsBundle"
+}

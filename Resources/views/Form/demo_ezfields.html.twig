@@ -1,0 +1,39 @@
+{% extends 'form_table_layout.html.twig' %}
+
+{% block form_row %}
+    <tr>
+        <td>
+            {{- form_label(form) -}}
+            {% if form.vars.ezforms.description is defined %}
+                <p>{{ form.vars.ezforms.description }}</p>
+            {% endif %}
+        </td>
+        <td>
+            {{- form_errors(form) -}}
+            {{- form_widget(form) -}}
+        </td>
+    </tr>
+{% endblock form_row %}
+
+{% block __ezforms_update_image_widget %}
+    {% spaceless %}
+        {{ ez_render_field(
+            form.vars.ezforms.content,
+            form.vars.ezforms.fielddefinition.identifier,
+            { 'parameters': {'alias': 'articlethumbnail'} }
+        ) }}
+        {{ block('form_widget_simple') }}
+    {% endspaceless %}
+{% endblock __ezforms_update_image_widget %}
+
+{% block _ezforms_update_content_ezforms_image_widget %}
+    {% spaceless %}
+        {{ block('__ezforms_update_image_widget') }}
+    {% endspaceless %}
+{% endblock _ezforms_update_content_ezforms_image_widget %}
+
+{% block _ezforms_update_user_ezforms_image_widget %}
+    {% spaceless %}
+        {{ block('__ezforms_update_image_widget') }}
+    {% endspaceless %}
+{% endblock _ezforms_update_user_ezforms_image_widget %}

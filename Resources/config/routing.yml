@@ -1,0 +1,15 @@
+_createcontent_route:
+    path:   /democreatecontent
+    defaults:   { _controller: NetgenEzFormsBundle:Demo:demoCreateContent }
+
+_createuser_route:
+    path:   /democreateuser
+    defaults:   { _controller: NetgenEzFormsBundle:Demo:demoCreateUser }
+
+_updatecontent_route:
+    path:   /demoupdatecontent
+    defaults:   { _controller: NetgenEzFormsBundle:Demo:demoUpdateContent }
+
+_updateuser_route:
+    path:   /demoupdateuser
+    defaults:   { _controller: NetgenEzFormsBundle:Demo:demoUpdateUser }
