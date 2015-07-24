@@ -20,7 +20,7 @@ Currently supported FieldTypes:
 | Country        | no
 | Date           | no
 | DateAndTime    | no
-| EmailAddress   | no
+| EmailAddress   | yes
 | Float          | no
 | Integer        | no
 | Image          | yes

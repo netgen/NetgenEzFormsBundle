@@ -3,6 +3,7 @@ parameters:
     netgen.ezforms.form.fieldtype_handler.ezstring.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\TextLine
     netgen.ezforms.form.fieldtype_handler.eztext.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\TextBlock
     netgen.ezforms.form.fieldtype_handler.ezuser.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\User
+    netgen.ezforms.form.fieldtype_handler.ezemail.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Email
 
 services:
     netgen.ezforms.form.fieldtype_handler.ezimage:
@@ -24,3 +25,9 @@ services:
         class: %netgen.ezforms.form.fieldtype_handler.ezuser.class%
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezuser}
+
+    netgen.ezforms.form.fieldtype_handler.ezemail:
+        class: %netgen.ezforms.form.fieldtype_handler.ezemail.class%
+        tags:
+            - {name: netgen.ezforms.form.fieldtype_handler, alias: ezemail}
+
