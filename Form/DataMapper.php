@@ -106,16 +106,6 @@ abstract class DataMapper implements DataMapperInterface
                 !$form->isDisabled()
             )
             {
-                // If the field is of type DateTime and the data is the same skip the update to
-                // keep the original object hash
-                if (
-                    $form->getData() instanceof \DateTime &&
-                    $form->getData() == $this->propertyAccessor->getValue( $data, $propertyPath )
-                )
-                {
-                    continue;
-                }
-
                 // If $data is out ContentCreateStruct, we need to map it to the corresponding field
                 // in the struct
                 if ( $data instanceof DataWrapper )
@@ -125,13 +115,26 @@ abstract class DataMapper implements DataMapperInterface
                 }
                 // If the data is identical to the value in $data, we are
                 // dealing with a reference
-                else if (
-                    !is_object( $data ) ||
-                    !$config->getByReference() ||
-                    $form->getData() !== $this->propertyAccessor->getValue( $data, $propertyPath )
-                )
+                else
                 {
-                    $this->propertyAccessor->setValue( $data, $propertyPath, $form->getData() );
+                    if (
+                        !is_object( $data ) ||
+                        !$config->getByReference() ||
+                        $form->getData() !== $this->propertyAccessor->getValue( $data, $propertyPath )
+                    )
+                    {
+                        $this->propertyAccessor->setValue( $data, $propertyPath, $form->getData() );
+                    }
+
+                    // If the field is of type DateTime and the data is the same skip the update to
+                    // keep the original object hash
+                    else if (
+                        $form->getData() instanceof \DateTime &&
+                        $form->getData() == $this->propertyAccessor->getValue( $data, $propertyPath )
+                    )
+                    {
+                        continue;
+                    }
                 }
             }
         }
