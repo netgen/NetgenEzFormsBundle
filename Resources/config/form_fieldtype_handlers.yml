@@ -6,6 +6,7 @@ parameters:
     netgen.ezforms.form.fieldtype_handler.ezemail.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Email
     netgen.ezforms.form.fieldtype_handler.ezselection.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Selection
     netgen.ezforms.form.fieldtype_handler.ezboolean.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Checkbox
+    netgen.ezforms.form.fieldtype_handler.ezdate.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Date
 
 services:
     netgen.ezforms.form.fieldtype_handler.ezimage:
@@ -42,3 +43,8 @@ services:
         class: %netgen.ezforms.form.fieldtype_handler.ezboolean.class%
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezboolean}
+
+    netgen.ezforms.form.fieldtype_handler.ezdate:
+        class: %netgen.ezforms.form.fieldtype_handler.ezdate.class%
+        tags:
+            - {name: netgen.ezforms.form.fieldtype_handler, alias: ezdate}

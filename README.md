@@ -18,7 +18,7 @@ Currently supported FieldTypes:
 | BinaryFile     | no
 | Checkbox       | yes
 | Country        | no
-| Date           | no
+| Date           | yes
 | DateAndTime    | no
 | EmailAddress   | yes
 | Float          | no
