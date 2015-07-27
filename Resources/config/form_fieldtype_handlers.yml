@@ -10,6 +10,7 @@ parameters:
     netgen.ezforms.form.fieldtype_handler.ezdatetime.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\DateAndTime
     netgen.ezforms.form.fieldtype_handler.ezinteger.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Integer
     netgen.ezforms.form.fieldtype_handler.ezfloat.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Float
+    netgen.ezforms.form.fieldtype_handler.ezurl.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Url
 
 services:
     netgen.ezforms.form.fieldtype_handler.ezimage:
@@ -66,3 +67,8 @@ services:
         class: %netgen.ezforms.form.fieldtype_handler.ezfloat.class%
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezfloat}
+
+    netgen.ezforms.form.fieldtype_handler.ezurl:
+        class: %netgen.ezforms.form.fieldtype_handler.ezurl.class%
+        tags:
+            - {name: netgen.ezforms.form.fieldtype_handler, alias: ezurl}
