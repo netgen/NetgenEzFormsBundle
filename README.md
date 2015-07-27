@@ -33,7 +33,7 @@ Currently supported FieldTypes:
 | Relation       | no
 | RelationList   | no
 | RichText       | no
-| Selection      | no
+| Selection      | yes
 | TextBlock      | yes
 | TextLine       | yes
 | Time           | no
