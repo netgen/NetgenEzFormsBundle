@@ -117,6 +117,16 @@ abstract class DataMapper implements DataMapperInterface
                 // dealing with a reference
                 else
                 {
+                    // If the field is of type DateTime and the data is the same skip the update to
+                    // keep the original object hash
+                    if (
+                        $form->getData() instanceof \DateTime &&
+                        $form->getData() == $this->propertyAccessor->getValue( $data, $propertyPath )
+                    )
+                    {
+                        continue;
+                    }
+
                     if (
                         !is_object( $data ) ||
                         !$config->getByReference() ||
@@ -124,16 +134,6 @@ abstract class DataMapper implements DataMapperInterface
                     )
                     {
                         $this->propertyAccessor->setValue( $data, $propertyPath, $form->getData() );
-                    }
-
-                    // If the field is of type DateTime and the data is the same skip the update to
-                    // keep the original object hash
-                    else if (
-                        $form->getData() instanceof \DateTime &&
-                        $form->getData() == $this->propertyAccessor->getValue( $data, $propertyPath )
-                    )
-                    {
-                        continue;
                     }
                 }
             }
