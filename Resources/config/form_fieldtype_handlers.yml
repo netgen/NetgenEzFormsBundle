@@ -12,6 +12,7 @@ parameters:
     netgen.ezforms.form.fieldtype_handler.ezfloat.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Float
     netgen.ezforms.form.fieldtype_handler.ezurl.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Url
     netgen.ezforms.form.fieldtype_handler.ezcountry.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Country
+    netgen.ezforms.form.fieldtype_handler.eztime.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Time
 
 
 services:
@@ -81,3 +82,8 @@ services:
             - '%ezpublish.fieldType.ezcountry.data%'
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezcountry}
+
+    netgen.ezforms.form.fieldtype_handler.eztime:
+        class: %netgen.ezforms.form.fieldtype_handler.eztime.class%
+        tags:
+            - {name: netgen.ezforms.form.fieldtype_handler, alias: eztime}

@@ -36,7 +36,7 @@ Currently supported FieldTypes:
 | Selection      | yes
 | TextBlock      | yes
 | TextLine       | yes
-| Time           | no
+| Time           | yes
 | Url            | yes
 | User           | yes
 | XmlText        | no
