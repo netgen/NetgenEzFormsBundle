@@ -19,7 +19,7 @@ Currently supported FieldTypes:
 | Checkbox       | yes
 | Country        | no
 | Date           | yes
-| DateAndTime    | no
+| DateAndTime    | yes
 | EmailAddress   | yes
 | Float          | no
 | Integer        | no
