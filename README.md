@@ -22,7 +22,7 @@ Currently supported FieldTypes:
 | DateAndTime    | yes
 | EmailAddress   | yes
 | Float          | no
-| Integer        | no
+| Integer        | yes
 | Image          | yes
 | ISBN           | no
 | Keyword        | no
