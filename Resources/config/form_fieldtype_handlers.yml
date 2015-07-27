@@ -7,6 +7,7 @@ parameters:
     netgen.ezforms.form.fieldtype_handler.ezselection.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Selection
     netgen.ezforms.form.fieldtype_handler.ezboolean.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Checkbox
     netgen.ezforms.form.fieldtype_handler.ezdate.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Date
+    netgen.ezforms.form.fieldtype_handler.ezdatetime.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\DateAndTime
 
 services:
     netgen.ezforms.form.fieldtype_handler.ezimage:
@@ -48,3 +49,8 @@ services:
         class: %netgen.ezforms.form.fieldtype_handler.ezdate.class%
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezdate}
+
+    netgen.ezforms.form.fieldtype_handler.ezdatetime:
+        class: %netgen.ezforms.form.fieldtype_handler.ezdatetime.class%
+        tags:
+            - {name: netgen.ezforms.form.fieldtype_handler, alias: ezdatetime}
