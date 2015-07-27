@@ -17,7 +17,7 @@ Currently supported FieldTypes:
 | Author         | no
 | BinaryFile     | no
 | Checkbox       | yes
-| Country        | no
+| Country        | yes
 | Date           | yes
 | DateAndTime    | yes
 | EmailAddress   | yes
