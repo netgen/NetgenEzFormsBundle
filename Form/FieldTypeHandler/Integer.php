@@ -31,14 +31,25 @@ class Integer extends FieldTypeHandler
 
         if ( !empty( $fieldDefinition->getValidatorConfiguration()['IntegerValueValidator'] ) )
         {
+            $rangeConstraints = array();
+
             $min = $fieldDefinition->getValidatorConfiguration()['IntegerValueValidator']['minIntegerValue'];
             $max = $fieldDefinition->getValidatorConfiguration()['IntegerValueValidator']['maxIntegerValue'];
-            $options['constraints'][] = new Assert\Range(
-                array(
-                    'min' => $min,
-                    'max' => $max,
-                )
-            );
+
+            if ( $min !== false )
+            {
+                $rangeConstraints['min'] = $min;
+            }
+
+            if ( $max !== false )
+            {
+                $rangeConstraints['max'] = $max;
+            }
+
+            if ( !empty( $rangeConstraints ) )
+            {
+                $options['constraints'][] = new Assert\Range( $rangeConstraints );
+            }
         }
 
         $formBuilder->add( $fieldDefinition->identifier, 'integer', $options );
