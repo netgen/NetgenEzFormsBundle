@@ -38,23 +38,27 @@ class TextLine extends FieldTypeHandler
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
 
-        $minStringLength = $fieldDefinition->validatorConfiguration["StringLengthValidator"]["minStringLength"];
-        $maxStringLength = $fieldDefinition->validatorConfiguration["StringLengthValidator"]["maxStringLength"];
-        $lengthConstraints = array();
-
-        if ( $minStringLength !== false )
+        if ( !empty( $fieldDefinition->validatorConfiguration["StringLengthValidator"] ) )
         {
-            $lengthConstraints["min"] = $minStringLength;
-        }
+            $lengthConstraints = array();
 
-        if ( $maxStringLength !== false )
-        {
-            $lengthConstraints["max"] = $maxStringLength;
-        }
+            $minStringLength = $fieldDefinition->validatorConfiguration["StringLengthValidator"]["minStringLength"];
+            $maxStringLength = $fieldDefinition->validatorConfiguration["StringLengthValidator"]["maxStringLength"];
 
-        if ( !empty( $lengthConstraints ) )
-        {
-            $options["constraints"][] = new Constraints\Length( $lengthConstraints );
+            if ( $minStringLength !== false )
+            {
+                $lengthConstraints["min"] = $minStringLength;
+            }
+
+            if ( $maxStringLength !== false )
+            {
+                $lengthConstraints["max"] = $maxStringLength;
+            }
+
+            if ( !empty( $lengthConstraints ) )
+            {
+                $options["constraints"][] = new Constraints\Length( $lengthConstraints );
+            }
         }
 
         $formBuilder->add( $fieldDefinition->identifier, "text", $options );
