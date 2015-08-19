@@ -26,18 +26,11 @@ class Selection extends FieldTypeHandler
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $values = $fieldDefinition->getFieldSettings()["options"];
-        $isMultiple = $fieldDefinition->getFieldSettings()["isMultiple"];
 
         $options['expanded'] = false;
-        $options['multiple'] = false;
-
-        if ( $isMultiple )
-        {
-            $options['multiple'] = true;
-        }
+        $options['multiple'] = $fieldDefinition->getFieldSettings()["isMultiple"];
 
         $options['choice_list'] = new ChoiceList( array_keys($values), array_values($values) );
-
 
         $formBuilder->add( $fieldDefinition->identifier, "choice", $options );
     }

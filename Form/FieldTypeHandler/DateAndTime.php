@@ -31,10 +31,7 @@ class DateAndTime extends FieldTypeHandler
         $options['date_widget'] = 'choice';
         $options['time_widget'] = 'choice';
         $options['with_seconds'] = $useSeconds;
-        $options['required'] = $fieldDefinition->isRequired;
-        $options['constraints'] = array(
-            new Assert\DateTime(),
-        );
+        $options['constraints'][] = new Assert\DateTime();
 
         $formBuilder->add( $fieldDefinition->identifier, "datetime", $options );
     }

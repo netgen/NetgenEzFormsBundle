@@ -28,10 +28,7 @@ class Date extends FieldTypeHandler
 
         $options['input'] = 'datetime';
         $options['widget'] = 'choice';
-        $options['required'] = $fieldDefinition->isRequired;
-		$options['constraints'] = array(
-			new Assert\Date(),
-		);
+		$options['constraints'][] = new Assert\Date();
 
         $formBuilder->add( $fieldDefinition->identifier, "date", $options );
     }

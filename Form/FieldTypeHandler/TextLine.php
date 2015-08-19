@@ -54,9 +54,7 @@ class TextLine extends FieldTypeHandler
 
         if ( !empty( $lengthConstraints ) )
         {
-            $options["constraints"] = array(
-                new Constraints\Length( $lengthConstraints ),
-            );
+            $options["constraints"][] = new Constraints\Length( $lengthConstraints );
         }
 
         $formBuilder->add( $fieldDefinition->identifier, "text", $options );

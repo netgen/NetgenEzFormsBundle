@@ -24,8 +24,6 @@ class Url extends FieldTypeHandler
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
 
-        $options['required'] = $fieldDefinition->isRequired;
-
         $formBuilder->add( $fieldDefinition->identifier, 'ezforms_url', $options );
     }
 

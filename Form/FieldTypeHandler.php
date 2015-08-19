@@ -3,6 +3,7 @@
 namespace Netgen\Bundle\EzFormsBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\FieldType\Value;
@@ -85,6 +86,12 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
         if ( $content !== null )
         {
             $options["ezforms"]["content"] = $content;
+        }
+
+        $options["constraints"] = array();
+        if ( $fieldDefinition->isRequired )
+        {
+            $options["constraints"][] = new Constraints\NotBlank();
         }
 
         return $options;

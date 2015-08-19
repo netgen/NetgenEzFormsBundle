@@ -24,17 +24,9 @@ class Email extends FieldTypeHandler
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
 
-        $emailValidator = $fieldDefinition->validatorConfiguration["EmailAddressValidator"];
-
-        if ( !empty( $emailValidator ) )
+        if ( !empty( $fieldDefinition->validatorConfiguration["EmailAddressValidator"] ) )
         {
-            $options["constraints"] = array(
-                new Constraints\Email(
-                    array(
-                        'checkMX' => true,
-                    )
-                ),
-            );
+            $options["constraints"][] = new Constraints\Email();
         }
 
         $formBuilder->add( $fieldDefinition->identifier, "email", $options );

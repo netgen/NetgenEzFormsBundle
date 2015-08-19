@@ -61,12 +61,10 @@ class Image extends FieldTypeHandler
 
         if ( $maxFileSize !== false )
         {
-            $options["constraints"] = array(
-                new Constraints\File(
-                    array(
-                        "maxSize" => $maxFileSize,
-                    )
-                ),
+            $options["constraints"][] = new Constraints\File(
+                array(
+                    "maxSize" => $maxFileSize,
+                )
             );
         }
 

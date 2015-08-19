@@ -54,16 +54,8 @@ class Country extends FieldTypeHandler
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
 
-        $isMultiple = $fieldDefinition->getFieldSettings()["isMultiple"];
-
-        $options['required'] = $fieldDefinition->isRequired;
         $options['expanded'] = false;
-        $options['multiple'] = false;
-
-        if ( $isMultiple )
-        {
-            $options['multiple'] = true;
-        }
+        $options['multiple'] = $fieldDefinition->getFieldSettings()["isMultiple"];
 
         $options['choice_list'] = new ChoiceList(
             array_keys( $this->filteredCountryData ),

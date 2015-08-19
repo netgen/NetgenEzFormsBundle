@@ -22,12 +22,7 @@ class Checkbox extends FieldTypeHandler
     )
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
-
-        $isRequired = $fieldDefinition->isRequired;
-        $defaultValue = $fieldDefinition->defaultValue->bool;
-
-        $options["required"] = $isRequired;
-        $options["data"] = $defaultValue;
+        $options["data"] = $fieldDefinition->defaultValue->bool;
 
         $formBuilder->add( $fieldDefinition->identifier, "checkbox", $options );
     }

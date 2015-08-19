@@ -33,17 +33,13 @@ class Integer extends FieldTypeHandler
         {
             $min = $fieldDefinition->getValidatorConfiguration()['IntegerValueValidator']['minIntegerValue'];
             $max = $fieldDefinition->getValidatorConfiguration()['IntegerValueValidator']['maxIntegerValue'];
-            $options['constraints'] = array(
-                new Assert\Range(
-                    array(
-                        'min' => $min,
-                        'max' => $max,
-                    )
-                ),
+            $options['constraints'][] = new Assert\Range(
+                array(
+                    'min' => $min,
+                    'max' => $max,
+                )
             );
         }
-
-        $options['required'] = $fieldDefinition->isRequired;
 
         $formBuilder->add( $fieldDefinition->identifier, 'integer', $options );
     }

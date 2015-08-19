@@ -29,10 +29,7 @@ class Time extends FieldTypeHandler
         $options['input'] = 'datetime';
         $options['widget'] = 'choice';
         $options['with_seconds'] = $useSeconds;
-        $options['required'] = $fieldDefinition->isRequired;
-        $options['constraints'] = array(
-            new Assert\Time(),
-        );
+        $options['constraints'][] = new Assert\Time();
 
         $formBuilder->add( $fieldDefinition->identifier, 'time', $options );
     }

@@ -28,13 +28,11 @@ class Float extends FieldTypeHandler
         {
             $min = $fieldDefinition->getValidatorConfiguration()['FloatValueValidator']['minFloatValue'];
             $max = $fieldDefinition->getValidatorConfiguration()['FloatValueValidator']['maxFloatValue'];
-            $options['constraints'] = array(
-                new Assert\Range(
-                    array(
-                        'min' => $min,
-                        'max' => $max,
-                    )
-                ),
+            $options['constraints'][] = new Assert\Range(
+                array(
+                    'min' => $min,
+                    'max' => $max,
+                )
             );
         }
 
@@ -42,8 +40,6 @@ class Float extends FieldTypeHandler
         {
             $options['data'] = (float)$fieldDefinition->defaultValue->value;
         }
-
-        $options['required'] = $fieldDefinition->isRequired;
 
         $formBuilder->add( $fieldDefinition->identifier, 'number', $options );
     }
