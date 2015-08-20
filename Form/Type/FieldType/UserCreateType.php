@@ -44,18 +44,25 @@ class UserCreateType extends AbstractType
                 new Constraints\NotBlank(),
             ),
         );
+
+        $passwordConstraints = array(
+            new Constraints\NotBlank()
+        );
+
+        if ( $this->minimumPasswordLength > 0 )
+        {
+            $passwordConstraints[] = new Constraints\Length(
+                array(
+                    "min" => $this->minimumPasswordLength,
+                )
+            );
+        }
+
         $passwordOptions = array(
             "type" => "password",
             "invalid_message" => "Both passwords must match.",
             "options" => array(
-                "constraints" => array(
-                    new Constraints\NotBlank(),
-                    new Constraints\Length(
-                        array(
-                            "min" => $this->minimumPasswordLength,
-                        )
-                    ),
-                ),
+                "constraints" => $passwordConstraints,
             ),
             "first_options" => array(
                 "label" => "Password",

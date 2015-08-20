@@ -38,6 +38,17 @@ class UserUpdateType extends AbstractType
                 new Constraints\Email(),
             ),
         );
+
+        $passwordConstraints = array();
+        if ( $this->minimumPasswordLength > 0 )
+        {
+            $passwordConstraints[] = new Constraints\Length(
+                array(
+                    "min" => $this->minimumPasswordLength,
+                )
+            );
+        }
+
         $passwordOptions = array(
             "type" => "password",
             // Setting required to false enables passing empty passwords for no update,
@@ -45,13 +56,7 @@ class UserUpdateType extends AbstractType
             "required" => false,
             "invalid_message" => "Both passwords must match.",
             "options" => array(
-                "constraints" => array(
-                    new Constraints\Length(
-                        array(
-                            "min" => $this->minimumPasswordLength,
-                        )
-                    ),
-                ),
+                "constraints" => $passwordConstraints,
             ),
             "first_options" => array(
                 "label" => "New password (leave empty to keep current password)",
