@@ -13,6 +13,8 @@ parameters:
 
     netgen.ezforms.form.url_type.class: Netgen\Bundle\EzFormsBundle\Form\Type\UrlType
 
+    netgen.ezforms.form.info_collection.class: Netgen\Bundle\EzFormsBundle\Form\Type\InfoCollectionType
+
 services:
     netgen.ezforms.form.data_mapper.create_content:
         class: %netgen.ezforms.form.data_mapper.create_content.class%
@@ -70,3 +72,11 @@ services:
         class: %netgen.ezforms.form.url_type.class%
         tags:
             - {name: form.type, alias: ezforms_url}
+
+    netgen.ezforms.form.info_collection:
+        class: %netgen.ezforms.form.info_collection.class%
+        arguments:
+            - @netgen.ezforms.form.fieldtype_handler_registry
+            - @netgen.ezforms.form.data_mapper.create_content
+        tags:
+            - {name: form.type, alias: ezforms_info_collection}
