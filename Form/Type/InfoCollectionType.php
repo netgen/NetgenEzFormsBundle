@@ -60,6 +60,6 @@ class InfoCollectionType extends AbstractContentType
             $handler = $this->fieldTypeHandlerRegistry->get( $fieldDefinition->fieldTypeIdentifier );
             $handler->buildFieldCreateForm( $builder, $fieldDefinition, $contentCreateStruct->mainLanguageCode );
         }
-
     }
 }
+
