@@ -21,7 +21,8 @@ class Date extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        Content $content = null,
+        $readOnly = false
     )
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
@@ -29,6 +30,7 @@ class Date extends FieldTypeHandler
         $options['input'] = 'datetime';
         $options['widget'] = 'choice';
 		$options['constraints'][] = new Assert\Date();
+        $options['read_only'] = $readOnly;
 
         $formBuilder->add( $fieldDefinition->identifier, "date", $options );
     }

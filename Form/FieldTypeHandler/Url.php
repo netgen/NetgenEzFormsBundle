@@ -19,11 +19,12 @@ class Url extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        Content $content = null,
+        $readOnly = false
     )
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
-
+        $options['read_only'] = $readOnly;
         $formBuilder->add( $fieldDefinition->identifier, 'ezforms_url', $options );
     }
 

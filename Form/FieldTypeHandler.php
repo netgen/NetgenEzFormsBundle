@@ -47,6 +47,7 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
      * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
      * @param string $languageCode
      * @param null|\eZ\Publish\API\Repository\Values\Content\Content $content
+     * @param boolean $readOnly
      *
      * @return void
      */
@@ -54,7 +55,8 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        Content $content = null,
+        $readOnly = false
     )
     {
         throw new RuntimeException( "Not implemented." );
@@ -124,10 +126,11 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         Content $content,
-        $languageCode
+        $languageCode,
+        $readOnly
     )
     {
-        $this->buildFieldForm( $formBuilder, $fieldDefinition, $languageCode, $content );
+        $this->buildFieldForm( $formBuilder, $fieldDefinition, $languageCode, $content, $readOnly );
     }
 
     /**

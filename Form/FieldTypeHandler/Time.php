@@ -20,7 +20,8 @@ class Time extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        Content $content = null,
+        $readOnly = false
     )
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
@@ -30,6 +31,7 @@ class Time extends FieldTypeHandler
         $options['widget'] = 'choice';
         $options['with_seconds'] = $useSeconds;
         $options['constraints'][] = new Assert\Time();
+        $options['read_only'] = $readOnly;
 
         $formBuilder->add( $fieldDefinition->identifier, 'time', $options );
     }

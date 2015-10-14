@@ -6,6 +6,7 @@ use Netgen\Bundle\EzFormsBundle\Model\InformationCollectionInterface;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
+use eZ\Publish\API\Repository\Values\Content\Content;
 use RuntimeException;
 
 /**
@@ -57,6 +58,23 @@ class InfoCollectionType extends AbstractContentType
             );
         }
 
+        /** @var Content $content */
+        $content = $dataWrapper->target;
+
+        if ( !$content instanceof Content )
+        {
+            throw new RuntimeException(
+                "Data target must be an instance of eZ\\Publish\\API\\Repository\\Values\\Content\\Content"
+            );
+        }
+
+        if ( $content->contentInfo->contentTypeId !== $contentType->id )
+        {
+            throw new RuntimeException(
+                "Data definition (ContentType) does not correspond to the data target (Content)"
+            );
+        }
+
         $builder->setDataMapper( $this->dataMapper );
 
         foreach ( $contentType->getFieldDefinitions() as $fieldDefinition )
@@ -67,13 +85,16 @@ class InfoCollectionType extends AbstractContentType
                 continue;
             }
 
+            $handler = $this->fieldTypeHandlerRegistry->get( $fieldDefinition->fieldTypeIdentifier );
+
             if ( !$fieldDefinition->isInfoCollector )
             {
-                continue;
+                $handler->buildFieldUpdateForm( $builder, $fieldDefinition, $content, $contentType->mainLanguageCode, true);
             }
-
-            $handler = $this->fieldTypeHandlerRegistry->get( $fieldDefinition->fieldTypeIdentifier );
-            $handler->buildFieldCreateForm( $builder, $fieldDefinition, $contentType->mainLanguageCode );
+            else
+            {
+                $handler->buildFieldCreateForm( $builder, $fieldDefinition, $contentType->mainLanguageCode );
+            }
         }
 
         // Intentionally omitting submit buttons, set them manually as needed

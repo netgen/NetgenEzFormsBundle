@@ -52,7 +52,8 @@ class Image extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        Content $content = null,
+        $readOnly = false
     )
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
@@ -61,7 +62,7 @@ class Image extends FieldTypeHandler
 
         if ( $maxFileSize !== false )
         {
-            $options["constraints"][] = new Constraints\File(
+            $options['constraints'][] = new Constraints\File(
                 array(
                     "maxSize" => $maxFileSize,
                 )
@@ -71,7 +72,8 @@ class Image extends FieldTypeHandler
         // Image should not be erased (updated as empty) if nothing is selected in file input
         $this->skipEmptyUpdate( $formBuilder, $fieldDefinition->identifier );
 
-        $options["block_name"] = "ezforms_image";
+        $options['block_name'] = "ezforms_image";
+        $options['read_only'] = $readOnly;
 
         $formBuilder->add( $fieldDefinition->identifier, "file", $options );
     }

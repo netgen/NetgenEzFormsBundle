@@ -32,12 +32,14 @@ class TextBlock extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        Content $content = null,
+        $readOnly = false
     )
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
 
-        $options["attr"]["rows"] = $fieldDefinition->fieldSettings["textRows"];
+        $options['attr']['rows'] = $fieldDefinition->fieldSettings["textRows"];
+        $options['read_only'] = $readOnly;
 
         $formBuilder->add( $fieldDefinition->identifier, "textarea", $options );
     }

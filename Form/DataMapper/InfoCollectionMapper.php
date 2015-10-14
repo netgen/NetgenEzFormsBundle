@@ -24,6 +24,9 @@ class InfoCollectionMapper extends DataMapper
         /** @var ContentType $contentType */
         $contentType = $data->definition;
 
+        /** @var $content \eZ\Publish\API\Repository\Values\Content\Content */
+        $content = $data->target;
+
         $fieldDefinitionIdentifier = (string)$propertyPath;
         $fieldDefinition = $contentType->getFieldDefinition( $fieldDefinitionIdentifier );
 
@@ -35,11 +38,14 @@ class InfoCollectionMapper extends DataMapper
         }
 
         $fieldTypeIdentifier = $fieldDefinition->fieldTypeIdentifier;
+        $handler = $this->fieldTypeHandlerRegistry->get($fieldTypeIdentifier);
 
-        $handler = $this->fieldTypeHandlerRegistry->get( $fieldTypeIdentifier );
         $form->setData(
             $handler->convertFieldValueToForm(
-                $contentType->getFieldDefinition( $fieldDefinitionIdentifier )->defaultValue
+                $content->getFieldValue(
+                    $fieldDefinitionIdentifier,
+                    $contentType->mainLanguageCode
+                )
             )
         );
     }

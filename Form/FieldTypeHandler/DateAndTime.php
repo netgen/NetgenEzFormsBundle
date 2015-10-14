@@ -21,7 +21,8 @@ class DateAndTime extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        Content $content = null,
+        $readOnly = false
     )
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
@@ -32,6 +33,7 @@ class DateAndTime extends FieldTypeHandler
         $options['time_widget'] = 'choice';
         $options['with_seconds'] = $useSeconds;
         $options['constraints'][] = new Assert\DateTime();
+        $options['read_only'] = $readOnly;
 
         $formBuilder->add( $fieldDefinition->identifier, "datetime", $options );
     }
