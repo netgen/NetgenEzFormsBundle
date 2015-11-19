@@ -13,6 +13,7 @@ parameters:
     netgen.ezforms.form.fieldtype_handler.ezurl.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Url
     netgen.ezforms.form.fieldtype_handler.ezcountry.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Country
     netgen.ezforms.form.fieldtype_handler.eztime.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Time
+    netgen.ezforms.form.fieldtype_handler.enhancedezbinaryfile.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\EnhancedFile
 
 
 services:
@@ -87,3 +88,10 @@ services:
         class: %netgen.ezforms.form.fieldtype_handler.eztime.class%
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: eztime}
+
+    netgen.ezforms.form.fieldtype_handler.enhancedezbinaryfile:
+        class: %netgen.ezforms.form.fieldtype_handler.enhancedezbinaryfile.class%
+        arguments:
+            - @ezpublish.config.resolver
+        tags:
+            - {name: netgen.ezforms.form.fieldtype_handler, alias: enhancedezbinaryfile}
