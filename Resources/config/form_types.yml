@@ -17,52 +17,52 @@ services:
     netgen.ezforms.form.data_mapper.create_content:
         class: %netgen.ezforms.form.data_mapper.create_content.class%
         arguments:
-            - @netgen.ezforms.form.fieldtype_handler_registry
+            - "@netgen.ezforms.form.fieldtype_handler_registry"
 
     netgen.ezforms.form.type.create_content:
         class: %netgen.ezforms.form.type.create_content.class%
         arguments:
-            - @netgen.ezforms.form.fieldtype_handler_registry
-            - @netgen.ezforms.form.data_mapper.create_content
+            - "@netgen.ezforms.form.fieldtype_handler_registry"
+            - "@netgen.ezforms.form.data_mapper.create_content"
         tags:
             - {name: form.type, alias: ezforms_create_content}
 
     netgen.ezforms.form.data_mapper.create_user:
         class: %netgen.ezforms.form.data_mapper.create_user.class%
         arguments:
-            - @netgen.ezforms.form.fieldtype_handler_registry
+            - "@netgen.ezforms.form.fieldtype_handler_registry"
 
     netgen.ezforms.form.type.create_user:
         class: %netgen.ezforms.form.type.create_user.class%
         arguments:
-            - @netgen.ezforms.form.fieldtype_handler_registry
-            - @netgen.ezforms.form.data_mapper.create_user
+            - "@netgen.ezforms.form.fieldtype_handler_registry"
+            - "@netgen.ezforms.form.data_mapper.create_user"
         tags:
             - {name: form.type, alias: ezforms_create_user}
 
     netgen.ezforms.form.data_mapper.update_content:
         class: %netgen.ezforms.form.data_mapper.update_content.class%
         arguments:
-            - @netgen.ezforms.form.fieldtype_handler_registry
+            - "@netgen.ezforms.form.fieldtype_handler_registry"
 
     netgen.ezforms.form.type.update_content:
         class: %netgen.ezforms.form.type.update_content.class%
         arguments:
-            - @netgen.ezforms.form.fieldtype_handler_registry
-            - @netgen.ezforms.form.data_mapper.update_content
+            - "@netgen.ezforms.form.fieldtype_handler_registry"
+            - "@netgen.ezforms.form.data_mapper.update_content"
         tags:
             - {name: form.type, alias: ezforms_update_content}
 
     netgen.ezforms.form.data_mapper.update_user:
         class: %netgen.ezforms.form.data_mapper.update_user.class%
         arguments:
-            - @netgen.ezforms.form.fieldtype_handler_registry
+            - "@netgen.ezforms.form.fieldtype_handler_registry"
 
     netgen.ezforms.form.type.update_user:
         class: %netgen.ezforms.form.type.update_user.class%
         arguments:
-            - @netgen.ezforms.form.fieldtype_handler_registry
-            - @netgen.ezforms.form.data_mapper.update_user
+            - "@netgen.ezforms.form.fieldtype_handler_registry"
+            - "@netgen.ezforms.form.data_mapper.update_user"
         tags:
             - {name: form.type, alias: ezforms_update_user}
 
