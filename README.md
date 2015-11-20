@@ -24,7 +24,7 @@ Currently supported FieldTypes:
 | Float          | yes
 | Integer        | yes
 | Image          | yes
-| ISBN           | no
+| ISBN           | yes
 | Keyword        | no
 | Media          | no
 | MapLocation    | no
