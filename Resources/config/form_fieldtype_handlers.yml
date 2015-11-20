@@ -14,7 +14,7 @@ parameters:
     netgen.ezforms.form.fieldtype_handler.ezcountry.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Country
     netgen.ezforms.form.fieldtype_handler.eztime.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Time
     netgen.ezforms.form.fieldtype_handler.ezisbn.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Isbn
-
+    netgen.ezforms.form.fieldtype_handler.ezbinaryfile.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\File
 
 services:
     netgen.ezforms.form.fieldtype_handler.ezimage:
@@ -93,3 +93,8 @@ services:
         class: %netgen.ezforms.form.fieldtype_handler.ezisbn.class%
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezisbn}
+
+    netgen.ezforms.form.fieldtype_handler.ezbinaryfile:
+        class: %netgen.ezforms.form.fieldtype_handler.ezbinaryfile.class%
+        tags:
+            - {name: netgen.ezforms.form.fieldtype_handler, alias: ezbinaryfile}
