@@ -33,7 +33,8 @@ class TextLine extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        Content $content = null,
+        $readOnly = false
     )
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
@@ -60,6 +61,8 @@ class TextLine extends FieldTypeHandler
                 $options["constraints"][] = new Constraints\Length( $lengthConstraints );
             }
         }
+
+        $options['read_only'] = $readOnly;
 
         $formBuilder->add( $fieldDefinition->identifier, "text", $options );
     }

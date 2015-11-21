@@ -60,6 +60,7 @@ interface FieldTypeHandlerInterface
      * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
      * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      * @param string $languageCode
+     * @param boolean $readOnly
      *
      * @return void
      */
@@ -67,6 +68,7 @@ interface FieldTypeHandlerInterface
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         Content $content,
-        $languageCode
+        $languageCode,
+        $readOnly
     );
 }

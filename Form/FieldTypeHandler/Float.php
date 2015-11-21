@@ -19,7 +19,8 @@ class Float extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        Content $content = null,
+        $readOnly = false
     )
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
@@ -51,6 +52,8 @@ class Float extends FieldTypeHandler
         {
             $options['data'] = (float)$fieldDefinition->defaultValue->value;
         }
+
+        $options['read_only'] = $readOnly;
 
         $formBuilder->add( $fieldDefinition->identifier, 'number', $options );
     }

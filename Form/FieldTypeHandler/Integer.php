@@ -19,7 +19,8 @@ class Integer extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        Content $content = null,
+        $readOnly = false
     )
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
@@ -51,6 +52,8 @@ class Integer extends FieldTypeHandler
                 $options['constraints'][] = new Assert\Range( $rangeConstraints );
             }
         }
+
+        $options['read_only'] = $readOnly;
 
         $formBuilder->add( $fieldDefinition->identifier, 'integer', $options );
     }

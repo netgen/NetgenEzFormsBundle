@@ -20,7 +20,8 @@ class Selection extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        Content $content = null,
+        $readOnly = false
     )
     {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
@@ -31,6 +32,7 @@ class Selection extends FieldTypeHandler
         $options['multiple'] = $fieldDefinition->getFieldSettings()["isMultiple"];
 
         $options['choice_list'] = new ChoiceList( array_keys($values), array_values($values) );
+        $options['read_only'] = $readOnly;
 
         $formBuilder->add( $fieldDefinition->identifier, "choice", $options );
     }

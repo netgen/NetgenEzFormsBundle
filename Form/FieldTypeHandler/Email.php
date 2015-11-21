@@ -19,7 +19,8 @@ class Email extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        Content $content = null,
+        $readOnly = false
     )
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
@@ -28,6 +29,8 @@ class Email extends FieldTypeHandler
         {
             $options["constraints"][] = new Constraints\Email();
         }
+
+        $options['read_only'] = $readOnly;
 
         $formBuilder->add( $fieldDefinition->identifier, "email", $options );
     }

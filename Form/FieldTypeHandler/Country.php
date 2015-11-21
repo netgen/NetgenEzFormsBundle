@@ -49,13 +49,15 @@ class Country extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        Content $content = null,
+        $readOnly = false
     )
     {
         $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
 
         $options['expanded'] = false;
         $options['multiple'] = $fieldDefinition->getFieldSettings()["isMultiple"];
+        $options['read_only'] = $readOnly;
 
         $options['choice_list'] = new ChoiceList(
             array_keys( $this->filteredCountryData ),
