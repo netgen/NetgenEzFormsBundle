@@ -88,7 +88,7 @@ class InformationCollectionMapper extends DataMapper
         $fieldTypeIdentifier = $fieldDefinition->fieldTypeIdentifier;
         $handler = $this->fieldTypeHandlerRegistry->get( $fieldTypeIdentifier );
 
-        $payload->setField(
+        $payload->setCollectedFieldValue(
             $fieldDefinitionIdentifier,
             $handler->convertFieldValueFromForm( $form->getData() )
         );

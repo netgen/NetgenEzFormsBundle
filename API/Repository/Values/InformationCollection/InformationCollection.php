@@ -3,7 +3,6 @@
 namespace Netgen\Bundle\EzFormsBundle\API\Repository\Values\InformationCollection;
 
 use eZ\Publish\API\Repository\Values\ValueObject;
-use eZ\Publish\API\Repository\Exceptions\PropertyNotFoundException;
 
 /**
  * Class InformationCollection
@@ -12,35 +11,28 @@ use eZ\Publish\API\Repository\Exceptions\PropertyNotFoundException;
 abstract class InformationCollection extends ValueObject
 {
     /**
-     * Get value for given fieldIdentifier
+     * Returns value for $fieldDefIdentifier
      *
-     * @param string $fieldIdentifier
+     * @param $fieldDefIdentifier
      *
      * @return mixed
-     *
-     * @throws PropertyNotFoundException
      */
-    public function getField( $fieldIdentifier )
-    {
-        if ( property_exists( $this, $fieldIdentifier ) )
-        {
-            return $this->$fieldIdentifier;
-        }
-        throw new PropertyNotFoundException( $fieldIdentifier, get_class( $this ) );
-    }
+    abstract public function getCollectedFieldValue( $fieldDefIdentifier );
 
     /**
-     * Set given value to selected fieldIdentifier
+     * This method returns the complete fields collection
      *
-     * @param string $fieldIdentifier
-     * @param string  $value
-     *
-     * @return $this
+     * @return array
      */
-    public function setField( $fieldIdentifier, $value )
-    {
-        $this->$fieldIdentifier = $value;
+    abstract public function getCollectedFields();
 
-        return $this;
-    }
+    /**
+     * Sets value for $fieldDefIdentifier
+     *
+     * @param string $fieldDefIdentifier
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    abstract public function setCollectedFieldValue( $fieldDefIdentifier, $value );
 }
