@@ -24,6 +24,8 @@ class InformationCollection extends APIInformationCollection
         {
             return $this->collectedData[$fieldDefIdentifier];
         }
+
+        return null;
     }
 
     /**
