@@ -6,6 +6,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\FieldType\BinaryFile\Value as FileValue;
 use eZ\Publish\SPI\FieldType\Value;
 use Symfony\Component\Validator\Constraints;
 
@@ -38,11 +39,13 @@ class File extends FieldTypeHandler
             return null;
         }
 
-        return array(
+        $fileData = array(
             "inputUri" => $data->getRealPath(),
             "fileName" => $data->getClientOriginalName(),
             "fileSize" => $data->getSize(),
         );
+
+        return new FileValue( $fileData );
     }
 
     /**
