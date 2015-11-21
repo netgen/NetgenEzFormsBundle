@@ -4,7 +4,7 @@ namespace Netgen\Bundle\EzFormsBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
-use Netgen\Bundle\EzFormsBundle\API\Repository\Values\InformationCollection\InformationCollection;
+use Netgen\Bundle\EzFormsBundle\API\Repository\Values\InformationCollection\InformationCollectionStruct;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use RuntimeException;
 
@@ -39,13 +39,13 @@ class InfoCollectionType extends AbstractContentType
             );
         }
 
-        /** @var InformationCollection $payload */
+        /** @var InformationCollectionStruct $payload */
         $payload = $dataWrapper->payload;
 
-        if ( !$payload instanceof InformationCollection )
+        if ( !$payload instanceof InformationCollectionStruct )
         {
             throw new RuntimeException(
-                "Data payload must be an instance of Netgen\\Bundle\\EzFormsBundle\\API\\Repository\\Values\\InformationCollection\\InformationCollection"
+                "Data payload must be an instance of Netgen\\Bundle\\EzFormsBundle\\API\\Repository\\Values\\InformationCollection\\InformationCollectionStruct"
             );
         }
 

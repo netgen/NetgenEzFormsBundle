@@ -4,7 +4,7 @@ namespace Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
-use Netgen\Bundle\EzFormsBundle\API\Repository\Values\InformationCollection\InformationCollection;
+use Netgen\Bundle\EzFormsBundle\API\Repository\Values\InformationCollection\InformationCollectionStruct;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
@@ -70,7 +70,7 @@ class InformationCollectionMapper extends DataMapper
         PropertyPathInterface $propertyPath
     )
     {
-        /** @var InformationCollection $payload */
+        /** @var InformationCollectionStruct $payload */
         $payload = $data->payload;
         /** @var ContentType $contentType */
         $contentType = $data->definition;

@@ -6,9 +6,9 @@ use eZ\Publish\API\Repository\Values\ValueObject;
 
 /**
  * Class InformationCollection
- * @package Netgen\Bundle\EzFormsBundle\API\Repository\Values\InformationCollection
+ * @package Netgen\Bundle\EzFormsBundle\API\Repository\Values\InformationCollectionStruct
  */
-abstract class InformationCollection extends ValueObject
+abstract class InformationCollectionStruct extends ValueObject
 {
     /**
      * Returns value for $fieldDefIdentifier

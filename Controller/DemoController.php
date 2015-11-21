@@ -4,7 +4,7 @@ namespace Netgen\Bundle\EzFormsBundle\Controller;
 
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 use eZ\Bundle\EzPublishCoreBundle\Controller;
-use Netgen\Bundle\EzFormsBundle\Core\Repository\Values\InformationCollection\InformationCollection;
+use Netgen\Bundle\EzFormsBundle\Core\Repository\Values\InformationCollection\InformationCollectionStruct;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
@@ -304,7 +304,7 @@ class DemoController extends Controller
         $contentTypeId = $content->versionInfo->contentInfo->contentTypeId;
         $contentType = $repository->getContentTypeService()->loadContentType( $contentTypeId );
 
-        $informationCollection = new InformationCollection();
+        $informationCollection = new InformationCollectionStruct();
 
         $data = new DataWrapper( $informationCollection, $contentType );
 
@@ -319,7 +319,7 @@ class DemoController extends Controller
 
         if ( $form->isValid() )
         {
-            /** @var InformationCollection $data */
+            /** @var InformationCollectionStruct $data */
             $data = $form->getData()->payload;
             // save data to database
             // or something else
