@@ -37,3 +37,21 @@
         {{ block('__ezforms_update_image_widget') }}
     {% endspaceless %}
 {% endblock _ezforms_update_user_ezforms_image_widget %}
+
+{# BinaryFile update field custom rendering #}
+{% block __ezforms_update_file_widget %}
+    {% spaceless %}
+        {{ ez_render_field(
+        form.vars.ezforms.content,
+        form.vars.ezforms.fielddefinition.identifier
+        ) }}
+        {{ block('form_widget_simple') }}
+    {% endspaceless %}
+{% endblock __ezforms_update_file_widget %}
+
+{% block _ezforms_update_content_ezforms_binary_file_widget %}
+    {% spaceless %}
+        {{ block('__ezforms_update_file_widget') }}
+    {% endspaceless %}
+{% endblock _ezforms_update_content_ezforms_binary_file_widget %}
+{# END of BinaryFile update field custom rendering #}

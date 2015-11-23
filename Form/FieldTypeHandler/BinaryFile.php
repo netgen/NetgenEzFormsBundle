@@ -73,7 +73,7 @@ class BinaryFile extends FieldTypeHandler
         // File should not be erased (updated as empty) if nothing is selected in file input
         $this->skipEmptyUpdate( $formBuilder, $fieldDefinition->identifier );
         // Used with update for displaying current file
-        $options["block_name"] = "ezforms_image";
+        $options["block_name"] = "ezforms_binary_file";
 
         $formBuilder->add( $fieldDefinition->identifier, "file", $options );
     }
