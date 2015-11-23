@@ -11,11 +11,11 @@ use eZ\Publish\SPI\FieldType\Value;
 use Symfony\Component\Validator\Constraints;
 
 /**
- * Class File
+ * Class BinaryFile
  *
  * @package Netgen\EzFormsBundle\FieldType\FormBuilder
  */
-class File extends FieldTypeHandler
+class BinaryFile extends FieldTypeHandler
 {
     /**
      * {@inheritdoc}
