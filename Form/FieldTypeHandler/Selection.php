@@ -50,7 +50,7 @@ class Selection extends FieldTypeHandler
      *
      * @return array
      */
-    public function convertFieldValueToForm( Value $value )
+    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition )
     {
         return $value->selection;
     }

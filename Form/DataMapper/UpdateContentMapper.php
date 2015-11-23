@@ -47,7 +47,8 @@ class UpdateContentMapper extends DataMapper
                 $content->getFieldValue(
                     $fieldDefinitionIdentifier,
                     $contentUpdateStruct->initialLanguageCode
-                )
+                ),
+                $fieldDefinition
             )
         );
     }

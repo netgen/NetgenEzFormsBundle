@@ -41,7 +41,8 @@ class CreateUserMapper extends DataMapper
         $handler = $this->fieldTypeHandlerRegistry->get( $fieldTypeIdentifier );
         $form->setData(
             $handler->convertFieldValueToForm(
-                $contentType->getFieldDefinition( $fieldDefinitionIdentifier )->defaultValue
+                $contentType->getFieldDefinition( $fieldDefinitionIdentifier )->defaultValue,
+                $fieldDefinition
             )
         );
     }

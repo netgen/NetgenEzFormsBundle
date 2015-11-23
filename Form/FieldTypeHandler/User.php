@@ -17,10 +17,8 @@ class User extends FieldTypeHandler
 {
     /**
      * {@inheritdoc}
-     *
-     * @param \eZ\Publish\Core\FieldType\TextLine\Value $value
      */
-    public function convertFieldValueToForm( Value $value )
+    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition )
     {
         // Returning null here because user data is mapped in mapper as an exceptional case
         return null;

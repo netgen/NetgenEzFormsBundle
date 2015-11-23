@@ -18,10 +18,8 @@ class TextBlock extends FieldTypeHandler
 {
     /**
      * {@inheritdoc}
-     *
-     * @param \eZ\Publish\Core\FieldType\TextLine\Value $value
      */
-    public function convertFieldValueToForm( Value $value )
+    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition )
     {
         return $value->text;
     }
