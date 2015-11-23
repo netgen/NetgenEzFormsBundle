@@ -42,8 +42,8 @@
 {% block __ezforms_update_file_widget %}
     {% spaceless %}
         {{ ez_render_field(
-        form.vars.ezforms.content,
-        form.vars.ezforms.fielddefinition.identifier
+            form.vars.ezforms.content,
+            form.vars.ezforms.fielddefinition.identifier
         ) }}
         {{ block('form_widget_simple') }}
     {% endspaceless %}
