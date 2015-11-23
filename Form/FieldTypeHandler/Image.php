@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\FieldType\Value;
+use eZ\Publish\Core\FieldType\Image\Value as ImageValue;
 use Symfony\Component\Validator\Constraints;
 
 /**
@@ -38,11 +39,13 @@ class Image extends FieldTypeHandler
             return null;
         }
 
-        return array(
+        $imageData = array(
             "inputUri" => $data->getRealPath(),
             "fileName" => $data->getClientOriginalName(),
             "fileSize" => $data->getSize(),
         );
+
+        return new ImageValue( $imageData );
     }
 
     /**

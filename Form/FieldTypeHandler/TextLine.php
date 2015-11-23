@@ -6,6 +6,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use eZ\Publish\SPI\FieldType\Value;
 use Symfony\Component\Validator\Constraints;
 
@@ -24,6 +25,19 @@ class TextLine extends FieldTypeHandler
     public function convertFieldValueToForm( Value $value )
     {
         return $value->text;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function convertFieldValueFromForm( $data )
+    {
+        if ( empty( $data ) )
+        {
+            $data = '';
+        }
+
+        return new TextLineValue( $data );
     }
 
     /**
