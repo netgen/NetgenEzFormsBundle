@@ -20,7 +20,7 @@ class TextLine extends FieldTypeHandler
     /**
      * {@inheritdoc}
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition )
+    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
     {
         return $value->text;
     }

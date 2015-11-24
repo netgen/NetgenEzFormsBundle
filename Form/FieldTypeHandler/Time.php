@@ -39,7 +39,7 @@ class Time extends FieldTypeHandler
      *
      * @return int|null
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition )
+    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
     {
         $time = $value->time;
         if ( is_int( $time ) )

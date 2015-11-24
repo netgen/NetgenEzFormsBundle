@@ -22,7 +22,7 @@ class BinaryFile extends FieldTypeHandler
      *
      * @param \eZ\Publish\Core\FieldType\Image\Value $value
      */
-    public function convertFieldValueToForm( Value $value )
+    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
     {
         return null;
     }

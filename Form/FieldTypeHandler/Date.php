@@ -38,7 +38,7 @@ class Date extends FieldTypeHandler
      *
      * @return DateTime
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition )
+    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
     {
         return $value->date;
     }

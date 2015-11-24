@@ -18,7 +18,7 @@ class User extends FieldTypeHandler
     /**
      * {@inheritdoc}
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition )
+    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
     {
         // Returning null here because user data is mapped in mapper as an exceptional case
         return null;

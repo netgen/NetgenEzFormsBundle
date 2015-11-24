@@ -32,7 +32,7 @@ class Checkbox extends FieldTypeHandler
      *
      * @return boolean
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition )
+    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
     {
         return $value->bool;
     }

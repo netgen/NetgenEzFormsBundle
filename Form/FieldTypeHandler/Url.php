@@ -32,7 +32,7 @@ class Url extends FieldTypeHandler
      *
      * @return array
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition )
+    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
     {
         return array( 'url' => $value->link, 'text' => $value->text );
     }
