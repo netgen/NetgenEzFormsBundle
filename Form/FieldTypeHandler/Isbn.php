@@ -22,7 +22,7 @@ class Isbn extends FieldTypeHandler
      *
      * @param IsbnValue $value
      */
-    public function convertFieldValueToForm( Value $value )
+    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
     {
         return $value->isbn;
     }

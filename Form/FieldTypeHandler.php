@@ -26,7 +26,7 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
     /**
      * @inheritdoc
      */
-    abstract public function convertFieldValueToForm( Value $value );
+    abstract public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null );
 
     /**
      * @inheritdoc

@@ -60,7 +60,7 @@ class Float extends FieldTypeHandler
      *
      * @return float
      */
-    public function convertFieldValueToForm( Value $value )
+    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
     {
         return $value->value;
     }

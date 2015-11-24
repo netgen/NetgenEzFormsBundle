@@ -37,7 +37,7 @@ class Email extends FieldTypeHandler
      *
      * @return string
      */
-    public function convertFieldValueToForm( Value $value )
+    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
     {
         return $value->email;
     }

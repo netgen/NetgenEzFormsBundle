@@ -59,7 +59,8 @@ class UpdateUserMapper extends DataMapper
                     $user->getFieldValue(
                         $fieldDefinitionIdentifier,
                         $userUpdateStruct->contentUpdateStruct->initialLanguageCode
-                    )
+                    ),
+                    $fieldDefinition
                 )
             );
         }

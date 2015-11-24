@@ -21,10 +21,11 @@ interface FieldTypeHandlerInterface
      * @see buildFieldUpdateForm
      *
      * @param \eZ\Publish\SPI\FieldType\Value $value
+     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition|null $fieldDefinition
      *
      * @return mixed
      */
-    public function convertFieldValueToForm( Value $value );
+    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null );
 
     /**
      * Converts the form data to a format that can be accepted by eZ Publish FieldType.

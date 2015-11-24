@@ -60,7 +60,7 @@ class Integer extends FieldTypeHandler
      *
      * @return int
      */
-    public function convertFieldValueToForm( Value $value )
+    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
     {
         return (int)$value->value;
     }
