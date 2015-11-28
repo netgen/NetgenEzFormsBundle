@@ -4,6 +4,7 @@ namespace Netgen\Bundle\EzFormsBundle\Controller;
 
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 use eZ\Bundle\EzPublishCoreBundle\Controller;
+use Netgen\Bundle\EzFormsBundle\Core\Repository\Values\InformationCollection\InformationCollectionStruct;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
@@ -279,6 +280,50 @@ class DemoController extends Controller
                     )
                 )
             );
+        }
+
+        return $this->render(
+            "NetgenEzFormsBundle::demo_form.html.twig",
+            array(
+                "form" => $form->createView(),
+            )
+        );
+    }
+
+    public function demoInformationCollectionAction( Request $request )
+    {
+        $repository = $this->getRepository();
+        $contentService = $repository->getContentService();
+        $locationService = $repository->getLocationService();
+        // @todo for demo purpose, user should have necessary permissions by itself
+        $repository->setCurrentUser(
+            $repository->getUserService()->loadUserByLogin( "admin" )
+        );
+
+        $content = $contentService->loadContent( 126 );
+        $contentTypeId = $content->versionInfo->contentInfo->contentTypeId;
+        $contentType = $repository->getContentTypeService()->loadContentType( $contentTypeId );
+
+        $informationCollection = new InformationCollectionStruct();
+
+        $data = new DataWrapper( $informationCollection, $contentType );
+
+        // No method to create named builder in framework controller
+        /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
+        $formBuilder = $this->container->get( "form.factory" )->createBuilder( "ezforms_information_collection", $data );
+        // Adding controls as EzFormsBundle does not do that by itself
+        $formBuilder->add( "save", "submit", array( "label" => "Publish" ) );
+
+        $form = $formBuilder->getForm();
+        $form->handleRequest( $request );
+
+        if ( $form->isValid() )
+        {
+            /** @var InformationCollectionStruct $data */
+            $data = $form->getData()->payload;
+            // save data to database
+            // or something else
+            // this is left for end developer
         }
 
         return $this->render(
