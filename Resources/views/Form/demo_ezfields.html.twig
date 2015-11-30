@@ -64,14 +64,36 @@
         </div>
 
         {{ form_row(form.address) }}
-        {{ form_row(form.address_hidden) }}
-        {{ form_row(form.find_address) }}
-        {{ form_row(form.restore_coordinates) }}
+
+        {% if form.vars.value.address is defined and form.vars.value.address is not empty %}
+            {% set address_hidden_value = form.vars.value.address %}
+        {% else %}
+            {% set address_hidden_value = '' %}
+        {% endif %}
+        <input type="hidden" id="{{ id }}_address_hidden" value="{{ address_hidden_value }}">
+
+        <button type="button" id="{{ id }}_find_address">{{ 'ezforms.form.map.find_address.label'|trans }}</button>
+        <button type="button" id="{{ id }}_restore_coordinates" disabled>{{ 'ezforms.form.map.restore_coordinates.label'|trans }}</button>
+
         {{ form_row(form.latitude) }}
-        {{ form_row(form.latitude_hidden) }}
+
+        {% if form.vars.value.latitude is defined and form.vars.value.latitude is not empty %}
+            {% set latitude_hidden_value = form.vars.value.latitude %}
+        {% else %}
+            {% set latitude_hidden_value = '' %}
+        {% endif %}
+        <input type="hidden" id="{{ id }}_latitude_hidden" value="{{ latitude_hidden_value }}">
+
         {{ form_row(form.longitude) }}
-        {{ form_row(form.longitude_hidden) }}
-        {{ form_row(form.current_location) }}
+
+        {% if form.vars.value.longitude is defined and form.vars.value.longitude is not empty %}
+            {% set longitude_hidden_value = form.vars.value.longitude %}
+        {% else %}
+            {% set longitude_hidden_value = '' %}
+        {% endif %}
+        <input type="hidden" id="{{ id }}_longitude_hidden" value="{{ longitude_hidden_value }}">
+
+        <button type="button" id="{{ id }}_current_location">{{ 'ezforms.form.map.current_location.label'|trans }}</button>
 
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
         <script type="text/javascript">
