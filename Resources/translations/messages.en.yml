@@ -1,0 +1,6 @@
+ezforms.form.map.address.label: "Address"
+ezforms.form.map.find_address.label: "Find address"
+ezforms.form.map.restore_coordinates.label: "Restore"
+ezforms.form.map.latitude.label: "Latitude"
+ezforms.form.map.longitude.label: "Longitude"
+ezforms.form.map.current_location.label: 'My current location'

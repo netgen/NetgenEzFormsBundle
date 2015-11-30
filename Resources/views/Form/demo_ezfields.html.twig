@@ -55,3 +55,199 @@
     {% endspaceless %}
 {% endblock _ezforms_update_content_ezforms_binary_file_widget %}
 {# END of BinaryFile update field custom rendering #}
+
+{# MapLocation fieldtype handler #}
+{% block __ezforms_map_location_widget %}
+    {% spaceless %}
+        <div id="{{ id ~ '_map' }}" style="margin: 0; padding: 0; height: 400px; width: 600px;">
+
+        </div>
+
+        {{ form_row(form.address) }}
+
+        {% if form.vars.value.address is defined and form.vars.value.address is not empty %}
+            {% set address_hidden_value = form.vars.value.address %}
+        {% else %}
+            {% set address_hidden_value = '' %}
+        {% endif %}
+        <input type="hidden" id="{{ id }}_address_hidden" value="{{ address_hidden_value }}">
+
+        <button type="button" id="{{ id }}_find_address">{{ 'ezforms.form.map.find_address.label'|trans }}</button>
+        <button type="button" id="{{ id }}_restore_coordinates" disabled>{{ 'ezforms.form.map.restore_coordinates.label'|trans }}</button>
+
+        {{ form_row(form.latitude) }}
+
+        {% if form.vars.value.latitude is defined and form.vars.value.latitude is not empty %}
+            {% set latitude_hidden_value = form.vars.value.latitude %}
+        {% else %}
+            {% set latitude_hidden_value = '' %}
+        {% endif %}
+        <input type="hidden" id="{{ id }}_latitude_hidden" value="{{ latitude_hidden_value }}">
+
+        {{ form_row(form.longitude) }}
+
+        {% if form.vars.value.longitude is defined and form.vars.value.longitude is not empty %}
+            {% set longitude_hidden_value = form.vars.value.longitude %}
+        {% else %}
+            {% set longitude_hidden_value = '' %}
+        {% endif %}
+        <input type="hidden" id="{{ id }}_longitude_hidden" value="{{ longitude_hidden_value }}">
+
+        <button type="button" id="{{ id }}_current_location">{{ 'ezforms.form.map.current_location.label'|trans }}</button>
+
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+        <script type="text/javascript">
+
+            function EzFormsMapLocationFieldType() {
+                var formId = '{{ id }}';
+                var mapId = formId + '_map';
+                var addressId = formId + '_address';
+                var addressHiddenId = formId + '_address_hidden';
+                var latitudeId = formId + '_latitude';
+                var latitudeHiddenId = formId + '_latitude_hidden';
+                var longitudeId = formId + '_longitude';
+                var longitudeHiddenId = formId + '_longitude_hidden';
+                var restoreButtonId = formId + '_restore_coordinates';
+                var addressButtonId = formId + '_find_address';
+                var currentLocationButtonId = formId + '_current_location';
+                var geocoder = null;
+                var maxZoom = 13;
+
+                var showAddress = function () {
+                    var address = document.getElementById(addressId).value;
+
+                    if (geocoder) {
+
+                        geocoder.geocode({'address': address}, function (results, status){
+                            if (status === google.maps.GeocoderStatus.OK ) {
+                                var position = results[0].geometry.location;
+                                map.setOptions({center: position, zoom: maxZoom});
+                                marker.setPosition(position);
+                                updateLatitudeAndLongitude(position);
+                            } else {
+                                alert( address + " not found.");
+                            }
+                        });
+                    }
+                };
+
+                var restoreLatitudeAndLongitude = function() {
+                    var lat = document.getElementById(latitudeHiddenId);
+                    var lng = document.getElementById(longitudeHiddenId);
+
+                    document.getElementById(addressId).value = document.getElementById(addressHiddenId).value;
+                    document.getElementById(latitudeId).value = lat.value;
+                    document.getElementById(longitudeId).value = lng.value;
+
+                    if (lat.value && lat.value != 0) {
+                        var point = new google.maps.LatLng(lat.value, lng.value);
+                        marker.setPosition(point);
+                        map.panTo(point);
+                    }
+
+                    document.getElementById(restoreButtonId).disabled = true;
+                    document.getElementById(restoreButtonId).className = 'button-disabled';
+
+                    return false;
+                };
+
+                var updateLatitudeAndLongitude = function (coordinates) {
+                    document.getElementById(latitudeId).value = coordinates.lat();
+                    document.getElementById(longitudeId).value = coordinates.lng();
+
+                    document.getElementById(restoreButtonId).disabled = false;
+                    document.getElementById(restoreButtonId).className = 'button';
+                };
+
+                var getCurrentPosition = function() {
+                    var success = function(position) {
+                        var location = '';
+                        var point = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+                        if (navigator.geolocation.type == 'Gears' && position.gearsAddress) {
+                            location = [position.gearsAddress.city, position.gearsAddress.region, position.gearsAddress.country].join(', ');
+                        } else if (navigator.geolocation.type == 'ClientLocation') {
+                            location = [position.address.city, position.address.region, position.address.country].join(', ');
+                        }
+
+                        document.getElementById(addressId).value = location;
+                        map.setOptions({zoom: maxZoom, center: point});
+                        marker.setPosition(point);
+                        updateLatitudeAndLongitude(point);
+                    };
+
+                    var fail = function(error) {
+                        alert( "Could not get your location, error was: " + error.message);
+                    };
+
+                    navigator.geolocation.getCurrentPosition(success, fail, {'gearsRequestAddress': true});
+                }
+
+                var map = null;
+                var startPoint = null;
+                var zoom = 0;
+                var marker = null;
+
+                if (document.getElementById(latitudeId).value && document.getElementById(latitudeId).value != 0) {
+                    startPoint = new google.maps.LatLng(document.getElementById(latitudeId).value, document.getElementById(longitudeId).value);
+                    zoom = maxZoom;
+                } else {
+                    startPoint = new google.maps.LatLng(0, 0);
+                }
+
+                map = new google.maps.Map(document.getElementById(mapId), {
+                    center: startPoint,
+                    zoom: zoom,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+                marker = new google.maps.Marker({map: map, position: startPoint, draggable: true});
+                google.maps.event.addListener(marker, 'dragend', function (event) {
+                    updateLatitudeAndLongitude(event.latLng);
+                    document.getElementById(addressId).value = '';
+                });
+
+                geocoder = new google.maps.Geocoder();
+                google.maps.event.addListener(map, 'click', function(event){
+                    marker.setPosition(event.latLng);
+                    map.panTo(event.latLng);
+                    updateLatitudeAndLongitude(event.latLng);
+                    document.getElementById( addressid ).value = '';
+                });
+
+                document.getElementById(addressButtonId).onclick = showAddress;
+                document.getElementById(restoreButtonId).onclick = restoreLatitudeAndLongitude;
+
+                if (navigator.geolocation) {
+                    var currentLocationButton = document.getElementById(currentLocationButtonId);
+
+                    currentLocationButton.onclick = getCurrentPosition;
+                    currentLocationButton.className = 'button';
+                    currentLocationButton.disabled = false;
+                }
+            }
+
+        </script>
+        <script type="text/javascript">
+
+            if (window.addEventListener) {
+                window.addEventListener('load', function(){ EzFormsMapLocationFieldType() }, false);
+            } else if (window.attachEvent) {
+                window.attachEvent('onload', function(){ EzFormsMapLocationFieldType() } );
+            }
+
+        </script>
+    {% endspaceless %}
+{% endblock __ezforms_map_location_widget %}
+
+{% block _ezforms_create_content_ezforms_map_widget %}
+    {% spaceless %}
+        {{ block('__ezforms_map_location_widget') }}
+    {% endspaceless %}
+{% endblock _ezforms_create_content_ezforms_map_widget %}
+
+{% block _ezforms_update_content_ezforms_map_widget %}
+    {% spaceless %}
+        {{ block('__ezforms_map_location_widget') }}
+    {% endspaceless %}
+{% endblock _ezforms_update_content_ezforms_map_widget %}
+{# END of MapLocation fieldtype handler #}
