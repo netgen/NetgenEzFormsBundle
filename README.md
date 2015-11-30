@@ -27,7 +27,7 @@ Currently supported FieldTypes:
 | ISBN           | yes
 | Keyword        | no
 | Media          | no
-| MapLocation    | no
+| MapLocation    | yes
 | Page           | no
 | Rating         | no
 | Relation       | no
