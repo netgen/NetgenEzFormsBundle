@@ -13,3 +13,7 @@ _updatecontent_route:
 _updateuser_route:
     path:   /demoupdateuser
     defaults:   { _controller: NetgenEzFormsBundle:Demo:demoUpdateUser }
+
+_informationcollection_route:
+    path: /demoinformationcollection
+    defaults: { _controller: NetgenEzFormsBundle:Demo:demoInformationCollection }
