@@ -32,8 +32,6 @@ class InformationCollectionType extends AbstractContentType
     {
         parent::__construct( $fieldTypeHandlerRegistry, $dataMapper );
         $this->languages = $languages;
-
-        var_dump($languages);
     }
 
     /**
