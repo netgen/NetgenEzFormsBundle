@@ -84,13 +84,13 @@ services:
     netgen.ezforms.form.data_mapper.info_collection:
         class: %netgen.ezforms.form.data_mapper.info_collection.class%
         arguments:
-            - @netgen.ezforms.form.fieldtype_handler_registry
+            - "@netgen.ezforms.form.fieldtype_handler_registry"
 
     netgen.ezforms.form.type.info_collection:
         class: %netgen.ezforms.form.type.info_collection.class%
         arguments:
-            - @netgen.ezforms.form.fieldtype_handler_registry
-            - @netgen.ezforms.form.data_mapper.info_collection
+            - "@netgen.ezforms.form.fieldtype_handler_registry"
+            - "@netgen.ezforms.form.data_mapper.info_collection"
         calls:
             - [setLanguages, [$languages$]]
         tags:
