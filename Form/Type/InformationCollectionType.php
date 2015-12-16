@@ -104,10 +104,15 @@ class InformationCollectionType extends AbstractContentType
      */
     protected function getLanguageCode( ContentType $contentType )
     {
-        if ( in_array( $contentType->mainLanguageCode, $this->languages ) ) {
-            return $contentType->mainLanguageCode;
+        $contentTypeLanguages = array_keys( $contentType->getNames() );
+
+        foreach( $this->languages as $languageCode)
+        {
+            if ( in_array( $languageCode, $contentTypeLanguages ) ) {
+                return $languageCode;
+            }
         }
 
-        return array_shift( $this->languages );
+        return $contentType->mainLanguageCode;
     }
 }
