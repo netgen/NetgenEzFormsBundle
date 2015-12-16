@@ -22,15 +22,12 @@ class InformationCollectionType extends AbstractContentType
     protected $languages;
 
     /**
-     * InformationCollectionType constructor override.
+     * Sets system available array of languages
      *
-     * @param FieldTypeHandlerRegistry $fieldTypeHandlerRegistry
-     * @param DataMapperInterface $dataMapper
      * @param array $languages
      */
-    public function __construct( FieldTypeHandlerRegistry $fieldTypeHandlerRegistry, DataMapperInterface $dataMapper, $languages )
+    public function setLanguages( array $languages )
     {
-        parent::__construct( $fieldTypeHandlerRegistry, $dataMapper );
         $this->languages = $languages;
     }
 
