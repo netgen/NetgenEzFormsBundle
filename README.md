@@ -5,10 +5,10 @@ Integration of Symfony's Form component with eZ Publish 5 Public API
 
 Currently implemented forms:
 
-| Entity / Form             | Create | Update
-| ------------- | --- | ---
-| Content      | yes | yes
-| User      | yes | yes
+| Entity / Form             | Create | Update | Information collection
+| ------------- | --- | --- | ---
+| Content      | yes | yes | yes
+| User      | yes | yes | no
 
 Currently supported FieldTypes:
 
