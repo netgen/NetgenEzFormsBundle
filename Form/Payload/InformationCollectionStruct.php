@@ -1,14 +1,12 @@
 <?php
 
-namespace Netgen\Bundle\EzFormsBundle\Core\Repository\Values\InformationCollection;
-
-use Netgen\Bundle\EzFormsBundle\API\Repository\Values\InformationCollection\InformationCollectionStruct as APIInformationCollection;
+namespace Netgen\Bundle\EzFormsBundle\Form\Payload;
 
 /**
- * Class InformationCollection
- * @package Netgen\Bundle\EzFormsBundle\Core\Repository\Values\InformationCollection
+ * Class InformationCollectionStruct
+ * @package Netgen\Bundle\EzFormsBundle\Form\Payload
  */
-class InformationCollectionStruct extends APIInformationCollection
+class InformationCollectionStruct
 {
     /**
      * @var mixed[] An array of field values like $collectedData[$fieldDefIdentifier]
@@ -16,7 +14,11 @@ class InformationCollectionStruct extends APIInformationCollection
     protected $collectedData;
 
     /**
-     * {@inheritdoc}
+     * Returns value for $fieldDefIdentifier
+     *
+     * @param $fieldDefIdentifier
+     *
+     * @return mixed
      */
     public function getCollectedFieldValue( $fieldDefIdentifier )
     {
@@ -29,7 +31,9 @@ class InformationCollectionStruct extends APIInformationCollection
     }
 
     /**
-     * {@inheritdoc}
+     * This method returns the complete fields collection
+     *
+     * @return array
      */
     public function getCollectedFields()
     {
@@ -37,7 +41,12 @@ class InformationCollectionStruct extends APIInformationCollection
     }
 
     /**
-     * {@inheritdoc}
+     * Sets value for $fieldDefIdentifier
+     *
+     * @param string $fieldDefIdentifier
+     * @param mixed $value
+     *
+     * @return mixed
      */
     public function setCollectedFieldValue($fieldDefIdentifier, $value)
     {

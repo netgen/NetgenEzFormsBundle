@@ -7,7 +7,7 @@ use eZ\Bundle\EzPublishCoreBundle\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
-use Netgen\Bundle\EzFormsBundle\Core\Repository\Values\InformationCollection\InformationCollectionStruct;
+use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
 use RuntimeException;
 use Exception;
 

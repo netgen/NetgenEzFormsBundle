@@ -4,7 +4,7 @@ namespace Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
-use Netgen\Bundle\EzFormsBundle\API\Repository\Values\InformationCollection\InformationCollectionStruct;
+use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
