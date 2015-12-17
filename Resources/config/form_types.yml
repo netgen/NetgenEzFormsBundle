@@ -15,6 +15,9 @@ parameters:
 
     netgen.ezforms.form.map_type.class: Netgen\Bundle\EzFormsBundle\Form\Type\MapType
 
+    netgen.ezforms.form.data_mapper.info_collection.class: Netgen\Bundle\EzFormsBundle\Form\DataMapper\InformationCollectionMapper
+    netgen.ezforms.form.type.info_collection.class: Netgen\Bundle\EzFormsBundle\Form\Type\InformationCollectionType
+
 services:
     netgen.ezforms.form.data_mapper.create_content:
         class: %netgen.ezforms.form.data_mapper.create_content.class%
@@ -77,3 +80,18 @@ services:
         class: %netgen.ezforms.form.map_type.class%
         tags:
             - {name: form.type, alias: ezforms_map}
+
+    netgen.ezforms.form.data_mapper.info_collection:
+        class: %netgen.ezforms.form.data_mapper.info_collection.class%
+        arguments:
+            - "@netgen.ezforms.form.fieldtype_handler_registry"
+
+    netgen.ezforms.form.type.info_collection:
+        class: %netgen.ezforms.form.type.info_collection.class%
+        arguments:
+            - "@netgen.ezforms.form.fieldtype_handler_registry"
+            - "@netgen.ezforms.form.data_mapper.info_collection"
+        calls:
+            - [setLanguages, [$languages$]]
+        tags:
+            - {name: form.type, alias: ezforms_information_collection}
