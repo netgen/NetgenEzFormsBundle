@@ -10,11 +10,9 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 /**
- * Class BaseMapper
+ * Class BaseMapper.
  *
  * A data mapper using property paths to read/write data.
- *
- * @package Netgen\EzFormsBundle\Form\DataMapper
  */
 abstract class DataMapper implements DataMapperInterface
 {
@@ -37,8 +35,7 @@ abstract class DataMapper implements DataMapperInterface
     public function __construct(
         FieldTypeHandlerRegistry $fieldTypeHandlerRegistry,
         PropertyAccessorInterface $propertyAccessor = null
-    )
-    {
+    ) {
         $this->fieldTypeHandlerRegistry = $fieldTypeHandlerRegistry;
         $this->propertyAccessor = $propertyAccessor ?: PropertyAccess::createPropertyAccessor();
     }
@@ -46,32 +43,25 @@ abstract class DataMapper implements DataMapperInterface
     /**
      * {@inheritdoc}
      */
-    public function mapDataToForms( $data, $forms )
+    public function mapDataToForms($data, $forms)
     {
         $empty = null === $data || array() === $data;
 
-        if ( !$empty && !is_array( $data ) && !is_object( $data ) )
-        {
-            throw new UnexpectedTypeException( $data, 'object, array or empty' );
+        if (!$empty && !is_array($data) && !is_object($data)) {
+            throw new UnexpectedTypeException($data, 'object, array or empty');
         }
 
-        foreach ( $forms as $form )
-        {
+        foreach ($forms as $form) {
             $propertyPath = $form->getPropertyPath();
             $config = $form->getConfig();
 
-            if ( $data instanceof DataWrapper && null !== $propertyPath && $config->getMapped() )
-            {
+            if ($data instanceof DataWrapper && null !== $propertyPath && $config->getMapped()) {
                 /** @var $data \Netgen\Bundle\EzFormsBundle\Form\DataWrapper */
-                $this->mapToForm( $form, $data, $propertyPath );
-            }
-            else if ( !$empty && null !== $propertyPath && $config->getMapped() )
-            {
-                $form->setData( $this->propertyAccessor->getValue( $data, $propertyPath ) );
-            }
-            else
-            {
-                $form->setData( $form->getConfig()->getData() );
+                $this->mapToForm($form, $data, $propertyPath);
+            } elseif (!$empty && null !== $propertyPath && $config->getMapped()) {
+                $form->setData($this->propertyAccessor->getValue($data, $propertyPath));
+            } else {
+                $form->setData($form->getConfig()->getData());
             }
         }
     }
@@ -79,20 +69,17 @@ abstract class DataMapper implements DataMapperInterface
     /**
      * {@inheritdoc}
      */
-    public function mapFormsToData( $forms, &$data )
+    public function mapFormsToData($forms, &$data)
     {
-        if ( null === $data )
-        {
+        if (null === $data) {
             return;
         }
 
-        if ( !is_array( $data ) && !is_object( $data ) )
-        {
-            throw new UnexpectedTypeException( $data, 'object, array or empty' );
+        if (!is_array($data) && !is_object($data)) {
+            throw new UnexpectedTypeException($data, 'object, array or empty');
         }
 
-        foreach ( $forms as $form )
-        {
+        foreach ($forms as $form) {
             $propertyPath = $form->getPropertyPath();
             $config = $form->getConfig();
 
@@ -104,36 +91,31 @@ abstract class DataMapper implements DataMapperInterface
                 $form->isSubmitted() &&
                 $form->isSynchronized() &&
                 !$form->isDisabled()
-            )
-            {
+            ) {
                 // If $data is out ContentCreateStruct, we need to map it to the corresponding field
                 // in the struct
-                if ( $data instanceof DataWrapper )
-                {
+                if ($data instanceof DataWrapper) {
                     /** @var $data \Netgen\Bundle\EzFormsBundle\Form\DataWrapper */
-                    $this->mapFromForm( $form, $data, $propertyPath );
+                    $this->mapFromForm($form, $data, $propertyPath);
                 }
                 // If the data is identical to the value in $data, we are
                 // dealing with a reference
-                else
-                {
+                else {
                     // If the field is of type DateTime and the data is the same skip the update to
                     // keep the original object hash
                     if (
                         $form->getData() instanceof \DateTime &&
-                        $form->getData() == $this->propertyAccessor->getValue( $data, $propertyPath )
-                    )
-                    {
+                        $form->getData() == $this->propertyAccessor->getValue($data, $propertyPath)
+                    ) {
                         continue;
                     }
 
                     if (
-                        !is_object( $data ) ||
+                        !is_object($data) ||
                         !$config->getByReference() ||
-                        $form->getData() !== $this->propertyAccessor->getValue( $data, $propertyPath )
-                    )
-                    {
-                        $this->propertyAccessor->setValue( $data, $propertyPath, $form->getData() );
+                        $form->getData() !== $this->propertyAccessor->getValue($data, $propertyPath)
+                    ) {
+                        $this->propertyAccessor->setValue($data, $propertyPath, $form->getData());
                     }
                 }
             }
@@ -146,8 +128,6 @@ abstract class DataMapper implements DataMapperInterface
      * @param \Symfony\Component\Form\FormInterface $form
      * @param \Netgen\Bundle\EzFormsBundle\Form\DataWrapper $data
      * @param \Symfony\Component\PropertyAccess\PropertyPathInterface $propertyPath
-     *
-     * @return void
      */
     abstract protected function mapToForm(
         FormInterface $form,
@@ -161,8 +141,6 @@ abstract class DataMapper implements DataMapperInterface
      * @param \Symfony\Component\Form\FormInterface $form
      * @param \Netgen\Bundle\EzFormsBundle\Form\DataWrapper $data
      * @param \Symfony\Component\PropertyAccess\PropertyPathInterface $propertyPath
-     *
-     * @return void
      */
     abstract protected function mapFromForm(
         FormInterface $form,
@@ -177,16 +155,16 @@ abstract class DataMapper implements DataMapperInterface
      * @param mixed $value
      * @param string $fieldDefinitionIdentifier
      *
-     * @return boolean
+     * @return bool
      */
-    protected function shouldSkipForEmptyUpdate( FormInterface $form, $value, $fieldDefinitionIdentifier )
+    protected function shouldSkipForEmptyUpdate(FormInterface $form, $value, $fieldDefinitionIdentifier)
     {
-        return (
+        return
             $value === null &&
             (
-                $form->getRoot()->has( "ezforms_skip_empty_update_{$fieldDefinitionIdentifier}" ) &&
-                $form->getRoot()->get( "ezforms_skip_empty_update_{$fieldDefinitionIdentifier}" )->getData() === "yes"
+                $form->getRoot()->has("ezforms_skip_empty_update_{$fieldDefinitionIdentifier}") &&
+                $form->getRoot()->get("ezforms_skip_empty_update_{$fieldDefinitionIdentifier}")->getData() === 'yes'
             )
-        );
+        ;
     }
 }

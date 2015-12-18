@@ -11,8 +11,7 @@ use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use RuntimeException;
 
 /**
- * Class InformationCollectionMapper
- * @package Netgen\Bundle\EzFormsBundle\Form\DataMapper
+ * Class InformationCollectionMapper.
  */
 class InformationCollectionMapper extends DataMapper
 {
@@ -22,23 +21,19 @@ class InformationCollectionMapper extends DataMapper
      * @param \Symfony\Component\Form\FormInterface $form
      * @param \Netgen\Bundle\EzFormsBundle\Form\DataWrapper $data
      * @param \Symfony\Component\PropertyAccess\PropertyPathInterface $propertyPath
-     *
-     * @return void
      */
     protected function mapToForm(
         FormInterface $form,
         DataWrapper $data,
         PropertyPathInterface $propertyPath
-    )
-    {
+    ) {
         /** @var ContentType $contentType */
         $contentType = $data->definition;
 
         $fieldDefinitionIdentifier = (string)$propertyPath;
-        $fieldDefinition = $contentType->getFieldDefinition( $fieldDefinitionIdentifier );
+        $fieldDefinition = $contentType->getFieldDefinition($fieldDefinitionIdentifier);
 
-        if ( null === $fieldDefinition )
-        {
+        if (null === $fieldDefinition) {
             throw new RuntimeException(
                 "Data definition does not contain expected FieldDefinition '{$fieldDefinitionIdentifier}'"
             );
@@ -46,11 +41,11 @@ class InformationCollectionMapper extends DataMapper
 
         $fieldTypeIdentifier = $fieldDefinition->fieldTypeIdentifier;
 
-        $handler = $this->fieldTypeHandlerRegistry->get( $fieldTypeIdentifier );
+        $handler = $this->fieldTypeHandlerRegistry->get($fieldTypeIdentifier);
 
         $form->setData(
             $handler->convertFieldValueToForm(
-                $contentType->getFieldDefinition( $fieldDefinitionIdentifier )->defaultValue
+                $contentType->getFieldDefinition($fieldDefinitionIdentifier)->defaultValue
             )
         );
     }
@@ -61,36 +56,32 @@ class InformationCollectionMapper extends DataMapper
      * @param \Symfony\Component\Form\FormInterface $form
      * @param \Netgen\Bundle\EzFormsBundle\Form\DataWrapper $data
      * @param \Symfony\Component\PropertyAccess\PropertyPathInterface $propertyPath
-     *
-     * @return void
      */
     protected function mapFromForm(
         FormInterface $form,
         DataWrapper $data,
         PropertyPathInterface $propertyPath
-    )
-    {
+    ) {
         /** @var InformationCollectionStruct $payload */
         $payload = $data->payload;
         /** @var ContentType $contentType */
         $contentType = $data->definition;
 
         $fieldDefinitionIdentifier = (string)$propertyPath;
-        $fieldDefinition = $contentType->getFieldDefinition( $fieldDefinitionIdentifier );
+        $fieldDefinition = $contentType->getFieldDefinition($fieldDefinitionIdentifier);
 
-        if ( null === $fieldDefinition )
-        {
+        if (null === $fieldDefinition) {
             throw new RuntimeException(
                 "Data definition does not contain expected FieldDefinition '{$fieldDefinitionIdentifier}'"
             );
         }
 
         $fieldTypeIdentifier = $fieldDefinition->fieldTypeIdentifier;
-        $handler = $this->fieldTypeHandlerRegistry->get( $fieldTypeIdentifier );
+        $handler = $this->fieldTypeHandlerRegistry->get($fieldTypeIdentifier);
 
         $payload->setCollectedFieldValue(
             $fieldDefinitionIdentifier,
-            $handler->convertFieldValueFromForm( $form->getData() )
+            $handler->convertFieldValueFromForm($form->getData())
         );
     }
 }

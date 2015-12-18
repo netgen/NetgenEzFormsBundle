@@ -2,7 +2,6 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
-
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,34 +21,33 @@ class Date extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $options['input'] = 'datetime';
         $options['widget'] = 'choice';
-		$options['constraints'][] = new Assert\Date();
+        $options['constraints'][] = new Assert\Date();
 
-        $formBuilder->add( $fieldDefinition->identifier, "date", $options );
+        $formBuilder->add($fieldDefinition->identifier, 'date', $options);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return DateTime
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
         return $value->date;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return DateValue\Value
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
-        return new DateValue\Value( $data );
+        return new DateValue\Value($data);
     }
 }

@@ -20,62 +20,56 @@ class Float extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        if ( !empty( $fieldDefinition->getValidatorConfiguration()['FloatValueValidator'] ) )
-        {
+        if (!empty($fieldDefinition->getValidatorConfiguration()['FloatValueValidator'])) {
             $rangeConstraints = array();
 
             $min = $fieldDefinition->getValidatorConfiguration()['FloatValueValidator']['minFloatValue'];
             $max = $fieldDefinition->getValidatorConfiguration()['FloatValueValidator']['maxFloatValue'];
 
-            if ( $min !== false )
-            {
+            if ($min !== false) {
                 $rangeConstraints['min'] = $min;
             }
 
-            if ( $max !== false )
-            {
+            if ($max !== false) {
                 $rangeConstraints['max'] = $max;
             }
 
-            if ( !empty( $rangeConstraints ) )
-            {
-                $options['constraints'][] = new Assert\Range( $rangeConstraints );
+            if (!empty($rangeConstraints)) {
+                $options['constraints'][] = new Assert\Range($rangeConstraints);
             }
         }
 
-        if ( !empty( $fieldDefinition->defaultValue ) )
-        {
+        if (!empty($fieldDefinition->defaultValue)) {
             $options['data'] = (float)$fieldDefinition->defaultValue->value;
         }
 
-        $formBuilder->add( $fieldDefinition->identifier, 'number', $options );
+        $formBuilder->add($fieldDefinition->identifier, 'number', $options);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return float
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
         return $value->value;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return FloatValue\Value
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
-        if ( !is_numeric( $data ) )
-        {
+        if (!is_numeric($data)) {
             $data = null;
         }
-        return new FloatValue\Value( $data );
+
+        return new FloatValue\Value($data);
     }
 }

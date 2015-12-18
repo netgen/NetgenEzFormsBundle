@@ -21,9 +21,8 @@ class Time extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $useSeconds = $fieldDefinition->getFieldSettings()['useSeconds'];
         $options['input'] = 'datetime';
@@ -31,42 +30,39 @@ class Time extends FieldTypeHandler
         $options['with_seconds'] = $useSeconds;
         $options['constraints'][] = new Assert\Time();
 
-        $formBuilder->add( $fieldDefinition->identifier, 'time', $options );
+        $formBuilder->add($fieldDefinition->identifier, 'time', $options);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return int|null
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
         $time = $value->time;
-        if ( is_int( $time ) )
-        {
-            return new DateTime( "@$time" );
+        if (is_int($time)) {
+            return new DateTime("@$time");
         }
 
         return new DateTime();
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return TimeValue
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
-        if ( $data instanceof DateTime )
-        {
-            return TimeValue::fromDateTime( $data );
+        if ($data instanceof DateTime) {
+            return TimeValue::fromDateTime($data);
         }
 
-        if ( is_int( $data ) )
-        {
-            return new TimeValue( $data );
+        if (is_int($data)) {
+            return new TimeValue($data);
         }
 
-        return new TimeValue( null );
+        return new TimeValue(null);
     }
 }

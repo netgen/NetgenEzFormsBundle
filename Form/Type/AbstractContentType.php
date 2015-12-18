@@ -7,9 +7,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
 use Symfony\Component\Form\DataMapperInterface;
 
 /**
- * Class AbstractContentType
- *
- * @package Netgen\EzFormsBundle\Form\Type
+ * Class AbstractContentType.
  */
 abstract class AbstractContentType extends AbstractType
 {
@@ -29,7 +27,7 @@ abstract class AbstractContentType extends AbstractType
      * @param \Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry $fieldTypeHandlerRegistry
      * @param \Symfony\Component\Form\DataMapperInterface $dataMapper
      */
-    public function __construct( FieldTypeHandlerRegistry $fieldTypeHandlerRegistry, DataMapperInterface $dataMapper )
+    public function __construct(FieldTypeHandlerRegistry $fieldTypeHandlerRegistry, DataMapperInterface $dataMapper)
     {
         $this->fieldTypeHandlerRegistry = $fieldTypeHandlerRegistry;
         $this->dataMapper = $dataMapper;

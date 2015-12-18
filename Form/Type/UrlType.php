@@ -8,15 +8,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class UrlType extends AbstractType
 {
-    public function buildForm( FormBuilderInterface $builder, array $options )
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add( 'url', 'url',
+        $builder->add('url', 'url',
             array(
                 'constraints' => new Assert\Url(),
             )
         );
 
-        $builder->add( 'text', 'text' );
+        $builder->add('text', 'text');
     }
 
     /**

@@ -10,9 +10,7 @@ use eZ\Publish\SPI\FieldType\Value;
 use RuntimeException;
 
 /**
- * Class FieldTypeHandler
- *
- * @package Netgen\EzFormsBundle\FieldType
+ * Class FieldTypeHandler.
  */
 abstract class FieldTypeHandler implements FieldTypeHandlerInterface
 {
@@ -20,18 +18,17 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
 
     public function __construct()
     {
-
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    abstract public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null );
+    abstract public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null);
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
         return $data;
     }
@@ -47,21 +44,18 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
      * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
      * @param string $languageCode
      * @param null|\eZ\Publish\API\Repository\Values\Content\Content $content
-     *
-     * @return void
      */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        throw new RuntimeException( "Not implemented." );
+    ) {
+        throw new RuntimeException('Not implemented.');
     }
 
     /**
-     * Returns default field options, created from given $fieldDefinition and $languageCode
+     * Returns default field options, created from given $fieldDefinition and $languageCode.
      *
      * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
      * @param string $languageCode
@@ -73,32 +67,29 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
+    ) {
         $options = array();
 
-        $options["label"] = $fieldDefinition->getName( $languageCode );
-        $options["required"] = $fieldDefinition->isRequired;
-        $options["ezforms"]["description"] = $fieldDefinition->getDescription( $languageCode );
-        $options["ezforms"]["language_code"] = $languageCode;
-        $options["ezforms"]["fielddefinition"] = $fieldDefinition;
+        $options['label'] = $fieldDefinition->getName($languageCode);
+        $options['required'] = $fieldDefinition->isRequired;
+        $options['ezforms']['description'] = $fieldDefinition->getDescription($languageCode);
+        $options['ezforms']['language_code'] = $languageCode;
+        $options['ezforms']['fielddefinition'] = $fieldDefinition;
 
-        if ( $content !== null )
-        {
-            $options["ezforms"]["content"] = $content;
+        if ($content !== null) {
+            $options['ezforms']['content'] = $content;
         }
 
-        $options["constraints"] = array();
-        if ( $fieldDefinition->isRequired )
-        {
-            $options["constraints"][] = new Constraints\NotBlank();
+        $options['constraints'] = array();
+        if ($fieldDefinition->isRequired) {
+            $options['constraints'][] = new Constraints\NotBlank();
         }
 
         return $options;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * In most cases this will be the same as {@link self::buildUpdateFieldForm()}.
      * For this reason default implementation falls back to the internal method
@@ -108,13 +99,12 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode
-    )
-    {
-        $this->buildFieldForm( $formBuilder, $fieldDefinition, $languageCode );
+    ) {
+        $this->buildFieldForm($formBuilder, $fieldDefinition, $languageCode);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * In most cases this will be the same as {@link self::buildCreateFieldForm()}.
      * For this reason default implementation falls back to the internal method
@@ -125,9 +115,8 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
         FieldDefinition $fieldDefinition,
         Content $content,
         $languageCode
-    )
-    {
-        $this->buildFieldForm( $formBuilder, $fieldDefinition, $languageCode, $content );
+    ) {
+        $this->buildFieldForm($formBuilder, $fieldDefinition, $languageCode, $content);
     }
 
     /**
@@ -137,16 +126,16 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
      * @param \Symfony\Component\Form\FormBuilderInterface $formBuilder
      * @param string $fieldDefinitionIdentifier
      */
-    protected function skipEmptyUpdate( FormBuilderInterface $formBuilder, $fieldDefinitionIdentifier )
+    protected function skipEmptyUpdate(FormBuilderInterface $formBuilder, $fieldDefinitionIdentifier)
     {
         $options = array(
-            "mapped" => false,
-            "data" => "yes",
+            'mapped' => false,
+            'data' => 'yes',
         );
 
         $formBuilder->add(
             "ezforms_skip_empty_update_{$fieldDefinitionIdentifier}",
-            "hidden",
+            'hidden',
             $options
         );
     }

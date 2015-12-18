@@ -8,18 +8,16 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\FieldType\Value;
 use eZ\Publish\Core\FieldType\MapLocation as MapLocationValue;
-use Symfony\Component\Validator\Constraints;
 
 /**
- * Class MapLocation
- * @package Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler
+ * Class MapLocation.
  */
 class MapLocation extends FieldTypeHandler
 {
     /**
      * {@inheritdoc}
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
         return array(
             'latitude' => empty($value->latitude) ? null : $value->latitude,
@@ -31,10 +29,9 @@ class MapLocation extends FieldTypeHandler
     /**
      * {@inheritdoc}
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
-        if ( !is_array( $data ) )
-        {
+        if (!is_array($data)) {
             return null;
         }
 
@@ -55,12 +52,11 @@ class MapLocation extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        $options["block_name"] = "ezforms_map";
+        $options['block_name'] = 'ezforms_map';
 
-        $formBuilder->add( $fieldDefinition->identifier, "ezforms_map", $options );
+        $formBuilder->add($fieldDefinition->identifier, 'ezforms_map', $options);
     }
 }

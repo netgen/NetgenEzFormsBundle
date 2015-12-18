@@ -13,43 +13,40 @@ use eZ\Publish\Core\FieldType\EmailAddress;
 class Email extends FieldTypeHandler
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        if ( !empty( $fieldDefinition->validatorConfiguration["EmailAddressValidator"] ) )
-        {
-            $options["constraints"][] = new Constraints\Email();
+        if (!empty($fieldDefinition->validatorConfiguration['EmailAddressValidator'])) {
+            $options['constraints'][] = new Constraints\Email();
         }
 
-        $formBuilder->add( $fieldDefinition->identifier, "email", $options );
+        $formBuilder->add($fieldDefinition->identifier, 'email', $options);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return string
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
         return $value->email;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return \eZ\Publish\Core\FieldType\EmailAddress\Value
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
-        return new EmailAddress\Value( $data );
+        return new EmailAddress\Value($data);
     }
 }
-

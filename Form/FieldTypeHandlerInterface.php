@@ -8,9 +8,7 @@ use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\FieldType\Value;
 
 /**
- * Interface FieldTypeHandlerInterface
- *
- * @package Netgen\EzFormsBundle\Form
+ * Interface FieldTypeHandlerInterface.
  */
 interface FieldTypeHandlerInterface
 {
@@ -25,7 +23,7 @@ interface FieldTypeHandlerInterface
      *
      * @return mixed
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null );
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null);
 
     /**
      * Converts the form data to a format that can be accepted by eZ Publish FieldType.
@@ -37,7 +35,7 @@ interface FieldTypeHandlerInterface
      *
      * @return mixed
      */
-    public function convertFieldValueFromForm( $data );
+    public function convertFieldValueFromForm($data);
 
     /**
      * Builds the form the given $fieldDefinition and $languageCode for creating.
@@ -45,8 +43,6 @@ interface FieldTypeHandlerInterface
      * @param \Symfony\Component\Form\FormBuilderInterface $formBuilder
      * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
      * @param string $languageCode
-     *
-     * @return void
      */
     public function buildFieldCreateForm(
         FormBuilderInterface $formBuilder,
@@ -61,8 +57,6 @@ interface FieldTypeHandlerInterface
      * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
      * @param \eZ\Publish\API\Repository\Values\Content\Content $content
      * @param string $languageCode
-     *
-     * @return void
      */
     public function buildFieldUpdateForm(
         FormBuilderInterface $formBuilder,

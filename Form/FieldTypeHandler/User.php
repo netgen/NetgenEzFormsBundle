@@ -9,16 +9,14 @@ use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\FieldType\Value;
 
 /**
- * Class User
- *
- * @package Netgen\EzFormsBundle\FieldType\FormBuilder
+ * Class User.
  */
 class User extends FieldTypeHandler
 {
     /**
      * {@inheritdoc}
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
         // Returning null here because user data is mapped in mapper as an exceptional case
         return null;
@@ -31,11 +29,10 @@ class User extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode);
 
-        $formBuilder->add( $fieldDefinition->identifier, "ezforms_ezuser_create", $options );
+        $formBuilder->add($fieldDefinition->identifier, 'ezforms_ezuser_create', $options);
     }
 
     /**
@@ -46,10 +43,9 @@ class User extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         Content $content,
         $languageCode
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        $formBuilder->add( $fieldDefinition->identifier, "ezforms_ezuser_update", $options );
+        $formBuilder->add($fieldDefinition->identifier, 'ezforms_ezuser_update', $options);
     }
 }
