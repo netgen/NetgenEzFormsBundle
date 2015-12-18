@@ -9,18 +9,16 @@ use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use RuntimeException;
 
 /**
- * Class UpdateContentMapper
+ * Class UpdateContentMapper.
  *
  * A data mapper using property paths to read/write data.
- *
- * @package Netgen\EzFormsBundle\Form\DataMapper
  */
 class UpdateContentMapper extends DataMapper
 {
     /**
      * {@inheritdoc}
      */
-    protected function mapToForm( FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath )
+    protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
         /** @var $contentUpdateStruct \eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct */
         $contentUpdateStruct = $data->payload;
@@ -30,10 +28,9 @@ class UpdateContentMapper extends DataMapper
         $contentType = $data->definition;
 
         $fieldDefinitionIdentifier = (string)$propertyPath;
-        $fieldDefinition = $contentType->getFieldDefinition( $fieldDefinitionIdentifier );
+        $fieldDefinition = $contentType->getFieldDefinition($fieldDefinitionIdentifier);
 
-        if ( null === $fieldDefinition )
-        {
+        if (null === $fieldDefinition) {
             throw new RuntimeException(
                 "Data payload does not contain expected FieldDefinition '{$fieldDefinitionIdentifier}'"
             );
@@ -41,7 +38,7 @@ class UpdateContentMapper extends DataMapper
 
         $fieldTypeIdentifier = $fieldDefinition->fieldTypeIdentifier;
 
-        $handler = $this->fieldTypeHandlerRegistry->get( $fieldTypeIdentifier );
+        $handler = $this->fieldTypeHandlerRegistry->get($fieldTypeIdentifier);
         $form->setData(
             $handler->convertFieldValueToForm(
                 $content->getFieldValue(
@@ -56,7 +53,7 @@ class UpdateContentMapper extends DataMapper
     /**
      * {@inheritdoc}
      */
-    protected function mapFromForm( FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath )
+    protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
         /** @var $contentUpdateStruct \eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct */
         $contentUpdateStruct = $data->payload;
@@ -64,10 +61,9 @@ class UpdateContentMapper extends DataMapper
         $contentType = $data->definition;
 
         $fieldDefinitionIdentifier = (string)$propertyPath;
-        $fieldDefinition = $contentType->getFieldDefinition( $fieldDefinitionIdentifier );
+        $fieldDefinition = $contentType->getFieldDefinition($fieldDefinitionIdentifier);
 
-        if ( null === $fieldDefinition )
-        {
+        if (null === $fieldDefinition) {
             throw new RuntimeException(
                 "Data payload does not contain expected FieldDefinition '{$fieldDefinitionIdentifier}'"
             );
@@ -78,12 +74,11 @@ class UpdateContentMapper extends DataMapper
 
         // Set field to struct only if it is not empty or it has not been marked
         // to skip update if empty
-        if ( !$this->shouldSkipForEmptyUpdate( $form, $formData, $fieldDefinitionIdentifier ) )
-        {
-            $handler = $this->fieldTypeHandlerRegistry->get( $fieldTypeIdentifier );
+        if (!$this->shouldSkipForEmptyUpdate($form, $formData, $fieldDefinitionIdentifier)) {
+            $handler = $this->fieldTypeHandlerRegistry->get($fieldTypeIdentifier);
             $contentUpdateStruct->setField(
                 $fieldDefinitionIdentifier,
-                $handler->convertFieldValueFromForm( $form->getData() )
+                $handler->convertFieldValueFromForm($form->getData())
             );
         }
     }

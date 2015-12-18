@@ -9,28 +9,25 @@ use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use RuntimeException;
 
 /**
- * Class CreateContentMapper
+ * Class CreateContentMapper.
  *
  * A data mapper using property paths to read/write data.
- *
- * @package Netgen\EzFormsBundle\Form\DataMapper
  */
 class CreateContentMapper extends DataMapper
 {
     /**
      * {@inheritdoc}
      */
-    protected function mapToForm( FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath )
+    protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
         /** @var $contentCreateStruct \eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct */
         $contentCreateStruct = $data->payload;
         $contentType = $contentCreateStruct->contentType;
 
         $fieldDefinitionIdentifier = (string)$propertyPath;
-        $fieldDefinition = $contentType->getFieldDefinition( $fieldDefinitionIdentifier );
+        $fieldDefinition = $contentType->getFieldDefinition($fieldDefinitionIdentifier);
 
-        if ( null === $fieldDefinition )
-        {
+        if (null === $fieldDefinition) {
             throw new RuntimeException(
                 "Data payload does not contain expected FieldDefinition '{$fieldDefinitionIdentifier}'"
             );
@@ -38,10 +35,10 @@ class CreateContentMapper extends DataMapper
 
         $fieldTypeIdentifier = $fieldDefinition->fieldTypeIdentifier;
 
-        $handler = $this->fieldTypeHandlerRegistry->get( $fieldTypeIdentifier );
+        $handler = $this->fieldTypeHandlerRegistry->get($fieldTypeIdentifier);
         $form->setData(
             $handler->convertFieldValueToForm(
-                $contentType->getFieldDefinition( $fieldDefinitionIdentifier )->defaultValue,
+                $contentType->getFieldDefinition($fieldDefinitionIdentifier)->defaultValue,
                 $fieldDefinition
             )
         );
@@ -50,17 +47,16 @@ class CreateContentMapper extends DataMapper
     /**
      * {@inheritdoc}
      */
-    protected function mapFromForm( FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath )
+    protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
         /** @var $contentCreateStruct \eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct */
         $contentCreateStruct = $data->payload;
         $contentType = $contentCreateStruct->contentType;
 
         $fieldDefinitionIdentifier = (string)$propertyPath;
-        $fieldDefinition = $contentType->getFieldDefinition( $fieldDefinitionIdentifier );
+        $fieldDefinition = $contentType->getFieldDefinition($fieldDefinitionIdentifier);
 
-        if ( null === $fieldDefinition )
-        {
+        if (null === $fieldDefinition) {
             throw new RuntimeException(
                 "Data payload does not contain expected FieldDefinition '{$fieldDefinitionIdentifier}'"
             );
@@ -68,10 +64,10 @@ class CreateContentMapper extends DataMapper
 
         $fieldTypeIdentifier = $fieldDefinition->fieldTypeIdentifier;
 
-        $handler = $this->fieldTypeHandlerRegistry->get( $fieldTypeIdentifier );
+        $handler = $this->fieldTypeHandlerRegistry->get($fieldTypeIdentifier);
         $contentCreateStruct->setField(
             $fieldDefinitionIdentifier,
-            $handler->convertFieldValueFromForm( $form->getData() )
+            $handler->convertFieldValueFromForm($form->getData())
         );
     }
 }

@@ -9,18 +9,16 @@ use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use RuntimeException;
 
 /**
- * Class UpdateUserMapper
+ * Class UpdateUserMapper.
  *
  * A data mapper using property paths to read/write data.
- *
- * @package Netgen\EzFormsBundle\Form\DataMapper
  */
 class UpdateUserMapper extends DataMapper
 {
     /**
      * {@inheritdoc}
      */
-    protected function mapToForm( FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath )
+    protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
         /** @var $userUpdateStruct \eZ\Publish\API\Repository\Values\User\UserUpdateStruct */
         $userUpdateStruct = $data->payload;
@@ -30,10 +28,9 @@ class UpdateUserMapper extends DataMapper
         $contentType = $data->definition;
 
         $fieldDefinitionIdentifier = (string)$propertyPath;
-        $fieldDefinition = $contentType->getFieldDefinition( $fieldDefinitionIdentifier );
+        $fieldDefinition = $contentType->getFieldDefinition($fieldDefinitionIdentifier);
 
-        if ( null === $fieldDefinition )
-        {
+        if (null === $fieldDefinition) {
             throw new RuntimeException(
                 "Data payload does not contain expected FieldDefinition '{$fieldDefinitionIdentifier}'"
             );
@@ -43,17 +40,14 @@ class UpdateUserMapper extends DataMapper
 
         // For user we can update only email and password.
         // Only email is set as it doesn't make sense to set the password to the form.
-        if ( $fieldTypeIdentifier === "ezuser" )
-        {
+        if ($fieldTypeIdentifier === 'ezuser') {
             $form->setData(
                 array(
-                    "email" => $user->email,
+                    'email' => $user->email,
                 )
             );
-        }
-        else
-        {
-            $handler = $this->fieldTypeHandlerRegistry->get( $fieldTypeIdentifier );
+        } else {
+            $handler = $this->fieldTypeHandlerRegistry->get($fieldTypeIdentifier);
             $form->setData(
                 $handler->convertFieldValueToForm(
                     $user->getFieldValue(
@@ -69,7 +63,7 @@ class UpdateUserMapper extends DataMapper
     /**
      * {@inheritdoc}
      */
-    protected function mapFromForm( FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath )
+    protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
         /** @var $userUpdateStruct \eZ\Publish\API\Repository\Values\User\UserUpdateStruct */
         $userUpdateStruct = $data->payload;
@@ -77,10 +71,9 @@ class UpdateUserMapper extends DataMapper
         $contentType = $data->definition;
 
         $fieldDefinitionIdentifier = (string)$propertyPath;
-        $fieldDefinition = $contentType->getFieldDefinition( $fieldDefinitionIdentifier );
+        $fieldDefinition = $contentType->getFieldDefinition($fieldDefinitionIdentifier);
 
-        if ( null === $fieldDefinition )
-        {
+        if (null === $fieldDefinition) {
             throw new RuntimeException(
                 "Data payload does not contain expected FieldDefinition '{$fieldDefinitionIdentifier}'"
             );
@@ -88,16 +81,15 @@ class UpdateUserMapper extends DataMapper
 
         $fieldTypeIdentifier = $fieldDefinition->fieldTypeIdentifier;
 
-        $handler = $this->fieldTypeHandlerRegistry->get( $fieldTypeIdentifier );
+        $handler = $this->fieldTypeHandlerRegistry->get($fieldTypeIdentifier);
         $formData = $form->getData();
 
         // For ezuser we need to map form data to the properties in the UserUpdateStruct
-        if ( $fieldTypeIdentifier === "ezuser" )
-        {
-            $convertedData = $handler->convertFieldValueFromForm( $formData );
+        if ($fieldTypeIdentifier === 'ezuser') {
+            $convertedData = $handler->convertFieldValueFromForm($formData);
 
-            $userUpdateStruct->email = $convertedData["email"];
-            $userUpdateStruct->password = $convertedData["password"];
+            $userUpdateStruct->email = $convertedData['email'];
+            $userUpdateStruct->password = $convertedData['password'];
 
             // Creating users through Content context is not allowed,
             // so we map dummy data to make it non-empty
@@ -106,16 +98,15 @@ class UpdateUserMapper extends DataMapper
             $userUpdateStruct->contentUpdateStruct->setField(
                 $fieldDefinitionIdentifier,
                 array(
-                    "login" => "dummy",
+                    'login' => 'dummy',
                 )
             );
         }
         // Else set field to struct, but only if it is not empty or it has not been marked
         // to skip update if empty
-        else if ( !$this->shouldSkipForEmptyUpdate( $form, $formData, $fieldDefinitionIdentifier ) )
-        {
-            $convertedData = $handler->convertFieldValueFromForm( $formData );
-            $userUpdateStruct->contentUpdateStruct->setField( $fieldDefinitionIdentifier, $convertedData );
+        elseif (!$this->shouldSkipForEmptyUpdate($form, $formData, $fieldDefinitionIdentifier)) {
+            $convertedData = $handler->convertFieldValueFromForm($formData);
+            $userUpdateStruct->contentUpdateStruct->setField($fieldDefinitionIdentifier, $convertedData);
         }
     }
 }

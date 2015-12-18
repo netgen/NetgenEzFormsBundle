@@ -13,14 +13,14 @@ use eZ\Publish\Core\FieldType\Country\Value as CountryValue;
 class Country extends FieldTypeHandler
 {
     /**
-     * Country codes
+     * Country codes.
      *
      * @var array
      */
     protected $countryData;
 
     /**
-     * Removed redundant data from array
+     * Removed redundant data from array.
      *
      * @var array
      */
@@ -28,16 +28,15 @@ class Country extends FieldTypeHandler
 
     /**
      * Constructor
-     * Set information data from Service Container for countries
+     * Set information data from Service Container for countries.
      *
      * @param array $countryData
      */
-    public function __construct( $countryData )
+    public function __construct($countryData)
     {
         $this->countryData = $countryData;
 
-        foreach( $countryData as $countryCode => $country )
-        {
+        foreach ($countryData as $countryCode => $country) {
             $this->filteredCountryData[$countryCode] = $country['Name'];
         }
     }
@@ -50,60 +49,52 @@ class Country extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $options['expanded'] = false;
-        $options['multiple'] = $fieldDefinition->getFieldSettings()["isMultiple"];
+        $options['multiple'] = $fieldDefinition->getFieldSettings()['isMultiple'];
 
         $options['choice_list'] = new ChoiceList(
-            array_keys( $this->filteredCountryData ),
-            array_values( $this->filteredCountryData )
+            array_keys($this->filteredCountryData),
+            array_values($this->filteredCountryData)
         );
 
-
-        $formBuilder->add( $fieldDefinition->identifier, 'choice', $options );
+        $formBuilder->add($fieldDefinition->identifier, 'choice', $options);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return array
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
         return $value->countries;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return CountryValue;
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
         $country = array();
 
         // case if multiple is true
-        if ( is_array( $data ) )
-        {
-            foreach ( $data as $countryCode )
-            {
-                if ( array_key_exists( $countryCode, $this->countryData ) )
-                {
+        if (is_array($data)) {
+            foreach ($data as $countryCode) {
+                if (array_key_exists($countryCode, $this->countryData)) {
                     $country[$countryCode] = $this->countryData[$countryCode];
                 }
             }
-        }
-        else
-        {
-            if ( array_key_exists( $data, $this->countryData ) )
-            {
+        } else {
+            if (array_key_exists($data, $this->countryData)) {
                 $country[$data] = $this->countryData[$data];
             }
         }
 
-        return new CountryValue( (array)$country );
+        return new CountryValue((array)$country);
     }
 }

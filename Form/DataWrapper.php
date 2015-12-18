@@ -3,11 +3,7 @@
 namespace Netgen\Bundle\EzFormsBundle\Form;
 
 /**
- * Class DataWrapper
- *
- *
- *
- * @package Netgen\EzFormsBundle\Form
+ * Class DataWrapper.
  */
 class DataWrapper
 {
@@ -44,7 +40,7 @@ class DataWrapper
      * @param null|mixed $target
      * @param null|mixed $definition
      */
-    public function __construct( $payload, $definition = null, $target = null )
+    public function __construct($payload, $definition = null, $target = null)
     {
         $this->payload = $payload;
         $this->definition = $definition;

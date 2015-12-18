@@ -10,16 +10,14 @@ use eZ\Publish\Core\FieldType\TextBlock\Value as TextBlockValue;
 use eZ\Publish\SPI\FieldType\Value;
 
 /**
- * Class TextBlock
- *
- * @package Netgen\EzFormsBundle\FieldType\FormBuilder
+ * Class TextBlock.
  */
 class TextBlock extends FieldTypeHandler
 {
     /**
      * {@inheritdoc}
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
         return $value->text;
     }
@@ -27,14 +25,13 @@ class TextBlock extends FieldTypeHandler
     /**
      * {@inheritdoc}
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
-        if ( empty( $data ) )
-        {
+        if (empty($data)) {
             $data = '';
         }
 
-        return new TextBlockValue( $data );
+        return new TextBlockValue($data);
     }
 
     /**
@@ -45,12 +42,11 @@ class TextBlock extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        $options["attr"]["rows"] = $fieldDefinition->fieldSettings["textRows"];
+        $options['attr']['rows'] = $fieldDefinition->fieldSettings['textRows'];
 
-        $formBuilder->add( $fieldDefinition->identifier, "textarea", $options );
+        $formBuilder->add($fieldDefinition->identifier, 'textarea', $options);
     }
 }

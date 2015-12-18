@@ -20,62 +20,56 @@ class Integer extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        if ( !empty( $fieldDefinition->defaultValue ) )
-        {
+        if (!empty($fieldDefinition->defaultValue)) {
             $options['data'] = (int)$fieldDefinition->defaultValue->value;
         }
 
-        if ( !empty( $fieldDefinition->getValidatorConfiguration()['IntegerValueValidator'] ) )
-        {
+        if (!empty($fieldDefinition->getValidatorConfiguration()['IntegerValueValidator'])) {
             $rangeConstraints = array();
 
             $min = $fieldDefinition->getValidatorConfiguration()['IntegerValueValidator']['minIntegerValue'];
             $max = $fieldDefinition->getValidatorConfiguration()['IntegerValueValidator']['maxIntegerValue'];
 
-            if ( $min !== false )
-            {
+            if ($min !== false) {
                 $rangeConstraints['min'] = $min;
             }
 
-            if ( $max !== false )
-            {
+            if ($max !== false) {
                 $rangeConstraints['max'] = $max;
             }
 
-            if ( !empty( $rangeConstraints ) )
-            {
-                $options['constraints'][] = new Assert\Range( $rangeConstraints );
+            if (!empty($rangeConstraints)) {
+                $options['constraints'][] = new Assert\Range($rangeConstraints);
             }
         }
 
-        $formBuilder->add( $fieldDefinition->identifier, 'integer', $options );
+        $formBuilder->add($fieldDefinition->identifier, 'integer', $options);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return int
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
         return (int)$value->value;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return IntegerValue\Value
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
-        if ( !is_int( $data ) )
-        {
+        if (!is_int($data)) {
             $data = null;
         }
-        return new IntegerValue\Value( $data );
+
+        return new IntegerValue\Value($data);
     }
 }

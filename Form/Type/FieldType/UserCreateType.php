@@ -7,9 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 
 /**
- * Class UserCreateType
- *
- * @package Netgen\EzFormsBundle\FieldType
+ * Class UserCreateType.
  */
 class UserCreateType extends AbstractType
 {
@@ -21,7 +19,7 @@ class UserCreateType extends AbstractType
     /**
      * @param int $minimumPasswordLength
      */
-    public function __construct( $minimumPasswordLength )
+    public function __construct($minimumPasswordLength)
     {
         $this->minimumPasswordLength = $minimumPasswordLength;
     }
@@ -29,53 +27,52 @@ class UserCreateType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm( FormBuilderInterface $builder, array $options )
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $emailOptions = array(
-            "label" => "E-mail address",
-            "constraints" => array(
+            'label' => 'E-mail address',
+            'constraints' => array(
                 new Constraints\NotBlank(),
                 new Constraints\Email(),
             ),
         );
         $usernameOptions = array(
-            "label" => "Username",
-            "constraints" => array(
+            'label' => 'Username',
+            'constraints' => array(
                 new Constraints\NotBlank(),
             ),
         );
 
         $passwordConstraints = array(
-            new Constraints\NotBlank()
+            new Constraints\NotBlank(),
         );
 
-        if ( $this->minimumPasswordLength > 0 )
-        {
+        if ($this->minimumPasswordLength > 0) {
             $passwordConstraints[] = new Constraints\Length(
                 array(
-                    "min" => $this->minimumPasswordLength,
+                    'min' => $this->minimumPasswordLength,
                 )
             );
         }
 
         $passwordOptions = array(
-            "type" => "password",
-            "invalid_message" => "Both passwords must match.",
-            "options" => array(
-                "constraints" => $passwordConstraints,
+            'type' => 'password',
+            'invalid_message' => 'Both passwords must match.',
+            'options' => array(
+                'constraints' => $passwordConstraints,
             ),
-            "first_options" => array(
-                "label" => "Password",
+            'first_options' => array(
+                'label' => 'Password',
             ),
-            "second_options" => array(
-                "label" => "Repeat password",
+            'second_options' => array(
+                'label' => 'Repeat password',
             ),
         );
 
         $builder
-            ->add( "email", "email", $emailOptions )
-            ->add( "username", "text", $usernameOptions )
-            ->add( "password", "repeated", $passwordOptions );
+            ->add('email', 'email', $emailOptions)
+            ->add('username', 'text', $usernameOptions)
+            ->add('password', 'repeated', $passwordOptions);
     }
 
     /**
@@ -83,6 +80,6 @@ class UserCreateType extends AbstractType
      */
     public function getName()
     {
-        return "ezforms_ezuser_create";
+        return 'ezforms_ezuser_create';
     }
 }

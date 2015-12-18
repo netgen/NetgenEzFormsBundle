@@ -11,9 +11,7 @@ use eZ\Publish\Core\FieldType\Image\Value as ImageValue;
 use Symfony\Component\Validator\Constraints;
 
 /**
- * Class Image
- *
- * @package Netgen\EzFormsBundle\FieldType\FormBuilder
+ * Class Image.
  */
 class Image extends FieldTypeHandler
 {
@@ -22,7 +20,7 @@ class Image extends FieldTypeHandler
      *
      * @param \eZ\Publish\Core\FieldType\Image\Value $value
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
         return null;
     }
@@ -32,20 +30,19 @@ class Image extends FieldTypeHandler
      *
      * @param null|\Symfony\Component\HttpFoundation\File\UploadedFile $data
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
-        if ( $data === null )
-        {
+        if ($data === null) {
             return null;
         }
 
         $imageData = array(
-            "inputUri" => $data->getRealPath(),
-            "fileName" => $data->getClientOriginalName(),
-            "fileSize" => $data->getSize(),
+            'inputUri' => $data->getRealPath(),
+            'fileName' => $data->getClientOriginalName(),
+            'fileSize' => $data->getSize(),
         );
 
-        return new ImageValue( $imageData );
+        return new ImageValue($imageData);
     }
 
     /**
@@ -56,26 +53,24 @@ class Image extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        $maxFileSize = $fieldDefinition->validatorConfiguration["FileSizeValidator"]["maxFileSize"];
+        $maxFileSize = $fieldDefinition->validatorConfiguration['FileSizeValidator']['maxFileSize'];
 
-        if ( $maxFileSize !== false )
-        {
-            $options["constraints"][] = new Constraints\File(
+        if ($maxFileSize !== false) {
+            $options['constraints'][] = new Constraints\File(
                 array(
-                    "maxSize" => $maxFileSize,
+                    'maxSize' => $maxFileSize,
                 )
             );
         }
 
         // Image should not be erased (updated as empty) if nothing is selected in file input
-        $this->skipEmptyUpdate( $formBuilder, $fieldDefinition->identifier );
+        $this->skipEmptyUpdate($formBuilder, $fieldDefinition->identifier);
 
-        $options["block_name"] = "ezforms_image";
+        $options['block_name'] = 'ezforms_image';
 
-        $formBuilder->add( $fieldDefinition->identifier, "file", $options );
+        $formBuilder->add($fieldDefinition->identifier, 'file', $options);
     }
 }

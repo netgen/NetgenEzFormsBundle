@@ -11,16 +11,14 @@ use eZ\Publish\SPI\FieldType\Value;
 use Symfony\Component\Validator\Constraints;
 
 /**
- * Class TextLine
- *
- * @package Netgen\EzFormsBundle\FieldType\FormBuilder
+ * Class TextLine.
  */
 class TextLine extends FieldTypeHandler
 {
     /**
      * {@inheritdoc}
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
         return $value->text;
     }
@@ -28,14 +26,13 @@ class TextLine extends FieldTypeHandler
     /**
      * {@inheritdoc}
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
-        if ( empty( $data ) )
-        {
+        if (empty($data)) {
             $data = '';
         }
 
-        return new TextLineValue( $data );
+        return new TextLineValue($data);
     }
 
     /**
@@ -46,33 +43,28 @@ class TextLine extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        if ( !empty( $fieldDefinition->validatorConfiguration["StringLengthValidator"] ) )
-        {
+        if (!empty($fieldDefinition->validatorConfiguration['StringLengthValidator'])) {
             $lengthConstraints = array();
 
-            $minStringLength = $fieldDefinition->validatorConfiguration["StringLengthValidator"]["minStringLength"];
-            $maxStringLength = $fieldDefinition->validatorConfiguration["StringLengthValidator"]["maxStringLength"];
+            $minStringLength = $fieldDefinition->validatorConfiguration['StringLengthValidator']['minStringLength'];
+            $maxStringLength = $fieldDefinition->validatorConfiguration['StringLengthValidator']['maxStringLength'];
 
-            if ( $minStringLength !== false )
-            {
-                $lengthConstraints["min"] = $minStringLength;
+            if ($minStringLength !== false) {
+                $lengthConstraints['min'] = $minStringLength;
             }
 
-            if ( $maxStringLength !== false )
-            {
-                $lengthConstraints["max"] = $maxStringLength;
+            if ($maxStringLength !== false) {
+                $lengthConstraints['max'] = $maxStringLength;
             }
 
-            if ( !empty( $lengthConstraints ) )
-            {
-                $options["constraints"][] = new Constraints\Length( $lengthConstraints );
+            if (!empty($lengthConstraints)) {
+                $options['constraints'][] = new Constraints\Length($lengthConstraints);
             }
         }
 
-        $formBuilder->add( $fieldDefinition->identifier, "text", $options );
+        $formBuilder->add($fieldDefinition->identifier, 'text', $options);
     }
 }

@@ -19,31 +19,30 @@ class Checkbox extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
-        $options["data"] = $fieldDefinition->defaultValue->bool;
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
+        $options['data'] = $fieldDefinition->defaultValue->bool;
 
-        $formBuilder->add( $fieldDefinition->identifier, "checkbox", $options );
+        $formBuilder->add($fieldDefinition->identifier, 'checkbox', $options);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
-     * @return boolean
+     * @return bool
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
         return $value->bool;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return CheckboxValue\Value
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
-        return new CheckboxValue\Value( $data );
+        return new CheckboxValue\Value($data);
     }
 }

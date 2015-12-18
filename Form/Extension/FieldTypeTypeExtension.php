@@ -8,9 +8,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class FieldTypeTypeExtension
- *
- * @package Netgen\EzFormsBundle\Form\Extension
+ * Class FieldTypeTypeExtension.
  */
 class FieldTypeTypeExtension extends AbstractTypeExtension
 {
@@ -20,17 +18,17 @@ class FieldTypeTypeExtension extends AbstractTypeExtension
     public function getExtendedType()
     {
         // Returning 'form' extends all form types
-        return "form";
+        return 'form';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions( OptionsResolverInterface $resolver )
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setOptional(
             array(
-                "ezforms",
+                'ezforms',
             )
         );
     }
@@ -38,30 +36,26 @@ class FieldTypeTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildView( FormView $view, FormInterface $form, array $options )
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $ezFormsVars = array();
 
-        if ( isset( $options["ezforms"]["fielddefinition"] ) )
-        {
-            $ezFormsVars["fielddefinition"] = $options["ezforms"]["fielddefinition"];
+        if (isset($options['ezforms']['fielddefinition'])) {
+            $ezFormsVars['fielddefinition'] = $options['ezforms']['fielddefinition'];
         }
 
-        if ( isset( $options["ezforms"]["language_code"] ) )
-        {
-            $ezFormsVars["language_code"] = $options["ezforms"]["language_code"];
+        if (isset($options['ezforms']['language_code'])) {
+            $ezFormsVars['language_code'] = $options['ezforms']['language_code'];
         }
 
-        if ( isset( $options["ezforms"]["content"] ) )
-        {
-            $ezFormsVars["content"] = $options["ezforms"]["content"];
+        if (isset($options['ezforms']['content'])) {
+            $ezFormsVars['content'] = $options['ezforms']['content'];
         }
 
-        if ( isset( $options["ezforms"]["description"] ) )
-        {
-            $ezFormsVars["description"] = $options["ezforms"]["description"];
+        if (isset($options['ezforms']['description'])) {
+            $ezFormsVars['description'] = $options['ezforms']['description'];
         }
 
-        $view->vars["ezforms"] = $ezFormsVars;
+        $view->vars['ezforms'] = $ezFormsVars;
     }
 }

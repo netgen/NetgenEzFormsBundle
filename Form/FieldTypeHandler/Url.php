@@ -8,7 +8,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\Core\FieldType\Url as UrlValue;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class Url extends FieldTypeHandler
 {
@@ -20,36 +19,34 @@ class Url extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        $formBuilder->add( $fieldDefinition->identifier, 'ezforms_url', $options );
+        $formBuilder->add($fieldDefinition->identifier, 'ezforms_url', $options);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return array
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
-        return array( 'url' => $value->link, 'text' => $value->text );
+        return array('url' => $value->link, 'text' => $value->text);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return UrlValue\Value
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
-        if ( !is_array( $data ) )
-        {
+        if (!is_array($data)) {
             $data['url'] = null;
             $data['text'] = null;
         }
 
-        return new UrlValue\Value( $data['url'], $data['text'] );
+        return new UrlValue\Value($data['url'], $data['text']);
     }
 }

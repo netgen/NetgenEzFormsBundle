@@ -6,8 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Class MapType
- * @package Netgen\Bundle\EzFormsBundle\Form\Type
+ * Class MapType.
  */
 class MapType extends AbstractType
 {
@@ -16,16 +15,16 @@ class MapType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add("address", "text", array(
-            "label" => "ezforms.form.map.address.label",
+        $builder->add('address', 'text', array(
+            'label' => 'ezforms.form.map.address.label',
         ));
 
-        $builder->add("latitude", "number", array(
-            "label" => "ezforms.form.map.latitude.label",
+        $builder->add('latitude', 'number', array(
+            'label' => 'ezforms.form.map.latitude.label',
         ));
 
-        $builder->add("longitude", "number", array(
-            "label" => "ezforms.form.map.longitude.label",
+        $builder->add('longitude', 'number', array(
+            'label' => 'ezforms.form.map.longitude.label',
         ));
     }
 
@@ -36,6 +35,6 @@ class MapType extends AbstractType
      */
     public function getName()
     {
-        return "ezforms_map";
+        return 'ezforms_map';
     }
 }

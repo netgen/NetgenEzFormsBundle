@@ -11,9 +11,7 @@ use eZ\Publish\Core\FieldType\ISBN\Value as IsbnValue;
 use Symfony\Component\Validator\Constraints;
 
 /**
- * Class Isbn
- *
- * @package Netgen\EzFormsBundle\FieldType\FormBuilder
+ * Class Isbn.
  */
 class Isbn extends FieldTypeHandler
 {
@@ -22,7 +20,7 @@ class Isbn extends FieldTypeHandler
      *
      * @param IsbnValue $value
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
         return $value->isbn;
     }
@@ -30,14 +28,13 @@ class Isbn extends FieldTypeHandler
     /**
      * {@inheritdoc}
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
-        if ( empty( $data ) )
-        {
+        if (empty($data)) {
             $data = '';
         }
 
-        return new IsbnValue( $data );
+        return new IsbnValue($data);
     }
 
     /**
@@ -48,23 +45,19 @@ class Isbn extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        if ( $fieldDefinition->fieldSettings['isISBN13'] )
-        {
+        if ($fieldDefinition->fieldSettings['isISBN13']) {
             $options['constraints'][] = new Constraints\Isbn(
                 array(
-                    'type' => 'isbn13'
+                    'type' => 'isbn13',
                 )
             );
-        }
-        else
-        {
+        } else {
             $options['constraints'][] = new Constraints\Isbn();
         }
 
-        $formBuilder->add( $fieldDefinition->identifier, "text", $options );
+        $formBuilder->add($fieldDefinition->identifier, 'text', $options);
     }
 }

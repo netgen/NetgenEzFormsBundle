@@ -9,28 +9,25 @@ use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use RuntimeException;
 
 /**
- * Class CreateUserMapper
+ * Class CreateUserMapper.
  *
  * A data mapper using property paths to read/write data.
- *
- * @package Netgen\EzFormsBundle\Form\DataMapper
  */
 class CreateUserMapper extends DataMapper
 {
     /**
      * {@inheritdoc}
      */
-    protected function mapToForm( FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath )
+    protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
         /** @var $userCreateStruct \eZ\Publish\Core\Repository\Values\User\UserCreateStruct */
         $userCreateStruct = $data->payload;
         $contentType = $userCreateStruct->contentType;
 
         $fieldDefinitionIdentifier = (string)$propertyPath;
-        $fieldDefinition = $contentType->getFieldDefinition( $fieldDefinitionIdentifier );
+        $fieldDefinition = $contentType->getFieldDefinition($fieldDefinitionIdentifier);
 
-        if ( null === $fieldDefinition )
-        {
+        if (null === $fieldDefinition) {
             throw new RuntimeException(
                 "Data payload does not contain expected FieldDefinition '{$fieldDefinitionIdentifier}'"
             );
@@ -38,10 +35,10 @@ class CreateUserMapper extends DataMapper
 
         $fieldTypeIdentifier = $fieldDefinition->fieldTypeIdentifier;
 
-        $handler = $this->fieldTypeHandlerRegistry->get( $fieldTypeIdentifier );
+        $handler = $this->fieldTypeHandlerRegistry->get($fieldTypeIdentifier);
         $form->setData(
             $handler->convertFieldValueToForm(
-                $contentType->getFieldDefinition( $fieldDefinitionIdentifier )->defaultValue,
+                $contentType->getFieldDefinition($fieldDefinitionIdentifier)->defaultValue,
                 $fieldDefinition
             )
         );
@@ -50,17 +47,16 @@ class CreateUserMapper extends DataMapper
     /**
      * {@inheritdoc}
      */
-    protected function mapFromForm( FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath )
+    protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
         /** @var $userCreateStruct \eZ\Publish\API\Repository\Values\User\UserCreateStruct */
         $userCreateStruct = $data->payload;
         $contentType = $userCreateStruct->contentType;
 
         $fieldDefinitionIdentifier = (string)$propertyPath;
-        $fieldDefinition = $contentType->getFieldDefinition( $fieldDefinitionIdentifier );
+        $fieldDefinition = $contentType->getFieldDefinition($fieldDefinitionIdentifier);
 
-        if ( null === $fieldDefinition )
-        {
+        if (null === $fieldDefinition) {
             throw new RuntimeException(
                 "Data payload does not contain expected FieldDefinition '{$fieldDefinitionIdentifier}'"
             );
@@ -68,20 +64,17 @@ class CreateUserMapper extends DataMapper
 
         $fieldTypeIdentifier = $fieldDefinition->fieldTypeIdentifier;
 
-        $handler = $this->fieldTypeHandlerRegistry->get( $fieldTypeIdentifier );
-        $convertedData = $handler->convertFieldValueFromForm( $form->getData() );
+        $handler = $this->fieldTypeHandlerRegistry->get($fieldTypeIdentifier);
+        $convertedData = $handler->convertFieldValueFromForm($form->getData());
 
         // 'ezuser' is an exceptional case, here we need to map form data to the properties
         // in the UserCreateStruct
-        if ( $fieldTypeIdentifier === "ezuser" )
-        {
-            $userCreateStruct->login = $convertedData["username"];
-            $userCreateStruct->email = $convertedData["email"];
-            $userCreateStruct->password = isset( $convertedData["password"] ) ? $convertedData["password"] : null;
-        }
-        else
-        {
-            $userCreateStruct->setField( $fieldDefinitionIdentifier, $convertedData );
+        if ($fieldTypeIdentifier === 'ezuser') {
+            $userCreateStruct->login = $convertedData['username'];
+            $userCreateStruct->email = $convertedData['email'];
+            $userCreateStruct->password = isset($convertedData['password']) ? $convertedData['password'] : null;
+        } else {
+            $userCreateStruct->setField($fieldDefinitionIdentifier, $convertedData);
         }
     }
 }

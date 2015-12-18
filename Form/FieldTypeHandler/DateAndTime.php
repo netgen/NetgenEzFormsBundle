@@ -22,9 +22,8 @@ class DateAndTime extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
-        $options = $this->getDefaultFieldOptions( $fieldDefinition, $languageCode, $content );
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $useSeconds = $fieldDefinition->getFieldSettings()['useSeconds'];
         $options['input'] = 'datetime';
@@ -33,26 +32,26 @@ class DateAndTime extends FieldTypeHandler
         $options['with_seconds'] = $useSeconds;
         $options['constraints'][] = new Assert\DateTime();
 
-        $formBuilder->add( $fieldDefinition->identifier, "datetime", $options );
+        $formBuilder->add($fieldDefinition->identifier, 'datetime', $options);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return DateTime
      */
-    public function convertFieldValueToForm( Value $value, FieldDefinition $fieldDefinition = null )
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
         return $value->value;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return DTValue\Value
      */
-    public function convertFieldValueFromForm( $data )
+    public function convertFieldValueFromForm($data)
     {
-        return new DTValue\Value( $data );
+        return new DTValue\Value($data);
     }
 }
