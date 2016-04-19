@@ -81,7 +81,7 @@ services:
     netgen.ezforms.form.fieldtype_handler.ezcountry:
         class: "%netgen.ezforms.form.fieldtype_handler.ezcountry.class%"
         arguments:
-            - '%ezpublish.fieldType.ezcountry.data%'
+            - "%ezpublish.fieldType.ezcountry.data%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezcountry}
 
