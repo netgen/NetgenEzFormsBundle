@@ -5,15 +5,15 @@ parameters:
 
 services:
     netgen.ezforms.form.type.fieldtype.ezuser_create:
-        class: %netgen.ezforms.form.type.fieldtype.ezuser_create.class%
+        class: "%netgen.ezforms.form.type.fieldtype.ezuser_create.class%"
         arguments:
-            - %netgen.ezforms.form.type.fieldtype.ezuser.parameters.min_password_length%
+            - "%netgen.ezforms.form.type.fieldtype.ezuser.parameters.min_password_length%"
         tags:
             - { name: form.type, alias: ezforms_ezuser_create }
 
     netgen.ezforms.form.type.fieldtype.ezuser_update:
-        class: %netgen.ezforms.form.type.fieldtype.ezuser_update.class%
+        class: "%netgen.ezforms.form.type.fieldtype.ezuser_update.class%"
         arguments:
-            - %netgen.ezforms.form.type.fieldtype.ezuser.parameters.min_password_length%
+            - "%netgen.ezforms.form.type.fieldtype.ezuser.parameters.min_password_length%"
         tags:
             - { name: form.type, alias: ezforms_ezuser_update }

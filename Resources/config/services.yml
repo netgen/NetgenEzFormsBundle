@@ -11,9 +11,9 @@ services:
     # Services tagged with 'netgen.ezforms.form.fieldtype_handler' will be registered
     # to this one during service container compilation. See imported resources.
     netgen.ezforms.form.fieldtype_handler_registry:
-        class: %netgen.ezforms.form.fieldtype_handler_registry.class%
+        class: "%netgen.ezforms.form.fieldtype_handler_registry.class%"
 
     netgen.ezforms.form.extension.fieldtype:
-        class: %netgen.ezforms.form.extension.fieldtype.class%
+        class: "%netgen.ezforms.form.extension.fieldtype.class%"
         tags:
             - {name: form.type_extension, alias: form}

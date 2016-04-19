@@ -19,88 +19,88 @@ parameters:
 
 services:
     netgen.ezforms.form.fieldtype_handler.ezimage:
-        class: %netgen.ezforms.form.fieldtype_handler.ezimage.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.ezimage.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezimage}
 
     netgen.ezforms.form.fieldtype_handler.ezstring:
-        class: %netgen.ezforms.form.fieldtype_handler.ezstring.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.ezstring.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezstring}
 
     netgen.ezforms.form.fieldtype_handler.eztext:
-        class: %netgen.ezforms.form.fieldtype_handler.eztext.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.eztext.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: eztext}
 
     netgen.ezforms.form.fieldtype_handler.ezuser:
-        class: %netgen.ezforms.form.fieldtype_handler.ezuser.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.ezuser.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezuser}
 
     netgen.ezforms.form.fieldtype_handler.ezemail:
-        class: %netgen.ezforms.form.fieldtype_handler.ezemail.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.ezemail.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezemail}
 
     netgen.ezforms.form.fieldtype_handler.ezselection:
-        class: %netgen.ezforms.form.fieldtype_handler.ezselection.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.ezselection.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezselection}
 
     netgen.ezforms.form.fieldtype_handler.ezboolean:
-        class: %netgen.ezforms.form.fieldtype_handler.ezboolean.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.ezboolean.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezboolean}
 
     netgen.ezforms.form.fieldtype_handler.ezdate:
-        class: %netgen.ezforms.form.fieldtype_handler.ezdate.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.ezdate.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezdate}
 
     netgen.ezforms.form.fieldtype_handler.ezdatetime:
-        class: %netgen.ezforms.form.fieldtype_handler.ezdatetime.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.ezdatetime.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezdatetime}
 
     netgen.ezforms.form.fieldtype_handler.ezinteger:
-        class: %netgen.ezforms.form.fieldtype_handler.ezinteger.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.ezinteger.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezinteger}
 
     netgen.ezforms.form.fieldtype_handler.ezfloat:
-        class: %netgen.ezforms.form.fieldtype_handler.ezfloat.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.ezfloat.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezfloat}
 
     netgen.ezforms.form.fieldtype_handler.ezurl:
-        class: %netgen.ezforms.form.fieldtype_handler.ezurl.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.ezurl.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezurl}
 
     netgen.ezforms.form.fieldtype_handler.ezcountry:
-        class: %netgen.ezforms.form.fieldtype_handler.ezcountry.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.ezcountry.class%"
         arguments:
             - '%ezpublish.fieldType.ezcountry.data%'
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezcountry}
 
     netgen.ezforms.form.fieldtype_handler.eztime:
-        class: %netgen.ezforms.form.fieldtype_handler.eztime.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.eztime.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: eztime}
 
     netgen.ezforms.form.fieldtype_handler.ezisbn:
-        class: %netgen.ezforms.form.fieldtype_handler.ezisbn.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.ezisbn.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezisbn}
 
     netgen.ezforms.form.fieldtype_handler.ezbinaryfile:
-        class: %netgen.ezforms.form.fieldtype_handler.ezbinaryfile.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.ezbinaryfile.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezbinaryfile}
 
     netgen.ezforms.form.fieldtype_handler.ezgmaplocation:
-        class: %netgen.ezforms.form.fieldtype_handler.ezgmaplocation.class%
+        class: "%netgen.ezforms.form.fieldtype_handler.ezgmaplocation.class%"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezgmaplocation}
