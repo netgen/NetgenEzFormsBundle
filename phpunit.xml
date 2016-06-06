@@ -16,6 +16,7 @@
             <exclude>
                 <directory>Controller</directory>
                 <directory>DependencyInjection</directory>
+                <directory>Resources</directory>
                 <directory>Tests</directory>
                 <directory>vendor</directory>
                 <file>NetgenEzFormsBundle.php</file>
