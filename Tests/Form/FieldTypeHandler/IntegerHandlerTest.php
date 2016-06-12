@@ -4,22 +4,22 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
-use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Integer;
+use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\IntegerHandler;
 use eZ\Publish\Core\FieldType\Integer\Value as IntegerValue;
 use Symfony\Component\Form\FormBuilder;
 
-class IntegerTest extends \PHPUnit_Framework_TestCase
+class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler()
     {
-        $integer = new Integer();
+        $integer = new IntegerHandler();
 
         $this->assertInstanceOf(FieldTypeHandler::class, $integer);
     }
 
     public function testConvertFieldValueToForm()
     {
-        $integer = new Integer();
+        $integer = new IntegerHandler();
         $integerValue = new IntegerValue(5);
 
         $returnedValue = $integer->convertFieldValueToForm($integerValue);
@@ -29,7 +29,7 @@ class IntegerTest extends \PHPUnit_Framework_TestCase
 
     public function testConvertFieldValueFromForm()
     {
-        $integer = new Integer();
+        $integer = new IntegerHandler();
         $integerValue = new IntegerValue(5);
 
         $returnedValue = $integer->convertFieldValueFromForm(5);
@@ -39,7 +39,7 @@ class IntegerTest extends \PHPUnit_Framework_TestCase
 
     public function testConvertFieldValueFromFormWhenDataIsNotNumeric()
     {
-        $integer = new Integer();
+        $integer = new IntegerHandler();
         $integerValue = new IntegerValue(null);
 
         $returnedValue = $integer->convertFieldValueFromForm('test');
@@ -76,7 +76,7 @@ class IntegerTest extends \PHPUnit_Framework_TestCase
 
         $languageCode = 'eng-GB';
 
-        $integer = new Integer();
+        $integer = new IntegerHandler();
         $integer->buildFieldCreateForm($formBuilder, $fieldDefinition, $languageCode);
     }
 }

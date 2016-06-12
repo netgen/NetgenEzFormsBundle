@@ -4,7 +4,7 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
-use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Float;
+use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\FloatHandler;
 use eZ\Publish\Core\FieldType\Float as FloatValue;
 use Symfony\Component\Form\FormBuilder;
 
@@ -12,14 +12,14 @@ class FloatTest extends \PHPUnit_Framework_TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler()
     {
-        $float = new Float();
+        $float = new FloatHandler();
 
         $this->assertInstanceOf(FieldTypeHandler::class, $float);
     }
 
     public function testConvertFieldValueToForm()
     {
-        $float = new Float();
+        $float = new FloatHandler();
         $floatValue = new FloatValue\Value(4.74);
 
         $returnedValue = $float->convertFieldValueToForm($floatValue);
@@ -29,7 +29,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
 
     public function testConvertFieldValueFromForm()
     {
-        $float = new Float();
+        $float = new FloatHandler();
         $floatValue = new FloatValue\Value(4.74);
 
         $returnedValue = $float->convertFieldValueFromForm(4.74);
@@ -39,7 +39,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
 
     public function testConvertFieldValueFromFormWhenDataIsNotNumeric()
     {
-        $float = new Float();
+        $float = new FloatHandler();
         $floatValue = new FloatValue\Value(null);
 
         $returnedValue = $float->convertFieldValueFromForm('test');
@@ -76,7 +76,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
 
         $languageCode = 'eng-GB';
 
-        $float = new Float();
+        $float = new FloatHandler();
         $float->buildFieldCreateForm($formBuilder, $fieldDefinition, $languageCode);
     }
 }
