@@ -7,6 +7,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\BinaryFile;
 use eZ\Publish\SPI\FieldType\Value;
 use eZ\Publish\Core\FieldType\BinaryFile\Value as FileValue;
+use Netgen\Bundle\EzFormsBundle\Tests\Form\Mock\FileMock;
 use Symfony\Component\Form\FormBuilder;
 
 class BinaryFileTest extends \PHPUnit_Framework_TestCase
@@ -31,22 +32,7 @@ class BinaryFileTest extends \PHPUnit_Framework_TestCase
     public function testConvertFieldValueFromForm()
     {
         $binaryFile = new BinaryFile();
-        $data = $this->getMockBuilder(\SplFileInfo::class)
-            ->disableOriginalConstructor()
-            ->setMethods(array('getRealPath', 'getClientOriginalName', 'getSize'))
-            ->getMock();
-
-        $data->expects($this->once())
-            ->willReturn('/some/path')
-            ->method('getRealPath');
-
-        $data->expects($this->once())
-            ->willReturn('file.txt')
-            ->method('getClientOriginalName');
-
-        $data->expects($this->once())
-            ->willReturn(123)
-            ->method('getSize');
+        $data = new FileMock();
 
         $returnedData = $binaryFile->convertFieldValueFromForm($data);
 

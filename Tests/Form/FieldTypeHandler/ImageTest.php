@@ -6,6 +6,7 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Image;
 use eZ\Publish\Core\FieldType\Image\Value as ImageValue;
+use Netgen\Bundle\EzFormsBundle\Tests\Form\Mock\FileMock;
 use Symfony\Component\Form\FormBuilder;
 
 class ImageTest extends \PHPUnit_Framework_TestCase
@@ -30,22 +31,7 @@ class ImageTest extends \PHPUnit_Framework_TestCase
     public function testConvertFieldValueFromForm()
     {
         $image = new Image();
-        $data = $this->getMockBuilder(\SplFileInfo::class)
-            ->disableOriginalConstructor()
-            ->setMethods(array('getRealPath', 'getClientOriginalName', 'getSize'))
-            ->getMock();
-
-        $data->expects($this->once())
-            ->willReturn('/some/path')
-            ->method('getRealPath');
-
-        $data->expects($this->once())
-            ->willReturn('image.jpg')
-            ->method('getClientOriginalName');
-
-        $data->expects($this->once())
-            ->willReturn(123)
-            ->method('getSize');
+        $data = new FileMock();
 
         $returnedData = $image->convertFieldValueFromForm($data);
 
