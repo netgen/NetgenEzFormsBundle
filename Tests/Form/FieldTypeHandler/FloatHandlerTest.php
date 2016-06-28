@@ -8,7 +8,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\FloatHandler;
 use eZ\Publish\Core\FieldType\Float as FloatValue;
 use Symfony\Component\Form\FormBuilder;
 
-class FloatTest extends \PHPUnit_Framework_TestCase
+class FloatHandlerTest extends \PHPUnit_Framework_TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler()
     {
@@ -69,8 +69,8 @@ class FloatTest extends \PHPUnit_Framework_TestCase
                     'FloatValueValidator' => array(
                         'minFloatValue' => 4,
                         'maxFloatValue' => 10,
-                    )
-                )
+                    ),
+                ),
             )
         );
 

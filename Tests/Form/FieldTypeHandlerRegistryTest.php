@@ -6,7 +6,6 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Date;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
 use OutOfBoundsException;
 use RuntimeException;
-use Symfony\Component\EventDispatcher\Tests\CallableClass;
 
 class FieldTypeHandlerRegistryTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,7 +32,7 @@ class FieldTypeHandlerRegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function testItThrowsOutOfRuntimeExceptionWhenHandlerIsNotInstanceOfHandler()
     {
-        $registry = new FieldTypeHandlerRegistry(array('some_handler' => function (){}));
+        $registry = new FieldTypeHandlerRegistry(array('some_handler' => function () {}));
         $registry->get('some_handler');
     }
 

@@ -180,7 +180,7 @@ class UpdateContentTypeTest extends \PHPUnit_Framework_TestCase
                             'identifier' => 'identifier',
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -192,7 +192,6 @@ class UpdateContentTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testBuildForm()
     {
-
         $fieldTypeHandler = $this->getMockBuilder(FieldTypeHandler::class)
             ->disableOriginalConstructor()
             ->setMethods(array('buildFieldUpdateForm'))
@@ -200,7 +199,6 @@ class UpdateContentTypeTest extends \PHPUnit_Framework_TestCase
 
         $fieldTypeHandler->expects($this->once())
             ->method('buildFieldUpdateForm');
-
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
@@ -217,7 +215,6 @@ class UpdateContentTypeTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->setMethods(array('setDataMapper'))
             ->getMock();
-
 
         $contentInfo = new ContentInfo(array('contentTypeId' => 123));
         $versionInfo = new VersionInfo(array('contentInfo' => $contentInfo));
@@ -239,7 +236,7 @@ class UpdateContentTypeTest extends \PHPUnit_Framework_TestCase
                             'identifier' => 'identifier',
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -251,7 +248,6 @@ class UpdateContentTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testBuildFormContinueIfFieldIdentifierIsEzUser()
     {
-
         $fieldTypeHandler = $this->getMockBuilder(FieldTypeHandler::class)
             ->disableOriginalConstructor()
             ->setMethods(array('buildFieldUpdateForm'))
@@ -259,7 +255,6 @@ class UpdateContentTypeTest extends \PHPUnit_Framework_TestCase
 
         $fieldTypeHandler->expects($this->never())
             ->method('buildFieldUpdateForm');
-
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
@@ -276,7 +271,6 @@ class UpdateContentTypeTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->setMethods(array('setDataMapper'))
             ->getMock();
-
 
         $contentInfo = new ContentInfo(array('contentTypeId' => 123));
         $versionInfo = new VersionInfo(array('contentInfo' => $contentInfo));
@@ -299,7 +293,7 @@ class UpdateContentTypeTest extends \PHPUnit_Framework_TestCase
                             'fieldTypeIdentifier' => 'ezuser',
                         )
                     ),
-                )
+                ),
             )
         );
 

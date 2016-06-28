@@ -66,7 +66,7 @@ class TextBlockTest extends \PHPUnit_Framework_TestCase
                 'names' => array('fre-FR' => 'fre-FR'),
                 'fieldSettings' => array(
                     'textRows' => 4,
-                )
+                ),
             )
         );
 

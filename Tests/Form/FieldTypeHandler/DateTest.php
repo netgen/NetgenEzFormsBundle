@@ -25,7 +25,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $dateValue = new DateValue\Value($dateTime);
 
         $returnedDate = $date->convertFieldValueToForm($dateValue);
-        $dateTime->setTime( 0, 0, 0 );
+        $dateTime->setTime(0, 0, 0);
         $this->assertEquals($dateTime, $returnedDate);
     }
 

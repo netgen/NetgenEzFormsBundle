@@ -21,7 +21,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
     {
         $time = new Time();
         $timeValue = new TimeValue(500);
-        $dateTime = new \DateTime("@500");
+        $dateTime = new \DateTime('@500');
 
         $returnedValue = $time->convertFieldValueToForm($timeValue);
 
@@ -89,7 +89,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
                 'names' => array('fre-FR' => 'fre-FR'),
                 'fieldSettings' => array(
                     'useSeconds' => true,
-                )
+                ),
             )
         );
 

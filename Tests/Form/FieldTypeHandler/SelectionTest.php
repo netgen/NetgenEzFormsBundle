@@ -60,7 +60,7 @@ class SelectionTest extends \PHPUnit_Framework_TestCase
                         2 => 'Selection 2',
                     ),
                     'isMultiple' => true,
-                )
+                ),
             )
         );
 

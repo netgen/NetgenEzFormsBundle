@@ -4,7 +4,6 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\Form\DataMapper;
 
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\InformationCollectionMapper;
 use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
@@ -69,7 +68,7 @@ class InformationCollectionMapperTest extends \PHPUnit_Framework_TestCase
                             'defaultValue' => new TextLineValue('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -149,7 +148,7 @@ class InformationCollectionMapperTest extends \PHPUnit_Framework_TestCase
                             'defaultValue' => new TextLineValue('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -213,7 +212,7 @@ class InformationCollectionMapperTest extends \PHPUnit_Framework_TestCase
                             'defaultValue' => new TextLineValue('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -280,7 +279,7 @@ class InformationCollectionMapperTest extends \PHPUnit_Framework_TestCase
                             'defaultValue' => new TextLineValue('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -306,7 +305,7 @@ class InformationCollectionMapperTest extends \PHPUnit_Framework_TestCase
             ->method('__toString');
 
         $form = $this->getForm();
-        
+
         $form->expects($this->once())
             ->willReturn($config)
             ->method('getConfig');

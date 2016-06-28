@@ -5,7 +5,6 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\Form\DataMapper;
 use eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\CreateContentMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Symfony\Component\Form\FormConfigBuilder;
@@ -13,7 +12,8 @@ use eZ\Publish\Core\FieldType\TextLine\Value;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 
-class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
+class CreateContentMapperTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * @var CreateContentMapper
      */
@@ -39,7 +39,8 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
      */
     private $propertyAccessor;
 
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->dispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
         $this->propertyAccessor = $this->getMock('Symfony\Component\PropertyAccess\PropertyAccessorInterface');
         $this->registry = $this->getMock('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry');
@@ -47,7 +48,8 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
         $this->mapper = new CreateContentMapper($this->registry, $this->propertyAccessor);
     }
 
-    private function getForm() {
+    private function getForm()
+    {
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')
             ->disableOriginalConstructor()
             ->setMethods(array(
@@ -57,28 +59,31 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
                 'getConfig',
                 'isSubmitted',
                 'isSynchronized',
-                'isDisabled'
+                'isDisabled',
             ))
             ->getMock();
 
         return $form;
     }
 
-    public function testInstanceOfDataMapper() {
+    public function testInstanceOfDataMapper()
+    {
         $this->assertInstanceOf('\Symfony\Component\Form\DataMapperInterface', $this->mapper);
     }
 
     /**
      * @expectedException \Symfony\Component\Form\Exception\UnexpectedTypeException
      */
-    public function testMapDataToFormsShouldThrowUnexpectedTypeException() {
+    public function testMapDataToFormsShouldThrowUnexpectedTypeException()
+    {
         $this->mapper->mapDataToForms('data', 'form');
     }
 
     /**
      * @expectedException \RuntimeException
      */
-    public function testMapDataToFormsWithoutValidFieldDefinition() {
+    public function testMapDataToFormsWithoutValidFieldDefinition()
+    {
         $contentType = new ContentType(
             array(
                 'id' => 123,
@@ -91,7 +96,7 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
                             'defaultValue' => new Value('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -104,7 +109,7 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(TRUE)
+            ->willReturn(true)
             ->method('getMapped');
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
@@ -129,7 +134,8 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
         $this->mapper->mapDataToForms($data, array($form));
     }
 
-    public function testMapDataToForms() {
+    public function testMapDataToForms()
+    {
         $contentType = new ContentType(
             array(
                 'id' => 123,
@@ -142,7 +148,7 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
                             'defaultValue' => new Value('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -164,7 +170,7 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(TRUE)
+            ->willReturn(true)
             ->method('getMapped');
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
@@ -192,7 +198,8 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
         $this->mapper->mapDataToForms($data, array($form));
     }
 
-    public function testMapDataToFormsWithoutDataWrapper() {
+    public function testMapDataToFormsWithoutDataWrapper()
+    {
         $data = new \stdClass();
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
@@ -201,7 +208,7 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(TRUE)
+            ->willReturn(true)
             ->method('getMapped');
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
@@ -225,7 +232,8 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
         $this->mapper->mapDataToForms($data, array($form));
     }
 
-    public function testMapDataToFormsDefault() {
+    public function testMapDataToFormsDefault()
+    {
         $data = new \stdClass();
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
@@ -243,13 +251,14 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
             ->method('getConfig');
 
         $form->expects($this->once())
-            ->willReturn(NULL)
+            ->willReturn(null)
             ->method('getPropertyPath');
 
         $this->mapper->mapDataToForms($data, array($form));
     }
 
-    public function testMapFormsToData() {
+    public function testMapFormsToData()
+    {
         $contentType = new ContentType(
             array(
                 'id' => 123,
@@ -262,7 +271,7 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
                             'defaultValue' => new Value('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -284,7 +293,7 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(TRUE)
+            ->willReturn(true)
             ->method('getMapped');
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
@@ -299,15 +308,15 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn(TRUE)
+            ->willReturn(true)
             ->method('isSubmitted');
 
         $form->expects($this->once())
-            ->willReturn(TRUE)
+            ->willReturn(true)
             ->method('isSynchronized');
 
         $form->expects($this->once())
-            ->willReturn(FALSE)
+            ->willReturn(false)
             ->method('isDisabled');
 
         $form->expects($this->once())
@@ -328,7 +337,8 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
     /**
      * @expectedException \RuntimeException
      */
-    public function testMapFormsToDataWithInvalidFieldDefinition() {
+    public function testMapFormsToDataWithInvalidFieldDefinition()
+    {
         $contentType = new ContentType(
             array(
                 'id' => 123,
@@ -341,7 +351,7 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
                             'defaultValue' => new Value('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -354,7 +364,7 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(TRUE)
+            ->willReturn(true)
             ->method('getMapped');
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
@@ -369,15 +379,15 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn(TRUE)
+            ->willReturn(true)
             ->method('isSubmitted');
 
         $form->expects($this->once())
-            ->willReturn(TRUE)
+            ->willReturn(true)
             ->method('isSynchronized');
 
         $form->expects($this->once())
-            ->willReturn(FALSE)
+            ->willReturn(false)
             ->method('isDisabled');
 
         $form->expects($this->once())
@@ -407,7 +417,7 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(TRUE)
+            ->willReturn(true)
             ->method('getMapped');
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
@@ -418,15 +428,15 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn(TRUE)
+            ->willReturn(true)
             ->method('isSubmitted');
 
         $form->expects($this->once())
-            ->willReturn(TRUE)
+            ->willReturn(true)
             ->method('isSynchronized');
 
         $form->expects($this->once())
-            ->willReturn(FALSE)
+            ->willReturn(false)
             ->method('isDisabled');
 
         $form->expects($this->exactly(3))
@@ -459,7 +469,7 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(TRUE)
+            ->willReturn(true)
             ->method('getMapped');
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
@@ -470,15 +480,15 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase {
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn(TRUE)
+            ->willReturn(true)
             ->method('isSubmitted');
 
         $form->expects($this->once())
-            ->willReturn(TRUE)
+            ->willReturn(true)
             ->method('isSynchronized');
 
         $form->expects($this->once())
-            ->willReturn(FALSE)
+            ->willReturn(false)
             ->method('isDisabled');
 
         $form->expects($this->exactly(2))

@@ -146,7 +146,7 @@ class InformationCollectionTypeTest extends \PHPUnit_Framework_TestCase
                             'isInfoCollector' => false,
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -187,7 +187,7 @@ class InformationCollectionTypeTest extends \PHPUnit_Framework_TestCase
                             'isInfoCollector' => false,
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -238,7 +238,7 @@ class InformationCollectionTypeTest extends \PHPUnit_Framework_TestCase
                             'isInfoCollector' => true,
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -290,7 +290,7 @@ class InformationCollectionTypeTest extends \PHPUnit_Framework_TestCase
                             'isInfoCollector' => true,
                         )
                     ),
-                )
+                ),
             )
         );
 

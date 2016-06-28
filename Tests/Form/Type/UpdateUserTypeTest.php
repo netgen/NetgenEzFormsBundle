@@ -183,7 +183,7 @@ class UpdateUserTypeTest extends \PHPUnit_Framework_TestCase
                             'identifier' => 'identifier',
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -192,7 +192,6 @@ class UpdateUserTypeTest extends \PHPUnit_Framework_TestCase
         $updateUserType = new UpdateUserType($handlerRegistry, $dataMapper);
         $updateUserType->buildForm($formBuilder, $options);
     }
-
 
     public function testBuildForm()
     {
@@ -203,7 +202,6 @@ class UpdateUserTypeTest extends \PHPUnit_Framework_TestCase
 
         $fieldTypeHandler->expects($this->once())
             ->method('buildFieldUpdateForm');
-
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
@@ -220,7 +218,6 @@ class UpdateUserTypeTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->setMethods(array('setDataMapper'))
             ->getMock();
-
 
         $contentInfo = new ContentInfo(array('contentTypeId' => 123));
         $versionInfo = new VersionInfo(array('contentInfo' => $contentInfo));
@@ -244,7 +241,7 @@ class UpdateUserTypeTest extends \PHPUnit_Framework_TestCase
                             'identifier' => 'identifier',
                         )
                     ),
-                )
+                ),
             )
         );
 

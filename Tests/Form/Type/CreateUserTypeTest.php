@@ -126,7 +126,7 @@ class CreateUserTypeTest extends \PHPUnit_Framework_TestCase
                             'identifier' => 'identifier',
                         )
                     ),
-                )
+                ),
             )
         );
         $userUpdateStruct = new UserCreateStruct(array('contentType' => $contentType));

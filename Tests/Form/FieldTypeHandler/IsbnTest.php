@@ -93,7 +93,7 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
                 'descriptions' => array('fre-FR' => 'fre-FR'),
                 'names' => array('fre-FR' => 'fre-FR'),
                 'fieldSettings' => array(
-                    'isISBN13' => true
+                    'isISBN13' => true,
                 ),
             )
         );

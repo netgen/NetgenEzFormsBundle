@@ -71,7 +71,7 @@ class CreateUserMapperTest extends \PHPUnit_Framework_TestCase
                             'defaultValue' => new TextLineValue('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -138,7 +138,7 @@ class CreateUserMapperTest extends \PHPUnit_Framework_TestCase
                             'defaultValue' => new TextLineValue('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -190,7 +190,7 @@ class CreateUserMapperTest extends \PHPUnit_Framework_TestCase
                             'defaultValue' => new TextLineValue('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -267,7 +267,7 @@ class CreateUserMapperTest extends \PHPUnit_Framework_TestCase
                             'defaultValue' => new TextLineValue('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -353,7 +353,7 @@ class CreateUserMapperTest extends \PHPUnit_Framework_TestCase
                             'defaultValue' => new TextLineValue('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 

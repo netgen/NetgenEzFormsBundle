@@ -72,7 +72,7 @@ class UpdateContentMapperTest extends \PHPUnit_Framework_TestCase
                             'defaultValue' => new TextLineValue('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -149,7 +149,7 @@ class UpdateContentMapperTest extends \PHPUnit_Framework_TestCase
                             'defaultValue' => new TextLineValue('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -207,7 +207,7 @@ class UpdateContentMapperTest extends \PHPUnit_Framework_TestCase
                             'defaultValue' => new TextLineValue('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 
@@ -273,7 +273,7 @@ class UpdateContentMapperTest extends \PHPUnit_Framework_TestCase
                             'defaultValue' => new TextLineValue('Some name'),
                         )
                     ),
-                )
+                ),
             )
         );
 

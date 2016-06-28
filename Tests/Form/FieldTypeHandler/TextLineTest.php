@@ -68,7 +68,7 @@ class TextLineTest extends \PHPUnit_Framework_TestCase
                     'StringLengthValidator' => array(
                         'minStringLength' => 4,
                         'maxStringLength' => 100,
-                    )
+                    ),
                 ),
             )
         );

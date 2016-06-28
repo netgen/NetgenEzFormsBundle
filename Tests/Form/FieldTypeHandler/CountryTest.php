@@ -16,8 +16,8 @@ class CountryTest extends \PHPUnit_Framework_TestCase
             'HR' => array(
                 'Name' => 'Croatia',
                 'Code' => 'HR',
-                'Language' => 'cro-HR'
-            )
+                'Language' => 'cro-HR',
+            ),
         );
         $country = new Country($countries);
 
@@ -30,8 +30,8 @@ class CountryTest extends \PHPUnit_Framework_TestCase
             'HR' => array(
                 'Name' => 'Croatia',
                 'Code' => 'HR',
-                'Language' => 'cro-HR'
-            )
+                'Language' => 'cro-HR',
+            ),
         );
         $country = new Country($countries);
         $countryValue = new CountryValue($countries);
@@ -47,8 +47,8 @@ class CountryTest extends \PHPUnit_Framework_TestCase
             'HR' => array(
                 'Name' => 'Croatia',
                 'Code' => 'HR',
-                'Language' => 'cro-HR'
-            )
+                'Language' => 'cro-HR',
+            ),
         );
         $country = new Country($countries);
         $countryValue = new CountryValue($countries);
@@ -63,8 +63,8 @@ class CountryTest extends \PHPUnit_Framework_TestCase
             'HR' => array(
                 'Name' => 'Croatia',
                 'Code' => 'HR',
-                'Language' => 'cro-HR'
-            )
+                'Language' => 'cro-HR',
+            ),
         );
         $country = new Country($countries);
         $countryValue = new CountryValue($countries);
@@ -99,8 +99,8 @@ class CountryTest extends \PHPUnit_Framework_TestCase
             'HR' => array(
                 'Name' => 'Croatia',
                 'Code' => 'HR',
-                'Language' => 'cro-HR'
-            )
+                'Language' => 'cro-HR',
+            ),
         );
         $country = new Country($countries);
         $country->buildFieldCreateForm($formBuilder, $fieldDefinition, $languageCode);

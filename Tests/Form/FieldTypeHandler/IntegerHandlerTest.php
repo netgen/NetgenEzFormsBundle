@@ -69,8 +69,8 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
                     'IntegerValueValidator' => array(
                         'minIntegerValue' => 4,
                         'maxIntegerValue' => 10,
-                    )
-                )
+                    ),
+                ),
             )
         );
 

@@ -126,7 +126,7 @@ class CreateContentTypeTest extends \PHPUnit_Framework_TestCase
                             'identifier' => 'identifier',
                         )
                     ),
-                )
+                ),
             )
         );
         $contentUpdateStruct = new ContentCreateStruct(array('contentType' => $contentType));
@@ -174,7 +174,7 @@ class CreateContentTypeTest extends \PHPUnit_Framework_TestCase
                             'fieldTypeIdentifier' => 'ezuser',
                         )
                     ),
-                )
+                ),
             )
         );
         $contentUpdateStruct = new ContentCreateStruct(array('contentType' => $contentType));
