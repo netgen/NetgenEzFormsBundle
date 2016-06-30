@@ -1,0 +1,86 @@
+<?php
+
+namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type\FieldType;
+
+use Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserCreateType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Validator\Constraints;
+
+class UserCreateTypeTest extends \PHPUnit_Framework_TestCase
+{
+    public function testItExtendsAbstractType()
+    {
+        $userCreateType = new UserCreateType(10);
+        $this->assertInstanceOf(AbstractType::class, $userCreateType);
+    }
+
+    public function testBuildForm()
+    {
+        $formBuilder = $this->getMockBuilder(FormBuilder::class)
+            ->disableOriginalConstructor()
+            ->setMethods(array('add'))
+            ->getMock();
+
+        $emailOptions = array(
+            'label' => 'E-mail address',
+            'constraints' => array(
+                new Constraints\NotBlank(),
+                new Constraints\Email(),
+            ),
+        );
+
+        $usernameOptions = array(
+            'label' => 'Username',
+            'constraints' => array(
+                new Constraints\NotBlank(),
+            ),
+        );
+
+        $passwordConstraints = array(
+            new Constraints\NotBlank(),
+            new Constraints\Length(
+                array(
+                    'min' => 10,
+                )
+            ),
+        );
+
+        $passwordOptions = array(
+            'type' => 'password',
+            'invalid_message' => 'Both passwords must match.',
+            'options' => array(
+                'constraints' => $passwordConstraints,
+            ),
+            'first_options' => array(
+                'label' => 'Password',
+            ),
+            'second_options' => array(
+                'label' => 'Repeat password',
+            ),
+        );
+
+        $formBuilder->expects($this->at(0))
+            ->method('add')
+            ->willReturn($formBuilder)
+            ->with('email', 'email', $emailOptions);
+
+        $formBuilder->expects($this->at(1))
+            ->method('add')
+            ->willReturn($formBuilder)
+            ->with('username', 'text', $usernameOptions);
+
+        $formBuilder->expects($this->at(2))
+            ->method('add')
+            ->with('password', 'repeated', $passwordOptions);
+
+        $userCreateType = new UserCreateType(10);
+        $userCreateType->buildForm($formBuilder, array());
+    }
+
+    public function testGetName()
+    {
+        $userCreateType = new UserCreateType(10);
+        $this->assertEquals('ezforms_ezuser_create', $userCreateType->getName());
+    }
+}

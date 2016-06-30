@@ -7,10 +7,10 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\Core\FieldType\Float as FloatValue;
+use eZ\Publish\Core\FieldType\Integer as IntegerValue;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Float extends FieldTypeHandler
+class IntegerHandler extends FieldTypeHandler
 {
     /**
      * {@inheritdoc}
@@ -23,11 +23,15 @@ class Float extends FieldTypeHandler
     ) {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        if (!empty($fieldDefinition->getValidatorConfiguration()['FloatValueValidator'])) {
+        if (!empty($fieldDefinition->defaultValue)) {
+            $options['data'] = (int)$fieldDefinition->defaultValue->value;
+        }
+
+        if (!empty($fieldDefinition->getValidatorConfiguration()['IntegerValueValidator'])) {
             $rangeConstraints = array();
 
-            $min = $fieldDefinition->getValidatorConfiguration()['FloatValueValidator']['minFloatValue'];
-            $max = $fieldDefinition->getValidatorConfiguration()['FloatValueValidator']['maxFloatValue'];
+            $min = $fieldDefinition->getValidatorConfiguration()['IntegerValueValidator']['minIntegerValue'];
+            $max = $fieldDefinition->getValidatorConfiguration()['IntegerValueValidator']['maxIntegerValue'];
 
             if ($min !== false) {
                 $rangeConstraints['min'] = $min;
@@ -42,34 +46,30 @@ class Float extends FieldTypeHandler
             }
         }
 
-        if (!empty($fieldDefinition->defaultValue)) {
-            $options['data'] = (float)$fieldDefinition->defaultValue->value;
-        }
-
-        $formBuilder->add($fieldDefinition->identifier, 'number', $options);
+        $formBuilder->add($fieldDefinition->identifier, 'integer', $options);
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return float
+     * @return int
      */
     public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
-        return $value->value;
+        return (int)$value->value;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return FloatValue\Value
+     * @return IntegerValue\Value
      */
     public function convertFieldValueFromForm($data)
     {
-        if (!is_numeric($data)) {
+        if (!is_int($data)) {
             $data = null;
         }
 
-        return new FloatValue\Value($data);
+        return new IntegerValue\Value($data);
     }
 }

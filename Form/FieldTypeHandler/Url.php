@@ -43,6 +43,7 @@ class Url extends FieldTypeHandler
     public function convertFieldValueFromForm($data)
     {
         if (!is_array($data)) {
+            $data = array();
             $data['url'] = null;
             $data['text'] = null;
         }
