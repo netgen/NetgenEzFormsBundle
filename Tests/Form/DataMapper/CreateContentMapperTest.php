@@ -41,10 +41,26 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->dispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
-        $this->propertyAccessor = $this->getMock('Symfony\Component\PropertyAccess\PropertyAccessorInterface');
-        $this->registry = $this->getMock('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry');
-        $this->handler = $this->getMock('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerInterface');
+        $this->dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcherInterface')
+            ->disableOriginalConstructor()
+            ->setMethods(array())
+            ->getMock();
+
+        $this->propertyAccessor = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyAccessorInterface')
+            ->disableOriginalConstructor()
+            ->setMethods(array())
+            ->getMock();
+
+        $this->registry = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry')
+            ->disableOriginalConstructor()
+            ->setMethods(array())
+            ->getMock();
+
+        $this->handler = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerInterface')
+            ->disableOriginalConstructor()
+            ->setMethods(array())
+            ->getMock();
+
         $this->mapper = new CreateContentMapper($this->registry, $this->propertyAccessor);
     }
 

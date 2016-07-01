@@ -33,9 +33,21 @@ class InformationCollectionMapperTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->propertyAccessor = $this->getMock('Symfony\Component\PropertyAccess\PropertyAccessorInterface');
-        $this->registry = $this->getMock('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry');
-        $this->handler = $this->getMock('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerInterface');
+        $this->propertyAccessor = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyAccessorInterface')
+            ->disableOriginalConstructor()
+            ->setMethods(array())
+            ->getMock();
+
+        $this->registry = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry')
+            ->disableOriginalConstructor()
+            ->setMethods(array())
+            ->getMock();
+
+        $this->handler = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerInterface')
+            ->disableOriginalConstructor()
+            ->setMethods(array())
+            ->getMock();
+
         $this->mapper = new InformationCollectionMapper($this->registry, $this->propertyAccessor);
     }
 
