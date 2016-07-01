@@ -5,22 +5,76 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\FloatHandler;
-use eZ\Publish\Core\FieldType\Float as FloatValue;
+use eZ\Publish\Core\FieldType\Float\Value as FloatValue;
 use Symfony\Component\Form\FormBuilder;
+use eZ\Publish\Core\Helper\FieldHelper;
+use Symfony\Component\Validator\Constraints;
 
 class FloatHandlerTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $fieldHelper;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $formBuilder;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $content;
+
+    /**
+     * @var array
+     */
+    protected $fieldDefinitionParameters;
+
+    protected function setUp()
+    {
+        $this->fieldHelper = $this->getMockBuilder(FieldHelper::class)
+            ->disableOriginalConstructor()
+            ->setMethods(array('isFieldEmpty'))
+            ->getMock();
+
+        $this->formBuilder = $this->getMockBuilder(FormBuilder::class)
+            ->disableOriginalConstructor()
+            ->setMethods(array('add'))
+            ->getMock();
+
+        $this->content = $this->getMockBuilder('eZ\Publish\API\Repository\Values\Content\Content')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->fieldDefinitionParameters = array(
+            'id' => 'id',
+            'identifier' => 'identifier',
+            'isRequired' => true,
+            'defaultValue' => new FloatValue(4.74),
+            'descriptions' => array('fre-FR' => 'fre-FR'),
+            'names' => array('fre-FR' => 'fre-FR'),
+            'validatorConfiguration' => array(
+                'FloatValueValidator' => array(
+                    'minFloatValue' => 4,
+                    'maxFloatValue' => 10,
+                ),
+            ),
+        );
+    }
+
     public function testAssertInstanceOfFieldTypeHandler()
     {
-        $float = new FloatHandler();
+        $float = new FloatHandler($this->fieldHelper);
 
         $this->assertInstanceOf(FieldTypeHandler::class, $float);
     }
 
     public function testConvertFieldValueToForm()
     {
-        $float = new FloatHandler();
-        $floatValue = new FloatValue\Value(4.74);
+        $float = new FloatHandler($this->fieldHelper);
+        $floatValue = new FloatValue(4.74);
 
         $returnedValue = $float->convertFieldValueToForm($floatValue);
 
@@ -29,8 +83,8 @@ class FloatHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testConvertFieldValueFromForm()
     {
-        $float = new FloatHandler();
-        $floatValue = new FloatValue\Value(4.74);
+        $float = new FloatHandler($this->fieldHelper);
+        $floatValue = new FloatValue(4.74);
 
         $returnedValue = $float->convertFieldValueFromForm(4.74);
 
@@ -39,8 +93,8 @@ class FloatHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testConvertFieldValueFromFormWhenDataIsNotNumeric()
     {
-        $float = new FloatHandler();
-        $floatValue = new FloatValue\Value(null);
+        $float = new FloatHandler($this->fieldHelper);
+        $floatValue = new FloatValue(null);
 
         $returnedValue = $float->convertFieldValueFromForm('test');
 
@@ -49,34 +103,162 @@ class FloatHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testBuildFieldCreateForm()
     {
-        $formBuilder = $this->getMockBuilder(FormBuilder::class)
-            ->disableOriginalConstructor()
-            ->setMethods(array('add'))
-            ->getMock();
+        $formBuilder = clone($this->formBuilder);
+
+        $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
+
+        $fieldHelper = clone $this->fieldHelper;
+
+        $options = array(
+            'label' => null,
+            'required' => true,
+            'constraints' => array(
+                new Constraints\NotBlank(),
+                new Constraints\Range(array('min' => 4, 'max' => 10))
+            ),
+            'ezforms' => array(
+                'description' => null,
+                'language_code' => 'eng-GB',
+                'fielddefinition' => $fieldDefinition
+            ),
+            'data' => 4.74
+        );
 
         $formBuilder->expects($this->once())
-            ->method('add');
+            ->method('add')->withConsecutive(
+                array(
+                    $fieldDefinition->identifier, 'number', $options
+                ));
 
-        $fieldDefinition = new FieldDefinition(
-            array(
-                'id' => 'id',
-                'identifier' => 'identifier',
-                'isRequired' => true,
-                'defaultValue' => new FloatValue\Value(4.74),
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-                'validatorConfiguration' => array(
-                    'FloatValueValidator' => array(
-                        'minFloatValue' => 4,
-                        'maxFloatValue' => 10,
-                    ),
-                ),
+        $floatHandler = new FloatHandler($this->fieldHelper);
+        $floatHandler->buildFieldCreateForm($formBuilder, $fieldDefinition, 'eng-GB');
+    }
+
+    public function testBuildFieldUpdateForm()
+    {
+        $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
+
+        $options = array(
+            'label' => null,
+            'required' => true,
+            'constraints' => array(
+                new Constraints\NotBlank(),
+                new Constraints\Range(array('min' => 4, 'max' => 10))
+            ),
+            'ezforms' => array(
+                'description' => null,
+                'language_code' => 'eng-GB',
+                'fielddefinition' => $fieldDefinition,
+                'content' => $this->content
             )
         );
 
-        $languageCode = 'eng-GB';
+        $formBuilder = clone($this->formBuilder);
 
-        $float = new FloatHandler();
-        $float->buildFieldCreateForm($formBuilder, $fieldDefinition, $languageCode);
+        $formBuilder->expects($this->once())
+            ->method('add')->withConsecutive(array(
+                $fieldDefinition->identifier, 'number', $options
+            ));
+
+        $floatHandler = new FloatHandler($this->fieldHelper);
+        $floatHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $this->content, 'eng-GB');
+    }
+
+    public function testBuildFieldUpdateFormIfDefaultValueIsNotSet()
+    {
+        $fieldDefinitionParameters = $this->fieldDefinitionParameters;
+        $fieldDefinitionParameters['defaultValue'] = null;
+        $fieldDefinition = new FieldDefinition($fieldDefinitionParameters);
+
+        $options = array(
+            'label' => null,
+            'required' => true,
+            'constraints' => array(
+                new Constraints\NotBlank(),
+                new Constraints\Range(array('min' => 4, 'max' => 10))
+            ),
+            'ezforms' => array(
+                'description' => null,
+                'language_code' => 'eng-GB',
+                'fielddefinition' => $fieldDefinition,
+                'content' => $this->content
+            )
+        );
+
+        $formBuilder = clone($this->formBuilder);
+        $formBuilder->expects($this->once())
+            ->method('add')->withConsecutive(array(
+                $fieldDefinition->identifier, 'number', $options
+            ));
+
+        $floatHandler = new FloatHandler($this->fieldHelper);
+        $floatHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $this->content, 'eng-GB');
+    }
+
+    public function testBuildFieldUpdateFormIfFieldIsEmpty()
+    {
+        $fieldHelper = clone $this->fieldHelper;
+        $fieldHelper->expects($this->once())->method('isFieldEmpty')->willReturn(true);
+
+        $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
+
+        $options = array(
+            'label' => null,
+            'required' => true,
+            'constraints' => array(
+                new Constraints\NotBlank(),
+                new Constraints\Range(array('min' => 4, 'max' => 10))
+            ),
+            'data' => 4.74,
+            'ezforms' => array(
+                'description' => null,
+                'language_code' => 'eng-GB',
+                'fielddefinition' => $fieldDefinition,
+                'content' => $this->content
+            )
+        );
+
+        $formBuilder = clone($this->formBuilder);
+
+        $formBuilder->expects($this->once())
+            ->method('add')->withConsecutive(array(
+                $fieldDefinition->identifier, 'number', $options
+            ));
+
+        $floatHandler = new FloatHandler($fieldHelper);
+        $floatHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $this->content, 'eng-GB');
+    }
+
+    public function testBuildFieldUpdateFormIfFieldIsNotEmpty()
+    {
+        $fieldHelper = clone $this->fieldHelper;
+        $fieldHelper->expects($this->once())->method('isFieldEmpty')->willReturn(false);
+
+        $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
+
+        $options = array(
+            'label' => null,
+            'required' => true,
+            'constraints' => array(
+                new Constraints\NotBlank(),
+                new Constraints\Range(array('min' => 4, 'max' => 10))
+            ),
+            'ezforms' => array(
+                'description' => null,
+                'language_code' => 'eng-GB',
+                'fielddefinition' => $fieldDefinition,
+                'content' => $this->content
+            )
+        );
+
+        $formBuilder = clone($this->formBuilder);
+
+        $formBuilder->expects($this->once())
+            ->method('add')->withConsecutive(array(
+                $fieldDefinition->identifier, 'number', $options
+            ));
+
+        $floatHandler = new FloatHandler($fieldHelper);
+        $floatHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $this->content, 'eng-GB');
     }
 }

@@ -72,6 +72,7 @@ services:
 
     netgen.ezforms.form.fieldtype_handler.ezfloat:
         class: "%netgen.ezforms.form.fieldtype_handler.ezfloat.class%"
+        arguments: [ "@ezpublish.field_helper" ]
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezfloat}
 
