@@ -526,8 +526,12 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase
     {
         $someNumber = 42;
 
-        $this->expectException('Symfony\Component\Form\Exception\UnexpectedTypeException');
-        
-        $this->mapper->mapFormsToData(array(), $someNumber);
+        try {
+            $this->mapper->mapFormsToData(array(), $someNumber);
+        } catch (\Symfony\Component\Form\Exception\UnexpectedTypeException $e) {
+            // empty body
+        }
+
+        $this->assertInstanceOf('\Symfony\Component\Form\Exception\UnexpectedTypeException',$e);
     }
 }
