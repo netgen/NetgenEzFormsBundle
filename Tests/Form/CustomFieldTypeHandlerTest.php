@@ -15,7 +15,11 @@ class CustomFieldTypeHandlerTest extends \PHPUnit_Framework_TestCase
     public function testBuildFieldUpdateFormWhenNoImplementedHandler()
     {
         $formBuilder = $this->getMockForAbstractClass(FormBuilderInterface::class);
-        $fieldDefinition = $this->getMock(FieldDefinition::class);
+        $fieldDefinition = $this->getMockBuilder(FieldDefinition::class)
+            ->disableOriginalConstructor()
+            ->setMethods(array())
+            ->getMock();
+
         $content = $this->getMockForAbstractClass(Content::class);
         $language = 'eng-GB';
 

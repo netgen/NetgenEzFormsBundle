@@ -37,9 +37,21 @@ class UpdateContentMapperTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->propertyAccessor = $this->getMock('Symfony\Component\PropertyAccess\PropertyAccessorInterface');
-        $this->registry = $this->getMock('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry');
-        $this->handler = $this->getMock('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerInterface');
+        $this->propertyAccessor = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyAccessorInterface')
+            ->disableOriginalConstructor()
+            ->setMethods(array())
+            ->getMock();
+
+        $this->registry = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry')
+            ->disableOriginalConstructor()
+            ->setMethods(array())
+            ->getMock();
+
+        $this->handler = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerInterface')
+            ->disableOriginalConstructor()
+            ->setMethods(array())
+            ->getMock();
+
         $this->mapper = new UpdateContentMapper($this->registry, $this->propertyAccessor);
     }
 
@@ -155,7 +167,10 @@ class UpdateContentMapperTest extends \PHPUnit_Framework_TestCase
 
         $contentUpdateStruct = new ContentUpdateStruct();
 
-        $content = $this->getMock(Content::class);
+        $content = $this->getMockBuilder(Content::class)
+            ->disableOriginalConstructor()
+            ->setMethods(array())
+            ->getMock();
 
         $data = new DataWrapper($contentUpdateStruct, $contentType, $content);
 
