@@ -50,6 +50,7 @@ services:
 
     netgen.ezforms.form.fieldtype_handler.ezboolean:
         class: "%netgen.ezforms.form.fieldtype_handler.ezboolean.class%"
+        arguments: [ "@ezpublish.field_helper" ]
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezboolean}
 
