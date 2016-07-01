@@ -1,10 +1,11 @@
 NetgenEzFormsBundle
 ===================
 
-[![Latest Stable Version](https://poser.pugx.org/netgen/ez-forms-bundle/v/stable)](https://packagist.org/packages/netgen/ez-forms-bundle)
-[![Total Downloads](https://poser.pugx.org/netgen/ez-forms-bundle/downloads)](https://packagist.org/packages/netgen/ez-forms-bundle)
-[![Latest Unstable Version](https://poser.pugx.org/netgen/ez-forms-bundle/v/unstable)](https://packagist.org/packages/netgen/ez-forms-bundle)
-[![License](https://poser.pugx.org/netgen/ez-forms-bundle/license)](https://packagist.org/packages/netgen/ez-forms-bundle)
+[![Build Status](https://img.shields.io/travis/netgen/NetgenEzFormsBundle.svg?style=flat-square)](https://travis-ci.org/netgen/NetgenEzFormsBundle)
+[![Code Coverage](https://img.shields.io/codecov/c/github/netgen/NetgenEzFormsBundle.svg?style=flat-square)](https://codecov.io/gh/netgen/NetgenEzFormsBundle)
+[![Downloads](https://img.shields.io/packagist/dt/netgen/ez-forms-bundle.svg?style=flat-square)](https://packagist.org/packages/netgen/ez-forms-bundle)
+[![Latest stable](https://img.shields.io/packagist/v/netgen/ez-forms-bundle.svg?style=flat-square)](https://packagist.org/packages/netgen/ez-forms-bundle)
+[![License](https://img.shields.io/packagist/l/netgen/ez-forms-bundle.svg?style=flat-square)](https://packagist.org/packages/netgen/ez-forms-bundle)
 
 Integration of Symfony's Form component with eZ Publish 5 Public API
 
