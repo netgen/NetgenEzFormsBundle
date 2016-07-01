@@ -9,9 +9,27 @@ use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\Core\FieldType\Integer as IntegerValue;
 use Symfony\Component\Validator\Constraints as Assert;
+use eZ\Publish\Core\Helper\FieldHelper;
 
 class IntegerHandler extends FieldTypeHandler
 {
+    /**
+     * @var FieldHelper
+     */
+    protected $fieldHelper;
+
+    /**
+     * Integer constructor.
+     *
+     * @param FieldHelper $fieldHelper
+     */
+    public function __construct(FieldHelper $fieldHelper)
+    {
+        parent::__construct();
+
+        $this->fieldHelper = $fieldHelper;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -23,8 +41,14 @@ class IntegerHandler extends FieldTypeHandler
     ) {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        if (!empty($fieldDefinition->defaultValue)) {
-            $options['data'] = (int)$fieldDefinition->defaultValue->value;
+        if ($fieldDefinition->defaultValue instanceof IntegerValue\Value) {
+            if ($content instanceof Content) {
+                if ($this->fieldHelper->isFieldEmpty($content, $fieldDefinition->identifier)) {
+                    $options['data'] = (int)$fieldDefinition->defaultValue->value;
+                }
+            } else {
+                $options['data'] = (int)$fieldDefinition->defaultValue->value;
+            }
         }
 
         if (!empty($fieldDefinition->getValidatorConfiguration()['IntegerValueValidator'])) {

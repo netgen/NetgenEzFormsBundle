@@ -7,19 +7,65 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\IntegerHandler;
 use eZ\Publish\Core\FieldType\Integer\Value as IntegerValue;
 use Symfony\Component\Form\FormBuilder;
+use eZ\Publish\Core\Helper\FieldHelper;
+use Symfony\Component\Validator\Constraints;
+use eZ\Publish\Core\Repository\Values\Content\Content;
 
 class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $fieldHelper;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $formBuilder;
+
+    /**
+     * @var array
+     */
+    protected $fieldDefinitionParameters;
+
+    protected function setUp()
+    {
+        $this->fieldHelper = $this->getMockBuilder(FieldHelper::class)
+            ->disableOriginalConstructor()
+            ->setMethods(array('isFieldEmpty'))
+            ->getMock();
+
+        $this->formBuilder = $this->getMockBuilder(FormBuilder::class)
+            ->disableOriginalConstructor()
+            ->setMethods(array('add'))
+            ->getMock();
+
+        $this->fieldDefinitionParameters = array(
+            'id' => 'id',
+            'identifier' => 'identifier',
+            'isRequired' => true,
+            'defaultValue' => new IntegerValue(5),
+            'descriptions' => array('fre-FR' => 'fre-FR'),
+            'names' => array('fre-FR' => 'fre-FR'),
+            'validatorConfiguration' => array(
+                'IntegerValueValidator' => array(
+                    'minIntegerValue' => 4,
+                    'maxIntegerValue' => 10,
+                ),
+            ),
+        );
+    }
+
     public function testAssertInstanceOfFieldTypeHandler()
     {
-        $integer = new IntegerHandler();
+        $integer = new IntegerHandler($this->fieldHelper);
 
         $this->assertInstanceOf(FieldTypeHandler::class, $integer);
     }
 
     public function testConvertFieldValueToForm()
     {
-        $integer = new IntegerHandler();
+        $integer = new IntegerHandler($this->fieldHelper);
         $integerValue = new IntegerValue(5);
 
         $returnedValue = $integer->convertFieldValueToForm($integerValue);
@@ -29,7 +75,7 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testConvertFieldValueFromForm()
     {
-        $integer = new IntegerHandler();
+        $integer = new IntegerHandler($this->fieldHelper);
         $integerValue = new IntegerValue(5);
 
         $returnedValue = $integer->convertFieldValueFromForm(5);
@@ -39,7 +85,7 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testConvertFieldValueFromFormWhenDataIsNotNumeric()
     {
-        $integer = new IntegerHandler();
+        $integer = new IntegerHandler($this->fieldHelper);
         $integerValue = new IntegerValue(null);
 
         $returnedValue = $integer->convertFieldValueFromForm('test');
@@ -49,34 +95,189 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testBuildFieldCreateForm()
     {
-        $formBuilder = $this->getMockBuilder(FormBuilder::class)
-            ->disableOriginalConstructor()
-            ->setMethods(array('add'))
-            ->getMock();
+        $formBuilder = clone($this->formBuilder);
 
-        $formBuilder->expects($this->once())
-            ->method('add');
+        $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
 
-        $fieldDefinition = new FieldDefinition(
-            array(
-                'id' => 'id',
-                'identifier' => 'identifier',
-                'isRequired' => true,
-                'defaultValue' => new IntegerValue(5),
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-                'validatorConfiguration' => array(
-                    'IntegerValueValidator' => array(
-                        'minIntegerValue' => 4,
-                        'maxIntegerValue' => 10,
-                    ),
-                ),
+        $options = array(
+            'label' => null,
+            'required' => true,
+            'constraints' => array(
+                new Constraints\NotBlank(),
+                new Constraints\Range(array('min' => 4, 'max' => 10))
+            ),
+            'data' => 5,
+            'ezforms' => array(
+                'description' => null,
+                'language_code' => 'eng-GB',
+                'fielddefinition' => $fieldDefinition
             )
         );
 
+        $formBuilder->expects($this->once())
+            ->method('add')->withConsecutive(
+                array(
+                    $fieldDefinition->identifier,
+                    'integer',
+                    $options
+            ));
+
         $languageCode = 'eng-GB';
 
-        $integer = new IntegerHandler();
-        $integer->buildFieldCreateForm($formBuilder, $fieldDefinition, $languageCode);
+        $integerHandler = new IntegerHandler($this->fieldHelper);
+        $integerHandler->buildFieldCreateForm($formBuilder, $fieldDefinition, $languageCode);
+    }
+
+    public function testBuildFieldUpdateForm()
+    {
+        $content = $this->getMockBuilder(Content::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
+
+        $options = array(
+            'label' => null,
+            'required' => true,
+            'constraints' => array(
+                new Constraints\NotBlank(),
+                new Constraints\Range(array('min' => 4, 'max' => 10))
+            ),
+            'ezforms' => array(
+                'description' => null,
+                'language_code' => 'eng-GB',
+                'fielddefinition' => $fieldDefinition,
+                'content' => $content
+            )
+        );
+
+        $formBuilder = clone($this->formBuilder);
+
+        $formBuilder->expects($this->once())
+            ->method('add')->withConsecutive(array(
+                $fieldDefinition->identifier, 'integer', $options
+            ));
+
+        $languageCode = 'eng-GB';
+
+        $integerHandler = new IntegerHandler($this->fieldHelper);
+        $integerHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $content, $languageCode);
+    }
+
+    public function testBuildFieldUpdateFormIfDefaultValueIsNotSet()
+    {
+
+        $fieldDefinitionParameters = $this->fieldDefinitionParameters;
+        $fieldDefinitionParameters['defaultValue'] = null;
+        $fieldDefinition = new FieldDefinition($fieldDefinitionParameters);
+
+        $content = $this->getMockBuilder(Content::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $options = array(
+            'label' => null,
+            'required' => true,
+            'constraints' => array(
+                new Constraints\NotBlank(),
+                new Constraints\Range(array('min' => 4, 'max' => 10))
+            ),
+            'ezforms' => array(
+                'description' => null,
+                'language_code' => 'eng-GB',
+                'fielddefinition' => $fieldDefinition,
+                'content' => $content
+            )
+        );
+
+        $formBuilder = clone($this->formBuilder);
+        $formBuilder->expects($this->once())
+            ->method('add')->withConsecutive(array(
+                $fieldDefinition->identifier, 'integer', $options
+            ));
+
+        $languageCode = 'eng-GB';
+
+        $integerHandler = new IntegerHandler($this->fieldHelper);
+        $integerHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $content, $languageCode);
+    }
+
+    public function testBuildFieldUpdateFormIfFieldIsEmpty()
+    {
+        $fieldHelper = clone $this->fieldHelper;
+        $fieldHelper->expects($this->once())->method('isFieldEmpty')->willReturn(true);
+
+        $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
+
+        $content = $this->getMockBuilder(Content::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $options = array(
+            'label' => null,
+            'required' => true,
+            'constraints' => array(
+                new Constraints\NotBlank(),
+                new Constraints\Range(array('min' => 4, 'max' => 10))
+            ),
+            'data' => 5,
+            'ezforms' => array(
+                'description' => null,
+                'language_code' => 'eng-GB',
+                'fielddefinition' => $fieldDefinition,
+                'content' => $content
+            )
+        );
+
+        $formBuilder = clone($this->formBuilder);
+
+        $formBuilder->expects($this->once())
+            ->method('add')->withConsecutive(array(
+                $fieldDefinition->identifier, 'integer', $options
+            ));
+
+        $languageCode = 'eng-GB';
+
+        $integerHandler = new IntegerHandler($fieldHelper);
+        $integerHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $content, $languageCode);
+    }
+
+    public function testBuildFieldUpdateFormIfFieldIsNotEmpty()
+    {
+        $fieldHelper = clone $this->fieldHelper;
+        $fieldHelper->expects($this->once())->method('isFieldEmpty')->willReturn(false);
+
+        $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
+
+        $content = $this->getMockBuilder(Content::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $options = array(
+            'label' => null,
+            'required' => true,
+            'constraints' => array(
+                new Constraints\NotBlank(),
+                new Constraints\Range(array('min' => 4, 'max' => 10))
+            ),
+            'ezforms' => array(
+                'description' => null,
+                'language_code' => 'eng-GB',
+                'fielddefinition' => $fieldDefinition,
+                'content' => $content
+            )
+        );
+
+        $formBuilder = clone($this->formBuilder);
+
+        $formBuilder->expects($this->once())
+            ->method('add')->withConsecutive(array(
+                $fieldDefinition->identifier, 'integer', $options
+            ));
+
+        $languageCode = 'eng-GB';
+
+        $integerHandler = new IntegerHandler($fieldHelper);
+        $integerHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $content, $languageCode);
     }
 }

@@ -65,6 +65,7 @@ services:
 
     netgen.ezforms.form.fieldtype_handler.ezinteger:
         class: "%netgen.ezforms.form.fieldtype_handler.ezinteger.class%"
+        arguments: [ "@ezpublish.field_helper" ]
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezinteger}
 
