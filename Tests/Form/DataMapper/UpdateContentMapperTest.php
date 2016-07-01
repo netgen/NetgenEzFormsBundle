@@ -167,7 +167,10 @@ class UpdateContentMapperTest extends \PHPUnit_Framework_TestCase
 
         $contentUpdateStruct = new ContentUpdateStruct();
 
-        $content = $this->getMock(Content::class);
+        $content = $this->getMockBuilder(Content::class)
+            ->disableOriginalConstructor()
+            ->setMethods(array())
+            ->getMock();
 
         $data = new DataWrapper($contentUpdateStruct, $contentType, $content);
 
