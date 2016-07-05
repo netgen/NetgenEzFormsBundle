@@ -42,7 +42,7 @@ class Checkbox extends FieldTypeHandler
 
         if ($fieldDefinition->defaultValue instanceof CheckboxValue\Value) {
             if ($content instanceof Content) {
-                if ($this->fieldHelper->isFieldEmpty($content, $fieldDefinition->identifier)) {
+                if ($this->fieldHelper->isFieldEmpty($content, $fieldDefinition->identifier, $languageCode)) {
                     $options['data'] = $fieldDefinition->defaultValue->bool;
                 }
             } else {

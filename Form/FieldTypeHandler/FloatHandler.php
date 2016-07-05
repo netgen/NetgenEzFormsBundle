@@ -63,7 +63,7 @@ class FloatHandler extends FieldTypeHandler
 
         if ($fieldDefinition->defaultValue instanceof FloatValue\Value) {
             if ($content instanceof Content) {
-                if ($this->fieldHelper->isFieldEmpty($content, $fieldDefinition->identifier)) {
+                if ($this->fieldHelper->isFieldEmpty($content, $fieldDefinition->identifier, $languageCode)) {
                     $options['data'] = (float)$fieldDefinition->defaultValue->value;
                 }
             } else {
