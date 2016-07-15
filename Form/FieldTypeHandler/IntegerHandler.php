@@ -42,11 +42,7 @@ class IntegerHandler extends FieldTypeHandler
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         if ($fieldDefinition->defaultValue instanceof IntegerValue\Value) {
-            if ($content instanceof Content) {
-                if ($this->fieldHelper->isFieldEmpty($content, $fieldDefinition->identifier, $languageCode)) {
-                    $options['data'] = (int)$fieldDefinition->defaultValue->value;
-                }
-            } else {
+            if (!$content instanceof Content) {
                 $options['data'] = (int)$fieldDefinition->defaultValue->value;
             }
         }

@@ -41,11 +41,7 @@ class Checkbox extends FieldTypeHandler
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         if ($fieldDefinition->defaultValue instanceof CheckboxValue\Value) {
-            if ($content instanceof Content) {
-                if ($this->fieldHelper->isFieldEmpty($content, $fieldDefinition->identifier, $languageCode)) {
-                    $options['data'] = $fieldDefinition->defaultValue->bool;
-                }
-            } else {
+            if (!$content instanceof Content) {
                 $options['data'] = $fieldDefinition->defaultValue->bool;
             }
         }

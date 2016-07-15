@@ -95,8 +95,6 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testBuildFieldCreateForm()
     {
-        $formBuilder = clone($this->formBuilder);
-
         $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
 
         $options = array(
@@ -114,7 +112,7 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $formBuilder->expects($this->once())
+        $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(
                 array(
                     $fieldDefinition->identifier,
@@ -125,7 +123,7 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
         $languageCode = 'eng-GB';
 
         $integerHandler = new IntegerHandler($this->fieldHelper);
-        $integerHandler->buildFieldCreateForm($formBuilder, $fieldDefinition, $languageCode);
+        $integerHandler->buildFieldCreateForm($this->formBuilder, $fieldDefinition, $languageCode);
     }
 
     public function testBuildFieldUpdateForm()
@@ -151,9 +149,7 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $formBuilder = clone($this->formBuilder);
-
-        $formBuilder->expects($this->once())
+        $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
                 $fieldDefinition->identifier, 'integer', $options
             ));
@@ -161,7 +157,7 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
         $languageCode = 'eng-GB';
 
         $integerHandler = new IntegerHandler($this->fieldHelper);
-        $integerHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $content, $languageCode);
+        $integerHandler->buildFieldUpdateForm($this->formBuilder, $fieldDefinition, $content, $languageCode);
     }
 
     public function testBuildFieldUpdateFormIfDefaultValueIsNotSet()
@@ -190,8 +186,7 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $formBuilder = clone($this->formBuilder);
-        $formBuilder->expects($this->once())
+        $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
                 $fieldDefinition->identifier, 'integer', $options
             ));
@@ -199,85 +194,6 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
         $languageCode = 'eng-GB';
 
         $integerHandler = new IntegerHandler($this->fieldHelper);
-        $integerHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $content, $languageCode);
-    }
-
-    public function testBuildFieldUpdateFormIfFieldIsEmpty()
-    {
-        $fieldHelper = clone $this->fieldHelper;
-        $fieldHelper->expects($this->once())->method('isFieldEmpty')->willReturn(true);
-
-        $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
-
-        $content = $this->getMockBuilder(Content::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $options = array(
-            'label' => null,
-            'required' => true,
-            'constraints' => array(
-                new Constraints\NotBlank(),
-                new Constraints\Range(array('min' => 4, 'max' => 10))
-            ),
-            'data' => 5,
-            'ezforms' => array(
-                'description' => null,
-                'language_code' => 'eng-GB',
-                'fielddefinition' => $fieldDefinition,
-                'content' => $content
-            )
-        );
-
-        $formBuilder = clone($this->formBuilder);
-
-        $formBuilder->expects($this->once())
-            ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'integer', $options
-            ));
-
-        $languageCode = 'eng-GB';
-
-        $integerHandler = new IntegerHandler($fieldHelper);
-        $integerHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $content, $languageCode);
-    }
-
-    public function testBuildFieldUpdateFormIfFieldIsNotEmpty()
-    {
-        $fieldHelper = clone $this->fieldHelper;
-        $fieldHelper->expects($this->once())->method('isFieldEmpty')->willReturn(false);
-
-        $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
-
-        $content = $this->getMockBuilder(Content::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $options = array(
-            'label' => null,
-            'required' => true,
-            'constraints' => array(
-                new Constraints\NotBlank(),
-                new Constraints\Range(array('min' => 4, 'max' => 10))
-            ),
-            'ezforms' => array(
-                'description' => null,
-                'language_code' => 'eng-GB',
-                'fielddefinition' => $fieldDefinition,
-                'content' => $content
-            )
-        );
-
-        $formBuilder = clone($this->formBuilder);
-
-        $formBuilder->expects($this->once())
-            ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'integer', $options
-            ));
-
-        $languageCode = 'eng-GB';
-
-        $integerHandler = new IntegerHandler($fieldHelper);
-        $integerHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $content, $languageCode);
+        $integerHandler->buildFieldUpdateForm($this->formBuilder, $fieldDefinition, $content, $languageCode);
     }
 }

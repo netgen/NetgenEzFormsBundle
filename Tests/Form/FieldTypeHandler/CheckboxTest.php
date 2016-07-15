@@ -86,14 +86,9 @@ class CheckboxTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($checkboxValue, $returnedBool);
     }
 
-
     public function testBuildFieldCreateForm()
     {
-        $formBuilder = clone($this->formBuilder);
-
         $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
-
-        $fieldHelper = clone $this->fieldHelper;
 
         $options = array(
             'label' => null,
@@ -107,14 +102,14 @@ class CheckboxTest extends \PHPUnit_Framework_TestCase
             'data' => true
         );
 
-        $formBuilder->expects($this->once())
+        $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(
                 array(
                     $fieldDefinition->identifier, 'checkbox', $options
                 ));
 
-        $checkboxHandler = new Checkbox($fieldHelper);
-        $checkboxHandler->buildFieldCreateForm($formBuilder, $fieldDefinition, 'eng-GB');
+        $checkboxHandler = new Checkbox($this->fieldHelper);
+        $checkboxHandler->buildFieldCreateForm($this->formBuilder, $fieldDefinition, 'eng-GB');
     }
 
     public function testBuildFieldUpdateForm()
@@ -133,15 +128,13 @@ class CheckboxTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $formBuilder = clone($this->formBuilder);
-
-        $formBuilder->expects($this->once())
+        $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
                 $fieldDefinition->identifier, 'checkbox', $options
             ));
 
         $checkboxHandler = new Checkbox($this->fieldHelper);
-        $checkboxHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $this->content, 'eng-GB');
+        $checkboxHandler->buildFieldUpdateForm($this->formBuilder, $fieldDefinition, $this->content, 'eng-GB');
     }
 
     public function testBuildFieldUpdateFormIfDefaultValueIsNotSet()
@@ -164,76 +157,12 @@ class CheckboxTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $formBuilder = clone($this->formBuilder);
-        $formBuilder->expects($this->once())
+        $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
                 $fieldDefinition->identifier, 'checkbox', $options
             ));
 
         $checkboxHandler = new Checkbox($this->fieldHelper);
-        $checkboxHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $this->content, 'eng-GB');
-    }
-
-    public function testBuildFieldUpdateFormIfFieldIsEmpty()
-    {
-        $fieldHelper = clone $this->fieldHelper;
-        $fieldHelper->expects($this->once())->method('isFieldEmpty')->willReturn(true);
-
-        $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
-
-        $options = array(
-            'label' => null,
-            'required' => true,
-            'constraints' => array(
-                new Constraints\NotBlank(),
-            ),
-            'data' => true,
-            'ezforms' => array(
-                'description' => null,
-                'language_code' => 'eng-GB',
-                'fielddefinition' => $fieldDefinition,
-                'content' => $this->content
-            )
-        );
-
-        $formBuilder = clone($this->formBuilder);
-
-        $formBuilder->expects($this->once())
-            ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'checkbox', $options
-            ));
-
-        $checkboxHandler = new Checkbox($fieldHelper);
-        $checkboxHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $this->content, 'eng-GB');
-    }
-
-    public function testBuildFieldUpdateFormIfFieldIsNotEmpty()
-    {
-        $fieldHelper = clone $this->fieldHelper;
-        $fieldHelper->expects($this->once())->method('isFieldEmpty')->willReturn(false);
-
-        $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
-
-        $options = array(
-            'label' => null,
-            'required' => true,
-            'constraints' => array(new Constraints\NotBlank()),
-            'ezforms' => array(
-                'description' => null,
-                'language_code' => 'eng-GB',
-                'fielddefinition' => $fieldDefinition,
-                'content' => $this->content
-            )
-        );
-
-        $formBuilder = clone($this->formBuilder);
-
-        $formBuilder->expects($this->once())
-            ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'checkbox', $options
-            ));
-
-        $checkboxHandler = new Checkbox($fieldHelper);
-        $checkboxHandler->buildFieldUpdateForm($formBuilder, $fieldDefinition, $this->content, 'eng-GB');
+        $checkboxHandler->buildFieldUpdateForm($this->formBuilder, $fieldDefinition, $this->content, 'eng-GB');
     }
 }
