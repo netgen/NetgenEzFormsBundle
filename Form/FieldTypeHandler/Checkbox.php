@@ -6,11 +6,29 @@ use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\Core\FieldType\Checkbox as CheckboxValue;
+use eZ\Publish\Core\Helper\FieldHelper;
+use eZ\Publish\API\Repository\Values\Content\Content;
 
 class Checkbox extends FieldTypeHandler
 {
+    /**
+     * @var FieldHelper
+     */
+    protected $fieldHelper;
+
+    /**
+     * Integer constructor.
+     *
+     * @param FieldHelper $fieldHelper
+     */
+    public function __construct(FieldHelper $fieldHelper)
+    {
+        parent::__construct();
+
+        $this->fieldHelper = $fieldHelper;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -21,7 +39,12 @@ class Checkbox extends FieldTypeHandler
         Content $content = null
     ) {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
-        $options['data'] = $fieldDefinition->defaultValue->bool;
+
+        if ($fieldDefinition->defaultValue instanceof CheckboxValue\Value) {
+            if (!$content instanceof Content) {
+                $options['data'] = $fieldDefinition->defaultValue->bool;
+            }
+        }
 
         $formBuilder->add($fieldDefinition->identifier, 'checkbox', $options);
     }

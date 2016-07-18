@@ -9,9 +9,28 @@ use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\Core\FieldType\Float as FloatValue;
 use Symfony\Component\Validator\Constraints as Assert;
+use eZ\Publish\Core\Helper\FieldHelper;
+
 
 class FloatHandler extends FieldTypeHandler
 {
+    /**
+     * @var FieldHelper
+     */
+    protected $fieldHelper;
+
+    /**
+     * Integer constructor.
+     *
+     * @param FieldHelper $fieldHelper
+     */
+    public function __construct(FieldHelper $fieldHelper)
+    {
+        parent::__construct();
+
+        $this->fieldHelper = $fieldHelper;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -42,8 +61,10 @@ class FloatHandler extends FieldTypeHandler
             }
         }
 
-        if (!empty($fieldDefinition->defaultValue)) {
-            $options['data'] = (float)$fieldDefinition->defaultValue->value;
+        if ($fieldDefinition->defaultValue instanceof FloatValue\Value) {
+            if (!$content instanceof Content) {
+                $options['data'] = (float)$fieldDefinition->defaultValue->value;
+            }
         }
 
         $formBuilder->add($fieldDefinition->identifier, 'number', $options);

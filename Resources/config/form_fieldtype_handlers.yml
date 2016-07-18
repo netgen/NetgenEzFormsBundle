@@ -50,6 +50,7 @@ services:
 
     netgen.ezforms.form.fieldtype_handler.ezboolean:
         class: "%netgen.ezforms.form.fieldtype_handler.ezboolean.class%"
+        arguments: [ "@ezpublish.field_helper" ]
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezboolean}
 
@@ -65,11 +66,13 @@ services:
 
     netgen.ezforms.form.fieldtype_handler.ezinteger:
         class: "%netgen.ezforms.form.fieldtype_handler.ezinteger.class%"
+        arguments: [ "@ezpublish.field_helper" ]
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezinteger}
 
     netgen.ezforms.form.fieldtype_handler.ezfloat:
         class: "%netgen.ezforms.form.fieldtype_handler.ezfloat.class%"
+        arguments: [ "@ezpublish.field_helper" ]
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezfloat}
 
