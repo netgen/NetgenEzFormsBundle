@@ -110,20 +110,20 @@ class FloatHandlerTest extends \PHPUnit_Framework_TestCase
             'required' => true,
             'constraints' => array(
                 new Constraints\NotBlank(),
-                new Constraints\Range(array('min' => 4, 'max' => 10))
+                new Constraints\Range(array('min' => 4, 'max' => 10)),
             ),
             'ezforms' => array(
                 'description' => null,
                 'language_code' => 'eng-GB',
-                'fielddefinition' => $fieldDefinition
+                'fielddefinition' => $fieldDefinition,
             ),
-            'data' => 4.74
+            'data' => 4.74,
         );
 
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(
                 array(
-                    $fieldDefinition->identifier, 'number', $options
+                    $fieldDefinition->identifier, 'number', $options,
                 ));
 
         $floatHandler = new FloatHandler($this->fieldHelper);
@@ -139,19 +139,19 @@ class FloatHandlerTest extends \PHPUnit_Framework_TestCase
             'required' => true,
             'constraints' => array(
                 new Constraints\NotBlank(),
-                new Constraints\Range(array('min' => 4, 'max' => 10))
+                new Constraints\Range(array('min' => 4, 'max' => 10)),
             ),
             'ezforms' => array(
                 'description' => null,
                 'language_code' => 'eng-GB',
                 'fielddefinition' => $fieldDefinition,
-                'content' => $this->content
-            )
+                'content' => $this->content,
+            ),
         );
 
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'number', $options
+                $fieldDefinition->identifier, 'number', $options,
             ));
 
         $floatHandler = new FloatHandler($this->fieldHelper);
@@ -169,19 +169,19 @@ class FloatHandlerTest extends \PHPUnit_Framework_TestCase
             'required' => true,
             'constraints' => array(
                 new Constraints\NotBlank(),
-                new Constraints\Range(array('min' => 4, 'max' => 10))
+                new Constraints\Range(array('min' => 4, 'max' => 10)),
             ),
             'ezforms' => array(
                 'description' => null,
                 'language_code' => 'eng-GB',
                 'fielddefinition' => $fieldDefinition,
-                'content' => $this->content
-            )
+                'content' => $this->content,
+            ),
         );
 
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'number', $options
+                $fieldDefinition->identifier, 'number', $options,
             ));
 
         $floatHandler = new FloatHandler($this->fieldHelper);

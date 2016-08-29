@@ -32,7 +32,8 @@ class FieldTypeHandlerRegistryTest extends \PHPUnit_Framework_TestCase
      */
     public function testItThrowsOutOfRuntimeExceptionWhenHandlerIsNotInstanceOfHandler()
     {
-        $registry = new FieldTypeHandlerRegistry(array('some_handler' => function () {}));
+        $registry = new FieldTypeHandlerRegistry(array('some_handler' => function () {
+        }));
         $registry->get('some_handler');
     }
 

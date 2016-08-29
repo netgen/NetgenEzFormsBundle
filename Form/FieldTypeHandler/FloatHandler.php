@@ -11,7 +11,6 @@ use eZ\Publish\Core\FieldType\Float as FloatValue;
 use Symfony\Component\Validator\Constraints as Assert;
 use eZ\Publish\Core\Helper\FieldHelper;
 
-
 class FloatHandler extends FieldTypeHandler
 {
     /**

@@ -102,14 +102,14 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
             'required' => true,
             'constraints' => array(
                 new Constraints\NotBlank(),
-                new Constraints\Range(array('min' => 4, 'max' => 10))
+                new Constraints\Range(array('min' => 4, 'max' => 10)),
             ),
             'data' => 5,
             'ezforms' => array(
                 'description' => null,
                 'language_code' => 'eng-GB',
-                'fielddefinition' => $fieldDefinition
-            )
+                'fielddefinition' => $fieldDefinition,
+            ),
         );
 
         $this->formBuilder->expects($this->once())
@@ -117,7 +117,7 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
                 array(
                     $fieldDefinition->identifier,
                     'integer',
-                    $options
+                    $options,
             ));
 
         $languageCode = 'eng-GB';
@@ -139,19 +139,19 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
             'required' => true,
             'constraints' => array(
                 new Constraints\NotBlank(),
-                new Constraints\Range(array('min' => 4, 'max' => 10))
+                new Constraints\Range(array('min' => 4, 'max' => 10)),
             ),
             'ezforms' => array(
                 'description' => null,
                 'language_code' => 'eng-GB',
                 'fielddefinition' => $fieldDefinition,
-                'content' => $content
-            )
+                'content' => $content,
+            ),
         );
 
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'integer', $options
+                $fieldDefinition->identifier, 'integer', $options,
             ));
 
         $languageCode = 'eng-GB';
@@ -162,7 +162,6 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testBuildFieldUpdateFormIfDefaultValueIsNotSet()
     {
-
         $fieldDefinitionParameters = $this->fieldDefinitionParameters;
         $fieldDefinitionParameters['defaultValue'] = null;
         $fieldDefinition = new FieldDefinition($fieldDefinitionParameters);
@@ -176,19 +175,19 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
             'required' => true,
             'constraints' => array(
                 new Constraints\NotBlank(),
-                new Constraints\Range(array('min' => 4, 'max' => 10))
+                new Constraints\Range(array('min' => 4, 'max' => 10)),
             ),
             'ezforms' => array(
                 'description' => null,
                 'language_code' => 'eng-GB',
                 'fielddefinition' => $fieldDefinition,
-                'content' => $content
-            )
+                'content' => $content,
+            ),
         );
 
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'integer', $options
+                $fieldDefinition->identifier, 'integer', $options,
             ));
 
         $languageCode = 'eng-GB';

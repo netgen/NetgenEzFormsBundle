@@ -97,15 +97,15 @@ class CheckboxTest extends \PHPUnit_Framework_TestCase
             'ezforms' => array(
                 'description' => null,
                 'language_code' => 'eng-GB',
-                'fielddefinition' => $fieldDefinition
+                'fielddefinition' => $fieldDefinition,
             ),
-            'data' => true
+            'data' => true,
         );
 
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(
                 array(
-                    $fieldDefinition->identifier, 'checkbox', $options
+                    $fieldDefinition->identifier, 'checkbox', $options,
                 ));
 
         $checkboxHandler = new Checkbox($this->fieldHelper);
@@ -124,13 +124,13 @@ class CheckboxTest extends \PHPUnit_Framework_TestCase
                 'description' => null,
                 'language_code' => 'eng-GB',
                 'fielddefinition' => $fieldDefinition,
-                'content' => $this->content
-            )
+                'content' => $this->content,
+            ),
         );
 
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'checkbox', $options
+                $fieldDefinition->identifier, 'checkbox', $options,
             ));
 
         $checkboxHandler = new Checkbox($this->fieldHelper);
@@ -153,13 +153,13 @@ class CheckboxTest extends \PHPUnit_Framework_TestCase
                 'description' => null,
                 'language_code' => 'eng-GB',
                 'fielddefinition' => $fieldDefinition,
-                'content' => $this->content
-            )
+                'content' => $this->content,
+            ),
         );
 
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'checkbox', $options
+                $fieldDefinition->identifier, 'checkbox', $options,
             ));
 
         $checkboxHandler = new Checkbox($this->fieldHelper);
