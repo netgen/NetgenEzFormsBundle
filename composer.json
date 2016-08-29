@@ -15,7 +15,6 @@
         "phpunit/phpunit": "*"
     },
     "autoload": {
-        "psr-0": { "Netgen\\Bundle\\EzFormsBundle": "" }
-    },
-    "target-dir": "Netgen/Bundle/EzFormsBundle"
+        "psr-4": { "Netgen\\Bundle\\EzFormsBundle\\": "" }
+    }
 }
