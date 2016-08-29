@@ -26,8 +26,6 @@ class FloatHandler extends FieldTypeHandler
      */
     public function __construct(FieldHelper $fieldHelper)
     {
-        parent::__construct();
-
         $this->fieldHelper = $fieldHelper;
     }
 

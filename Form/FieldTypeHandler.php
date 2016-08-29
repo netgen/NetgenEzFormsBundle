@@ -16,10 +16,6 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
 {
     protected $fieldTypeRegistry;
 
-    public function __construct()
-    {
-    }
-
     /**
      * {@inheritdoc}
      */
