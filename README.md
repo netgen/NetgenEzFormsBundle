@@ -46,3 +46,6 @@ Currently supported FieldTypes:
 | Url            | yes
 | User           | yes
 | XmlText        | no
+
+## Documentation
+Please check [Petar's block post](http://www.netgenlabs.com/Blog/Creating-and-updating-eZ-Publish-Content-via-Symfony-s-Form-component).
