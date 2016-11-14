@@ -110,7 +110,7 @@ services:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezgmaplocation}
 
     netgen.ezforms.form.fieldtype_handler.ezobjectrelation:
-        class: "%netgen.ezforms.form.fieldtype_handler.ezobjectrelation.class"
+        class: "%netgen.ezforms.form.fieldtype_handler.ezobjectrelation.class%"
         arguments:
           - "@ezpublish.api.repository"
           - "@ezpublish.translation_helper"
