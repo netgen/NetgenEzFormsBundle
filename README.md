@@ -36,7 +36,7 @@ Currently supported FieldTypes:
 | MapLocation    | yes
 | Page           | no
 | Rating         | no
-| Relation       | no
+| Relation       | yes
 | RelationList   | no
 | RichText       | no
 | Selection      | yes
