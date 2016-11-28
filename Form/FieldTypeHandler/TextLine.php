@@ -52,11 +52,11 @@ class TextLine extends FieldTypeHandler
             $minStringLength = $fieldDefinition->validatorConfiguration['StringLengthValidator']['minStringLength'];
             $maxStringLength = $fieldDefinition->validatorConfiguration['StringLengthValidator']['maxStringLength'];
 
-            if ($minStringLength !== false) {
+            if (!empty($minStringLength)) {
                 $lengthConstraints['min'] = $minStringLength;
             }
 
-            if ($maxStringLength !== false) {
+            if (!empty($maxStringLength)) {
                 $lengthConstraints['max'] = $maxStringLength;
             }
 

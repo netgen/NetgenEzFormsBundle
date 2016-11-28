@@ -78,4 +78,36 @@ class TextLineTest extends \PHPUnit_Framework_TestCase
         $text = new TextLine();
         $text->buildFieldCreateForm($formBuilder, $fieldDefinition, $languageCode);
     }
+
+    public function testBuildFieldCreateFormWithStringLengthsNull()
+    {
+        $formBuilder = $this->getMockBuilder(FormBuilder::class)
+            ->disableOriginalConstructor()
+            ->setMethods(array('add'))
+            ->getMock();
+
+        $formBuilder->expects($this->once())
+            ->method('add');
+
+        $fieldDefinition = new FieldDefinition(
+            array(
+                'id' => 'id',
+                'identifier' => 'identifier',
+                'isRequired' => true,
+                'descriptions' => array('fre-FR' => 'fre-FR'),
+                'names' => array('fre-FR' => 'fre-FR'),
+                'validatorConfiguration' => array(
+                    'StringLengthValidator' => array(
+                        'minStringLength' => null,
+                        'maxStringLength' => null,
+                    ),
+                ),
+            )
+        );
+
+        $languageCode = 'eng-GB';
+
+        $text = new TextLine();
+        $text->buildFieldCreateForm($formBuilder, $fieldDefinition, $languageCode);
+    }
 }
