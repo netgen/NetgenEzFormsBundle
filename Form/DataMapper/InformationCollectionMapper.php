@@ -45,7 +45,8 @@ class InformationCollectionMapper extends DataMapper
 
         $form->setData(
             $handler->convertFieldValueToForm(
-                $contentType->getFieldDefinition($fieldDefinitionIdentifier)->defaultValue
+                $contentType->getFieldDefinition($fieldDefinitionIdentifier)->defaultValue,
+                $fieldDefinition
             )
         );
     }
