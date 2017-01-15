@@ -10,11 +10,70 @@ use Symfony\Component\Form\FormBuilder;
 
 class SelectionTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Selection
+     */
+    protected $handler;
+
+    public function setUp()
+    {
+        $this->handler = new Selection();
+    }
+
     public function testAssertInstanceOfFieldTypeHandler()
     {
-        $selection = new Selection();
+        $this->assertInstanceOf(FieldTypeHandler::class, $this->handler);
+    }
 
-        $this->assertInstanceOf(FieldTypeHandler::class, $selection);
+    public function testConvertFieldValueToFormWithIdentifiersArrayEmpty()
+    {
+        $identifiers = array();
+        $selection = new SelectionValue($identifiers);
+        $fieldDefinition = new FieldDefinition(
+            array(
+                'fieldSettings' => array(
+                    'isMultiple' => false,
+                ),
+            )
+        );
+
+        $converted = $this->handler->convertFieldValueToForm($selection, $fieldDefinition);
+
+        $this->assertEquals('', $converted);
+    }
+
+    public function testConvertFieldValueToFormWithFieldDefinitionMultiple()
+    {
+        $identifiers = array('identifier1', 'identifier2');
+        $selection = new SelectionValue($identifiers);
+        $fieldDefinition = new FieldDefinition(
+            array(
+                'fieldSettings' => array(
+                    'isMultiple' => true,
+                ),
+            )
+        );
+
+        $converted = $this->handler->convertFieldValueToForm($selection, $fieldDefinition);
+
+        $this->assertEquals($identifiers, $converted);
+    }
+
+    public function testConvertFieldValueToFormWithFieldDefinitionSingle()
+    {
+        $identifiers = array('identifier1', 'identifier2');
+        $selection = new SelectionValue($identifiers);
+        $fieldDefinition = new FieldDefinition(
+            array(
+                'fieldSettings' => array(
+                    'isMultiple' => false,
+                ),
+            )
+        );
+
+        $converted = $this->handler->convertFieldValueToForm($selection, $fieldDefinition);
+
+        $this->assertEquals($identifiers[0], $converted);
     }
 
     public function testConvertFieldValueToForm()

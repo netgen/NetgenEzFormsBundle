@@ -50,6 +50,20 @@ class Selection extends FieldTypeHandler
      */
     public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
+        $isMultiple = true;
+        if ($fieldDefinition !== null) {
+            $fieldSettings = $fieldDefinition->getFieldSettings();
+            $isMultiple = $fieldSettings['isMultiple'];
+        }
+
+        if (!$isMultiple) {
+            if (empty($value->selection)) {
+                return '';
+            }
+
+            return $value->selection[0];
+        }
+
         return $value->selection;
     }
 }
