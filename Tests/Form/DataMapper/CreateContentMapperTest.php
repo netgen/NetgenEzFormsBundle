@@ -531,4 +531,138 @@ class CreateContentMapperTest extends \PHPUnit_Framework_TestCase
 
         $this->mapper->mapFormsToData(array(), $someNumber);
     }
+
+    public function testMapFormsToDataWhenFormIsNotSynchronized()
+    {
+        $data = new \stdClass();
+
+        $this->propertyAccessor->expects($this->never())
+            ->method('getValue');
+
+        $config = $this->getMockBuilder(FormConfigBuilder::class)
+            ->disableOriginalConstructor()
+            ->setMethods(array('getMapped'))
+            ->getMock();
+
+        $config->expects($this->once())
+            ->willReturn(true)
+            ->method('getMapped');
+
+        $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
+            ->disableOriginalConstructor()
+            ->setMethods(array('__toString'))
+            ->getMockForAbstractClass();
+
+        $form = $this->getForm();
+
+        $form->expects($this->once())
+            ->willReturn(true)
+            ->method('isSubmitted');
+
+        $form->expects($this->once())
+            ->willReturn(false)
+            ->method('isSynchronized');
+
+        $form->expects($this->never())
+            ->method('isDisabled');
+
+        $form->expects($this->never())
+            ->method('getData');
+
+        $form->expects($this->once())
+            ->willReturn($config)
+            ->method('getConfig');
+
+        $form->expects($this->once())
+            ->willReturn($propertyPath)
+            ->method('getPropertyPath');
+
+        $this->mapper->mapFormsToData(array($form), $data);
+    }
+
+    public function testMapFormsToDataWithDataSameAsValueInData()
+    {
+        $contentType = new ContentType(
+            array(
+                'id' => 123,
+                'fieldDefinitions' => array(
+                    new FieldDefinition(
+                        array(
+                            'id' => 'id',
+                            'identifier' => 'name',
+                            'fieldTypeIdentifier' => 'eztext',
+                            'defaultValue' => new Value('Some name'),
+                        )
+                    ),
+                ),
+            )
+        );
+
+        $this->registry->expects($this->any())
+            ->method('get')
+            ->with('eztext')
+            ->will($this->returnValue($this->handler));
+
+        $this->handler->expects($this->never())
+            ->method('convertFieldValueFromForm')
+            ->willReturn(new TextLineValue('Some name'));
+
+        $contentCreateStruct = new ContentCreateStruct(array('contentType' => $contentType));
+
+        $data = new \stdClass();
+
+        $config = $this->getMockBuilder(FormConfigBuilder::class)
+            ->disableOriginalConstructor()
+            ->setMethods(array('getMapped', 'getByReference'))
+            ->getMock();
+
+        $config->expects($this->once())
+            ->willReturn(true)
+            ->method('getByReference');
+
+        $config->expects($this->once())
+            ->willReturn(true)
+            ->method('getMapped');
+
+        $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
+            ->disableOriginalConstructor()
+            ->setMethods(array('__toString'))
+            ->getMockForAbstractClass();
+
+        $propertyPath->expects($this->never())
+            ->willReturn('name')
+            ->method('__toString');
+
+        $form = $this->getForm();
+
+        $form->expects($this->once())
+            ->willReturn(true)
+            ->method('isSubmitted');
+
+        $form->expects($this->once())
+            ->willReturn(true)
+            ->method('isSynchronized');
+
+        $form->expects($this->once())
+            ->willReturn(false)
+            ->method('isDisabled');
+
+        $form->expects($this->any())
+            ->willReturn($data)
+            ->method('getData');
+
+        $form->expects($this->once())
+            ->willReturn($config)
+            ->method('getConfig');
+
+        $form->expects($this->once())
+            ->willReturn($propertyPath)
+            ->method('getPropertyPath');
+
+        $this->propertyAccessor->expects($this->once())
+            ->willReturn($data)
+            ->method('getValue');
+
+        $this->mapper->mapFormsToData(array($form), $data);
+    }
 }
