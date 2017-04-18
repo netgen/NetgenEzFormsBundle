@@ -4,6 +4,7 @@ namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -64,7 +65,7 @@ class FloatHandler extends FieldTypeHandler
             }
         }
 
-        $formBuilder->add($fieldDefinition->identifier, 'number', $options);
+        $formBuilder->add($fieldDefinition->identifier, NumberType::class, $options);
     }
 
     /**

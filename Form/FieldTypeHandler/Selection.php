@@ -4,7 +4,7 @@ namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -26,11 +26,12 @@ class Selection extends FieldTypeHandler
         $values = $fieldDefinition->getFieldSettings()['options'];
 
         $options['expanded'] = false;
+        $options['choices_as_values'] = true;
         $options['multiple'] = $fieldDefinition->getFieldSettings()['isMultiple'];
 
-        $options['choice_list'] = new ChoiceList(array_keys($values), array_values($values));
+        $options['choices'] = array_flip($values);
 
-        $formBuilder->add($fieldDefinition->identifier, 'choice', $options);
+        $formBuilder->add($fieldDefinition->identifier, ChoiceType::class, $options);
     }
 
     /**

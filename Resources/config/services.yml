@@ -16,4 +16,4 @@ services:
     netgen.ezforms.form.extension.fieldtype:
         class: "%netgen.ezforms.form.extension.fieldtype.class%"
         tags:
-            - {name: form.type_extension, alias: form}
+            - {name: form.type_extension, alias: form, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType}

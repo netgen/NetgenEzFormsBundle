@@ -3,6 +3,9 @@
 namespace Netgen\Bundle\EzFormsBundle\Form\Type\FieldType;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 
@@ -70,15 +73,27 @@ class UserCreateType extends AbstractType
         );
 
         $builder
-            ->add('email', 'email', $emailOptions)
-            ->add('username', 'text', $usernameOptions)
-            ->add('password', 'repeated', $passwordOptions);
+            ->add('email', EmailType::class, $emailOptions)
+            ->add('username', TextType::class, $usernameOptions)
+            ->add('password', RepeatedType::class, $passwordOptions);
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the name of this type.
+     *
+     * @return string The name of this type
      */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * Returns the prefix of the template block name for this type.
+     *
+     * @return string The prefix of the template block name
+     */
+    public function getBlockPrefix()
     {
         return 'ezforms_ezuser_create';
     }

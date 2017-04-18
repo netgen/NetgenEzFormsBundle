@@ -4,6 +4,7 @@ namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use Netgen\Bundle\EzFormsBundle\Form\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -22,7 +23,7 @@ class Url extends FieldTypeHandler
     ) {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        $formBuilder->add($fieldDefinition->identifier, 'ezforms_url', $options);
+        $formBuilder->add($fieldDefinition->identifier, UrlType::class, $options);
     }
 
     /**

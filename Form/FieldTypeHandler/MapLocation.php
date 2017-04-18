@@ -3,6 +3,7 @@
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use Netgen\Bundle\EzFormsBundle\Form\Type\MapType;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
@@ -57,6 +58,6 @@ class MapLocation extends FieldTypeHandler
 
         $options['block_name'] = 'ezforms_map';
 
-        $formBuilder->add($fieldDefinition->identifier, 'ezforms_map', $options);
+        $formBuilder->add($fieldDefinition->identifier, MapType::class, $options);
     }
 }

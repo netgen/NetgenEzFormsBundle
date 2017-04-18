@@ -3,6 +3,7 @@
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Extension;
 
 use Netgen\Bundle\EzFormsBundle\Form\Extension\FieldTypeTypeExtension;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,21 +14,21 @@ class FieldTypeTypeExtensionTest extends \PHPUnit_Framework_TestCase
     {
         $extension = new FieldTypeTypeExtension();
 
-        $this->assertEquals('form', $extension->getExtendedType());
+        $this->assertEquals(FormType::class, $extension->getExtendedType());
     }
 
     public function testSetDefaultOptions()
     {
         $resolver = $this->getMockBuilder(OptionsResolver::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('setOptional'))
+            ->setMethods(array('setDefined'))
             ->getMock();
 
         $resolver->expects($this->once())
-            ->method('setOptional');
+            ->method('setDefined');
 
         $extension = new FieldTypeTypeExtension();
-        $extension->setDefaultOptions($resolver);
+        $extension->configureOptions($resolver);
     }
 
     public function testBuildView()

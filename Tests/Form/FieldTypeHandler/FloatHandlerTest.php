@@ -6,6 +6,7 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\FloatHandler;
 use eZ\Publish\Core\FieldType\Float\Value as FloatValue;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilder;
 use eZ\Publish\Core\Helper\FieldHelper;
 use Symfony\Component\Validator\Constraints;
@@ -123,7 +124,7 @@ class FloatHandlerTest extends \PHPUnit_Framework_TestCase
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(
                 array(
-                    $fieldDefinition->identifier, 'number', $options,
+                    $fieldDefinition->identifier, NumberType::class, $options,
                 ));
 
         $floatHandler = new FloatHandler($this->fieldHelper);
@@ -151,7 +152,7 @@ class FloatHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'number', $options,
+                $fieldDefinition->identifier, NumberType::class, $options,
             ));
 
         $floatHandler = new FloatHandler($this->fieldHelper);
@@ -181,7 +182,7 @@ class FloatHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'number', $options,
+                $fieldDefinition->identifier, NumberType::class, $options,
             ));
 
         $floatHandler = new FloatHandler($this->fieldHelper);

@@ -4,6 +4,7 @@ namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -30,7 +31,7 @@ class Time extends FieldTypeHandler
         $options['with_seconds'] = $useSeconds;
         $options['constraints'][] = new Assert\Time();
 
-        $formBuilder->add($fieldDefinition->identifier, 'time', $options);
+        $formBuilder->add($fieldDefinition->identifier, TimeType::class, $options);
     }
 
     /**

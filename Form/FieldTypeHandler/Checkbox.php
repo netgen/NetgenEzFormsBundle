@@ -4,6 +4,7 @@ namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\Core\FieldType\Checkbox as CheckboxValue;
@@ -44,7 +45,7 @@ class Checkbox extends FieldTypeHandler
             }
         }
 
-        $formBuilder->add($fieldDefinition->identifier, 'checkbox', $options);
+        $formBuilder->add($fieldDefinition->identifier, CheckboxType::class, $options);
     }
 
     /**

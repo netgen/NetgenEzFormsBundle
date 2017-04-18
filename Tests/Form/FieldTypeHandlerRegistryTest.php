@@ -4,13 +4,11 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\Form;
 
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Date;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
-use OutOfBoundsException;
-use RuntimeException;
 
 class FieldTypeHandlerRegistryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException OutOfBoundsException
+     * @expectedException \OutOfBoundsException
      */
     public function testItThrowsOutOfBoundExceptionWhenGettingNonExistentHandler()
     {
@@ -19,7 +17,7 @@ class FieldTypeHandlerRegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException RuntimeException
+     * @expectedException \RuntimeException
      */
     public function testItThrowsOutOfRuntimeExceptionWhenHandlerIsNotCallable()
     {
@@ -28,7 +26,7 @@ class FieldTypeHandlerRegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException RuntimeException
+     * @expectedException \RuntimeException
      */
     public function testItThrowsOutOfRuntimeExceptionWhenHandlerIsNotInstanceOfHandler()
     {

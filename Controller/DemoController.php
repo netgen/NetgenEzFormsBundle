@@ -4,6 +4,8 @@ namespace Netgen\Bundle\EzFormsBundle\Controller;
 
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 use eZ\Bundle\EzPublishCoreBundle\Controller;
+use Netgen\Bundle\EzFormsBundle\Form\Type\UpdateContentType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
@@ -31,7 +33,7 @@ class DemoController extends Controller
         /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
         $formBuilder = $this->container->get('form.factory')->createBuilder('ezforms_create_content', $data);
         // Adding controls as EzFormsBundle does not do that by itself
-        $formBuilder->add('save', 'submit', array('label' => 'Publish'));
+        $formBuilder->add('save', SubmitType::class, array('label' => 'Publish'));
 
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
@@ -93,10 +95,10 @@ class DemoController extends Controller
         /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
         $formBuilder = $this->container->get('form.factory')->createBuilder('ezforms_update_content', $data);
         // Adding controls as EzFormsBundle does not do that by itself
-        $formBuilder->add('save', 'submit', array('label' => 'Update'));
+        $formBuilder->add('save', SubmitType::class, array('label' => 'Update'));
 
         $form = $formBuilder->getForm();
-        //$form = $this->createForm( 'ezforms_update_content', $data );
+        //$form = $this->createForm(UpdateContentType::class, $data);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -162,7 +164,7 @@ class DemoController extends Controller
         /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
         $formBuilder = $this->container->get('form.factory')->createBuilder('ezforms_create_user', $data);
         // Adding controls as EzFormsBundle does not do that by itself
-        $formBuilder->add('save', 'submit', array('label' => 'Publish'));
+        $formBuilder->add('save', SubmitType::class, array('label' => 'Publish'));
 
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
@@ -246,7 +248,7 @@ class DemoController extends Controller
         /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
         $formBuilder = $this->container->get('form.factory')->createBuilder('ezforms_update_user', $data);
         // Adding controls as EzFormsBundle does not do that by itself
-        $formBuilder->add('save', 'submit', array('label' => 'Update'));
+        $formBuilder->add('save', SubmitType::class, array('label' => 'Update'));
 
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
@@ -275,7 +277,6 @@ class DemoController extends Controller
     {
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
-        $locationService = $repository->getLocationService();
         // @todo for demo purpose, user should have necessary permissions by itself
         $repository->setCurrentUser(
             $repository->getUserService()->loadUserByLogin('admin')
@@ -293,7 +294,7 @@ class DemoController extends Controller
         /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
         $formBuilder = $this->container->get('form.factory')->createBuilder('ezforms_information_collection', $data);
         // Adding controls as EzFormsBundle does not do that by itself
-        $formBuilder->add('save', 'submit', array('label' => 'Publish'));
+        $formBuilder->add('save', SubmitType::class, array('label' => 'Publish'));
 
         $form = $formBuilder->getForm();
         $form->handleRequest($request);

@@ -36,7 +36,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 
         $returnedValue = $time->convertFieldValueToForm($timeValue);
 
-        $this->assertEquals($dateTime, $returnedValue);
+        $this->assertEquals($dateTime->getTimestamp(), $returnedValue->getTimestamp());
     }
 
     public function testConvertFieldValueFromFormWhenDataInstanceOfDateTime()

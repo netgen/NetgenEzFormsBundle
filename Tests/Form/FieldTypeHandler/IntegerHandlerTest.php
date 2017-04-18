@@ -3,6 +3,7 @@
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\IntegerHandler;
 use eZ\Publish\Core\FieldType\Integer\Value as IntegerValue;
@@ -116,7 +117,7 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('add')->withConsecutive(
                 array(
                     $fieldDefinition->identifier,
-                    'integer',
+                    IntegerType::class,
                     $options,
             ));
 
@@ -151,7 +152,7 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'integer', $options,
+                $fieldDefinition->identifier, IntegerType::class, $options,
             ));
 
         $languageCode = 'eng-GB';
@@ -187,7 +188,7 @@ class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'integer', $options,
+                $fieldDefinition->identifier, IntegerType::class, $options,
             ));
 
         $languageCode = 'eng-GB';

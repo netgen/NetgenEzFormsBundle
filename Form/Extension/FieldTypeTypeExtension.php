@@ -3,9 +3,10 @@
 namespace Netgen\Bundle\EzFormsBundle\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class FieldTypeTypeExtension.
@@ -18,15 +19,15 @@ class FieldTypeTypeExtension extends AbstractTypeExtension
     public function getExtendedType()
     {
         // Returning 'form' extends all form types
-        return 'form';
+        return FormType::class;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setOptional(
+        $resolver->setDefined(
             array(
                 'ezforms',
             )
