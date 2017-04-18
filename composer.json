@@ -10,9 +10,11 @@
         }
     ],
     "require": {
+        "symfony/symfony": "^2.8|^3.2",
         "ezsystems/ezpublish-kernel": "*"
     },
     "require-dev": {
+        "ezsystems/ezpublish-kernel": "^6.9",
         "phpunit/phpunit": "<6.0"
     },
     "autoload": {

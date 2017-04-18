@@ -3,6 +3,7 @@
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
@@ -70,6 +71,6 @@ class BinaryFile extends FieldTypeHandler
         // Used with update for displaying current file
         $options['block_name'] = 'ezforms_binary_file';
 
-        $formBuilder->add($fieldDefinition->identifier, 'file', $options);
+        $formBuilder->add($fieldDefinition->identifier, FileType::class, $options);
     }
 }

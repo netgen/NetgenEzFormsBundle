@@ -2,6 +2,7 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -131,7 +132,7 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
 
         $formBuilder->add(
             "ezforms_skip_empty_update_{$fieldDefinitionIdentifier}",
-            'hidden',
+            HiddenType::class,
             $options
         );
     }

@@ -3,6 +3,8 @@
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserCreateType;
+use Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserUpdateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
@@ -32,7 +34,7 @@ class User extends FieldTypeHandler
     ) {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode);
 
-        $formBuilder->add($fieldDefinition->identifier, 'ezforms_ezuser_create', $options);
+        $formBuilder->add($fieldDefinition->identifier, UserCreateType::class, $options);
     }
 
     /**
@@ -46,6 +48,6 @@ class User extends FieldTypeHandler
     ) {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        $formBuilder->add($fieldDefinition->identifier, 'ezforms_ezuser_update', $options);
+        $formBuilder->add($fieldDefinition->identifier, UserUpdateType::class, $options);
     }
 }

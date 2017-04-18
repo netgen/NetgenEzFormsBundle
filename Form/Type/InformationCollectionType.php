@@ -6,7 +6,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
 use RuntimeException;
 
 /**
@@ -35,6 +34,16 @@ class InformationCollectionType extends AbstractContentType
      * @return string The name of this type
      */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * Returns the prefix of the template block name for this type.
+     *
+     * @return string The prefix of the template block name
+     */
+    public function getBlockPrefix()
     {
         return 'ezforms_information_collection';
     }

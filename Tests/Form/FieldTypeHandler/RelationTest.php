@@ -2,7 +2,6 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
-use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\LocationList;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\Repository\ContentService;
@@ -15,8 +14,6 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Relation;
 use eZ\Publish\Core\FieldType\Relation\Value as RelationValue;
 use Symfony\Component\Form\FormBuilder;
-use eZ\Publish\Core\Helper\FieldHelper;
-use Symfony\Component\Validator\Constraints;
 
 class RelationTest extends \PHPUnit_Framework_TestCase
 {
@@ -54,7 +51,6 @@ class RelationTest extends \PHPUnit_Framework_TestCase
      * @var array
      */
     protected $fieldDefinitionParameters;
-
 
     protected function setUp()
     {
@@ -181,7 +177,7 @@ class RelationTest extends \PHPUnit_Framework_TestCase
                 'locations' => [
                     new Location(['contentInfo' => new ContentInfo()]),
                     new Location(['contentInfo' => new ContentInfo()]),
-                ]
+                ],
             ]));
 
         $selection = new Relation($this->repository, $this->translationHelper);
@@ -219,5 +215,4 @@ class RelationTest extends \PHPUnit_Framework_TestCase
         $selection = new Relation($this->repository, $this->translationHelper);
         $selection->buildFieldCreateForm($formBuilder, $fieldDefinition, 'eng-GB');
     }
-
 }

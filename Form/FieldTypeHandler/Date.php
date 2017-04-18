@@ -4,6 +4,7 @@ namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -28,7 +29,7 @@ class Date extends FieldTypeHandler
         $options['widget'] = 'choice';
         $options['constraints'][] = new Assert\Date();
 
-        $formBuilder->add($fieldDefinition->identifier, 'date', $options);
+        $formBuilder->add($fieldDefinition->identifier, DateType::class, $options);
     }
 
     /**

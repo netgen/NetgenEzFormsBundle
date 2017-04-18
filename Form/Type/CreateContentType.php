@@ -13,9 +13,21 @@ use RuntimeException;
 class CreateContentType extends AbstractContentType
 {
     /**
-     * {@inheritdoc}
+     * Returns the name of this type.
+     *
+     * @return string The name of this type
      */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * Returns the prefix of the template block name for this type.
+     *
+     * @return string The prefix of the template block name
+     */
+    public function getBlockPrefix()
     {
         return 'ezforms_create_content';
     }

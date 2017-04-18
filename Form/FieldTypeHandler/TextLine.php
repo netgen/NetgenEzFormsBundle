@@ -3,6 +3,7 @@
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
@@ -65,6 +66,6 @@ class TextLine extends FieldTypeHandler
             }
         }
 
-        $formBuilder->add($fieldDefinition->identifier, 'text', $options);
+        $formBuilder->add($fieldDefinition->identifier, TextType::class, $options);
     }
 }

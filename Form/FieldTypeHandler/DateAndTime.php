@@ -4,6 +4,7 @@ namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -32,7 +33,7 @@ class DateAndTime extends FieldTypeHandler
         $options['with_seconds'] = $useSeconds;
         $options['constraints'][] = new Assert\DateTime();
 
-        $formBuilder->add($fieldDefinition->identifier, 'datetime', $options);
+        $formBuilder->add($fieldDefinition->identifier, DateTimeType::class, $options);
     }
 
     /**

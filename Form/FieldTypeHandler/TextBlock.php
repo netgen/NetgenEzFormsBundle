@@ -3,6 +3,7 @@
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
@@ -47,6 +48,6 @@ class TextBlock extends FieldTypeHandler
 
         $options['attr']['rows'] = $fieldDefinition->fieldSettings['textRows'];
 
-        $formBuilder->add($fieldDefinition->identifier, 'textarea', $options);
+        $formBuilder->add($fieldDefinition->identifier, TextareaType::class, $options);
     }
 }

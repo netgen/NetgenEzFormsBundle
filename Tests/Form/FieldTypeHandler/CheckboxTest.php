@@ -6,6 +6,7 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Checkbox;
 use eZ\Publish\Core\FieldType\Checkbox\Value as CheckboxValue;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilder;
 use eZ\Publish\Core\Helper\FieldHelper;
 use Symfony\Component\Validator\Constraints;
@@ -105,7 +106,7 @@ class CheckboxTest extends \PHPUnit_Framework_TestCase
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(
                 array(
-                    $fieldDefinition->identifier, 'checkbox', $options,
+                    $fieldDefinition->identifier, CheckboxType::class, $options,
                 ));
 
         $checkboxHandler = new Checkbox($this->fieldHelper);
@@ -130,7 +131,7 @@ class CheckboxTest extends \PHPUnit_Framework_TestCase
 
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'checkbox', $options,
+                $fieldDefinition->identifier, CheckboxType::class, $options,
             ));
 
         $checkboxHandler = new Checkbox($this->fieldHelper);
@@ -159,7 +160,7 @@ class CheckboxTest extends \PHPUnit_Framework_TestCase
 
         $this->formBuilder->expects($this->once())
             ->method('add')->withConsecutive(array(
-                $fieldDefinition->identifier, 'checkbox', $options,
+                $fieldDefinition->identifier, CheckboxType::class, $options,
             ));
 
         $checkboxHandler = new Checkbox($this->fieldHelper);

@@ -8,7 +8,6 @@ use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
-use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -59,9 +58,10 @@ class Relation extends FieldTypeHandler
         }
 
         $formBuilder->add($fieldDefinition->identifier, ChoiceType::class, [
-            'choice_list' => new ArrayChoiceList($choices),
+            'choices' => $choices,
             'expanded' => false,
             'multiple' => false,
+            'choices_as_values' => true,
         ]);
     }
 

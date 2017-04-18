@@ -4,6 +4,7 @@ namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -27,7 +28,7 @@ class Email extends FieldTypeHandler
             $options['constraints'][] = new Constraints\Email();
         }
 
-        $formBuilder->add($fieldDefinition->identifier, 'email', $options);
+        $formBuilder->add($fieldDefinition->identifier, EmailType::class, $options);
     }
 
     /**
