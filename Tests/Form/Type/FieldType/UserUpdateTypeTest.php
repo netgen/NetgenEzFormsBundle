@@ -5,6 +5,7 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type\FieldType;
 use Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserUpdateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints;
@@ -39,7 +40,7 @@ class UserUpdateTypeTest extends \PHPUnit_Framework_TestCase
         );
 
         $passwordOptions = array(
-            'type' => 'password',
+            'type' => PasswordType::class,
             'required' => false,
             'invalid_message' => 'Both passwords must match.',
             'options' => array(

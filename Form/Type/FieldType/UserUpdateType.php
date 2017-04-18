@@ -4,6 +4,7 @@ namespace Netgen\Bundle\EzFormsBundle\Form\Type\FieldType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
@@ -49,7 +50,7 @@ class UserUpdateType extends AbstractType
         }
 
         $passwordOptions = array(
-            'type' => 'password',
+            'type' => PasswordType::class,
             // Setting required to false enables passing empty passwords for no update,
             // while length constraint still applies if passwords are not empty
             'required' => false,

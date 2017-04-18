@@ -5,6 +5,7 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type\FieldType;
 use Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserCreateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilder;
@@ -50,7 +51,7 @@ class UserCreateTypeTest extends \PHPUnit_Framework_TestCase
         );
 
         $passwordOptions = array(
-            'type' => 'password',
+            'type' => PasswordType::class,
             'invalid_message' => 'Both passwords must match.',
             'options' => array(
                 'constraints' => $passwordConstraints,
