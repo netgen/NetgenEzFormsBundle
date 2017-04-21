@@ -4,7 +4,11 @@ namespace Netgen\Bundle\EzFormsBundle\Controller;
 
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 use eZ\Bundle\EzPublishCoreBundle\Controller;
+use Netgen\Bundle\EzFormsBundle\Form\Type\CreateContentType;
+use Netgen\Bundle\EzFormsBundle\Form\Type\CreateUserType;
+use Netgen\Bundle\EzFormsBundle\Form\Type\InformationCollectionType;
 use Netgen\Bundle\EzFormsBundle\Form\Type\UpdateContentType;
+use Netgen\Bundle\EzFormsBundle\Form\Type\UpdateUserType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +35,7 @@ class DemoController extends Controller
 
         // No method to create named builder in framework controller
         /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
-        $formBuilder = $this->container->get('form.factory')->createBuilder('ezforms_create_content', $data);
+        $formBuilder = $this->container->get('form.factory')->createBuilder(CreateContentType::class, $data);
         // Adding controls as EzFormsBundle does not do that by itself
         $formBuilder->add('save', SubmitType::class, array('label' => 'Publish'));
 
@@ -93,7 +97,7 @@ class DemoController extends Controller
 
         // No method to create named builder in framework controller
         /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
-        $formBuilder = $this->container->get('form.factory')->createBuilder('ezforms_update_content', $data);
+        $formBuilder = $this->container->get('form.factory')->createBuilder(UpdateContentType::class, $data);
         // Adding controls as EzFormsBundle does not do that by itself
         $formBuilder->add('save', SubmitType::class, array('label' => 'Update'));
 
@@ -162,7 +166,7 @@ class DemoController extends Controller
 
         // No method to create named builder in framework controller
         /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
-        $formBuilder = $this->container->get('form.factory')->createBuilder('ezforms_create_user', $data);
+        $formBuilder = $this->container->get('form.factory')->createBuilder(CreateUserType::class, $data);
         // Adding controls as EzFormsBundle does not do that by itself
         $formBuilder->add('save', SubmitType::class, array('label' => 'Publish'));
 
@@ -246,7 +250,7 @@ class DemoController extends Controller
 
         // No method to create named builder in framework controller
         /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
-        $formBuilder = $this->container->get('form.factory')->createBuilder('ezforms_update_user', $data);
+        $formBuilder = $this->container->get('form.factory')->createBuilder(UpdateUserType::class, $data);
         // Adding controls as EzFormsBundle does not do that by itself
         $formBuilder->add('save', SubmitType::class, array('label' => 'Update'));
 
@@ -292,7 +296,7 @@ class DemoController extends Controller
 
         // No method to create named builder in framework controller
         /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
-        $formBuilder = $this->container->get('form.factory')->createBuilder('ezforms_information_collection', $data);
+        $formBuilder = $this->container->get('form.factory')->createBuilder(InformationCollectionType::class, $data);
         // Adding controls as EzFormsBundle does not do that by itself
         $formBuilder->add('save', SubmitType::class, array('label' => 'Publish'));
 
