@@ -3,10 +3,11 @@
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
 use Netgen\Bundle\EzFormsBundle\Form\Type\MapType;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
-class MapTypeTest extends \PHPUnit_Framework_TestCase
+class MapTypeTest extends TestCase
 {
     public function testItExtendsAbstractType()
     {

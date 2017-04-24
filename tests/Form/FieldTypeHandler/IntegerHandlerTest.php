@@ -3,6 +3,7 @@
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\IntegerHandler;
@@ -12,7 +13,7 @@ use eZ\Publish\Core\Helper\FieldHelper;
 use Symfony\Component\Validator\Constraints;
 use eZ\Publish\Core\Repository\Values\Content\Content;
 
-class IntegerHandlerTest extends \PHPUnit_Framework_TestCase
+class IntegerHandlerTest extends TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject

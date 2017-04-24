@@ -9,11 +9,12 @@ use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
 use Netgen\Bundle\EzFormsBundle\Form\Type\CreateContentType;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormBuilder;
 
-class CreateContentTypeTest extends \PHPUnit_Framework_TestCase
+class CreateContentTypeTest extends TestCase
 {
     public function testItExtendsAbstractType()
     {

@@ -11,12 +11,13 @@ use eZ\Publish\Core\Repository\Values\User\User;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\UpdateUserMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormConfigBuilder;
 use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-class UpdateUserMapperTest extends \PHPUnit_Framework_TestCase
+class UpdateUserMapperTest extends TestCase
 {
     /**
      * @var UpdateUserMapper

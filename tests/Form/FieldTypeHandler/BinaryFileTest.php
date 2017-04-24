@@ -8,9 +8,10 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\BinaryFile;
 use eZ\Publish\SPI\FieldType\Value;
 use eZ\Publish\Core\FieldType\BinaryFile\Value as FileValue;
 use Netgen\Bundle\EzFormsBundle\Tests\Form\Mock\FileMock;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class BinaryFileTest extends \PHPUnit_Framework_TestCase
+class BinaryFileTest extends TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler()
     {

@@ -6,12 +6,13 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\FloatHandler;
 use eZ\Publish\Core\FieldType\Float\Value as FloatValue;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilder;
 use eZ\Publish\Core\Helper\FieldHelper;
 use Symfony\Component\Validator\Constraints;
 
-class FloatHandlerTest extends \PHPUnit_Framework_TestCase
+class FloatHandlerTest extends TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject

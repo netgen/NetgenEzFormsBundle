@@ -6,9 +6,10 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\TextLine;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class TextLineTest extends \PHPUnit_Framework_TestCase
+class TextLineTest extends TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler()
     {

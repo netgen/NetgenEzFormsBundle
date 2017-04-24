@@ -6,9 +6,10 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Selection;
 use eZ\Publish\Core\FieldType\Selection\Value as SelectionValue;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class SelectionTest extends \PHPUnit_Framework_TestCase
+class SelectionTest extends TestCase
 {
     /**
      * @var Selection

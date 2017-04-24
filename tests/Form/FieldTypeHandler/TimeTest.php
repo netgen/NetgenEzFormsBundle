@@ -6,9 +6,10 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Time;
 use eZ\Publish\Core\FieldType\Time\Value as TimeValue;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class TimeTest extends \PHPUnit_Framework_TestCase
+class TimeTest extends TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler()
     {

@@ -3,8 +3,9 @@
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form;
 
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
+use PHPUnit\Framework\TestCase;
 
-class DataWrapperTest extends \PHPUnit_Framework_TestCase
+class DataWrapperTest extends TestCase
 {
     public function testSetValuesCorrectly()
     {

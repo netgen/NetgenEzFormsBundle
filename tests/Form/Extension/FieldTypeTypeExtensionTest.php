@@ -3,12 +3,13 @@
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Extension;
 
 use Netgen\Bundle\EzFormsBundle\Form\Extension\FieldTypeTypeExtension;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FieldTypeTypeExtensionTest extends \PHPUnit_Framework_TestCase
+class FieldTypeTypeExtensionTest extends TestCase
 {
     public function testGetExtendedType()
     {

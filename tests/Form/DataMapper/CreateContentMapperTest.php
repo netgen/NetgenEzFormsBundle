@@ -11,8 +11,9 @@ use Symfony\Component\Form\FormConfigBuilder;
 use eZ\Publish\Core\FieldType\TextLine\Value;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
+use PHPUnit\Framework\TestCase;
 
-class CreateContentMapperTest extends \PHPUnit_Framework_TestCase
+class CreateContentMapperTest extends TestCase
 {
     /**
      * @var CreateContentMapper

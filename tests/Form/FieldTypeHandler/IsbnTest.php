@@ -6,9 +6,10 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Isbn;
 use eZ\Publish\Core\FieldType\ISBN\Value as IsbnValue;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class IsbnTest extends \PHPUnit_Framework_TestCase
+class IsbnTest extends TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler()
     {

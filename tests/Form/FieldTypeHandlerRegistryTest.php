@@ -4,8 +4,9 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\Form;
 
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Date;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
+use PHPUnit\Framework\TestCase;
 
-class FieldTypeHandlerRegistryTest extends \PHPUnit_Framework_TestCase
+class FieldTypeHandlerRegistryTest extends TestCase
 {
     /**
      * @expectedException \OutOfBoundsException

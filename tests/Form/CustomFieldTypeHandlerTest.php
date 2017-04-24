@@ -4,9 +4,10 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\Form;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class CustomFieldTypeHandlerTest extends \PHPUnit_Framework_TestCase
+class CustomFieldTypeHandlerTest extends TestCase
 {
     /**
      * @expectedException \RuntimeException

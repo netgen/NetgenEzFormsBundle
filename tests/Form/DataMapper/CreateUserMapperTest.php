@@ -11,8 +11,9 @@ use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use Symfony\Component\Form\FormConfigBuilder;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
+use PHPUnit\Framework\TestCase;
 
-class CreateUserMapperTest extends \PHPUnit_Framework_TestCase
+class CreateUserMapperTest extends TestCase
 {
     /**
      * @var CreateUserMapper

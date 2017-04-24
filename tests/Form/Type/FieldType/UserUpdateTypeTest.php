@@ -3,6 +3,7 @@
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type\FieldType;
 
 use Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserUpdateType;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -10,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints;
 
-class UserUpdateTypeTest extends \PHPUnit_Framework_TestCase
+class UserUpdateTypeTest extends TestCase
 {
     public function testItExtendsAbstractType()
     {

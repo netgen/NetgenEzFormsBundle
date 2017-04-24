@@ -13,9 +13,10 @@ use eZ\Publish\Core\SignalSlot\Repository;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Relation;
 use eZ\Publish\Core\FieldType\Relation\Value as RelationValue;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class RelationTest extends \PHPUnit_Framework_TestCase
+class RelationTest extends TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject

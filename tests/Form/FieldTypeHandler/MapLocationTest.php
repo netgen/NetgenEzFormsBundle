@@ -6,9 +6,10 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\MapLocation;
 use eZ\Publish\Core\FieldType\MapLocation\Value as MapLocationValue;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class MapLocationTest extends \PHPUnit_Framework_TestCase
+class MapLocationTest extends TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler()
     {

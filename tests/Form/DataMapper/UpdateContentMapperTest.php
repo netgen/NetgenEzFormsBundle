@@ -9,11 +9,12 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\UpdateContentMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormConfigBuilder;
 use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-class UpdateContentMapperTest extends \PHPUnit_Framework_TestCase
+class UpdateContentMapperTest extends TestCase
 {
     /**
      * @var UpdateContentMapper

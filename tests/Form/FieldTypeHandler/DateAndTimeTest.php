@@ -6,9 +6,10 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\DateAndTime;
 use eZ\Publish\Core\FieldType\DateAndTime as DTValue;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class DateAndTimeTest extends \PHPUnit_Framework_TestCase
+class DateAndTimeTest extends TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler()
     {

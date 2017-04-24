@@ -10,3 +10,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - PSR-4 dev autoload for tests
 - bundle and tests directories
+- started following semver convention
+- test classes now extend TestCase rather than PHPUnit_Framework_TestCase
