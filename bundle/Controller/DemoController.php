@@ -7,6 +7,10 @@ use eZ\Bundle\EzPublishCoreBundle\Controller;
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
+use eZ\Publish\API\Repository\ContentService;
+use eZ\Bundle\EzPublishCoreBundle\Controller;
+use eZ\Publish\API\Repository\LocationService;
+use eZ\Publish\API\Repository\Repository;
 use Netgen\Bundle\EzFormsBundle\Form\Type\CreateContentType;
 use Netgen\Bundle\EzFormsBundle\Form\Type\CreateUserType;
 use Netgen\Bundle\EzFormsBundle\Form\Type\InformationCollectionType;
@@ -21,22 +25,26 @@ class DemoController extends Controller
 {
     public function demoCreateContentAction(Request $request)
     {
+        /** @var Repository $repository */
         $repository = $this->getRepository();
+        /** @var ContentService $contentService */
         $contentService = $repository->getContentService();
+        /** @var LocationService $locationService */
         $locationService = $repository->getLocationService();
         // @todo for demo purpose, user should have necessary permissions by itself
         $repository->setCurrentUser(
             $repository->getUserService()->loadUserByLogin('admin')
         );
-        $contentType = $repository->getContentTypeService()->loadContentTypeByIdentifier('test_type');
+        $contentType = $repository->getContentTypeService()
+            ->loadContentTypeByIdentifier('test_type');
         $contentCreateStruct = $contentService->newContentCreateStruct($contentType, 'eng-GB');
 
         $data = new DataWrapper($contentCreateStruct, $contentCreateStruct->contentType);
 
-        // No method to create named builder in framework controller
         /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
-        $formBuilder = $this->container->get('form.factory')->createBuilder(CreateContentType::class, $data);
-        // Adding controls as EzFormsBundle does not do that by itself
+        $formBuilder = $this->container->get('form.factory')
+            ->createBuilder(CreateContentType::class, $data);
+
         $formBuilder->add('save', SubmitType::class, array('label' => 'Publish'));
 
         $form = $formBuilder->getForm();
@@ -74,7 +82,7 @@ class DemoController extends Controller
         }
 
         return $this->render(
-            'NetgenEzFormsBundle::demo_form.html.twig',
+            'AcmeBundle::demo_create_content.html.twig',
             array(
                 'form' => $form->createView(),
             )
@@ -85,9 +93,6 @@ class DemoController extends Controller
     {
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
-        $repository->setCurrentUser(
-            $repository->getUserService()->loadUserByLogin('admin')
-        );
         $content = $contentService->loadContent(137);
         $contentType = $repository->getContentTypeService()->loadContentType($content->contentInfo->contentTypeId);
         $contentUpdateStruct = $contentService->newContentUpdateStruct();
@@ -95,10 +100,9 @@ class DemoController extends Controller
 
         $data = new DataWrapper($contentUpdateStruct, $contentType, $content);
 
-        // No method to create named builder in framework controller
         /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
         $formBuilder = $this->container->get('form.factory')->createBuilder(UpdateContentType::class, $data);
-        // Adding controls as EzFormsBundle does not do that by itself
+
         $formBuilder->add('save', SubmitType::class, array('label' => 'Update'));
 
         $form = $formBuilder->getForm();

@@ -9,45 +9,7 @@ NetgenEzFormsBundle
 [![License](https://img.shields.io/packagist/l/netgen/ez-forms-bundle.svg?style=flat-square)](LICENSE)
 [![PHP](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://secure.php.net/)
 
-Integration of Symfony's Form component with eZ Publish 5 Public API
-
-Currently implemented forms:
-
-| Entity / Form             | Create | Update | Information collection
-| ------------- | --- | --- | ---
-| Content      | yes | yes | yes
-| User      | yes | yes | no
-
-Currently supported FieldTypes:
-
-| FieldType             | Supported
-| ------------- | ---
-| Author         | no
-| BinaryFile     | yes
-| Checkbox       | yes
-| Country        | yes
-| Date           | yes
-| DateAndTime    | yes
-| EmailAddress   | yes
-| Float          | yes
-| Integer        | yes
-| Image          | yes
-| ISBN           | yes
-| Keyword        | no
-| Media          | no
-| MapLocation    | yes
-| Page           | no
-| Rating         | no
-| Relation       | yes
-| RelationList   | no
-| RichText       | no
-| Selection      | yes
-| TextBlock      | yes
-| TextLine       | yes
-| Time           | yes
-| Url            | yes
-| User           | yes
-| XmlText        | no
+NetgenEzFormsBundle is an integration of eZ Publish 5/Platform Repository API with Symfony's well-known [Form component](http://symfony.com/doc/current/components/form.html).
 
 License, docs and installation instructions
 -------------------------------------------
