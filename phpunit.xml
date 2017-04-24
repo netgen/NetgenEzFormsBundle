@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="vendor/autoload.php"
          backupGlobals="false"
          backupStaticAttributes="false"
@@ -5,22 +6,23 @@
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          colors="true"
+         verbose="true"
+         processIsolation="false"
+         stopOnFailure="false"
 >
     <testsuites>
         <testsuite name="Netgen\EzFormsBundle\Tests">
-            <directory>Tests</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
-            <directory>.</directory>
+            <directory suffix=".php">bundle</directory>
             <exclude>
-                <directory>Controller</directory>
-                <directory>DependencyInjection</directory>
-                <directory>Resources</directory>
-                <directory>Tests</directory>
-                <directory>vendor</directory>
-                <file>NetgenEzFormsBundle.php</file>
+                <directory>bundle/Controller</directory>
+                <directory>bundle/DependencyInjection</directory>
+                <directory>bundle/Resources</directory>
+                <file>bundle/NetgenEzFormsBundle.php</file>
             </exclude>
         </whitelist>
     </filter>

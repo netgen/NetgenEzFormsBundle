@@ -18,7 +18,17 @@
         "phpunit/phpunit": "<6.0"
     },
     "autoload": {
-        "psr-4": { "Netgen\\Bundle\\EzFormsBundle\\": "" }
+        "psr-4": {
+            "Netgen\\Bundle\\EzFormsBundle\\": "bundle"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Netgen\\Bundle\\EzFormsBundle\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
     },
     "extra": {
         "branch-alias": {
