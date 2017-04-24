@@ -11,6 +11,7 @@ use eZ\Publish\API\Repository\ContentService;
 use eZ\Bundle\EzPublishCoreBundle\Controller;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\Repository;
+use eZ\Publish\API\Repository\UserService;
 use Netgen\Bundle\EzFormsBundle\Form\Type\CreateContentType;
 use Netgen\Bundle\EzFormsBundle\Form\Type\CreateUserType;
 use Netgen\Bundle\EzFormsBundle\Form\Type\InformationCollectionType;
@@ -91,22 +92,25 @@ class DemoController extends Controller
 
     public function demoUpdateContentAction(Request $request)
     {
+        /** @var Repository $repository */
         $repository = $this->getRepository();
+        /** @var ContentService $contentService */
         $contentService = $repository->getContentService();
         $content = $contentService->loadContent(137);
-        $contentType = $repository->getContentTypeService()->loadContentType($content->contentInfo->contentTypeId);
+        $contentType = $repository->getContentTypeService()
+            ->loadContentType($content->contentInfo->contentTypeId);
         $contentUpdateStruct = $contentService->newContentUpdateStruct();
         $contentUpdateStruct->initialLanguageCode = 'eng-GB';
 
         $data = new DataWrapper($contentUpdateStruct, $contentType, $content);
 
         /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
-        $formBuilder = $this->container->get('form.factory')->createBuilder(UpdateContentType::class, $data);
+        $formBuilder = $this->container->get('form.factory')
+            ->createBuilder(UpdateContentType::class, $data);
 
         $formBuilder->add('save', SubmitType::class, array('label' => 'Update'));
 
         $form = $formBuilder->getForm();
-        //$form = $this->createForm(UpdateContentType::class, $data);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -123,7 +127,7 @@ class DemoController extends Controller
                 $repository->commit();
             } catch (Exception $e) {
                 $repository->rollback();
-                // @todo do something else if needed
+
                 throw $e;
             }
 
@@ -137,7 +141,7 @@ class DemoController extends Controller
         }
 
         return $this->render(
-            'NetgenEzFormsBundle::demo_form.html.twig',
+            'AcmeBundle::demo_update_content.html.twig',
             array(
                 'form' => $form->createView(),
             )
@@ -146,16 +150,13 @@ class DemoController extends Controller
 
     public function demoCreateUserAction(Request $request)
     {
-        // @todo check that user really is anonymous, otherwise it does not make sense to allow registration
-
+        /** @var Repository $repository */
         $repository = $this->getRepository();
+        /** @var UserService $userService */
         $userService = $repository->getUserService();
-        $repository->setCurrentUser(
-            // @todo anonymous requires additional permissions to create new user
-            $userService->loadUserByLogin('admin')
-        );
 
-        $contentType = $repository->getContentTypeService()->loadContentTypeByIdentifier('user');
+        $contentType = $repository->getContentTypeService()
+            ->loadContentTypeByIdentifier('user');
         $userCreateStruct = $userService->newUserCreateStruct(
             null,
             null,
@@ -163,22 +164,21 @@ class DemoController extends Controller
             'eng-GB',
             $contentType
         );
-        // Setting manually as it is not controlled through form
+
         $userCreateStruct->enabled = false;
 
         $data = new DataWrapper($userCreateStruct, $userCreateStruct->contentType);
 
-        // No method to create named builder in framework controller
         /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
         $formBuilder = $this->container->get('form.factory')->createBuilder(CreateUserType::class, $data);
-        // Adding controls as EzFormsBundle does not do that by itself
+
         $formBuilder->add('save', SubmitType::class, array('label' => 'Publish'));
 
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            // @todo ensure that user can create 'user' type under required UserGroup Location
+
             $userGroup = $userService->loadUserGroup(13);
 
             try {
@@ -224,7 +224,7 @@ class DemoController extends Controller
         }
 
         return $this->render(
-            'NetgenEzFormsBundle::demo_form.html.twig',
+            'AcmeBundle::demo_create_user.html.twig',
             array(
                 'form' => $form->createView(),
             )
@@ -233,16 +233,13 @@ class DemoController extends Controller
 
     public function demoUpdateUserAction(Request $request)
     {
+        /** @var Repository $repository */
         $repository = $this->getRepository();
+        /** @var UserService $userService */
         $userService = $repository->getUserService();
+        /** @var ContentService $contentService */
         $contentService = $repository->getContentService();
 
-        // @todo check that user is really logged in, it should have permissions to self edit
-        $repository->setCurrentUser(
-            $repository->getUserService()->loadUserByLogin('admin')
-        );
-
-        // @todo load current user
         $user = $userService->loadUser(142);
         $contentType = $repository->getContentTypeService()->loadContentTypeByIdentifier('user');
         $contentUpdateStruct = $contentService->newContentUpdateStruct();
@@ -252,10 +249,9 @@ class DemoController extends Controller
 
         $data = new DataWrapper($userUpdateStruct, $contentType, $user);
 
-        // No method to create named builder in framework controller
         /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
         $formBuilder = $this->container->get('form.factory')->createBuilder(UpdateUserType::class, $data);
-        // Adding controls as EzFormsBundle does not do that by itself
+
         $formBuilder->add('save', SubmitType::class, array('label' => 'Update'));
 
         $form = $formBuilder->getForm();
@@ -274,7 +270,7 @@ class DemoController extends Controller
         }
 
         return $this->render(
-            'NetgenEzFormsBundle::demo_form.html.twig',
+            'AcmeBundle::demo_update_user.html.twig',
             array(
                 'form' => $form->createView(),
             )
