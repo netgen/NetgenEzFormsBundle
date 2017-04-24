@@ -79,7 +79,11 @@ class Country extends FieldTypeHandler
                 return '';
             }
 
-            return $value->countries[0];
+            $keys = array_keys($value->countries);
+
+            return array(
+                $keys[0] => $value->countries[$keys[0]],
+            );
         }
 
         return $value->countries;
