@@ -64,10 +64,24 @@ class Country extends FieldTypeHandler
     /**
      * {@inheritdoc}
      *
-     * @return array
+     * @return array|string
      */
     public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
+        $isMultiple = true;
+        if ($fieldDefinition !== null) {
+            $fieldSettings = $fieldDefinition->getFieldSettings();
+            $isMultiple = $fieldSettings['isMultiple'];
+        }
+
+        if (!$isMultiple) {
+            if (empty($value->countries)) {
+                return '';
+            }
+
+            return $value->countries[0];
+        }
+
         return $value->countries;
     }
 
