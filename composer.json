@@ -3,6 +3,15 @@
     "description": "Integration of Symfony's Form component with eZ Platform Public API",
     "type": "ezplatform-bundle",
     "license": "GPL-2.0",
+    "keywords": [
+        "ezpublish",
+        "ezplatform",
+        "forms",
+        "netgen",
+        "ezforms",
+        "ez-forms-bundle"
+    ],
+    "homepage": "https://github.com/netgen/NetgenEzFormsBundle",
     "authors": [
         {
             "name": "Netgen",
