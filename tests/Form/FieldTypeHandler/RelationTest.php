@@ -93,18 +93,12 @@ class RelationTest extends TestCase
 
     public function testConvertFieldValueToForm()
     {
-        $destinationContentId = 2;
-        $this->contentService->expects($this->once())
-            ->method('loadContent')
-            ->with($destinationContentId)
-            ->willReturn('foo');
-
         $relation = new Relation($this->repository, $this->translationHelper);
         $relationValue = new RelationValue(2);
 
         $returnedValue = $relation->convertFieldValueToForm($relationValue);
 
-        $this->assertEquals('foo', $returnedValue);
+        $this->assertEquals(2, $returnedValue);
     }
 
     public function testConvertFieldValueToFormNullDestinationContentId()

@@ -71,6 +71,6 @@ class Relation extends FieldTypeHandler
             return null;
         }
 
-        return $this->repository->getContentService()->loadContent($value->destinationContentId);
+        return $value->destinationContentId;
     }
 }
