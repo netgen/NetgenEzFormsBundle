@@ -1,7 +1,7 @@
 imports:
-    - {resource: form_fieldtype_handlers.yml}
-    - {resource: fieldtype_form_types.yml}
-    - {resource: form_types.yml}
+    - { resource: form_fieldtype_handlers.yml }
+    - { resource: fieldtype_form_types.yml }
+    - { resource: form_types.yml }
 
 parameters:
     netgen.ezforms.form.fieldtype_handler_registry.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry
@@ -17,3 +17,8 @@ services:
         class: "%netgen.ezforms.form.extension.fieldtype.class%"
         tags:
             - {name: form.type_extension, alias: form, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType}
+
+    netgen.ezforms.ezxml.ezoe_input_parser:
+        class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\XmlText\eZOEInputParser
+        arguments:
+            - '@ezpublish_legacy.kernel'

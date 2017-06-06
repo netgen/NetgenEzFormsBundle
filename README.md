@@ -46,7 +46,7 @@ Currently supported FieldTypes:
 | Time           | yes
 | Url            | yes
 | User           | yes
-| XmlText        | no
+| XmlText        | yes
 
 License, docs and installation instructions
 -------------------------------------------
