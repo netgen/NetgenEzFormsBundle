@@ -1,97 +1,77 @@
-parameters:
-    netgen.ezforms.form.data_mapper.create_content.class: Netgen\Bundle\EzFormsBundle\Form\DataMapper\CreateContentMapper
-    netgen.ezforms.form.type.create_content.class: Netgen\Bundle\EzFormsBundle\Form\Type\CreateContentType
-
-    netgen.ezforms.form.data_mapper.create_user.class: Netgen\Bundle\EzFormsBundle\Form\DataMapper\CreateUserMapper
-    netgen.ezforms.form.type.create_user.class: Netgen\Bundle\EzFormsBundle\Form\Type\CreateUserType
-
-    netgen.ezforms.form.data_mapper.update_content.class: Netgen\Bundle\EzFormsBundle\Form\DataMapper\UpdateContentMapper
-    netgen.ezforms.form.type.update_content.class: Netgen\Bundle\EzFormsBundle\Form\Type\UpdateContentType
-
-    netgen.ezforms.form.data_mapper.update_user.class: Netgen\Bundle\EzFormsBundle\Form\DataMapper\UpdateUserMapper
-    netgen.ezforms.form.type.update_user.class: Netgen\Bundle\EzFormsBundle\Form\Type\UpdateUserType
-
-    netgen.ezforms.form.url_type.class: Netgen\Bundle\EzFormsBundle\Form\Type\UrlType
-
-    netgen.ezforms.form.map_type.class: Netgen\Bundle\EzFormsBundle\Form\Type\MapType
-
-    netgen.ezforms.form.data_mapper.info_collection.class: Netgen\Bundle\EzFormsBundle\Form\DataMapper\InformationCollectionMapper
-    netgen.ezforms.form.type.info_collection.class: Netgen\Bundle\EzFormsBundle\Form\Type\InformationCollectionType
-
 services:
     netgen.ezforms.form.data_mapper.create_content:
-        class: "%netgen.ezforms.form.data_mapper.create_content.class%"
+        class: Netgen\Bundle\EzFormsBundle\Form\DataMapper\CreateContentMapper
         arguments:
             - "@netgen.ezforms.form.fieldtype_handler_registry"
 
     netgen.ezforms.form.type.create_content:
-        class: "%netgen.ezforms.form.type.create_content.class%"
+        class: Netgen\Bundle\EzFormsBundle\Form\Type\CreateContentType
         arguments:
             - "@netgen.ezforms.form.fieldtype_handler_registry"
             - "@netgen.ezforms.form.data_mapper.create_content"
         tags:
-            - {name: form.type, alias: ezforms_create_content}
+            - { name: form.type, alias: ezforms_create_content }
 
     netgen.ezforms.form.data_mapper.create_user:
-        class: "%netgen.ezforms.form.data_mapper.create_user.class%"
+        class: Netgen\Bundle\EzFormsBundle\Form\DataMapper\CreateUserMapper
         arguments:
             - "@netgen.ezforms.form.fieldtype_handler_registry"
 
     netgen.ezforms.form.type.create_user:
-        class: "%netgen.ezforms.form.type.create_user.class%"
+        class: Netgen\Bundle\EzFormsBundle\Form\Type\CreateUserType
         arguments:
             - "@netgen.ezforms.form.fieldtype_handler_registry"
             - "@netgen.ezforms.form.data_mapper.create_user"
         tags:
-            - {name: form.type, alias: ezforms_create_user}
+            - { name: form.type, alias: ezforms_create_user }
 
     netgen.ezforms.form.data_mapper.update_content:
-        class: "%netgen.ezforms.form.data_mapper.update_content.class%"
+        class: Netgen\Bundle\EzFormsBundle\Form\DataMapper\UpdateContentMapper
         arguments:
             - "@netgen.ezforms.form.fieldtype_handler_registry"
 
     netgen.ezforms.form.type.update_content:
-        class: "%netgen.ezforms.form.type.update_content.class%"
+        class: Netgen\Bundle\EzFormsBundle\Form\Type\UpdateContentType
         arguments:
             - "@netgen.ezforms.form.fieldtype_handler_registry"
             - "@netgen.ezforms.form.data_mapper.update_content"
         tags:
-            - {name: form.type, alias: ezforms_update_content}
+            - { name: form.type, alias: ezforms_update_content }
 
     netgen.ezforms.form.data_mapper.update_user:
-        class: "%netgen.ezforms.form.data_mapper.update_user.class%"
+        class: Netgen\Bundle\EzFormsBundle\Form\DataMapper\UpdateUserMapper
         arguments:
             - "@netgen.ezforms.form.fieldtype_handler_registry"
 
     netgen.ezforms.form.type.update_user:
-        class: "%netgen.ezforms.form.type.update_user.class%"
+        class: Netgen\Bundle\EzFormsBundle\Form\Type\UpdateUserType
         arguments:
             - "@netgen.ezforms.form.fieldtype_handler_registry"
             - "@netgen.ezforms.form.data_mapper.update_user"
         tags:
-            - {name: form.type, alias: ezforms_update_user}
+            - { name: form.type, alias: ezforms_update_user }
 
     netgen.ezforms.form.url_type:
-        class: "%netgen.ezforms.form.url_type.class%"
+        class: Netgen\Bundle\EzFormsBundle\Form\Type\UrlType
         tags:
-            - {name: form.type, alias: ezforms_url}
+            - { name: form.type, alias: ezforms_url }
 
     netgen.ezforms.form.map_type:
-        class: "%netgen.ezforms.form.map_type.class%"
+        class: Netgen\Bundle\EzFormsBundle\Form\Type\MapType
         tags:
-            - {name: form.type, alias: ezforms_map}
+            - { name: form.type, alias: ezforms_map }
 
     netgen.ezforms.form.data_mapper.info_collection:
-        class: "%netgen.ezforms.form.data_mapper.info_collection.class%"
+        class: Netgen\Bundle\EzFormsBundle\Form\DataMapper\InformationCollectionMapper
         arguments:
             - "@netgen.ezforms.form.fieldtype_handler_registry"
 
     netgen.ezforms.form.type.info_collection:
-        class: "%netgen.ezforms.form.type.info_collection.class%"
+        class: Netgen\Bundle\EzFormsBundle\Form\Type\InformationCollectionType
         arguments:
             - "@netgen.ezforms.form.fieldtype_handler_registry"
             - "@netgen.ezforms.form.data_mapper.info_collection"
         calls:
             - [setLanguages, [$languages$]]
         tags:
-            - {name: form.type, alias: ezforms_information_collection}
+            - { name: form.type, alias: ezforms_information_collection }
