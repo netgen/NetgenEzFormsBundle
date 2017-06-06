@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Enabled Scrutinizer service
 
+### Changed
+- Fix for Relation field type handler by @amirkoklan
+
 ## [2.0] - 2017-24-04
 ### Added
 - PSR-4 dev autoload for tests
