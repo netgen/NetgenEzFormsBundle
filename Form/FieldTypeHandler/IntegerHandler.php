@@ -51,11 +51,11 @@ class IntegerHandler extends FieldTypeHandler
             $min = $fieldDefinition->getValidatorConfiguration()['IntegerValueValidator']['minIntegerValue'];
             $max = $fieldDefinition->getValidatorConfiguration()['IntegerValueValidator']['maxIntegerValue'];
 
-            if ($min !== false) {
+            if ($min !== null) {
                 $rangeConstraints['min'] = $min;
             }
 
-            if ($max !== false) {
+            if ($max !== null) {
                 $rangeConstraints['max'] = $max;
             }
 
