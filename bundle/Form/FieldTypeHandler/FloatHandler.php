@@ -2,15 +2,15 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
+use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\FieldType\Float as FloatValue;
+use eZ\Publish\Core\Helper\FieldHelper;
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\Core\FieldType\Float as FloatValue;
 use Symfony\Component\Validator\Constraints as Assert;
-use eZ\Publish\Core\Helper\FieldHelper;
 
 class FloatHandler extends FieldTypeHandler
 {
@@ -27,6 +27,30 @@ class FloatHandler extends FieldTypeHandler
     public function __construct(FieldHelper $fieldHelper)
     {
         $this->fieldHelper = $fieldHelper;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return float
+     */
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
+    {
+        return $value->value;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return FloatValue\Value
+     */
+    public function convertFieldValueFromForm($data)
+    {
+        if (!is_numeric($data)) {
+            $data = null;
+        }
+
+        return new FloatValue\Value($data);
     }
 
     /**
@@ -61,34 +85,10 @@ class FloatHandler extends FieldTypeHandler
 
         if ($fieldDefinition->defaultValue instanceof FloatValue\Value) {
             if (!$content instanceof Content) {
-                $options['data'] = (float)$fieldDefinition->defaultValue->value;
+                $options['data'] = (float) $fieldDefinition->defaultValue->value;
             }
         }
 
         $formBuilder->add($fieldDefinition->identifier, NumberType::class, $options);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @return float
-     */
-    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
-    {
-        return $value->value;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @return FloatValue\Value
-     */
-    public function convertFieldValueFromForm($data)
-    {
-        if (!is_numeric($data)) {
-            $data = null;
-        }
-
-        return new FloatValue\Value($data);
     }
 }

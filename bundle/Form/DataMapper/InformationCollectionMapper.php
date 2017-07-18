@@ -2,13 +2,13 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 
+use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
+use RuntimeException;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use RuntimeException;
 
 /**
  * Class InformationCollectionMapper.
@@ -30,7 +30,7 @@ class InformationCollectionMapper extends DataMapper
         /** @var ContentType $contentType */
         $contentType = $data->definition;
 
-        $fieldDefinitionIdentifier = (string)$propertyPath;
+        $fieldDefinitionIdentifier = (string) $propertyPath;
         $fieldDefinition = $contentType->getFieldDefinition($fieldDefinitionIdentifier);
 
         if (null === $fieldDefinition) {
@@ -68,7 +68,7 @@ class InformationCollectionMapper extends DataMapper
         /** @var ContentType $contentType */
         $contentType = $data->definition;
 
-        $fieldDefinitionIdentifier = (string)$propertyPath;
+        $fieldDefinitionIdentifier = (string) $propertyPath;
         $fieldDefinition = $contentType->getFieldDefinition($fieldDefinitionIdentifier);
 
         if (null === $fieldDefinition) {

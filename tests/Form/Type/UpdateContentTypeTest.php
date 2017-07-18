@@ -3,11 +3,11 @@
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
 use eZ\Publish\Core\Repository\Values\Content\Content;
-use eZ\Publish\SPI\Persistence\Content\ContentInfo;
-use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
 use eZ\Publish\Core\Repository\Values\Content\ContentUpdateStruct;
+use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\SPI\Persistence\Content\ContentInfo;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;

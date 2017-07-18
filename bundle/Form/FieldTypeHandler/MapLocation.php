@@ -2,13 +2,13 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
+use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\FieldType\MapLocation as MapLocationValue;
+use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\Type\MapType;
 use Symfony\Component\Form\FormBuilderInterface;
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\SPI\FieldType\Value;
-use eZ\Publish\Core\FieldType\MapLocation as MapLocationValue;
 
 /**
  * Class MapLocation.

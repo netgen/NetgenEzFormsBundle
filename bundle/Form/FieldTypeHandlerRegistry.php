@@ -45,10 +45,11 @@ class FieldTypeHandlerRegistry
     /**
      * Returns a FieldTypeHandler for FieldType $identifier.
      *
-     * @throws \OutOfBoundsException
-     * @throws \RuntimeException When type is not a FieldTypeHandler instance nor a callable factory
      *
      * @param string $identifier The FieldType identifier
+     *
+     * @throws \OutOfBoundsException
+     * @throws \RuntimeException When type is not a FieldTypeHandler instance nor a callable factory
      *
      * @return \Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler
      */

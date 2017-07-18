@@ -2,16 +2,16 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\DataMapper;
 
+use eZ\Publish\Core\FieldType\TextLine\Value;
+use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\CreateContentMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
-use Symfony\Component\Form\FormConfigBuilder;
-use eZ\Publish\Core\FieldType\TextLine\Value;
-use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Form\FormConfigBuilder;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 class CreateContentMapperTest extends TestCase
 {
@@ -63,24 +63,6 @@ class CreateContentMapperTest extends TestCase
             ->getMock();
 
         $this->mapper = new CreateContentMapper($this->registry, $this->propertyAccessor);
-    }
-
-    private function getForm()
-    {
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')
-            ->disableOriginalConstructor()
-            ->setMethods(array(
-                'getData',
-                'setData',
-                'getPropertyPath',
-                'getConfig',
-                'isSubmitted',
-                'isSynchronized',
-                'isDisabled',
-            ))
-            ->getMock();
-
-        return $form;
     }
 
     public function testInstanceOfDataMapper()
@@ -665,5 +647,23 @@ class CreateContentMapperTest extends TestCase
             ->method('getValue');
 
         $this->mapper->mapFormsToData(array($form), $data);
+    }
+
+    private function getForm()
+    {
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')
+            ->disableOriginalConstructor()
+            ->setMethods(array(
+                'getData',
+                'setData',
+                'getPropertyPath',
+                'getConfig',
+                'isSubmitted',
+                'isSynchronized',
+                'isDisabled',
+            ))
+            ->getMock();
+
+        return $form;
     }
 }

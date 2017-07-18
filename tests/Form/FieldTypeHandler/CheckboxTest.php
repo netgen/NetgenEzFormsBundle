@@ -2,14 +2,14 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
+use eZ\Publish\Core\FieldType\Checkbox\Value as CheckboxValue;
+use eZ\Publish\Core\Helper\FieldHelper;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Checkbox;
-use eZ\Publish\Core\FieldType\Checkbox\Value as CheckboxValue;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilder;
-use eZ\Publish\Core\Helper\FieldHelper;
 use Symfony\Component\Validator\Constraints;
 
 class CheckboxTest extends TestCase

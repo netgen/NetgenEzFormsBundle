@@ -2,13 +2,13 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
+use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserCreateType;
 use Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserUpdateType;
 use Symfony\Component\Form\FormBuilderInterface;
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\SPI\FieldType\Value;
 
 /**
  * Class User.

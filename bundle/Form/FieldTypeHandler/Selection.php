@@ -2,38 +2,16 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
+use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\FieldType\Selection as SelectionValue;
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\Core\FieldType\Selection as SelectionValue;
 
 class Selection extends FieldTypeHandler
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function buildFieldForm(
-        FormBuilderInterface $formBuilder,
-        FieldDefinition $fieldDefinition,
-        $languageCode,
-        Content $content = null
-    ) {
-        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
-
-        $values = $fieldDefinition->getFieldSettings()['options'];
-
-        $options['expanded'] = false;
-        $options['choices_as_values'] = true;
-        $options['multiple'] = $fieldDefinition->getFieldSettings()['isMultiple'];
-
-        $options['choices'] = array_flip($values);
-
-        $formBuilder->add($fieldDefinition->identifier, ChoiceType::class, $options);
-    }
-
     /**
      * {@inheritdoc}
      *
@@ -66,5 +44,27 @@ class Selection extends FieldTypeHandler
         }
 
         return $value->selection;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function buildFieldForm(
+        FormBuilderInterface $formBuilder,
+        FieldDefinition $fieldDefinition,
+        $languageCode,
+        Content $content = null
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
+
+        $values = $fieldDefinition->getFieldSettings()['options'];
+
+        $options['expanded'] = false;
+        $options['choices_as_values'] = true;
+        $options['multiple'] = $fieldDefinition->getFieldSettings()['isMultiple'];
+
+        $options['choices'] = array_flip($values);
+
+        $formBuilder->add($fieldDefinition->identifier, ChoiceType::class, $options);
     }
 }

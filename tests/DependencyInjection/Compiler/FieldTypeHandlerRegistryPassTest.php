@@ -10,18 +10,13 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class FieldTypeHandlerRegistryPassTest extends AbstractCompilerPassTestCase
 {
-    protected function registerCompilerPass(ContainerBuilder $container)
-    {
-        $container->addCompilerPass(new FieldTypeHandlerRegistryPass());
-    }
-
     public function testCompilerPassCollectsValidServices()
     {
         $registry = new Definition();
         $this->setDefinition('netgen.ezforms.form.fieldtype_handler_registry', $registry);
 
         $handler = new Definition();
-        $handler->addTag('netgen.ezforms.form.fieldtype_handler', ['alias' => 'eztext']);
+        $handler->addTag('netgen.ezforms.form.fieldtype_handler', array('alias' => 'eztext'));
         $this->setDefinition('netgen.ezforms.form.fieldtype_handler.eztext', $handler);
 
         $this->compile();
@@ -29,10 +24,10 @@ class FieldTypeHandlerRegistryPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'netgen.ezforms.form.fieldtype_handler_registry',
             'register',
-            [
+            array(
                 'eztext',
-                new Reference('netgen.ezforms.form.fieldtype_handler.eztext')
-            ]
+                new Reference('netgen.ezforms.form.fieldtype_handler.eztext'),
+            )
         );
     }
 
@@ -54,9 +49,14 @@ class FieldTypeHandlerRegistryPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'netgen.ezforms.form.fieldtype_handler_registry',
             'register',
-            [
-                new Reference('netgen.ezforms.form.fieldtype_handler.eztext')
-            ]
+            array(
+                new Reference('netgen.ezforms.form.fieldtype_handler.eztext'),
+            )
         );
+    }
+
+    protected function registerCompilerPass(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new FieldTypeHandlerRegistryPass());
     }
 }

@@ -10,17 +10,17 @@ class ConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    protected function getConfiguration()
-    {
-        return new Configuration();
-    }
-
     public function testConfigurationValuesAreOkAndValid()
     {
         $this->assertConfigurationIsValid(
-            [
-                'netgen_netgen_ez_forms' => [],
-            ]
+            array(
+                'netgen_netgen_ez_forms' => array(),
+            )
         );
+    }
+
+    protected function getConfiguration()
+    {
+        return new Configuration();
     }
 }

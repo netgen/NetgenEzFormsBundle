@@ -2,17 +2,17 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
+use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\LocationList;
+use eZ\Publish\Core\FieldType\Relation\Value as RelationValue;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\Repository\ContentService;
 use eZ\Publish\Core\Repository\LocationService;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\Core\REST\Client\Values\Content\Location;
 use eZ\Publish\Core\SignalSlot\Repository;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Relation;
-use eZ\Publish\Core\FieldType\Relation\Value as RelationValue;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
@@ -168,12 +168,12 @@ class RelationTest extends TestCase
         $this->locationService->expects($this->once())
             ->method('loadLocationChildren')
             ->with($location)
-            ->willReturn(new LocationList([
-                'locations' => [
-                    new Location(['contentInfo' => new ContentInfo()]),
-                    new Location(['contentInfo' => new ContentInfo()]),
-                ],
-            ]));
+            ->willReturn(new LocationList(array(
+                'locations' => array(
+                    new Location(array('contentInfo' => new ContentInfo())),
+                    new Location(array('contentInfo' => new ContentInfo())),
+                ),
+            )));
 
         $selection = new Relation($this->repository, $this->translationHelper);
         $selection->buildFieldCreateForm($formBuilder, $fieldDefinition, 'eng-GB');

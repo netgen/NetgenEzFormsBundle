@@ -2,11 +2,11 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\Type;
 
-use Symfony\Component\Form\FormBuilderInterface;
+use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use RuntimeException;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Class InformationCollectionType.
@@ -108,7 +108,7 @@ class InformationCollectionType extends AbstractContentType
         $contentTypeLanguages = array_keys($contentType->getNames());
 
         foreach ($this->languages as $languageCode) {
-            if (in_array($languageCode, $contentTypeLanguages)) {
+            if (in_array($languageCode, $contentTypeLanguages, true)) {
                 return $languageCode;
             }
         }

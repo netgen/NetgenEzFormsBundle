@@ -3,9 +3,9 @@
 namespace Netgen\Bundle\EzFormsBundle\Form\Type;
 
 use eZ\Publish\API\Repository\Values\User\UserCreateStruct;
-use Symfony\Component\Form\FormBuilderInterface;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use RuntimeException;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Class EzPublishCreateUserType.

@@ -2,14 +2,14 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
+use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\FieldType\Checkbox as CheckboxValue;
+use eZ\Publish\Core\Helper\FieldHelper;
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\FieldType\Checkbox as CheckboxValue;
-use eZ\Publish\Core\Helper\FieldHelper;
-use eZ\Publish\API\Repository\Values\Content\Content;
 
 class Checkbox extends FieldTypeHandler
 {
@@ -30,26 +30,6 @@ class Checkbox extends FieldTypeHandler
 
     /**
      * {@inheritdoc}
-     */
-    protected function buildFieldForm(
-        FormBuilderInterface $formBuilder,
-        FieldDefinition $fieldDefinition,
-        $languageCode,
-        Content $content = null
-    ) {
-        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
-
-        if ($fieldDefinition->defaultValue instanceof CheckboxValue\Value) {
-            if (!$content instanceof Content) {
-                $options['data'] = $fieldDefinition->defaultValue->bool;
-            }
-        }
-
-        $formBuilder->add($fieldDefinition->identifier, CheckboxType::class, $options);
-    }
-
-    /**
-     * {@inheritdoc}
      *
      * @return bool
      */
@@ -66,5 +46,25 @@ class Checkbox extends FieldTypeHandler
     public function convertFieldValueFromForm($data)
     {
         return new CheckboxValue\Value($data);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function buildFieldForm(
+        FormBuilderInterface $formBuilder,
+        FieldDefinition $fieldDefinition,
+        $languageCode,
+        Content $content = null
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
+
+        if ($fieldDefinition->defaultValue instanceof CheckboxValue\Value) {
+            if (!$content instanceof Content) {
+                $options['data'] = $fieldDefinition->defaultValue->bool;
+            }
+        }
+
+        $formBuilder->add($fieldDefinition->identifier, CheckboxType::class, $options);
     }
 }

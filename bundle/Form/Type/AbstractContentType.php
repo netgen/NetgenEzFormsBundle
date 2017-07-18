@@ -2,8 +2,8 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 
 /**

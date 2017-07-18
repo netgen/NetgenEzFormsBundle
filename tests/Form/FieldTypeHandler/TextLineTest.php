@@ -2,9 +2,9 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
+use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
-use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\TextLine;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;

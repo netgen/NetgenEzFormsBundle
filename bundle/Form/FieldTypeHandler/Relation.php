@@ -3,6 +3,7 @@
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use eZ\Publish\API\Repository\Repository;
+use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\Core\Helper\TranslationHelper;
@@ -10,7 +11,6 @@ use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use eZ\Publish\API\Repository\Values\Content\Content;
 
 class Relation extends FieldTypeHandler
 {
@@ -26,6 +26,7 @@ class Relation extends FieldTypeHandler
 
     /**
      * ObjectRelation constructor.
+     *
      * @param Repository $repository
      * @param TranslationHelper $translationHelper
      */
@@ -33,6 +34,15 @@ class Relation extends FieldTypeHandler
     {
         $this->repository = $repository;
         $this->translationHelper = $translationHelper;
+    }
+
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
+    {
+        if (empty($value->destinationContentId)) {
+            return null;
+        }
+
+        return $value->destinationContentId;
     }
 
     protected function buildFieldForm(
@@ -51,26 +61,17 @@ class Relation extends FieldTypeHandler
         $location = $locationService->loadLocation($selectionRoot);
         $locationList = $locationService->loadLocationChildren($location);
 
-        $choices = [];
+        $choices = array();
         foreach ($locationList->locations as $child) {
-            /** @var Location $child */
+            /* @var Location $child */
             $choices[$this->translationHelper->getTranslatedContentNameByContentInfo($child->contentInfo)] = $child->contentInfo->id;
         }
 
-        $formBuilder->add($fieldDefinition->identifier, ChoiceType::class, [
+        $formBuilder->add($fieldDefinition->identifier, ChoiceType::class, array(
             'choices' => $choices,
             'expanded' => false,
             'multiple' => false,
             'choices_as_values' => true,
-        ]);
-    }
-
-    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
-    {
-        if (empty($value->destinationContentId)) {
-            return null;
-        }
-
-        return $value->destinationContentId;
+        ));
     }
 }

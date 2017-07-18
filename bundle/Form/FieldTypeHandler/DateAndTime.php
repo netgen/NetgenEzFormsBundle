@@ -2,19 +2,39 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
+use DateTime;
+use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\FieldType\DateAndTime as DTValue;
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\API\Repository\Values\Content\Content;
 use Symfony\Component\Validator\Constraints;
-use eZ\Publish\Core\FieldType\DateAndTime as DTValue;
-use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class DateAndTime extends FieldTypeHandler
 {
+    /**
+     * {@inheritdoc}
+     *
+     * @return DateTime
+     */
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
+    {
+        return $value->value;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return DTValue\Value
+     */
+    public function convertFieldValueFromForm($data)
+    {
+        return new DTValue\Value($data);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -34,25 +54,5 @@ class DateAndTime extends FieldTypeHandler
         $options['constraints'][] = new Assert\DateTime();
 
         $formBuilder->add($fieldDefinition->identifier, DateTimeType::class, $options);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @return DateTime
-     */
-    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
-    {
-        return $value->value;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @return DTValue\Value
-     */
-    public function convertFieldValueFromForm($data)
-    {
-        return new DTValue\Value($data);
     }
 }

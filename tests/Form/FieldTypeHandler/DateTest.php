@@ -2,11 +2,11 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
+use eZ\Publish\Core\FieldType\Date as DateValue;
 use eZ\Publish\Core\Repository\Values\Content\Content;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Date;
-use eZ\Publish\Core\FieldType\Date as DateValue;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 

@@ -2,9 +2,9 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form;
 
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
@@ -56,7 +56,7 @@ abstract class DataMapper implements DataMapperInterface
             $config = $form->getConfig();
 
             if ($data instanceof DataWrapper && null !== $propertyPath && $config->getMapped()) {
-                /** @var $data \Netgen\Bundle\EzFormsBundle\Form\DataWrapper */
+                /* @var $data \Netgen\Bundle\EzFormsBundle\Form\DataWrapper */
                 $this->mapToForm($form, $data, $propertyPath);
             } elseif (!$empty && null !== $propertyPath && $config->getMapped()) {
                 $form->setData($this->propertyAccessor->getValue($data, $propertyPath));
@@ -98,7 +98,7 @@ abstract class DataMapper implements DataMapperInterface
             // If $data is out ContentCreateStruct, we need to map it to the corresponding field
             // in the struct
             if ($data instanceof DataWrapper) {
-                /** @var $data \Netgen\Bundle\EzFormsBundle\Form\DataWrapper */
+                /* @var $data \Netgen\Bundle\EzFormsBundle\Form\DataWrapper */
                 $this->mapFromForm($form, $data, $propertyPath);
                 continue;
             }
@@ -107,7 +107,7 @@ abstract class DataMapper implements DataMapperInterface
             // keep the original object hash
             if (
                 $form->getData() instanceof \DateTime &&
-                $form->getData() == $this->propertyAccessor->getValue($data, $propertyPath)
+                $form->getData() === $this->propertyAccessor->getValue($data, $propertyPath)
             ) {
                 continue;
             }

@@ -2,11 +2,11 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\PropertyAccess\PropertyPathInterface;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use RuntimeException;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 /**
  * Class UpdateContentMapper.
@@ -27,7 +27,7 @@ class UpdateContentMapper extends DataMapper
         /** @var $contentType \eZ\Publish\API\Repository\Values\ContentType\ContentType */
         $contentType = $data->definition;
 
-        $fieldDefinitionIdentifier = (string)$propertyPath;
+        $fieldDefinitionIdentifier = (string) $propertyPath;
         $fieldDefinition = $contentType->getFieldDefinition($fieldDefinitionIdentifier);
 
         if (null === $fieldDefinition) {
@@ -60,7 +60,7 @@ class UpdateContentMapper extends DataMapper
         /** @var $contentType \eZ\Publish\API\Repository\Values\ContentType\ContentType */
         $contentType = $data->definition;
 
-        $fieldDefinitionIdentifier = (string)$propertyPath;
+        $fieldDefinitionIdentifier = (string) $propertyPath;
         $fieldDefinition = $contentType->getFieldDefinition($fieldDefinitionIdentifier);
 
         if (null === $fieldDefinition) {

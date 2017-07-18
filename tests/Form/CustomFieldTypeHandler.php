@@ -10,6 +10,5 @@ class CustomFieldTypeHandler extends FieldTypeHandler
 {
     public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
-        return;
     }
 }

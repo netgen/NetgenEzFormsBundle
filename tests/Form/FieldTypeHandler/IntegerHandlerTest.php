@@ -2,16 +2,16 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
+use eZ\Publish\Core\FieldType\Integer\Value as IntegerValue;
+use eZ\Publish\Core\Helper\FieldHelper;
+use eZ\Publish\Core\Repository\Values\Content\Content;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\IntegerHandler;
-use eZ\Publish\Core\FieldType\Integer\Value as IntegerValue;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilder;
-use eZ\Publish\Core\Helper\FieldHelper;
 use Symfony\Component\Validator\Constraints;
-use eZ\Publish\Core\Repository\Values\Content\Content;
 
 class IntegerHandlerTest extends TestCase
 {

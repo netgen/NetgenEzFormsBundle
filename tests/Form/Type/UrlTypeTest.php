@@ -4,9 +4,9 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
 use Netgen\Bundle\EzFormsBundle\Form\Type\UrlType;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Form\Extension\Core\Type\UrlType as CoreUrlType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType as CoreUrlType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints as Assert;
 

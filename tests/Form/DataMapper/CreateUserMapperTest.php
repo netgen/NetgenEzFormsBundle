@@ -2,16 +2,16 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\DataMapper;
 
+use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\Core\Repository\Values\User\UserCreateStruct;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\CreateUserMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
-use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormConfigBuilder;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
-use PHPUnit\Framework\TestCase;
 
 class CreateUserMapperTest extends TestCase
 {
@@ -53,16 +53,6 @@ class CreateUserMapperTest extends TestCase
             ->getMock();
 
         $this->mapper = new CreateUserMapper($this->registry, $this->propertyAccessor);
-    }
-
-    private function getForm()
-    {
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')
-            ->disableOriginalConstructor()
-            ->setMethods(array('getData', 'setData', 'getPropertyPath', 'getConfig', 'isSubmitted', 'isSynchronized', 'isDisabled'))
-            ->getMock();
-
-        return $form;
     }
 
     public function testInstanceOfDataMapper()
@@ -414,5 +404,15 @@ class CreateUserMapperTest extends TestCase
             ->method('getPropertyPath');
 
         $this->mapper->mapFormsToData(array($form), $data);
+    }
+
+    private function getForm()
+    {
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')
+            ->disableOriginalConstructor()
+            ->setMethods(array('getData', 'setData', 'getPropertyPath', 'getConfig', 'isSubmitted', 'isSynchronized', 'isDisabled'))
+            ->getMock();
+
+        return $form;
     }
 }

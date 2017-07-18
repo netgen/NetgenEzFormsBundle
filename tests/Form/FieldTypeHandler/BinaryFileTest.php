@@ -2,11 +2,11 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
+use eZ\Publish\Core\FieldType\BinaryFile\Value as FileValue;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\BinaryFile;
-use eZ\Publish\SPI\FieldType\Value;
-use eZ\Publish\Core\FieldType\BinaryFile\Value as FileValue;
 use Netgen\Bundle\EzFormsBundle\Tests\Form\Mock\FileMock;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;

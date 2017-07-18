@@ -2,13 +2,13 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form;
 
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\FieldType\Value;
 use RuntimeException;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints;
 
 /**
  * Class FieldTypeHandler.
@@ -28,6 +28,37 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
     public function convertFieldValueFromForm($data)
     {
         return $data;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * In most cases this will be the same as {@link self::buildUpdateFieldForm()}.
+     * For this reason default implementation falls back to the internal method
+     * {@link self::buildFieldForm()}, which should be implemented as needed.
+     */
+    public function buildFieldCreateForm(
+        FormBuilderInterface $formBuilder,
+        FieldDefinition $fieldDefinition,
+        $languageCode
+    ) {
+        $this->buildFieldForm($formBuilder, $fieldDefinition, $languageCode);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * In most cases this will be the same as {@link self::buildCreateFieldForm()}.
+     * For this reason default implementation falls back to the internal method
+     * {@link self::buildFieldForm()}, which should be implemented as needed.
+     */
+    public function buildFieldUpdateForm(
+        FormBuilderInterface $formBuilder,
+        FieldDefinition $fieldDefinition,
+        Content $content,
+        $languageCode
+    ) {
+        $this->buildFieldForm($formBuilder, $fieldDefinition, $languageCode, $content);
     }
 
     /**
@@ -83,37 +114,6 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
         }
 
         return $options;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * In most cases this will be the same as {@link self::buildUpdateFieldForm()}.
-     * For this reason default implementation falls back to the internal method
-     * {@link self::buildFieldForm()}, which should be implemented as needed.
-     */
-    public function buildFieldCreateForm(
-        FormBuilderInterface $formBuilder,
-        FieldDefinition $fieldDefinition,
-        $languageCode
-    ) {
-        $this->buildFieldForm($formBuilder, $fieldDefinition, $languageCode);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * In most cases this will be the same as {@link self::buildCreateFieldForm()}.
-     * For this reason default implementation falls back to the internal method
-     * {@link self::buildFieldForm()}, which should be implemented as needed.
-     */
-    public function buildFieldUpdateForm(
-        FormBuilderInterface $formBuilder,
-        FieldDefinition $fieldDefinition,
-        Content $content,
-        $languageCode
-    ) {
-        $this->buildFieldForm($formBuilder, $fieldDefinition, $languageCode, $content);
     }
 
     /**

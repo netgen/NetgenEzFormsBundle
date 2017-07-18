@@ -3,6 +3,7 @@
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\DataMapper;
 
 use eZ\Publish\API\Repository\Values\User\UserUpdateStruct;
+use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use eZ\Publish\Core\Repository\Values\Content\Content;
 use eZ\Publish\Core\Repository\Values\Content\ContentUpdateStruct;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
@@ -14,7 +15,6 @@ use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormConfigBuilder;
-use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 class UpdateUserMapperTest extends TestCase
@@ -57,20 +57,6 @@ class UpdateUserMapperTest extends TestCase
             ->getMock();
 
         $this->mapper = new UpdateUserMapper($this->registry, $this->propertyAccessor);
-    }
-
-    private function getForm()
-    {
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')
-            ->disableOriginalConstructor()
-            ->setMethods(
-                array(
-                    'getData', 'setData', 'getPropertyPath', 'getConfig', 'isSubmitted', 'isSynchronized', 'isDisabled',
-                )
-            )
-            ->getMock();
-
-        return $form;
     }
 
     public function testInstanceOfDataMapper()
@@ -652,5 +638,19 @@ class UpdateUserMapperTest extends TestCase
             ->method('getPropertyPath');
 
         $this->mapper->mapFormsToData(array($form), $data);
+    }
+
+    private function getForm()
+    {
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')
+            ->disableOriginalConstructor()
+            ->setMethods(
+                array(
+                    'getData', 'setData', 'getPropertyPath', 'getConfig', 'isSubmitted', 'isSynchronized', 'isDisabled',
+                )
+            )
+            ->getMock();
+
+        return $form;
     }
 }

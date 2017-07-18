@@ -2,10 +2,10 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
+use eZ\Publish\Core\FieldType\Image\Value as ImageValue;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Image;
-use eZ\Publish\Core\FieldType\Image\Value as ImageValue;
 use Netgen\Bundle\EzFormsBundle\Tests\Form\Mock\FileMock;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;

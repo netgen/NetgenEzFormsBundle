@@ -2,10 +2,10 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
+use eZ\Publish\Core\FieldType\TextBlock\Value as TextBlockValue;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\TextBlock;
-use eZ\Publish\Core\FieldType\TextBlock\Value as TextBlockValue;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 

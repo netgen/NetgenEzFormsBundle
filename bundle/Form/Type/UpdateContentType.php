@@ -3,11 +3,11 @@
 namespace Netgen\Bundle\EzFormsBundle\Form\Type;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct;
-use Symfony\Component\Form\FormBuilderInterface;
+use eZ\Publish\API\Repository\Values\ContentType\ContentType;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use RuntimeException;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Class UpdateContentType.

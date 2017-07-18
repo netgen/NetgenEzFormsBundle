@@ -2,13 +2,13 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
+use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\FieldType\Country\Value as CountryValue;
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\Core\FieldType\Country\Value as CountryValue;
 
 class Country extends FieldTypeHandler
 {
@@ -39,26 +39,6 @@ class Country extends FieldTypeHandler
         foreach ($countryData as $countryCode => $country) {
             $this->filteredCountryData[$countryCode] = $country['Name'];
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function buildFieldForm(
-        FormBuilderInterface $formBuilder,
-        FieldDefinition $fieldDefinition,
-        $languageCode,
-        Content $content = null
-    ) {
-        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
-
-        $options['expanded'] = false;
-        $options['choices_as_values'] = true;
-        $options['multiple'] = $fieldDefinition->getFieldSettings()['isMultiple'];
-
-        $options['choices'] = array_flip($this->filteredCountryData);
-
-        $formBuilder->add($fieldDefinition->identifier, ChoiceType::class, $options);
     }
 
     /**
@@ -111,6 +91,26 @@ class Country extends FieldTypeHandler
             }
         }
 
-        return new CountryValue((array)$country);
+        return new CountryValue((array) $country);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function buildFieldForm(
+        FormBuilderInterface $formBuilder,
+        FieldDefinition $fieldDefinition,
+        $languageCode,
+        Content $content = null
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
+
+        $options['expanded'] = false;
+        $options['choices_as_values'] = true;
+        $options['multiple'] = $fieldDefinition->getFieldSettings()['isMultiple'];
+
+        $options['choices'] = array_flip($this->filteredCountryData);
+
+        $formBuilder->add($fieldDefinition->identifier, ChoiceType::class, $options);
     }
 }

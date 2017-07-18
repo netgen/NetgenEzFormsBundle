@@ -2,38 +2,18 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
+use DateTime;
+use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\FieldType\Time\Value as TimeValue;
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\Core\FieldType\Time\Value as TimeValue;
-use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class Time extends FieldTypeHandler
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function buildFieldForm(
-        FormBuilderInterface $formBuilder,
-        FieldDefinition $fieldDefinition,
-        $languageCode,
-        Content $content = null
-    ) {
-        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
-
-        $useSeconds = $fieldDefinition->getFieldSettings()['useSeconds'];
-        $options['input'] = 'datetime';
-        $options['widget'] = 'choice';
-        $options['with_seconds'] = $useSeconds;
-        $options['constraints'][] = new Assert\Time();
-
-        $formBuilder->add($fieldDefinition->identifier, TimeType::class, $options);
-    }
-
     /**
      * {@inheritdoc}
      *
@@ -65,5 +45,25 @@ class Time extends FieldTypeHandler
         }
 
         return new TimeValue(null);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function buildFieldForm(
+        FormBuilderInterface $formBuilder,
+        FieldDefinition $fieldDefinition,
+        $languageCode,
+        Content $content = null
+    ) {
+        $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
+
+        $useSeconds = $fieldDefinition->getFieldSettings()['useSeconds'];
+        $options['input'] = 'datetime';
+        $options['widget'] = 'choice';
+        $options['with_seconds'] = $useSeconds;
+        $options['constraints'][] = new Assert\Time();
+
+        $formBuilder->add($fieldDefinition->identifier, TimeType::class, $options);
     }
 }

@@ -2,15 +2,15 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
+use eZ\Publish\API\Repository\Values\Content\Content;
+use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\FieldType\Integer as IntegerValue;
+use eZ\Publish\Core\Helper\FieldHelper;
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\Core\FieldType\Integer as IntegerValue;
 use Symfony\Component\Validator\Constraints as Assert;
-use eZ\Publish\Core\Helper\FieldHelper;
 
 class IntegerHandler extends FieldTypeHandler
 {
@@ -31,6 +31,30 @@ class IntegerHandler extends FieldTypeHandler
 
     /**
      * {@inheritdoc}
+     *
+     * @return int
+     */
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
+    {
+        return (int) $value->value;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return IntegerValue\Value
+     */
+    public function convertFieldValueFromForm($data)
+    {
+        if (!is_int($data)) {
+            $data = null;
+        }
+
+        return new IntegerValue\Value($data);
+    }
+
+    /**
+     * {@inheritdoc}
      */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
@@ -42,7 +66,7 @@ class IntegerHandler extends FieldTypeHandler
 
         if ($fieldDefinition->defaultValue instanceof IntegerValue\Value) {
             if (!$content instanceof Content) {
-                $options['data'] = (int)$fieldDefinition->defaultValue->value;
+                $options['data'] = (int) $fieldDefinition->defaultValue->value;
             }
         }
 
@@ -66,29 +90,5 @@ class IntegerHandler extends FieldTypeHandler
         }
 
         $formBuilder->add($fieldDefinition->identifier, IntegerType::class, $options);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @return int
-     */
-    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
-    {
-        return (int)$value->value;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @return IntegerValue\Value
-     */
-    public function convertFieldValueFromForm($data)
-    {
-        if (!is_int($data)) {
-            $data = null;
-        }
-
-        return new IntegerValue\Value($data);
     }
 }

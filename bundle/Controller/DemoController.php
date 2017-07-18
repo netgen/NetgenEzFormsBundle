@@ -2,20 +2,20 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Controller;
 
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
+use Exception;
 use eZ\Bundle\EzPublishCoreBundle\Controller;
+use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
+use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
+use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
 use Netgen\Bundle\EzFormsBundle\Form\Type\CreateContentType;
 use Netgen\Bundle\EzFormsBundle\Form\Type\CreateUserType;
 use Netgen\Bundle\EzFormsBundle\Form\Type\InformationCollectionType;
 use Netgen\Bundle\EzFormsBundle\Form\Type\UpdateContentType;
 use Netgen\Bundle\EzFormsBundle\Form\Type\UpdateUserType;
+use RuntimeException;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
-use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
-use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
-use RuntimeException;
-use Exception;
 
 class DemoController extends Controller
 {
@@ -198,7 +198,7 @@ class DemoController extends Controller
                 if ($e->getMessage() === $existingUsernameMessage) {
                     // Search for the first ezuser field type in content type
                     foreach ($userCreateStruct->contentType->getFieldDefinitions() as $fieldDefinition) {
-                        if ($fieldDefinition->fieldTypeIdentifier == 'ezuser') {
+                        if ($fieldDefinition->fieldTypeIdentifier === 'ezuser') {
                             $userFieldDefinition = $fieldDefinition;
                             break;
                         }

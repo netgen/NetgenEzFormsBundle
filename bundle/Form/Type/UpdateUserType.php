@@ -2,12 +2,12 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\Type;
 
-use eZ\Publish\API\Repository\Values\User\UserUpdateStruct;
-use eZ\Publish\API\Repository\Values\User\User;
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use Symfony\Component\Form\FormBuilderInterface;
+use eZ\Publish\API\Repository\Values\User\User;
+use eZ\Publish\API\Repository\Values\User\UserUpdateStruct;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use RuntimeException;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Class EzPublishCreateUserType.
