@@ -7,6 +7,7 @@ use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use eZ\Publish\Core\Helper\TranslationHelper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -24,12 +25,19 @@ class RelationList extends FieldTypeHandler
      * @var Repository
      */
     private $repository;
+    
+    /**
+     * @var TranslationHelper
+     */
+    private $translationHelper;
 
     public function __construct(
-        Repository $repository
+        Repository $repository,
+        TranslationHelper $translationHelper
     )
     {
         $this->repository = $repository;
+        $this->translationHelper = $translationHelper;
     }
 
     protected function buildFieldForm(
@@ -50,6 +58,24 @@ class RelationList extends FieldTypeHandler
         
         /* TODO: implement different selection methods */
         switch ($fieldSettings['selectionMethod']) {
+            case self::MULTIPLE_SELECTION:
+                $locationService = $this->repository->getLocationService();
+                $location = $locationService->loadLocation($defaultLocation ? $defaultLocation : 2);
+                $locationList = $locationService->loadLocationChildren($location);
+
+                $choices = [];
+                foreach ($locationList->locations as $child) {
+                    /** @var Location $child */
+                    $choices[$this->translationHelper->getTranslatedContentNameByContentInfo($child->contentInfo)] = $child->contentInfo->id;
+                }
+
+                $formBuilder->add($fieldDefinition->identifier, ChoiceType::class, [
+                    'choices' => $choices,
+                    'expanded' => false,
+                    'multiple' => true,
+                    'choices_as_values' => true,
+                ], $options);
+                break;
             default:
                 $locationService = $this->repository->getLocationService();
                 $location = $locationService->loadLocation($defaultLocation ? $defaultLocation : 2);
