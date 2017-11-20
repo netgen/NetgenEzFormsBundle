@@ -122,5 +122,6 @@ services:
         class: "%netgen.ezforms.form.fieldtype_handler.ezobjectrelationlist.class%"
         arguments:
           - "@ezpublish.api.repository"
+          - "@ezpublish.translation_helper"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezobjectrelationlist}            
