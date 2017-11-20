@@ -17,6 +17,7 @@ parameters:
     netgen.ezforms.form.fieldtype_handler.ezbinaryfile.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\BinaryFile
     netgen.ezforms.form.fieldtype_handler.ezgmaplocation.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\MapLocation
     netgen.ezforms.form.fieldtype_handler.ezobjectrelation.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Relation
+    netgen.ezforms.form.fieldtype_handler.ezobjectrelationlist.class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\RelationList
 
 services:
     netgen.ezforms.form.fieldtype_handler.ezimage:
@@ -116,3 +117,10 @@ services:
           - "@ezpublish.translation_helper"
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezobjectrelation}
+            
+    netgen.ezforms.form.fieldtype_handler.ezobjectrelationlist:
+        class: "%netgen.ezforms.form.fieldtype_handler.ezobjectrelationlist.class%"
+        arguments:
+          - "@ezpublish.api.repository"
+        tags:
+            - {name: netgen.ezforms.form.fieldtype_handler, alias: ezobjectrelationlist}            
