@@ -4,6 +4,7 @@ parameters:
 services:
     netgen.ezforms.form.type.fieldtype.ezuser_create:
         class: Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserCreateType
+        public: false
         arguments:
             - "%netgen.ezforms.form.type.fieldtype.ezuser.parameters.min_password_length%"
         tags:
@@ -11,6 +12,7 @@ services:
 
     netgen.ezforms.form.type.fieldtype.ezuser_update:
         class: Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserUpdateType
+        public: false
         arguments:
             - "%netgen.ezforms.form.type.fieldtype.ezuser.parameters.min_password_length%"
         tags:
