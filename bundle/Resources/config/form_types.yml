@@ -22,7 +22,6 @@ services:
 
     netgen.ezforms.form.type.create_user:
         class: Netgen\Bundle\EzFormsBundle\Form\Type\CreateUserType
-        public: false
         arguments:
             - "@netgen.ezforms.form.fieldtype_handler_registry"
             - "@netgen.ezforms.form.data_mapper.create_user"
@@ -37,7 +36,6 @@ services:
 
     netgen.ezforms.form.type.update_content:
         class: Netgen\Bundle\EzFormsBundle\Form\Type\UpdateContentType
-        public: false
         arguments:
             - "@netgen.ezforms.form.fieldtype_handler_registry"
             - "@netgen.ezforms.form.data_mapper.update_content"
@@ -52,7 +50,6 @@ services:
 
     netgen.ezforms.form.type.update_user:
         class: Netgen\Bundle\EzFormsBundle\Form\Type\UpdateUserType
-        public: false
         arguments:
             - "@netgen.ezforms.form.fieldtype_handler_registry"
             - "@netgen.ezforms.form.data_mapper.update_user"
@@ -61,13 +58,11 @@ services:
 
     netgen.ezforms.form.url_type:
         class: Netgen\Bundle\EzFormsBundle\Form\Type\UrlType
-        public: false
         tags:
             - { name: form.type, alias: ezforms_url }
 
     netgen.ezforms.form.map_type:
         class: Netgen\Bundle\EzFormsBundle\Form\Type\MapType
-        public: false
         tags:
             - { name: form.type, alias: ezforms_map }
 
@@ -79,7 +74,6 @@ services:
 
     netgen.ezforms.form.type.info_collection:
         class: Netgen\Bundle\EzFormsBundle\Form\Type\InformationCollectionType
-        public: false
         arguments:
             - "@netgen.ezforms.form.fieldtype_handler_registry"
             - "@netgen.ezforms.form.data_mapper.info_collection"

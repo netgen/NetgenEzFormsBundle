@@ -11,7 +11,6 @@ services:
         class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry
 
     netgen.ezforms.form.extension.fieldtype:
-        public: false
         class: Netgen\Bundle\EzFormsBundle\Form\Extension\FieldTypeTypeExtension
         tags:
             - { name: form.type_extension, alias: form, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
