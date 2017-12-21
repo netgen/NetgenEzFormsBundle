@@ -10,6 +10,12 @@ NetgenEzFormsBundle
 [![PHP](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://secure.php.net/)
 
 NetgenEzFormsBundle is an integration of eZ Publish 5/Platform Repository API with Symfony's well-known [Form component](http://symfony.com/doc/current/components/form.html).
+Initial implementation was dictated by the requirements of our use case at hand, so at the moment the bundle supports following forms:
+* Content creation
+* Content updating
+* User creation
+* User updating
+
 
 License, docs and installation instructions
 -------------------------------------------

@@ -1,14 +1,11 @@
 Documentation
 =============
 
-For more details about extending please check [this](EXTEND.md).
-
 Currently implemented forms:
-
-| Entity / Form             | Create | Update | Information collection
-| ------------- | --- | --- | ---
-| Content      | yes | yes | yes
-| User      | yes | yes | no
+* Content creation
+* Content updating
+* User creation
+* User updating
 
 ## Content creation
 
@@ -262,6 +259,9 @@ return $this->render(
     )
 );
 ```
+## Creating your own field handler
+
+TODO
 
 ## Supported field types
 
