@@ -2,7 +2,7 @@
     "name": "netgen/ez-forms-bundle",
     "description": "Integration of Symfony's Form component with eZ Platform Public API",
     "type": "ezplatform-bundle",
-    "license": "GPL-2.0",
+    "license": "GPL-2.0-only",
     "keywords": [
         "ezpublish",
         "ezplatform",
