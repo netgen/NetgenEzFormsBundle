@@ -6,7 +6,7 @@ NetgenEzFormsBundle
 [![Quality Score](https://img.shields.io/scrutinizer/g/netgen/NetgenEzFormsBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/netgen/NetgenEzFormsBundle)
 [![Downloads](https://img.shields.io/packagist/dt/netgen/ez-forms-bundle.svg?style=flat-square)](https://packagist.org/packages/netgen/ez-forms-bundle/stats)
 [![Latest stable](https://img.shields.io/packagist/v/netgen/ez-forms-bundle.svg?style=flat-square)](https://packagist.org/packages/netgen/ez-forms-bundle)
-[![License](https://img.shields.io/packagist/l/netgen/ez-forms-bundle.svg?style=flat-square)](LICENSE)
+[![License](https://img.shields.io/github/license/netgen/NetgenEzFormsBundle.svg?style=flat-square)](LICENSE)
 [![PHP](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://secure.php.net/)
 
 Integration of Symfony's Form component with eZ Publish 5 Public API
