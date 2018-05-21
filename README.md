@@ -39,7 +39,7 @@ Currently supported FieldTypes:
 | Page           | no
 | Rating         | no
 | Relation       | yes
-| RelationList   | no
+| RelationList   | yes
 | RichText       | no
 | Selection      | yes
 | TextBlock      | yes
