@@ -6,8 +6,9 @@ use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\SPI\FieldType\Value;
-use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
+use eZ\Publish\Core\FieldType\RelationList\Value as RelationListValue;
 use eZ\Publish\Core\Helper\TranslationHelper;
+use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
