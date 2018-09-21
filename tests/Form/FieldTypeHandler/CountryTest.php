@@ -39,7 +39,7 @@ class CountryTest extends TestCase
 
         $returnedValue = $country->convertFieldValueToForm($countryValue);
 
-        $this->assertEquals($countries, $returnedValue);
+        $this->assertEquals(['HR'], $returnedValue);
     }
 
     public function testConvertFieldValueToFormMultipleValues()
@@ -88,7 +88,7 @@ class CountryTest extends TestCase
 
         $returnedValue = $country->convertFieldValueToForm($countryValue, $fieldDefinition);
 
-        $this->assertEquals($selectedCountries, $returnedValue);
+        $this->assertEquals(['HR', 'BB'], $returnedValue);
     }
 
     public function testConvertFieldValueToFormSingleValue()
@@ -132,7 +132,7 @@ class CountryTest extends TestCase
 
         $returnedValue = $country->convertFieldValueToForm($countryValue, $fieldDefinition);
 
-        $this->assertEquals($selectedCountries, $returnedValue);
+        $this->assertEquals('HR', $returnedValue);
     }
 
     public function testConvertFieldValueToFormWithNoneSelected()
