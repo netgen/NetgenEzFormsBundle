@@ -53,7 +53,7 @@ class RelationTest extends TestCase
      */
     protected $fieldDefinitionParameters;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->translationHelper = $this->getMockBuilder(TranslationHelper::class)
             ->disableOriginalConstructor()

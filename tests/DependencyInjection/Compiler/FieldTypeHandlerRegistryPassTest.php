@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class FieldTypeHandlerRegistryPassTest extends AbstractCompilerPassTestCase
 {
-    public function testCompilerPassCollectsValidServices()
+    public function testCompilerPassCollectsValidServices(): void
     {
         $registry = new Definition();
         $this->setDefinition('netgen.ezforms.form.fieldtype_handler_registry', $registry);
@@ -35,7 +35,7 @@ class FieldTypeHandlerRegistryPassTest extends AbstractCompilerPassTestCase
      * @expectedException \Symfony\Component\DependencyInjection\Exception\LogicException
      * @expectedExceptionMessage 'netgen.ezforms.form.fieldtype_handler' service tag needs an 'alias' attribute to identify the field type. None given.
      */
-    public function testCompilerPassMustThrowExceptionIfHandlerServiceHasntGotAlias()
+    public function testCompilerPassMustThrowExceptionIfHandlerServiceHasntGotAlias(): void
     {
         $registry = new Definition();
         $this->setDefinition('netgen.ezforms.form.fieldtype_handler_registry', $registry);
@@ -55,7 +55,7 @@ class FieldTypeHandlerRegistryPassTest extends AbstractCompilerPassTestCase
         );
     }
 
-    protected function registerCompilerPass(ContainerBuilder $container)
+    protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new FieldTypeHandlerRegistryPass());
     }

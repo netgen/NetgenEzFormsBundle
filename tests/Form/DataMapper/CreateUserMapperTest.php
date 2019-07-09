@@ -35,7 +35,7 @@ class CreateUserMapperTest extends TestCase
      */
     private $propertyAccessor;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->propertyAccessor = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyAccessorInterface')
             ->disableOriginalConstructor()

@@ -40,7 +40,7 @@ class CreateContentMapperTest extends TestCase
      */
     private $propertyAccessor;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcherInterface')
             ->disableOriginalConstructor()

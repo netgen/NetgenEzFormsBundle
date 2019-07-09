@@ -16,7 +16,7 @@ class SelectionTest extends TestCase
      */
     protected $handler;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->handler = new Selection();
     }

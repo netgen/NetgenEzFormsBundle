@@ -30,7 +30,7 @@ class IntegerHandlerTest extends TestCase
      */
     protected $fieldDefinitionParameters;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->fieldHelper = $this->getMockBuilder(FieldHelper::class)
             ->disableOriginalConstructor()

@@ -10,7 +10,7 @@ class ConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    public function testConfigurationValuesAreOkAndValid()
+    public function testConfigurationValuesAreOkAndValid(): void
     {
         $this->assertConfigurationIsValid(
             array(
@@ -19,7 +19,7 @@ class ConfigurationTest extends TestCase
         );
     }
 
-    protected function getConfiguration()
+    protected function getConfiguration(): Configuration
     {
         return new Configuration();
     }

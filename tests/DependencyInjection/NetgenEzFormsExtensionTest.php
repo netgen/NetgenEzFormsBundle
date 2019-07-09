@@ -7,20 +7,20 @@ use Netgen\Bundle\EzFormsBundle\DependencyInjection\NetgenEzFormsExtension;
 
 class NetgenEzFormsExtensionTest extends AbstractExtensionTestCase
 {
-    public function testItSetsValidContainerParameters()
+    public function testItSetsValidContainerParameters(): void
     {
         $this->container->setParameter('ezpublish.siteaccess.list', array());
         $this->load();
     }
 
-    protected function getContainerExtensions()
+    protected function getContainerExtensions(): array
     {
         return array(
             new NetgenEzFormsExtension(),
         );
     }
 
-    protected function getMinimalConfiguration()
+    protected function getMinimalConfiguration(): array
     {
         return array();
     }
