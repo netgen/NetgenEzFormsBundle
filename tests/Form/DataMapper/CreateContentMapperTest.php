@@ -108,8 +108,8 @@ class CreateContentMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -117,18 +117,18 @@ class CreateContentMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->once())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapDataToForms($data, array($form));
     }
@@ -169,8 +169,8 @@ class CreateContentMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -178,8 +178,8 @@ class CreateContentMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->once())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getForm();
 
@@ -187,12 +187,12 @@ class CreateContentMapperTest extends TestCase
             ->method('setData');
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapDataToForms($data, array($form));
     }
@@ -207,8 +207,8 @@ class CreateContentMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -221,12 +221,12 @@ class CreateContentMapperTest extends TestCase
             ->method('setData');
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapDataToForms($data, array($form));
     }
@@ -246,12 +246,12 @@ class CreateContentMapperTest extends TestCase
             ->method('setData');
 
         $form->expects($this->exactly(2))
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn(null)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn(null);
 
         $this->mapper->mapDataToForms($data, array($form));
     }
@@ -292,8 +292,8 @@ class CreateContentMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -301,34 +301,34 @@ class CreateContentMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->once())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSubmitted');
+            ->method('isSubmitted')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSynchronized');
+            ->method('isSynchronized')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(false)
-            ->method('isDisabled');
+            ->method('isDisabled')
+            ->willReturn(false);
 
         $form->expects($this->once())
-            ->willReturn('Some name')
-            ->method('getData');
+            ->method('getData')
+            ->willReturn('Some name');
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapFormsToData(array($form), $data);
     }
@@ -363,8 +363,8 @@ class CreateContentMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -372,30 +372,30 @@ class CreateContentMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->once())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSubmitted');
+            ->method('isSubmitted')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSynchronized');
+            ->method('isSynchronized')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(false)
-            ->method('isDisabled');
+            ->method('isDisabled')
+            ->willReturn(false);
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapFormsToData(array($form), $data);
     }
@@ -416,8 +416,8 @@ class CreateContentMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -427,28 +427,28 @@ class CreateContentMapperTest extends TestCase
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSubmitted');
+            ->method('isSubmitted')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSynchronized');
+            ->method('isSynchronized')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(false)
-            ->method('isDisabled');
+            ->method('isDisabled')
+            ->willReturn(false);
 
         $form->expects($this->exactly(3))
-            ->willReturn('Some name')
-            ->method('getData');
+            ->method('getData')
+            ->willReturn('Some name');
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapFormsToData(array($form), $data);
     }
@@ -459,8 +459,8 @@ class CreateContentMapperTest extends TestCase
         $date = new \DateTime();
 
         $this->propertyAccessor->expects($this->once())
-            ->willReturn($date)
-            ->method('getValue');
+            ->method('getValue')
+            ->willReturn($date);
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
@@ -468,8 +468,8 @@ class CreateContentMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -479,28 +479,28 @@ class CreateContentMapperTest extends TestCase
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSubmitted');
+            ->method('isSubmitted')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSynchronized');
+            ->method('isSynchronized')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(false)
-            ->method('isDisabled');
+            ->method('isDisabled')
+            ->willReturn(false);
 
         $form->expects($this->exactly(2))
-            ->willReturn($date)
-            ->method('getData');
+            ->method('getData')
+            ->willReturn($date);
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapFormsToData(array($form), $data);
     }
@@ -528,8 +528,8 @@ class CreateContentMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -539,12 +539,12 @@ class CreateContentMapperTest extends TestCase
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSubmitted');
+            ->method('isSubmitted')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(false)
-            ->method('isSynchronized');
+            ->method('isSynchronized')
+            ->willReturn(false);
 
         $form->expects($this->never())
             ->method('isDisabled');
@@ -553,12 +553,12 @@ class CreateContentMapperTest extends TestCase
             ->method('getData');
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapFormsToData(array($form), $data);
     }
@@ -600,12 +600,12 @@ class CreateContentMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getByReference');
+            ->method('getByReference')
+            ->willReturn(true);
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -613,38 +613,38 @@ class CreateContentMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->never())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSubmitted');
+            ->method('isSubmitted')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSynchronized');
+            ->method('isSynchronized')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(false)
-            ->method('isDisabled');
+            ->method('isDisabled')
+            ->willReturn(false);
 
         $form->expects($this->any())
-            ->willReturn($data)
-            ->method('getData');
+            ->method('getData')
+            ->willReturn($data);
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->propertyAccessor->expects($this->once())
-            ->willReturn($data)
-            ->method('getValue');
+            ->method('getValue')
+            ->willReturn($data);
 
         $this->mapper->mapFormsToData(array($form), $data);
     }

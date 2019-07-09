@@ -93,8 +93,8 @@ class InformationCollectionMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyPathInterface')
             ->disableOriginalConstructor()
@@ -102,34 +102,34 @@ class InformationCollectionMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->once())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSubmitted');
+            ->method('isSubmitted')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSynchronized');
+            ->method('isSynchronized')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(false)
-            ->method('isDisabled');
+            ->method('isDisabled')
+            ->willReturn(false);
 
         $form->expects($this->once())
-            ->willReturn('Some name')
-            ->method('getData');
+            ->method('getData')
+            ->willReturn('Some name');
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapFormsToData(array($form), $data);
     }
@@ -164,8 +164,8 @@ class InformationCollectionMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyPathInterface')
             ->disableOriginalConstructor()
@@ -173,30 +173,30 @@ class InformationCollectionMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->once())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSubmitted');
+            ->method('isSubmitted')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSynchronized');
+            ->method('isSynchronized')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(false)
-            ->method('isDisabled');
+            ->method('isDisabled')
+            ->willReturn(false);
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapFormsToData(array($form), $data);
     }
@@ -237,8 +237,8 @@ class InformationCollectionMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyPathInterface')
             ->disableOriginalConstructor()
@@ -246,8 +246,8 @@ class InformationCollectionMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->once())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getForm();
 
@@ -255,12 +255,12 @@ class InformationCollectionMapperTest extends TestCase
             ->method('setData');
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapDataToForms($data, array($form));
     }
@@ -295,8 +295,8 @@ class InformationCollectionMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyPathInterface')
             ->disableOriginalConstructor()
@@ -304,18 +304,18 @@ class InformationCollectionMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->once())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapDataToForms($data, array($form));
     }

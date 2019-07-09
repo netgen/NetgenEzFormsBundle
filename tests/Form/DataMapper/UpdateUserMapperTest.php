@@ -105,8 +105,8 @@ class UpdateUserMapperTest extends TestCase
             ->getMock();
 
         $user->expects($this->once())
-            ->willReturn(new TextLineValue('Some name'))
-            ->method('getFieldValue');
+            ->method('getFieldValue')
+            ->willReturn(new TextLineValue('Some name'));
 
         $data = new DataWrapper($userUpdateStruct, $contentType, $user);
 
@@ -116,8 +116,8 @@ class UpdateUserMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -125,8 +125,8 @@ class UpdateUserMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->once())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getForm();
 
@@ -134,12 +134,12 @@ class UpdateUserMapperTest extends TestCase
             ->method('setData');
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapDataToForms($data, array($form));
     }
@@ -183,8 +183,8 @@ class UpdateUserMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -192,8 +192,8 @@ class UpdateUserMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->once())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getForm();
 
@@ -201,12 +201,12 @@ class UpdateUserMapperTest extends TestCase
             ->method('setData');
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapDataToForms($data, array($form));
     }
@@ -253,8 +253,8 @@ class UpdateUserMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -262,18 +262,18 @@ class UpdateUserMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->once())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapDataToForms($data, array($form));
     }
@@ -326,8 +326,8 @@ class UpdateUserMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -335,30 +335,30 @@ class UpdateUserMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->once())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSubmitted');
+            ->method('isSubmitted')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSynchronized');
+            ->method('isSynchronized')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(false)
-            ->method('isDisabled');
+            ->method('isDisabled')
+            ->willReturn(false);
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapFormsToData(array($form), $data);
     }
@@ -417,8 +417,8 @@ class UpdateUserMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -426,30 +426,30 @@ class UpdateUserMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->once())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSubmitted');
+            ->method('isSubmitted')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSynchronized');
+            ->method('isSynchronized')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(false)
-            ->method('isDisabled');
+            ->method('isDisabled')
+            ->willReturn(false);
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapFormsToData(array($form), $data);
     }
@@ -490,8 +490,8 @@ class UpdateUserMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -499,30 +499,30 @@ class UpdateUserMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->once())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getForm();
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSubmitted');
+            ->method('isSubmitted')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSynchronized');
+            ->method('isSynchronized')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(false)
-            ->method('isDisabled');
+            ->method('isDisabled')
+            ->willReturn(false);
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapFormsToData(array($form), $data);
     }
@@ -571,8 +571,8 @@ class UpdateUserMapperTest extends TestCase
             ->getMock();
 
         $config->expects($this->once())
-            ->willReturn(true)
-            ->method('getMapped');
+            ->method('getMapped')
+            ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
@@ -580,8 +580,8 @@ class UpdateUserMapperTest extends TestCase
             ->getMockForAbstractClass();
 
         $propertyPath->expects($this->once())
-            ->willReturn('name')
-            ->method('__toString');
+            ->method('__toString')
+            ->willReturn('name');
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')
             ->disableOriginalConstructor()
@@ -607,8 +607,8 @@ class UpdateUserMapperTest extends TestCase
             ->getMock();
 
         $internalFormSecond->expects($this->once())
-            ->willReturn('yes')
-            ->method('getData');
+            ->method('getData')
+            ->willReturn('yes');
 
         $internalForm->expects($this->any())
             ->method('get')
@@ -618,24 +618,24 @@ class UpdateUserMapperTest extends TestCase
             ->will($this->returnValue($internalForm));
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSubmitted');
+            ->method('isSubmitted')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(true)
-            ->method('isSynchronized');
+            ->method('isSynchronized')
+            ->willReturn(true);
 
         $form->expects($this->once())
-            ->willReturn(false)
-            ->method('isDisabled');
+            ->method('isDisabled')
+            ->willReturn(false);
 
         $form->expects($this->once())
-            ->willReturn($config)
-            ->method('getConfig');
+            ->method('getConfig')
+            ->willReturn($config);
 
         $form->expects($this->once())
-            ->willReturn($propertyPath)
-            ->method('getPropertyPath');
+            ->method('getPropertyPath')
+            ->willReturn($propertyPath);
 
         $this->mapper->mapFormsToData(array($form), $data);
     }

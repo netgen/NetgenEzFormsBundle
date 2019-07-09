@@ -214,8 +214,8 @@ class InformationCollectionTypeTest extends TestCase
             ->getMock();
 
         $handlerRegistry->expects($this->once())
-            ->willReturn($fieldTypeHandler)
-            ->method('get');
+            ->method('get')
+            ->willReturn($fieldTypeHandler);
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
@@ -266,8 +266,8 @@ class InformationCollectionTypeTest extends TestCase
             ->getMock();
 
         $handlerRegistry->expects($this->once())
-            ->willReturn($fieldTypeHandler)
-            ->method('get');
+            ->method('get')
+            ->willReturn($fieldTypeHandler);
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
