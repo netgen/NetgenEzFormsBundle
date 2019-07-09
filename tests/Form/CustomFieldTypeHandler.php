@@ -8,7 +8,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 class CustomFieldTypeHandler extends FieldTypeHandler
 {
-    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
     {
     }
 }

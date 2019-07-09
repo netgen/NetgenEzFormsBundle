@@ -40,7 +40,7 @@ class RelationList extends FieldTypeHandler
         $this->translationHelper = $translationHelper;
     }
 
-    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
     {
         if (empty($value->destinationContentIds)) {
             return null;
@@ -58,7 +58,7 @@ class RelationList extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        ?Content $content = null
     ) {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 

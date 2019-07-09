@@ -20,7 +20,7 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
     /**
      * {@inheritdoc}
      */
-    abstract public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null);
+    abstract public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null);
 
     /**
      * {@inheritdoc}
@@ -77,7 +77,7 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        ?Content $content = null
     ) {
         throw new RuntimeException('Not implemented.');
     }
@@ -94,7 +94,7 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
     protected function getDefaultFieldOptions(
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        ?Content $content = null
     ) {
         $options = [];
 

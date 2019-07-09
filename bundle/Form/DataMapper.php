@@ -34,7 +34,7 @@ abstract class DataMapper implements DataMapperInterface
      */
     public function __construct(
         FieldTypeHandlerRegistry $fieldTypeHandlerRegistry,
-        PropertyAccessorInterface $propertyAccessor = null
+        ?PropertyAccessorInterface $propertyAccessor = null
     ) {
         $this->fieldTypeHandlerRegistry = $fieldTypeHandlerRegistry;
         $this->propertyAccessor = $propertyAccessor ?: PropertyAccess::createPropertyAccessor();

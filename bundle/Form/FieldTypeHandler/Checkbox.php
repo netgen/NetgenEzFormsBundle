@@ -33,7 +33,7 @@ class Checkbox extends FieldTypeHandler
      *
      * @return bool
      */
-    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
     {
         return $value->bool;
     }
@@ -55,7 +55,7 @@ class Checkbox extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        ?Content $content = null
     ) {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 

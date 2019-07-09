@@ -36,7 +36,7 @@ class Relation extends FieldTypeHandler
         $this->translationHelper = $translationHelper;
     }
 
-    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
     {
         if (empty($value->destinationContentId)) {
             return null;
@@ -49,7 +49,7 @@ class Relation extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        ?Content $content = null
     ) {
         $selectionRoot = $fieldDefinition->getFieldSettings()['selectionRoot'];
 

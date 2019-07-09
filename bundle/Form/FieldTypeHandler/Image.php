@@ -21,7 +21,7 @@ class Image extends FieldTypeHandler
      *
      * @param \eZ\Publish\Core\FieldType\Image\Value $value
      */
-    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
     {
         return null;
     }
@@ -53,7 +53,7 @@ class Image extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        ?Content $content = null
     ) {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 

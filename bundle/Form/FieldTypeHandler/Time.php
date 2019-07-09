@@ -19,7 +19,7 @@ class Time extends FieldTypeHandler
      *
      * @return int|null
      */
-    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
     {
         $time = $value->time;
         if (is_int($time)) {
@@ -54,7 +54,7 @@ class Time extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        ?Content $content = null
     ) {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 

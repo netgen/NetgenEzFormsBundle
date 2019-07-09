@@ -19,7 +19,7 @@ class TextLine extends FieldTypeHandler
     /**
      * {@inheritdoc}
      */
-    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
     {
         return $value->text;
     }
@@ -43,7 +43,7 @@ class TextLine extends FieldTypeHandler
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         $languageCode,
-        Content $content = null
+        ?Content $content = null
     ) {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 

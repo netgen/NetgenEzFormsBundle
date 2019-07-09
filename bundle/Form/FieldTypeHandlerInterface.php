@@ -23,7 +23,7 @@ interface FieldTypeHandlerInterface
      *
      * @return mixed
      */
-    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null);
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null);
 
     /**
      * Converts the form data to a format that can be accepted by eZ Publish FieldType.
