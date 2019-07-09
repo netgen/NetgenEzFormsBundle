@@ -15,7 +15,7 @@ class UrlTest extends TestCase
     {
         $url = new Url();
 
-        $this->assertInstanceOf(FieldTypeHandler::class, $url);
+        self::assertInstanceOf(FieldTypeHandler::class, $url);
     }
 
     public function testConvertFieldValueToForm()
@@ -25,7 +25,7 @@ class UrlTest extends TestCase
 
         $returnedValue = $url->convertFieldValueToForm($timeValue);
 
-        $this->assertEquals(array('url' => 'link', 'text' => 'text'), $returnedValue);
+        self::assertSame(['url' => 'link', 'text' => 'text'], $returnedValue);
     }
 
     public function testConvertFieldValueFromForm()
@@ -33,9 +33,10 @@ class UrlTest extends TestCase
         $url = new Url();
         $timeValue = new UrlValue('link', 'text');
 
-        $returnedValue = $url->convertFieldValueFromForm(array('url' => 'link', 'text' => 'text'));
+        $returnedValue = $url->convertFieldValueFromForm(['url' => 'link', 'text' => 'text']);
 
-        $this->assertEquals($timeValue, $returnedValue);
+        self::assertSame($timeValue->link, $returnedValue->link);
+        self::assertSame($timeValue->text, $returnedValue->text);
     }
 
     public function testConvertFieldValueFromFormWhenDataIsNotArray()
@@ -45,27 +46,28 @@ class UrlTest extends TestCase
 
         $returnedValue = $url->convertFieldValueFromForm('some string');
 
-        $this->assertEquals($timeValue, $returnedValue);
+        self::assertSame($timeValue->link, $returnedValue->link);
+        self::assertSame($timeValue->text, $returnedValue->text);
     }
 
     public function testBuildFieldCreateForm()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('add');
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-            )
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+            ]
         );
 
         $languageCode = 'eng-GB';

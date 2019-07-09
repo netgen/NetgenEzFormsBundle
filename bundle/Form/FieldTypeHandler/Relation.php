@@ -61,16 +61,16 @@ class Relation extends FieldTypeHandler
         $location = $locationService->loadLocation($selectionRoot);
         $locationList = $locationService->loadLocationChildren($location);
 
-        $choices = array();
+        $choices = [];
         foreach ($locationList->locations as $child) {
             /* @var Location $child */
             $choices[$this->translationHelper->getTranslatedContentNameByContentInfo($child->contentInfo)] = $child->contentInfo->id;
         }
 
-        $formBuilder->add($fieldDefinition->identifier, ChoiceType::class, array(
+        $formBuilder->add($fieldDefinition->identifier, ChoiceType::class, [
             'choices' => $choices,
             'expanded' => false,
             'multiple' => false,
-        ));
+        ]);
     }
 }

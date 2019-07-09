@@ -20,8 +20,8 @@ class DataWrapperTest extends TestCase
 
         $dataWrapper = new DataWrapper($payload, $definition, $target);
 
-        $this->assertSame($payload, $dataWrapper->payload);
-        $this->assertSame($definition, $dataWrapper->definition);
-        $this->assertSame($target, $dataWrapper->target);
+        self::assertSame($payload, $dataWrapper->payload);
+        self::assertSame($definition, $dataWrapper->definition);
+        self::assertSame($target, $dataWrapper->target);
     }
 }

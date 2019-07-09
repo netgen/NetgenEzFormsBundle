@@ -2,7 +2,6 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
-use RuntimeException;
 use eZ\Publish\API\Repository\Values\User\UserUpdateStruct;
 use eZ\Publish\Core\Repository\Values\Content\Content;
 use eZ\Publish\Core\Repository\Values\Content\ContentUpdateStruct;
@@ -16,6 +15,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
 use Netgen\Bundle\EzFormsBundle\Form\Type\UpdateUserType;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormBuilder;
@@ -26,27 +26,27 @@ class UpdateUserTypeTest extends TestCase
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $updateUserType = new UpdateUserType($handlerRegistry, $dataMapper);
-        $this->assertInstanceOf(AbstractType::class, $updateUserType);
+        self::assertInstanceOf(AbstractType::class, $updateUserType);
     }
 
     public function testGetName()
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $updateUserType = new UpdateUserType($handlerRegistry, $dataMapper);
 
-        $this->assertEquals('ezforms_update_user', $updateUserType->getName());
+        self::assertSame('ezforms_update_user', $updateUserType->getName());
     }
 
     public function testBuildFormWithoutDataWrapperMustThrowException()
@@ -56,17 +56,17 @@ class UpdateUserTypeTest extends TestCase
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
-        $options = array('data' => 'data');
+        $options = ['data' => 'data'];
 
         $updateUserType = new UpdateUserType($handlerRegistry, $dataMapper);
         $updateUserType->buildForm($formBuilder, $options);
@@ -79,17 +79,17 @@ class UpdateUserTypeTest extends TestCase
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
-        $options = array('data' => new DataWrapper('payload'));
+        $options = ['data' => new DataWrapper('payload')];
 
         $updateUserType = new UpdateUserType($handlerRegistry, $dataMapper);
         $updateUserType->buildForm($formBuilder, $options);
@@ -102,19 +102,19 @@ class UpdateUserTypeTest extends TestCase
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $user = new User();
 
-        $options = array('data' => new DataWrapper('payload', 'definition', $user));
+        $options = ['data' => new DataWrapper('payload', 'definition', $user)];
 
         $updateUserType = new UpdateUserType($handlerRegistry, $dataMapper);
         $updateUserType->buildForm($formBuilder, $options);
@@ -127,20 +127,20 @@ class UpdateUserTypeTest extends TestCase
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $userUpdateStruct = new UserUpdateStruct();
         $user = new User();
 
-        $options = array('data' => new DataWrapper($userUpdateStruct, null, $user));
+        $options = ['data' => new DataWrapper($userUpdateStruct, null, $user)];
 
         $updateUserType = new UpdateUserType($handlerRegistry, $dataMapper);
         $updateUserType->buildForm($formBuilder, $options);
@@ -153,38 +153,38 @@ class UpdateUserTypeTest extends TestCase
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('setDataMapper'))
+            ->setMethods(['setDataMapper'])
             ->getMock();
 
-        $contentInfo = new ContentInfo(array('contentTypeId' => 123));
-        $versionInfo = new VersionInfo(array('contentInfo' => $contentInfo));
-        $content = new Content(array('versionInfo' => $versionInfo));
-        $user = new User(array('content' => $content));
+        $contentInfo = new ContentInfo(['contentTypeId' => 123]);
+        $versionInfo = new VersionInfo(['contentInfo' => $contentInfo]);
+        $content = new Content(['versionInfo' => $versionInfo]);
+        $user = new User(['content' => $content]);
 
         $userUpdateStruct = new UserUpdateStruct();
 
         $contentType = new ContentType(
-            array(
+            [
                 'id' => 654,
-                'fieldDefinitions' => array(
+                'fieldDefinitions' => [
                     new FieldDefinition(
-                        array(
+                        [
                             'id' => 'id',
                             'identifier' => 'identifier',
-                        )
+                        ]
                     ),
-                ),
-            )
+                ],
+            ]
         );
 
-        $options = array('data' => new DataWrapper($userUpdateStruct, $contentType, $user));
+        $options = ['data' => new DataWrapper($userUpdateStruct, $contentType, $user)];
 
         $updateUserType = new UpdateUserType($handlerRegistry, $dataMapper);
         $updateUserType->buildForm($formBuilder, $options);
@@ -194,18 +194,18 @@ class UpdateUserTypeTest extends TestCase
     {
         $fieldTypeHandler = $this->getMockBuilder(FieldTypeHandler::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('buildFieldUpdateForm'))
+            ->setMethods(['buildFieldUpdateForm'])
             ->getMockForAbstractClass();
 
-        $fieldTypeHandler->expects($this->once())
+        $fieldTypeHandler->expects(self::once())
             ->method('buildFieldUpdateForm');
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('get'))
+            ->setMethods(['get'])
             ->getMock();
 
-        $handlerRegistry->expects($this->once())
+        $handlerRegistry->expects(self::once())
             ->method('get')
             ->willReturn($fieldTypeHandler);
 
@@ -213,36 +213,36 @@ class UpdateUserTypeTest extends TestCase
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('setDataMapper'))
+            ->setMethods(['setDataMapper'])
             ->getMock();
 
-        $contentInfo = new ContentInfo(array('contentTypeId' => 123));
-        $versionInfo = new VersionInfo(array('contentInfo' => $contentInfo));
-        $content = new Content(array('versionInfo' => $versionInfo));
-        $user = new User(array('content' => $content));
+        $contentInfo = new ContentInfo(['contentTypeId' => 123]);
+        $versionInfo = new VersionInfo(['contentInfo' => $contentInfo]);
+        $content = new Content(['versionInfo' => $versionInfo]);
+        $user = new User(['content' => $content]);
 
         $contentUpdateStruct = new ContentUpdateStruct(
-            array(
+            [
                 'initialLanguageCode' => 'eng-GB',
-            )
+            ]
         );
-        $userUpdateStruct = new UserUpdateStruct(array('contentUpdateStruct' => $contentUpdateStruct));
+        $userUpdateStruct = new UserUpdateStruct(['contentUpdateStruct' => $contentUpdateStruct]);
 
         $contentType = new ContentType(
-            array(
+            [
                 'id' => 123,
-                'fieldDefinitions' => array(
+                'fieldDefinitions' => [
                     new FieldDefinition(
-                        array(
+                        [
                             'id' => 'id',
                             'identifier' => 'identifier',
-                        )
+                        ]
                     ),
-                ),
-            )
+                ],
+            ]
         );
 
-        $options = array('data' => new DataWrapper($userUpdateStruct, $contentType, $user));
+        $options = ['data' => new DataWrapper($userUpdateStruct, $contentType, $user)];
 
         $updateUserType = new UpdateUserType($handlerRegistry, $dataMapper);
         $updateUserType->buildForm($formBuilder, $options);

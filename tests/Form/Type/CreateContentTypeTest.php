@@ -2,7 +2,6 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
-use RuntimeException;
 use eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
@@ -11,6 +10,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
 use Netgen\Bundle\EzFormsBundle\Form\Type\CreateContentType;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormBuilder;
@@ -21,27 +21,27 @@ class CreateContentTypeTest extends TestCase
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $updateUserType = new CreateContentType($handlerRegistry, $dataMapper);
-        $this->assertInstanceOf(AbstractType::class, $updateUserType);
+        self::assertInstanceOf(AbstractType::class, $updateUserType);
     }
 
     public function testGetName()
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $updateUserType = new CreateContentType($handlerRegistry, $dataMapper);
 
-        $this->assertEquals('ezforms_create_content', $updateUserType->getName());
+        self::assertSame('ezforms_create_content', $updateUserType->getName());
     }
 
     public function testBuildFormWithoutDataWrapperMustThrowException()
@@ -51,17 +51,17 @@ class CreateContentTypeTest extends TestCase
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
-        $options = array('data' => 'data');
+        $options = ['data' => 'data'];
 
         $updateUserType = new CreateContentType($handlerRegistry, $dataMapper);
         $updateUserType->buildForm($formBuilder, $options);
@@ -74,17 +74,17 @@ class CreateContentTypeTest extends TestCase
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
-        $options = array('data' => new DataWrapper('payload'));
+        $options = ['data' => new DataWrapper('payload')];
 
         $updateUserType = new CreateContentType($handlerRegistry, $dataMapper);
         $updateUserType->buildForm($formBuilder, $options);
@@ -94,18 +94,18 @@ class CreateContentTypeTest extends TestCase
     {
         $fieldTypeHandler = $this->getMockBuilder(FieldTypeHandler::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('buildFieldCreateForm'))
+            ->setMethods(['buildFieldCreateForm'])
             ->getMockForAbstractClass();
 
-        $fieldTypeHandler->expects($this->once())
+        $fieldTypeHandler->expects(self::once())
             ->method('buildFieldCreateForm');
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('get'))
+            ->setMethods(['get'])
             ->getMock();
 
-        $handlerRegistry->expects($this->once())
+        $handlerRegistry->expects(self::once())
             ->method('get')
             ->willReturn($fieldTypeHandler);
 
@@ -113,25 +113,25 @@ class CreateContentTypeTest extends TestCase
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('setDataMapper'))
+            ->setMethods(['setDataMapper'])
             ->getMock();
 
         $contentType = new ContentType(
-            array(
+            [
                 'id' => 123,
-                'fieldDefinitions' => array(
+                'fieldDefinitions' => [
                     new FieldDefinition(
-                        array(
+                        [
                             'id' => 'id',
                             'identifier' => 'identifier',
-                        )
+                        ]
                     ),
-                ),
-            )
+                ],
+            ]
         );
-        $contentUpdateStruct = new ContentCreateStruct(array('contentType' => $contentType));
+        $contentUpdateStruct = new ContentCreateStruct(['contentType' => $contentType]);
 
-        $options = array('data' => new DataWrapper($contentUpdateStruct));
+        $options = ['data' => new DataWrapper($contentUpdateStruct)];
 
         $updateUserType = new CreateContentType($handlerRegistry, $dataMapper);
         $updateUserType->buildForm($formBuilder, $options);
@@ -141,18 +141,18 @@ class CreateContentTypeTest extends TestCase
     {
         $fieldTypeHandler = $this->getMockBuilder(FieldTypeHandler::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('buildFieldCreateForm'))
+            ->setMethods(['buildFieldCreateForm'])
             ->getMockForAbstractClass();
 
-        $fieldTypeHandler->expects($this->never())
+        $fieldTypeHandler->expects(self::never())
             ->method('buildFieldCreateForm');
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('get'))
+            ->setMethods(['get'])
             ->getMock();
 
-        $handlerRegistry->expects($this->never())
+        $handlerRegistry->expects(self::never())
             ->method('get')
             ->willReturn($fieldTypeHandler);
 
@@ -160,26 +160,26 @@ class CreateContentTypeTest extends TestCase
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('setDataMapper'))
+            ->setMethods(['setDataMapper'])
             ->getMock();
 
         $contentType = new ContentType(
-            array(
+            [
                 'id' => 123,
-                'fieldDefinitions' => array(
+                'fieldDefinitions' => [
                     new FieldDefinition(
-                        array(
+                        [
                             'id' => 'id',
                             'identifier' => 'identifier',
                             'fieldTypeIdentifier' => 'ezuser',
-                        )
+                        ]
                     ),
-                ),
-            )
+                ],
+            ]
         );
-        $contentUpdateStruct = new ContentCreateStruct(array('contentType' => $contentType));
+        $contentUpdateStruct = new ContentCreateStruct(['contentType' => $contentType]);
 
-        $options = array('data' => new DataWrapper($contentUpdateStruct));
+        $options = ['data' => new DataWrapper($contentUpdateStruct)];
 
         $updateUserType = new CreateContentType($handlerRegistry, $dataMapper);
         $updateUserType->buildForm($formBuilder, $options);

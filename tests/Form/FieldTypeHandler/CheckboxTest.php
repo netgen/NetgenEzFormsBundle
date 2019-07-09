@@ -38,34 +38,34 @@ class CheckboxTest extends TestCase
     {
         $this->fieldHelper = $this->getMockBuilder(FieldHelper::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('isFieldEmpty'))
+            ->setMethods(['isFieldEmpty'])
             ->getMock();
 
         $this->formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
         $this->content = $this->getMockBuilder('eZ\Publish\API\Repository\Values\Content\Content')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->fieldDefinitionParameters = array(
+        $this->fieldDefinitionParameters = [
             'id' => 'id',
             'identifier' => 'identifier',
             'isRequired' => true,
             'defaultValue' => new CheckboxValue(true),
-            'descriptions' => array('fre-FR' => 'fre-FR'),
-            'names' => array('fre-FR' => 'fre-FR'),
-            'validatorConfiguration' => array(),
-        );
+            'descriptions' => ['fre-FR' => 'fre-FR'],
+            'names' => ['fre-FR' => 'fre-FR'],
+            'validatorConfiguration' => [],
+        ];
     }
 
     public function testAssertInstanceOfFieldTypeHandler()
     {
         $checkboxHandler = new Checkbox($this->fieldHelper);
 
-        $this->assertInstanceOf(FieldTypeHandler::class, $checkboxHandler);
+        self::assertInstanceOf(FieldTypeHandler::class, $checkboxHandler);
     }
 
     public function testConvertFieldValueToForm()
@@ -75,7 +75,7 @@ class CheckboxTest extends TestCase
 
         $returnedBool = $checkboxHandler->convertFieldValueToForm($checkboxValue);
 
-        $this->assertTrue($returnedBool);
+        self::assertTrue($returnedBool);
     }
 
     public function testConvertFieldValueFromForm()
@@ -85,30 +85,31 @@ class CheckboxTest extends TestCase
 
         $returnedBool = $checkboxHandler->convertFieldValueFromForm(true);
 
-        $this->assertEquals($checkboxValue, $returnedBool);
+        self::assertSame($checkboxValue->bool, $returnedBool->bool);
     }
 
     public function testBuildFieldCreateForm()
     {
         $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
 
-        $options = array(
+        $options = [
             'label' => null,
             'required' => true,
-            'constraints' => array(new Constraints\NotBlank()),
-            'ezforms' => array(
+            'constraints' => [new Constraints\NotBlank()],
+            'ezforms' => [
                 'description' => null,
                 'language_code' => 'eng-GB',
                 'fielddefinition' => $fieldDefinition,
-            ),
+            ],
             'data' => true,
-        );
+        ];
 
-        $this->formBuilder->expects($this->once())
+        $this->formBuilder->expects(self::once())
             ->method('add')->withConsecutive(
-                array(
+                [
                     $fieldDefinition->identifier, CheckboxType::class, $options,
-                ));
+                ]
+            );
 
         $checkboxHandler = new Checkbox($this->fieldHelper);
         $checkboxHandler->buildFieldCreateForm($this->formBuilder, $fieldDefinition, 'eng-GB');
@@ -118,22 +119,22 @@ class CheckboxTest extends TestCase
     {
         $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
 
-        $options = array(
+        $options = [
             'label' => null,
             'required' => true,
-            'constraints' => array(new Constraints\NotBlank()),
-            'ezforms' => array(
+            'constraints' => [new Constraints\NotBlank()],
+            'ezforms' => [
                 'description' => null,
                 'language_code' => 'eng-GB',
                 'fielddefinition' => $fieldDefinition,
                 'content' => $this->content,
-            ),
-        );
+            ],
+        ];
 
-        $this->formBuilder->expects($this->once())
-            ->method('add')->withConsecutive(array(
+        $this->formBuilder->expects(self::once())
+            ->method('add')->withConsecutive([
                 $fieldDefinition->identifier, CheckboxType::class, $options,
-            ));
+            ]);
 
         $checkboxHandler = new Checkbox($this->fieldHelper);
         $checkboxHandler->buildFieldUpdateForm($this->formBuilder, $fieldDefinition, $this->content, 'eng-GB');
@@ -145,24 +146,24 @@ class CheckboxTest extends TestCase
         $fieldDefinitionParameters['defaultValue'] = null;
         $fieldDefinition = new FieldDefinition($fieldDefinitionParameters);
 
-        $options = array(
+        $options = [
             'label' => null,
             'required' => true,
-            'constraints' => array(
+            'constraints' => [
                 new Constraints\NotBlank(),
-            ),
-            'ezforms' => array(
+            ],
+            'ezforms' => [
                 'description' => null,
                 'language_code' => 'eng-GB',
                 'fielddefinition' => $fieldDefinition,
                 'content' => $this->content,
-            ),
-        );
+            ],
+        ];
 
-        $this->formBuilder->expects($this->once())
-            ->method('add')->withConsecutive(array(
+        $this->formBuilder->expects(self::once())
+            ->method('add')->withConsecutive([
                 $fieldDefinition->identifier, CheckboxType::class, $options,
-            ));
+            ]);
 
         $checkboxHandler = new Checkbox($this->fieldHelper);
         $checkboxHandler->buildFieldUpdateForm($this->formBuilder, $fieldDefinition, $this->content, 'eng-GB');

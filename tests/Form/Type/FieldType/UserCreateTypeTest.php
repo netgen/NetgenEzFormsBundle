@@ -17,75 +17,75 @@ class UserCreateTypeTest extends TestCase
     public function testItExtendsAbstractType()
     {
         $userCreateType = new UserCreateType(10);
-        $this->assertInstanceOf(AbstractType::class, $userCreateType);
+        self::assertInstanceOf(AbstractType::class, $userCreateType);
     }
 
     public function testBuildForm()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $emailOptions = array(
+        $emailOptions = [
             'label' => 'E-mail address',
-            'constraints' => array(
+            'constraints' => [
                 new Constraints\NotBlank(),
                 new Constraints\Email(),
-            ),
-        );
+            ],
+        ];
 
-        $usernameOptions = array(
+        $usernameOptions = [
             'label' => 'Username',
-            'constraints' => array(
+            'constraints' => [
                 new Constraints\NotBlank(),
-            ),
-        );
+            ],
+        ];
 
-        $passwordConstraints = array(
+        $passwordConstraints = [
             new Constraints\NotBlank(),
             new Constraints\Length(
-                array(
+                [
                     'min' => 10,
-                )
+                ]
             ),
-        );
+        ];
 
-        $passwordOptions = array(
+        $passwordOptions = [
             'type' => PasswordType::class,
             'invalid_message' => 'Both passwords must match.',
-            'options' => array(
+            'options' => [
                 'constraints' => $passwordConstraints,
-            ),
-            'first_options' => array(
+            ],
+            'first_options' => [
                 'label' => 'Password',
-            ),
-            'second_options' => array(
+            ],
+            'second_options' => [
                 'label' => 'Repeat password',
-            ),
-        );
+            ],
+        ];
 
-        $formBuilder->expects($this->at(0))
+        $formBuilder->expects(self::at(0))
             ->method('add')
             ->willReturn($formBuilder)
             ->with('email', EmailType::class, $emailOptions);
 
-        $formBuilder->expects($this->at(1))
+        $formBuilder->expects(self::at(1))
             ->method('add')
             ->willReturn($formBuilder)
             ->with('username', TextType::class, $usernameOptions);
 
-        $formBuilder->expects($this->at(2))
+        $formBuilder->expects(self::at(2))
             ->method('add')
             ->with('password', RepeatedType::class, $passwordOptions);
 
         $userCreateType = new UserCreateType(10);
-        $userCreateType->buildForm($formBuilder, array());
+        $userCreateType->buildForm($formBuilder, []);
     }
 
     public function testGetName()
     {
         $userCreateType = new UserCreateType(10);
-        $this->assertEquals('ezforms_ezuser_create', $userCreateType->getName());
+        self::assertSame('ezforms_ezuser_create', $userCreateType->getName());
     }
 }

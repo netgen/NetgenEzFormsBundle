@@ -20,7 +20,7 @@ class CreateUserMapper extends DataMapper
      */
     protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
-        /** @var $userCreateStruct \eZ\Publish\Core\Repository\Values\User\UserCreateStruct */
+        /** @var \eZ\Publish\Core\Repository\Values\User\UserCreateStruct $userCreateStruct */
         $userCreateStruct = $data->payload;
         $contentType = $userCreateStruct->contentType;
 
@@ -49,7 +49,7 @@ class CreateUserMapper extends DataMapper
      */
     protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
-        /** @var $userCreateStruct \eZ\Publish\API\Repository\Values\User\UserCreateStruct */
+        /** @var \eZ\Publish\API\Repository\Values\User\UserCreateStruct $userCreateStruct */
         $userCreateStruct = $data->payload;
         $contentType = $userCreateStruct->contentType;
 
@@ -72,7 +72,7 @@ class CreateUserMapper extends DataMapper
         if ($fieldTypeIdentifier === 'ezuser') {
             $userCreateStruct->login = $convertedData['username'];
             $userCreateStruct->email = $convertedData['email'];
-            $userCreateStruct->password = isset($convertedData['password']) ? $convertedData['password'] : null;
+            $userCreateStruct->password = $convertedData['password'] ?? null;
         } else {
             $userCreateStruct->setField($fieldDefinitionIdentifier, $convertedData);
         }

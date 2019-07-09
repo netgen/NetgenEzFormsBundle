@@ -37,7 +37,7 @@ class CreateContentType extends AbstractContentType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /** @var $dataWrapper \Netgen\Bundle\EzFormsBundle\Form\DataWrapper */
+        /** @var \Netgen\Bundle\EzFormsBundle\Form\DataWrapper $dataWrapper */
         $dataWrapper = $options['data'];
 
         if (!$dataWrapper instanceof DataWrapper) {

@@ -19,7 +19,7 @@ class Url extends FieldTypeHandler
      */
     public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
-        return array('url' => $value->link, 'text' => $value->text);
+        return ['url' => $value->link, 'text' => $value->text];
     }
 
     /**
@@ -30,7 +30,7 @@ class Url extends FieldTypeHandler
     public function convertFieldValueFromForm($data)
     {
         if (!is_array($data)) {
-            $data = array();
+            $data = [];
             $data['url'] = null;
             $data['text'] = null;
         }

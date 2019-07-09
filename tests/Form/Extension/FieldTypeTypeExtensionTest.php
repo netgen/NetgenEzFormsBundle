@@ -15,17 +15,17 @@ class FieldTypeTypeExtensionTest extends TestCase
     {
         $extension = new FieldTypeTypeExtension();
 
-        $this->assertEquals(FormType::class, $extension->getExtendedType());
+        self::assertSame(FormType::class, $extension->getExtendedType());
     }
 
     public function testSetDefaultOptions()
     {
         $resolver = $this->getMockBuilder(OptionsResolver::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('setDefined'))
+            ->setMethods(['setDefined'])
             ->getMock();
 
-        $resolver->expects($this->once())
+        $resolver->expects(self::once())
             ->method('setDefined');
 
         $extension = new FieldTypeTypeExtension();
@@ -40,14 +40,14 @@ class FieldTypeTypeExtensionTest extends TestCase
 
         $form = $this->getMockForAbstractClass(FormInterface::class);
 
-        $options = array(
-            'ezforms' => array(
+        $options = [
+            'ezforms' => [
                 'fielddefinition' => 'fielddefinition',
                 'language_code' => 'language_code',
                 'content' => 'content',
                 'description' => 'description',
-            ),
-        );
+            ],
+        ];
 
         $extension = new FieldTypeTypeExtension();
         $extension->buildView($formView, $form, $options);

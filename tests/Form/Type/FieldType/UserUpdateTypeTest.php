@@ -16,61 +16,61 @@ class UserUpdateTypeTest extends TestCase
     public function testItExtendsAbstractType()
     {
         $updateUserType = new UserUpdateType(10);
-        $this->assertInstanceOf(AbstractType::class, $updateUserType);
+        self::assertInstanceOf(AbstractType::class, $updateUserType);
     }
 
     public function testBuildForm()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $emailOptions = array(
+        $emailOptions = [
             'label' => 'E-mail address',
-            'constraints' => array(
+            'constraints' => [
                 new Constraints\NotBlank(),
                 new Constraints\Email(),
-            ),
-        );
+            ],
+        ];
 
         $passwordConstraints[] = new Constraints\Length(
-            array(
+            [
                 'min' => 10,
-            )
+            ]
         );
 
-        $passwordOptions = array(
+        $passwordOptions = [
             'type' => PasswordType::class,
             'required' => false,
             'invalid_message' => 'Both passwords must match.',
-            'options' => array(
+            'options' => [
                 'constraints' => $passwordConstraints,
-            ),
-            'first_options' => array(
+            ],
+            'first_options' => [
                 'label' => 'New password (leave empty to keep current password)',
-            ),
-            'second_options' => array(
+            ],
+            'second_options' => [
                 'label' => 'Repeat new password',
-            ),
-        );
+            ],
+        ];
 
-        $formBuilder->expects($this->at(0))
+        $formBuilder->expects(self::at(0))
             ->method('add')
             ->willReturn($formBuilder)
             ->with('email', EmailType::class, $emailOptions);
 
-        $formBuilder->expects($this->at(1))
+        $formBuilder->expects(self::at(1))
             ->method('add')
             ->with('password', RepeatedType::class, $passwordOptions);
 
         $userCreateType = new UserUpdateType(10);
-        $userCreateType->buildForm($formBuilder, array());
+        $userCreateType->buildForm($formBuilder, []);
     }
 
     public function testGetName()
     {
         $updateUserType = new UserUpdateType(10);
-        $this->assertEquals('ezforms_ezuser_update', $updateUserType->getName());
+        self::assertSame('ezforms_ezuser_update', $updateUserType->getName());
     }
 }

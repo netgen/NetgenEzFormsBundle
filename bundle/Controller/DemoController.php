@@ -34,10 +34,10 @@ class DemoController extends Controller
         $data = new DataWrapper($contentCreateStruct, $contentCreateStruct->contentType);
 
         // No method to create named builder in framework controller
-        /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
+        /** @var \Symfony\Component\Form\FormBuilderInterface $formBuilder */
         $formBuilder = $this->container->get('form.factory')->createBuilder(CreateContentType::class, $data);
         // Adding controls as EzFormsBundle does not do that by itself
-        $formBuilder->add('save', SubmitType::class, array('label' => 'Publish'));
+        $formBuilder->add('save', SubmitType::class, ['label' => 'Publish']);
 
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
@@ -50,9 +50,9 @@ class DemoController extends Controller
 
                 $contentDraft = $contentService->createContent(
                     $data->payload,
-                    array(
+                    [
                         $locationService->newLocationCreateStruct($rootLocation->id),
-                    )
+                    ]
                 );
 
                 $content = $contentService->publishVersion($contentDraft->versionInfo);
@@ -75,9 +75,9 @@ class DemoController extends Controller
 
         return $this->render(
             'NetgenEzFormsBundle::demo_form.html.twig',
-            array(
+            [
                 'form' => $form->createView(),
-            )
+            ]
         );
     }
 
@@ -96,10 +96,10 @@ class DemoController extends Controller
         $data = new DataWrapper($contentUpdateStruct, $contentType, $content);
 
         // No method to create named builder in framework controller
-        /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
+        /** @var \Symfony\Component\Form\FormBuilderInterface $formBuilder */
         $formBuilder = $this->container->get('form.factory')->createBuilder(UpdateContentType::class, $data);
         // Adding controls as EzFormsBundle does not do that by itself
-        $formBuilder->add('save', SubmitType::class, array('label' => 'Update'));
+        $formBuilder->add('save', SubmitType::class, ['label' => 'Update']);
 
         $form = $formBuilder->getForm();
         //$form = $this->createForm(UpdateContentType::class, $data);
@@ -134,16 +134,15 @@ class DemoController extends Controller
 
         return $this->render(
             'NetgenEzFormsBundle::demo_form.html.twig',
-            array(
+            [
                 'form' => $form->createView(),
-            )
+            ]
         );
     }
 
     public function demoCreateUserAction(Request $request)
     {
-        // @todo check that user really is anonymous, otherwise it does not make sense to allow registration
-
+        /** @todo check that user really is anonymous, otherwise it does not make sense to allow registration */
         $repository = $this->getRepository();
         $userService = $repository->getUserService();
         $repository->setCurrentUser(
@@ -165,22 +164,22 @@ class DemoController extends Controller
         $data = new DataWrapper($userCreateStruct, $userCreateStruct->contentType);
 
         // No method to create named builder in framework controller
-        /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
+        /** @var \Symfony\Component\Form\FormBuilderInterface $formBuilder */
         $formBuilder = $this->container->get('form.factory')->createBuilder(CreateUserType::class, $data);
         // Adding controls as EzFormsBundle does not do that by itself
-        $formBuilder->add('save', SubmitType::class, array('label' => 'Publish'));
+        $formBuilder->add('save', SubmitType::class, ['label' => 'Publish']);
 
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            // @todo ensure that user can create 'user' type under required UserGroup Location
+            /** @todo ensure that user can create 'user' type under required UserGroup Location */
             $userGroup = $userService->loadUserGroup(13);
 
             try {
                 $user = $userService->createUser(
                     $data->payload,
-                    array($userGroup)
+                    [$userGroup]
                 );
 
                 // @todo send confirmation email and redirect to proper location (enter confirmation code or something)
@@ -200,6 +199,7 @@ class DemoController extends Controller
                     foreach ($userCreateStruct->contentType->getFieldDefinitions() as $fieldDefinition) {
                         if ($fieldDefinition->fieldTypeIdentifier === 'ezuser') {
                             $userFieldDefinition = $fieldDefinition;
+
                             break;
                         }
                     }
@@ -221,9 +221,9 @@ class DemoController extends Controller
 
         return $this->render(
             'NetgenEzFormsBundle::demo_form.html.twig',
-            array(
+            [
                 'form' => $form->createView(),
-            )
+            ]
         );
     }
 
@@ -238,7 +238,7 @@ class DemoController extends Controller
             $repository->getUserService()->loadUserByLogin('admin')
         );
 
-        // @todo load current user
+        /** @todo load current user */
         $user = $userService->loadUser(142);
         $contentType = $repository->getContentTypeService()->loadContentTypeByIdentifier('user');
         $contentUpdateStruct = $contentService->newContentUpdateStruct();
@@ -249,10 +249,10 @@ class DemoController extends Controller
         $data = new DataWrapper($userUpdateStruct, $contentType, $user);
 
         // No method to create named builder in framework controller
-        /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
+        /** @var \Symfony\Component\Form\FormBuilderInterface $formBuilder */
         $formBuilder = $this->container->get('form.factory')->createBuilder(UpdateUserType::class, $data);
         // Adding controls as EzFormsBundle does not do that by itself
-        $formBuilder->add('save', SubmitType::class, array('label' => 'Update'));
+        $formBuilder->add('save', SubmitType::class, ['label' => 'Update']);
 
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
@@ -271,9 +271,9 @@ class DemoController extends Controller
 
         return $this->render(
             'NetgenEzFormsBundle::demo_form.html.twig',
-            array(
+            [
                 'form' => $form->createView(),
-            )
+            ]
         );
     }
 
@@ -295,10 +295,10 @@ class DemoController extends Controller
         $data = new DataWrapper($informationCollection, $contentType);
 
         // No method to create named builder in framework controller
-        /** @var $formBuilder \Symfony\Component\Form\FormBuilderInterface */
+        /** @var \Symfony\Component\Form\FormBuilderInterface $formBuilder */
         $formBuilder = $this->container->get('form.factory')->createBuilder(InformationCollectionType::class, $data);
         // Adding controls as EzFormsBundle does not do that by itself
-        $formBuilder->add('save', SubmitType::class, array('label' => 'Publish'));
+        $formBuilder->add('save', SubmitType::class, ['label' => 'Publish']);
 
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
@@ -313,9 +313,9 @@ class DemoController extends Controller
 
         return $this->render(
             'NetgenEzFormsBundle::demo_form.html.twig',
-            array(
+            [
                 'form' => $form->createView(),
-            )
+            ]
         );
     }
 }

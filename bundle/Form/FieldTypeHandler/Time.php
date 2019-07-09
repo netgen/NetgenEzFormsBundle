@@ -23,7 +23,7 @@ class Time extends FieldTypeHandler
     {
         $time = $value->time;
         if (is_int($time)) {
-            return new DateTime("@$time");
+            return new DateTime("@{$time}");
         }
 
         return new DateTime();

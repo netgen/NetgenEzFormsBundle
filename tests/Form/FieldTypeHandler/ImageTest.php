@@ -16,17 +16,17 @@ class ImageTest extends TestCase
     {
         $image = new Image();
 
-        $this->assertInstanceOf(FieldTypeHandler::class, $image);
+        self::assertInstanceOf(FieldTypeHandler::class, $image);
     }
 
     public function testConvertFieldValueToForm()
     {
         $image = new Image();
-        $imageValue = new ImageValue(array('fileName' => 'picture.jpeg'));
+        $imageValue = new ImageValue(['fileName' => 'picture.jpeg']);
 
         $returnedValue = $image->convertFieldValueToForm($imageValue);
 
-        $this->assertNull($returnedValue);
+        self::assertNull($returnedValue);
     }
 
     public function testConvertFieldValueFromForm()
@@ -36,7 +36,7 @@ class ImageTest extends TestCase
 
         $returnedData = $image->convertFieldValueFromForm($data);
 
-        $this->assertInstanceOf(ImageValue::class, $returnedData);
+        self::assertInstanceOf(ImageValue::class, $returnedData);
     }
 
     public function testConvertFieldValueFromFormWhenDataIsNull()
@@ -44,27 +44,27 @@ class ImageTest extends TestCase
         $image = new Image();
         $returnedData = $image->convertFieldValueFromForm(null);
 
-        $this->assertNull($returnedData);
+        self::assertNull($returnedData);
     }
 
     public function testBuildFieldCreateForm()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->exactly(2))
+        $formBuilder->expects(self::exactly(2))
             ->method('add');
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-            )
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+            ]
         );
 
         $languageCode = 'eng-GB';

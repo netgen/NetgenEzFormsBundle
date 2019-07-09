@@ -15,29 +15,31 @@ class MapLocationTest extends TestCase
     {
         $map = new MapLocation();
 
-        $this->assertInstanceOf(FieldTypeHandler::class, $map);
+        self::assertInstanceOf(FieldTypeHandler::class, $map);
     }
 
     public function testConvertFieldValueToForm()
     {
         $map = new MapLocation();
-        $data = array('latitude' => 34, 'longitude' => 123, 'address' => null);
+        $data = ['latitude' => 34, 'longitude' => 123, 'address' => null];
         $mapValue = new MapLocationValue($data);
 
         $returnedValue = $map->convertFieldValueToForm($mapValue);
 
-        $this->assertEquals($data, $returnedValue);
+        self::assertSame($data, $returnedValue);
     }
 
     public function testConvertFieldValueFromForm()
     {
         $map = new MapLocation();
-        $data = array('latitude' => 34, 'longitude' => 123, 'address' => null);
+        $data = ['latitude' => 34, 'longitude' => 123, 'address' => null];
         $mapValue = new MapLocationValue($data);
 
         $returnedValue = $map->convertFieldValueFromForm($data);
 
-        $this->assertEquals($mapValue, $returnedValue);
+        self::assertSame($mapValue->latitude, $returnedValue->latitude);
+        self::assertSame($mapValue->longitude, $returnedValue->longitude);
+        self::assertSame($mapValue->address, $returnedValue->address);
     }
 
     public function testConvertFieldValueFromFormWhenDataIsNotArray()
@@ -46,27 +48,27 @@ class MapLocationTest extends TestCase
 
         $returnedValue = $map->convertFieldValueFromForm(null);
 
-        $this->assertNull($returnedValue);
+        self::assertNull($returnedValue);
     }
 
     public function testBuildFieldCreateForm()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('add');
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-            )
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+            ]
         );
 
         $languageCode = 'eng-GB';

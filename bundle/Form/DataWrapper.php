@@ -19,7 +19,7 @@ class DataWrapper
      *
      * In case of Content or User target, this must be the corresponding ContentType.
      *
-     * @var null|mixed
+     * @var mixed|null
      */
     public $definition;
 
@@ -29,7 +29,7 @@ class DataWrapper
      * This target makes sense only in update context, when creating target does not
      * exist (yet to be created).
      *
-     * @var null|mixed
+     * @var mixed|null
      */
     public $target;
 
@@ -37,8 +37,8 @@ class DataWrapper
      * Construct from payload, target and definition.
      *
      * @param mixed $payload
-     * @param null|mixed $target
-     * @param null|mixed $definition
+     * @param mixed|null $target
+     * @param mixed|null $definition
      */
     public function __construct($payload, $definition = null, $target = null)
     {

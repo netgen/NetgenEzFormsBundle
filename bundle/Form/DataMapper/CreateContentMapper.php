@@ -20,7 +20,7 @@ class CreateContentMapper extends DataMapper
      */
     protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
-        /** @var $contentCreateStruct \eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct */
+        /** @var \eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct $contentCreateStruct */
         $contentCreateStruct = $data->payload;
         $contentType = $contentCreateStruct->contentType;
 
@@ -49,7 +49,7 @@ class CreateContentMapper extends DataMapper
      */
     protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
-        /** @var $contentCreateStruct \eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct */
+        /** @var \eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct $contentCreateStruct */
         $contentCreateStruct = $data->payload;
         $contentType = $contentCreateStruct->contentType;
 

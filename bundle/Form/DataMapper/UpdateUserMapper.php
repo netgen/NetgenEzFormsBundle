@@ -20,11 +20,11 @@ class UpdateUserMapper extends DataMapper
      */
     protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
-        /** @var $userUpdateStruct \eZ\Publish\API\Repository\Values\User\UserUpdateStruct */
+        /** @var \eZ\Publish\API\Repository\Values\User\UserUpdateStruct $userUpdateStruct */
         $userUpdateStruct = $data->payload;
-        /** @var $user \eZ\Publish\API\Repository\Values\User\User */
+        /** @var \eZ\Publish\API\Repository\Values\User\User $user */
         $user = $data->target;
-        /** @var $contentType \eZ\Publish\API\Repository\Values\ContentType\ContentType */
+        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $data->definition;
 
         $fieldDefinitionIdentifier = (string) $propertyPath;
@@ -42,9 +42,9 @@ class UpdateUserMapper extends DataMapper
         // Only email is set as it doesn't make sense to set the password to the form.
         if ($fieldTypeIdentifier === 'ezuser') {
             $form->setData(
-                array(
+                [
                     'email' => $user->email,
-                )
+                ]
             );
         } else {
             $handler = $this->fieldTypeHandlerRegistry->get($fieldTypeIdentifier);
@@ -65,9 +65,9 @@ class UpdateUserMapper extends DataMapper
      */
     protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
-        /** @var $userUpdateStruct \eZ\Publish\API\Repository\Values\User\UserUpdateStruct */
+        /** @var \eZ\Publish\API\Repository\Values\User\UserUpdateStruct $userUpdateStruct */
         $userUpdateStruct = $data->payload;
-        /** @var $contentType \eZ\Publish\API\Repository\Values\ContentType\ContentType */
+        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $data->definition;
 
         $fieldDefinitionIdentifier = (string) $propertyPath;
@@ -97,9 +97,9 @@ class UpdateUserMapper extends DataMapper
             // @todo this should be improved on eZ side
             $userUpdateStruct->contentUpdateStruct->setField(
                 $fieldDefinitionIdentifier,
-                array(
+                [
                     'login' => 'dummy',
-                )
+                ]
             );
         }
         // Else set field to struct, but only if it is not empty or it has not been marked

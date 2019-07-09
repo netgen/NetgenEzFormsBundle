@@ -29,7 +29,7 @@ class Image extends FieldTypeHandler
     /**
      * {@inheritdoc}
      *
-     * @param null|\Symfony\Component\HttpFoundation\File\UploadedFile $data
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile|null $data
      */
     public function convertFieldValueFromForm($data)
     {
@@ -37,11 +37,11 @@ class Image extends FieldTypeHandler
             return null;
         }
 
-        $imageData = array(
+        $imageData = [
             'inputUri' => $data->getRealPath(),
             'fileName' => $data->getClientOriginalName(),
             'fileSize' => $data->getSize(),
-        );
+        ];
 
         return new ImageValue($imageData);
     }
@@ -61,9 +61,9 @@ class Image extends FieldTypeHandler
 
         if ($maxFileSize !== false) {
             $options['constraints'][] = new Constraints\File(
-                array(
+                [
                     'maxSize' => $maxFileSize,
-                )
+                ]
             );
         }
 

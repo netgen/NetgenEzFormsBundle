@@ -48,7 +48,7 @@ class TextLine extends FieldTypeHandler
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         if (!empty($fieldDefinition->validatorConfiguration['StringLengthValidator'])) {
-            $lengthConstraints = array();
+            $lengthConstraints = [];
 
             $minStringLength = $fieldDefinition->validatorConfiguration['StringLengthValidator']['minStringLength'];
             $maxStringLength = $fieldDefinition->validatorConfiguration['StringLengthValidator']['maxStringLength'];

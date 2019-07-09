@@ -2,7 +2,6 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\DataMapper;
 
-use RuntimeException;
 use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
@@ -11,6 +10,7 @@ use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\CreateUserMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Symfony\Component\Form\FormConfigBuilder;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
@@ -40,17 +40,17 @@ class CreateUserMapperTest extends TestCase
     {
         $this->propertyAccessor = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyAccessorInterface')
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $this->registry = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry')
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $this->handler = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerInterface')
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $this->mapper = new CreateUserMapper($this->registry, $this->propertyAccessor);
@@ -58,71 +58,71 @@ class CreateUserMapperTest extends TestCase
 
     public function testInstanceOfDataMapper()
     {
-        $this->assertInstanceOf(DataMapper::class, $this->mapper);
+        self::assertInstanceOf(DataMapper::class, $this->mapper);
     }
 
     public function testMapDataToForms()
     {
         $contentType = new ContentType(
-            array(
+            [
                 'id' => 123,
-                'fieldDefinitions' => array(
+                'fieldDefinitions' => [
                     new FieldDefinition(
-                        array(
+                        [
                             'id' => 'id',
                             'identifier' => 'name',
                             'fieldTypeIdentifier' => 'eztext',
                             'defaultValue' => new TextLineValue('Some name'),
-                        )
+                        ]
                     ),
-                ),
-            )
+                ],
+            ]
         );
 
-        $this->registry->expects($this->once())
+        $this->registry->expects(self::once())
             ->method('get')
             ->with('eztext')
-            ->will($this->returnValue($this->handler));
+            ->willReturn($this->handler);
 
-        $this->handler->expects($this->once())
+        $this->handler->expects(self::once())
             ->method('convertFieldValueToForm')
             ->willReturn('Some name');
 
-        $userCreateStruct = new UserCreateStruct(array('contentType' => $contentType));
+        $userCreateStruct = new UserCreateStruct(['contentType' => $contentType]);
         $data = new DataWrapper($userCreateStruct);
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getMapped'))
+            ->setMethods(['getMapped'])
             ->getMock();
 
-        $config->expects($this->once())
+        $config->expects(self::once())
             ->method('getMapped')
             ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('__toString'))
+            ->setMethods(['__toString'])
             ->getMockForAbstractClass();
 
-        $propertyPath->expects($this->once())
+        $propertyPath->expects(self::once())
             ->method('__toString')
             ->willReturn('name');
 
         $form = $this->getForm();
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('setData');
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('getConfig')
             ->willReturn($config);
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('getPropertyPath')
             ->willReturn($propertyPath);
 
-        $this->mapper->mapDataToForms($data, array($form));
+        $this->mapper->mapDataToForms($data, [$form]);
     }
 
     public function testMapDataToFormsWithInvalidFieldDefinition()
@@ -130,213 +130,213 @@ class CreateUserMapperTest extends TestCase
         $this->expectException(RuntimeException::class);
 
         $contentType = new ContentType(
-            array(
+            [
                 'id' => 123,
-                'fieldDefinitions' => array(
+                'fieldDefinitions' => [
                     new FieldDefinition(
-                        array(
+                        [
                             'id' => 'id',
                             'identifier' => 'test',
                             'fieldTypeIdentifier' => 'eztext',
                             'defaultValue' => new TextLineValue('Some name'),
-                        )
+                        ]
                     ),
-                ),
-            )
+                ],
+            ]
         );
 
-        $userCreateStruct = new UserCreateStruct(array('contentType' => $contentType));
+        $userCreateStruct = new UserCreateStruct(['contentType' => $contentType]);
         $data = new DataWrapper($userCreateStruct);
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getMapped'))
+            ->setMethods(['getMapped'])
             ->getMock();
 
-        $config->expects($this->once())
+        $config->expects(self::once())
             ->method('getMapped')
             ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('__toString'))
+            ->setMethods(['__toString'])
             ->getMockForAbstractClass();
 
-        $propertyPath->expects($this->once())
+        $propertyPath->expects(self::once())
             ->method('__toString')
             ->willReturn('name');
 
         $form = $this->getForm();
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('getConfig')
             ->willReturn($config);
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('getPropertyPath')
             ->willReturn($propertyPath);
 
-        $this->mapper->mapDataToForms($data, array($form));
+        $this->mapper->mapDataToForms($data, [$form]);
     }
 
     public function testMapFormsToDataFieldTypeIdentifierNotEzUser()
     {
         $contentType = new ContentType(
-            array(
+            [
                 'id' => 123,
-                'fieldDefinitions' => array(
+                'fieldDefinitions' => [
                     new FieldDefinition(
-                        array(
+                        [
                             'id' => 'id',
                             'identifier' => 'name',
                             'fieldTypeIdentifier' => 'eztext',
                             'defaultValue' => new TextLineValue('Some name'),
-                        )
+                        ]
                     ),
-                ),
-            )
+                ],
+            ]
         );
 
-        $this->registry->expects($this->once())
+        $this->registry->expects(self::once())
             ->method('get')
             ->with('eztext')
-            ->will($this->returnValue($this->handler));
+            ->willReturn($this->handler);
 
-        $this->handler->expects($this->once())
+        $this->handler->expects(self::once())
             ->method('convertFieldValueFromForm')
             ->willReturn(new TextLineValue('Some name'));
 
-        $userCreateStruct = new UserCreateStruct(array('contentType' => $contentType));
+        $userCreateStruct = new UserCreateStruct(['contentType' => $contentType]);
         $data = new DataWrapper($userCreateStruct);
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getMapped'))
+            ->setMethods(['getMapped'])
             ->getMock();
 
-        $config->expects($this->once())
+        $config->expects(self::once())
             ->method('getMapped')
             ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('__toString'))
+            ->setMethods(['__toString'])
             ->getMockForAbstractClass();
 
-        $propertyPath->expects($this->once())
+        $propertyPath->expects(self::once())
             ->method('__toString')
             ->willReturn('name');
 
         $form = $this->getForm();
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('isSubmitted')
             ->willReturn(true);
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('isSynchronized')
             ->willReturn(true);
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('isDisabled')
             ->willReturn(false);
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('getData')
             ->willReturn('Some name');
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('getConfig')
             ->willReturn($config);
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('getPropertyPath')
             ->willReturn($propertyPath);
 
-        $this->mapper->mapFormsToData(array($form), $data);
+        $this->mapper->mapFormsToData([$form], $data);
     }
 
     public function testMapFormsToData()
     {
         $contentType = new ContentType(
-            array(
+            [
                 'id' => 123,
-                'fieldDefinitions' => array(
+                'fieldDefinitions' => [
                     new FieldDefinition(
-                        array(
+                        [
                             'id' => 'id',
                             'identifier' => 'name',
                             'fieldTypeIdentifier' => 'ezuser',
                             'defaultValue' => new TextLineValue('Some name'),
-                        )
+                        ]
                     ),
-                ),
-            )
+                ],
+            ]
         );
 
-        $this->registry->expects($this->once())
+        $this->registry->expects(self::once())
             ->method('get')
             ->with('ezuser')
-            ->will($this->returnValue($this->handler));
+            ->willReturn($this->handler);
 
-        $formData = array(
+        $formData = [
             'username' => 'username',
             'email' => 'email@test.com',
             'password' => 'passw0rd',
-        );
+        ];
 
-        $this->handler->expects($this->once())
+        $this->handler->expects(self::once())
             ->method('convertFieldValueFromForm')
             ->willReturn($formData);
 
-        $userCreateStruct = new UserCreateStruct(array('contentType' => $contentType));
+        $userCreateStruct = new UserCreateStruct(['contentType' => $contentType]);
         $data = new DataWrapper($userCreateStruct);
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getMapped'))
+            ->setMethods(['getMapped'])
             ->getMock();
 
-        $config->expects($this->once())
+        $config->expects(self::once())
             ->method('getMapped')
             ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('__toString'))
+            ->setMethods(['__toString'])
             ->getMockForAbstractClass();
 
-        $propertyPath->expects($this->once())
+        $propertyPath->expects(self::once())
             ->method('__toString')
             ->willReturn('name');
 
         $form = $this->getForm();
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('isSubmitted')
             ->willReturn(true);
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('isSynchronized')
             ->willReturn(true);
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('isDisabled')
             ->willReturn(false);
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('getData')
             ->willReturn($formData);
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('getConfig')
             ->willReturn($config);
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('getPropertyPath')
             ->willReturn($propertyPath);
 
-        $this->mapper->mapFormsToData(array($form), $data);
+        $this->mapper->mapFormsToData([$form], $data);
     }
 
     public function testMapFormsToDataWithInvalidFieldDefinition()
@@ -344,74 +344,72 @@ class CreateUserMapperTest extends TestCase
         $this->expectException(RuntimeException::class);
 
         $contentType = new ContentType(
-            array(
+            [
                 'id' => 123,
-                'fieldDefinitions' => array(
+                'fieldDefinitions' => [
                     new FieldDefinition(
-                        array(
+                        [
                             'id' => 'id',
                             'identifier' => 'test',
                             'fieldTypeIdentifier' => 'ezuser',
                             'defaultValue' => new TextLineValue('Some name'),
-                        )
+                        ]
                     ),
-                ),
-            )
+                ],
+            ]
         );
 
-        $userCreateStruct = new UserCreateStruct(array('contentType' => $contentType));
+        $userCreateStruct = new UserCreateStruct(['contentType' => $contentType]);
         $data = new DataWrapper($userCreateStruct);
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getMapped'))
+            ->setMethods(['getMapped'])
             ->getMock();
 
-        $config->expects($this->once())
+        $config->expects(self::once())
             ->method('getMapped')
             ->willReturn(true);
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('__toString'))
+            ->setMethods(['__toString'])
             ->getMockForAbstractClass();
 
-        $propertyPath->expects($this->once())
+        $propertyPath->expects(self::once())
             ->method('__toString')
             ->willReturn('name');
 
         $form = $this->getForm();
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('isSubmitted')
             ->willReturn(true);
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('isSynchronized')
             ->willReturn(true);
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('isDisabled')
             ->willReturn(false);
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('getConfig')
             ->willReturn($config);
 
-        $form->expects($this->once())
+        $form->expects(self::once())
             ->method('getPropertyPath')
             ->willReturn($propertyPath);
 
-        $this->mapper->mapFormsToData(array($form), $data);
+        $this->mapper->mapFormsToData([$form], $data);
     }
 
     private function getForm()
     {
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')
+        return $this->getMockBuilder('Symfony\Component\Form\Form')
             ->disableOriginalConstructor()
-            ->setMethods(array('getData', 'setData', 'getPropertyPath', 'getConfig', 'isSubmitted', 'isSynchronized', 'isDisabled'))
+            ->setMethods(['getData', 'setData', 'getPropertyPath', 'getConfig', 'isSubmitted', 'isSynchronized', 'isDisabled'])
             ->getMock();
-
-        return $form;
     }
 }

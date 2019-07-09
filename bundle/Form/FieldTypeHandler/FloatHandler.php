@@ -65,7 +65,7 @@ class FloatHandler extends FieldTypeHandler
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         if (!empty($fieldDefinition->getValidatorConfiguration()['FloatValueValidator'])) {
-            $rangeConstraints = array();
+            $rangeConstraints = [];
 
             $min = $fieldDefinition->getValidatorConfiguration()['FloatValueValidator']['minFloatValue'];
             $max = $fieldDefinition->getValidatorConfiguration()['FloatValueValidator']['maxFloatValue'];

@@ -74,7 +74,7 @@ class Country extends FieldTypeHandler
      */
     public function convertFieldValueFromForm($data)
     {
-        $country = array();
+        $country = [];
 
         // case if multiple is true
         if (is_array($data)) {

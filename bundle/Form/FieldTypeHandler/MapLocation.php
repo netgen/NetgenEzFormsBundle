@@ -20,11 +20,11 @@ class MapLocation extends FieldTypeHandler
      */
     public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
     {
-        return array(
+        return [
             'latitude' => empty($value->latitude) ? null : $value->latitude,
             'longitude' => empty($value->longitude) ? null : $value->longitude,
             'address' => empty($value->address) ? null : $value->address,
-        );
+        ];
     }
 
     /**
@@ -37,11 +37,11 @@ class MapLocation extends FieldTypeHandler
         }
 
         return new MapLocationValue\Value(
-            array(
+            [
                 'latitude' => $data['latitude'],
                 'longitude' => $data['longitude'],
                 'address' => $data['address'],
-            )
+            ]
         );
     }
 

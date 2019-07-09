@@ -15,7 +15,7 @@ class DateAndTimeTest extends TestCase
     {
         $dateAndTime = new DateAndTime();
 
-        $this->assertInstanceOf(FieldTypeHandler::class, $dateAndTime);
+        self::assertInstanceOf(FieldTypeHandler::class, $dateAndTime);
     }
 
     public function testConvertFieldValueToForm()
@@ -26,7 +26,7 @@ class DateAndTimeTest extends TestCase
 
         $returnedDate = $dateAndTime->convertFieldValueToForm($dateValue);
 
-        $this->assertEquals($dateTime, $returnedDate);
+        self::assertSame($dateTime, $returnedDate);
     }
 
     public function testConvertFieldValueFromForm()
@@ -37,27 +37,27 @@ class DateAndTimeTest extends TestCase
 
         $returnedDate = $dateAndTime->convertFieldValueFromForm($dateTime);
 
-        $this->assertEquals($dateValue, $returnedDate);
+        self::assertSame((string) $dateValue, (string) $returnedDate);
     }
 
     public function testBuildFieldCreateForm()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('add');
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-            )
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+            ]
         );
 
         $languageCode = 'eng-GB';

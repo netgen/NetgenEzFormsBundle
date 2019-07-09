@@ -2,16 +2,16 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
-use InvalidArgumentException;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\LocationList;
 use eZ\Publish\Core\FieldType\Relation\Value as RelationValue;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\Core\Repository\ContentService;
 use eZ\Publish\Core\Repository\LocationService;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\Core\Repository\Values\Content\Location;
+use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\Core\SignalSlot\Repository;
+use InvalidArgumentException;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Relation;
 use PHPUnit\Framework\TestCase;
@@ -58,7 +58,7 @@ class RelationTest extends TestCase
     {
         $this->translationHelper = $this->getMockBuilder(TranslationHelper::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('getTranslatedContentNameByContentInfo'))
+            ->setMethods(['getTranslatedContentNameByContentInfo'])
             ->getMock();
 
         $this->contentService = $this->getMockBuilder(ContentService::class)
@@ -81,7 +81,7 @@ class RelationTest extends TestCase
 
         $this->formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
     }
 
@@ -89,7 +89,7 @@ class RelationTest extends TestCase
     {
         $relation = new Relation($this->repository, $this->translationHelper);
 
-        $this->assertInstanceOf(FieldTypeHandler::class, $relation);
+        self::assertInstanceOf(FieldTypeHandler::class, $relation);
     }
 
     public function testConvertFieldValueToForm()
@@ -99,7 +99,7 @@ class RelationTest extends TestCase
 
         $returnedValue = $relation->convertFieldValueToForm($relationValue);
 
-        $this->assertEquals(2, $returnedValue);
+        self::assertSame(2, $returnedValue);
     }
 
     public function testConvertFieldValueToFormNullDestinationContentId()
@@ -109,7 +109,7 @@ class RelationTest extends TestCase
 
         $returnedValue = $relation->convertFieldValueToForm($relationValue);
 
-        $this->assertNull($returnedValue);
+        self::assertNull($returnedValue);
     }
 
     public function testConvertFieldValueFromForm()
@@ -118,7 +118,7 @@ class RelationTest extends TestCase
 
         $returnedValue = $relation->convertFieldValueFromForm(23);
 
-        $this->assertEquals(23, $returnedValue);
+        self::assertSame(23, $returnedValue);
     }
 
     public function testConvertFieldValueFromFormWhenDataIsNull()
@@ -127,34 +127,34 @@ class RelationTest extends TestCase
 
         $returnedValue = $relation->convertFieldValueFromForm(null);
 
-        $this->assertNull($returnedValue);
+        self::assertNull($returnedValue);
     }
 
     public function testBuildFieldCreateForm()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('add');
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-                'fieldSettings' => array(
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+                'fieldSettings' => [
                     'selectionRoot' => 2,
                     'selectionMethod' => 0,
-                ),
-            )
+                ],
+            ]
         );
 
-        $this->translationHelper->expects($this->atLeastOnce())
+        $this->translationHelper->expects(self::atLeastOnce())
             ->method('getTranslatedContentNameByContentInfo')
             ->willReturnOnConsecutiveCalls(
                 'test1',
@@ -162,19 +162,19 @@ class RelationTest extends TestCase
             );
 
         $location = new Location();
-        $this->locationService->expects($this->atLeastOnce())
+        $this->locationService->expects(self::atLeastOnce())
             ->method('loadLocation')
             ->willReturn($location);
 
-        $this->locationService->expects($this->once())
+        $this->locationService->expects(self::once())
             ->method('loadLocationChildren')
             ->with($location)
-            ->willReturn(new LocationList(array(
-                'locations' => array(
-                    new Location(array('contentInfo' => new ContentInfo())),
-                    new Location(array('contentInfo' => new ContentInfo())),
-                ),
-            )));
+            ->willReturn(new LocationList([
+                'locations' => [
+                    new Location(['contentInfo' => new ContentInfo()]),
+                    new Location(['contentInfo' => new ContentInfo()]),
+                ],
+            ]));
 
         $selection = new Relation($this->repository, $this->translationHelper);
         $selection->buildFieldCreateForm($formBuilder, $fieldDefinition, 'eng-GB');
@@ -187,24 +187,24 @@ class RelationTest extends TestCase
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->never())
+        $formBuilder->expects(self::never())
             ->method('add');
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-                'fieldSettings' => array(
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+                'fieldSettings' => [
                     'selectionRoot' => null,
                     'selectionMethod' => 0,
-                ),
-            )
+                ],
+            ]
         );
 
         $selection = new Relation($this->repository, $this->translationHelper);

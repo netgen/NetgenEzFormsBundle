@@ -15,7 +15,7 @@ class FieldTypeHandlerRegistry
      *
      * @var array
      */
-    protected $map = array();
+    protected $map = [];
 
     /**
      * Creates a service registry.
@@ -26,7 +26,7 @@ class FieldTypeHandlerRegistry
      * @param array $map A map where key is FieldType identifier, and value is a callable factory to get
      *                   the FieldTypeHandler object
      */
-    public function __construct(array $map = array())
+    public function __construct(array $map = [])
     {
         $this->map = $map;
     }
@@ -45,7 +45,6 @@ class FieldTypeHandlerRegistry
     /**
      * Returns a FieldTypeHandler for FieldType $identifier.
      *
-     *
      * @param string $identifier The FieldType identifier
      *
      * @throws \OutOfBoundsException
@@ -57,7 +56,8 @@ class FieldTypeHandlerRegistry
     {
         if (!isset($this->map[$identifier])) {
             throw new OutOfBoundsException("No handler registered for FieldType '{$identifier}'.");
-        } elseif (!$this->map[$identifier] instanceof FieldTypeHandler) {
+        }
+        if (!$this->map[$identifier] instanceof FieldTypeHandler) {
             if (!is_callable($this->map[$identifier])) {
                 throw new RuntimeException("FieldTypeHandler '{$identifier}' is not callable nor instance");
             }

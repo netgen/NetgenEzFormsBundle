@@ -34,35 +34,35 @@ class IntegerHandlerTest extends TestCase
     {
         $this->fieldHelper = $this->getMockBuilder(FieldHelper::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('isFieldEmpty'))
+            ->setMethods(['isFieldEmpty'])
             ->getMock();
 
         $this->formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $this->fieldDefinitionParameters = array(
+        $this->fieldDefinitionParameters = [
             'id' => 'id',
             'identifier' => 'identifier',
             'isRequired' => true,
             'defaultValue' => new IntegerValue(5),
-            'descriptions' => array('fre-FR' => 'fre-FR'),
-            'names' => array('fre-FR' => 'fre-FR'),
-            'validatorConfiguration' => array(
-                'IntegerValueValidator' => array(
+            'descriptions' => ['fre-FR' => 'fre-FR'],
+            'names' => ['fre-FR' => 'fre-FR'],
+            'validatorConfiguration' => [
+                'IntegerValueValidator' => [
                     'minIntegerValue' => 4,
                     'maxIntegerValue' => 10,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     public function testAssertInstanceOfFieldTypeHandler()
     {
         $integer = new IntegerHandler($this->fieldHelper);
 
-        $this->assertInstanceOf(FieldTypeHandler::class, $integer);
+        self::assertInstanceOf(FieldTypeHandler::class, $integer);
     }
 
     public function testConvertFieldValueToForm()
@@ -72,7 +72,7 @@ class IntegerHandlerTest extends TestCase
 
         $returnedValue = $integer->convertFieldValueToForm($integerValue);
 
-        $this->assertEquals(5, $returnedValue);
+        self::assertSame(5, $returnedValue);
     }
 
     public function testConvertFieldValueFromForm()
@@ -82,7 +82,7 @@ class IntegerHandlerTest extends TestCase
 
         $returnedValue = $integer->convertFieldValueFromForm(5);
 
-        $this->assertEquals($integerValue, $returnedValue);
+        self::assertSame($integerValue->value, $returnedValue->value);
     }
 
     public function testConvertFieldValueFromFormWhenDataIsNotNumeric()
@@ -92,35 +92,36 @@ class IntegerHandlerTest extends TestCase
 
         $returnedValue = $integer->convertFieldValueFromForm('test');
 
-        $this->assertEquals($integerValue, $returnedValue);
+        self::assertSame($integerValue->value, $returnedValue->value);
     }
 
     public function testBuildFieldCreateForm()
     {
         $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
 
-        $options = array(
+        $options = [
             'label' => null,
             'required' => true,
-            'constraints' => array(
+            'constraints' => [
                 new Constraints\NotBlank(),
-                new Constraints\Range(array('min' => 4, 'max' => 10)),
-            ),
+                new Constraints\Range(['min' => 4, 'max' => 10]),
+            ],
             'data' => 5,
-            'ezforms' => array(
+            'ezforms' => [
                 'description' => null,
                 'language_code' => 'eng-GB',
                 'fielddefinition' => $fieldDefinition,
-            ),
-        );
+            ],
+        ];
 
-        $this->formBuilder->expects($this->once())
+        $this->formBuilder->expects(self::once())
             ->method('add')->withConsecutive(
-                array(
+                [
                     $fieldDefinition->identifier,
                     IntegerType::class,
                     $options,
-            ));
+                ]
+            );
 
         $languageCode = 'eng-GB';
 
@@ -136,25 +137,25 @@ class IntegerHandlerTest extends TestCase
 
         $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
 
-        $options = array(
+        $options = [
             'label' => null,
             'required' => true,
-            'constraints' => array(
+            'constraints' => [
                 new Constraints\NotBlank(),
-                new Constraints\Range(array('min' => 4, 'max' => 10)),
-            ),
-            'ezforms' => array(
+                new Constraints\Range(['min' => 4, 'max' => 10]),
+            ],
+            'ezforms' => [
                 'description' => null,
                 'language_code' => 'eng-GB',
                 'fielddefinition' => $fieldDefinition,
                 'content' => $content,
-            ),
-        );
+            ],
+        ];
 
-        $this->formBuilder->expects($this->once())
-            ->method('add')->withConsecutive(array(
+        $this->formBuilder->expects(self::once())
+            ->method('add')->withConsecutive([
                 $fieldDefinition->identifier, IntegerType::class, $options,
-            ));
+            ]);
 
         $languageCode = 'eng-GB';
 
@@ -172,25 +173,25 @@ class IntegerHandlerTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $options = array(
+        $options = [
             'label' => null,
             'required' => true,
-            'constraints' => array(
+            'constraints' => [
                 new Constraints\NotBlank(),
-                new Constraints\Range(array('min' => 4, 'max' => 10)),
-            ),
-            'ezforms' => array(
+                new Constraints\Range(['min' => 4, 'max' => 10]),
+            ],
+            'ezforms' => [
                 'description' => null,
                 'language_code' => 'eng-GB',
                 'fielddefinition' => $fieldDefinition,
                 'content' => $content,
-            ),
-        );
+            ],
+        ];
 
-        $this->formBuilder->expects($this->once())
-            ->method('add')->withConsecutive(array(
+        $this->formBuilder->expects(self::once())
+            ->method('add')->withConsecutive([
                 $fieldDefinition->identifier, IntegerType::class, $options,
-            ));
+            ]);
 
         $languageCode = 'eng-GB';
 

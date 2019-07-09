@@ -13,227 +13,227 @@ class CountryTest extends TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler()
     {
-        $countries = array(
-            'HR' => array(
+        $countries = [
+            'HR' => [
                 'Name' => 'Croatia',
                 'Code' => 'HR',
                 'Language' => 'cro-HR',
-            ),
-        );
+            ],
+        ];
         $country = new Country($countries);
 
-        $this->assertInstanceOf(FieldTypeHandler::class, $country);
+        self::assertInstanceOf(FieldTypeHandler::class, $country);
     }
 
     public function testConvertFieldValueToForm()
     {
-        $countries = array(
-            'HR' => array(
+        $countries = [
+            'HR' => [
                 'Name' => 'Croatia',
                 'Code' => 'HR',
                 'Language' => 'cro-HR',
-            ),
-        );
+            ],
+        ];
         $country = new Country($countries);
         $countryValue = new CountryValue($countries);
 
         $returnedValue = $country->convertFieldValueToForm($countryValue);
 
-        $this->assertEquals(['HR'], $returnedValue);
+        self::assertSame(['HR'], $returnedValue);
     }
 
     public function testConvertFieldValueToFormMultipleValues()
     {
         $fieldDefinition = new FieldDefinition(
-            array(
-                'fieldSettings' => array(
+            [
+                'fieldSettings' => [
                     'isMultiple' => true,
-                ),
-            )
+                ],
+            ]
         );
 
-        $countries = array(
-            'HR' => array(
+        $countries = [
+            'HR' => [
                 'Name' => 'Croatia',
                 'Code' => 'HR',
                 'Language' => 'cro-HR',
-            ),
-            'BE' => array(
+            ],
+            'BE' => [
                 'Name' => 'Belgium',
                 'Code' => 'BE',
                 'Language' => 'be-FR',
-            ),
-            'BB' => array(
+            ],
+            'BB' => [
                 'Name' => 'Barbados',
                 'Code' => 'BB',
                 'Language' => 'be-FR',
-            ),
-        );
+            ],
+        ];
 
-        $selectedCountries = array(
-            'HR' => array(
+        $selectedCountries = [
+            'HR' => [
                 'Name' => 'Croatia',
                 'Code' => 'HR',
                 'Language' => 'cro-HR',
-            ),
-            'BB' => array(
+            ],
+            'BB' => [
                 'Name' => 'Barbados',
                 'Code' => 'BB',
                 'Language' => 'be-FR',
-            ),
-        );
+            ],
+        ];
 
         $country = new Country($countries);
         $countryValue = new CountryValue($selectedCountries);
 
         $returnedValue = $country->convertFieldValueToForm($countryValue, $fieldDefinition);
 
-        $this->assertEquals(['HR', 'BB'], $returnedValue);
+        self::assertSame(['HR', 'BB'], $returnedValue);
     }
 
     public function testConvertFieldValueToFormSingleValue()
     {
         $fieldDefinition = new FieldDefinition(
-            array(
-                'fieldSettings' => array(
+            [
+                'fieldSettings' => [
                     'isMultiple' => false,
-                ),
-            )
+                ],
+            ]
         );
 
-        $countries = array(
-            'HR' => array(
+        $countries = [
+            'HR' => [
                 'Name' => 'Croatia',
                 'Code' => 'HR',
                 'Language' => 'cro-HR',
-            ),
-            'BE' => array(
+            ],
+            'BE' => [
                 'Name' => 'Belgium',
                 'Code' => 'BE',
                 'Language' => 'be-FR',
-            ),
-            'BB' => array(
+            ],
+            'BB' => [
                 'Name' => 'Barbados',
                 'Code' => 'BB',
                 'Language' => 'be-FR',
-            ),
-        );
+            ],
+        ];
 
-        $selectedCountries = array(
-            'HR' => array(
+        $selectedCountries = [
+            'HR' => [
                 'Name' => 'Croatia',
                 'Code' => 'HR',
                 'Language' => 'cro-HR',
-            ),
-        );
+            ],
+        ];
 
         $country = new Country($countries);
         $countryValue = new CountryValue($selectedCountries);
 
         $returnedValue = $country->convertFieldValueToForm($countryValue, $fieldDefinition);
 
-        $this->assertEquals('HR', $returnedValue);
+        self::assertSame('HR', $returnedValue);
     }
 
     public function testConvertFieldValueToFormWithNoneSelected()
     {
         $fieldDefinition = new FieldDefinition(
-            array(
-                'fieldSettings' => array(
+            [
+                'fieldSettings' => [
                     'isMultiple' => false,
-                ),
-            )
+                ],
+            ]
         );
 
-        $countries = array(
-            'HR' => array(
+        $countries = [
+            'HR' => [
                 'Name' => 'Croatia',
                 'Code' => 'HR',
                 'Language' => 'cro-HR',
-            ),
-            'BE' => array(
+            ],
+            'BE' => [
                 'Name' => 'Belgium',
                 'Code' => 'BE',
                 'Language' => 'be-FR',
-            ),
-            'BB' => array(
+            ],
+            'BB' => [
                 'Name' => 'Barbados',
                 'Code' => 'BB',
                 'Language' => 'be-FR',
-            ),
-        );
+            ],
+        ];
 
-        $selectedCountries = array();
+        $selectedCountries = [];
 
         $country = new Country($countries);
         $countryValue = new CountryValue($selectedCountries);
 
         $returnedValue = $country->convertFieldValueToForm($countryValue, $fieldDefinition);
 
-        $this->assertEquals('', $returnedValue);
+        self::assertSame('', $returnedValue);
     }
 
     public function testConvertFieldValueFromForm()
     {
-        $countries = array(
-            'HR' => array(
+        $countries = [
+            'HR' => [
                 'Name' => 'Croatia',
                 'Code' => 'HR',
                 'Language' => 'cro-HR',
-            ),
-        );
+            ],
+        ];
         $country = new Country($countries);
         $countryValue = new CountryValue($countries);
         $returnedData = $country->convertFieldValueFromForm('HR');
 
-        $this->assertEquals($countryValue, $returnedData);
+        self::assertSame($countryValue->countries, $returnedData->countries);
     }
 
     public function testConvertFieldValueFromFormWithCountryArray()
     {
-        $countries = array(
-            'HR' => array(
+        $countries = [
+            'HR' => [
                 'Name' => 'Croatia',
                 'Code' => 'HR',
                 'Language' => 'cro-HR',
-            ),
-        );
+            ],
+        ];
         $country = new Country($countries);
         $countryValue = new CountryValue($countries);
-        $returnedData = $country->convertFieldValueFromForm(array('HR'));
+        $returnedData = $country->convertFieldValueFromForm(['HR']);
 
-        $this->assertEquals($countryValue, $returnedData);
+        self::assertSame($countryValue->countries, $returnedData->countries);
     }
 
     public function testBuildFieldCreateForm()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('add');
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-            )
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+            ]
         );
 
         $languageCode = 'eng-GB';
 
-        $countries = array(
-            'HR' => array(
+        $countries = [
+            'HR' => [
                 'Name' => 'Croatia',
                 'Code' => 'HR',
                 'Language' => 'cro-HR',
-            ),
-        );
+            ],
+        ];
         $country = new Country($countries);
         $country->buildFieldCreateForm($formBuilder, $fieldDefinition, $languageCode);
     }

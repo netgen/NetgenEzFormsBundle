@@ -17,7 +17,7 @@ class FieldTypeHandlerRegistryPassTest extends AbstractCompilerPassTestCase
         $this->setDefinition('netgen.ezforms.form.fieldtype_handler_registry', $registry);
 
         $handler = new Definition();
-        $handler->addTag('netgen.ezforms.form.fieldtype_handler', array('alias' => 'eztext'));
+        $handler->addTag('netgen.ezforms.form.fieldtype_handler', ['alias' => 'eztext']);
         $this->setDefinition('netgen.ezforms.form.fieldtype_handler.eztext', $handler);
 
         $this->compile();
@@ -25,10 +25,10 @@ class FieldTypeHandlerRegistryPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'netgen.ezforms.form.fieldtype_handler_registry',
             'register',
-            array(
+            [
                 'eztext',
                 new Reference('netgen.ezforms.form.fieldtype_handler.eztext'),
-            )
+            ]
         );
     }
 
@@ -49,9 +49,9 @@ class FieldTypeHandlerRegistryPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'netgen.ezforms.form.fieldtype_handler_registry',
             'register',
-            array(
+            [
                 new Reference('netgen.ezforms.form.fieldtype_handler.eztext'),
-            )
+            ]
         );
     }
 

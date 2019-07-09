@@ -2,7 +2,6 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
-use RuntimeException;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
@@ -11,6 +10,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
 use Netgen\Bundle\EzFormsBundle\Form\Type\InformationCollectionType;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormBuilder;
@@ -21,27 +21,27 @@ class InformationCollectionTypeTest extends TestCase
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
-        $this->assertInstanceOf(AbstractType::class, $infoCollectionType);
+        self::assertInstanceOf(AbstractType::class, $infoCollectionType);
     }
 
     public function testGetName()
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
 
-        $this->assertEquals('ezforms_information_collection', $infoCollectionType->getName());
+        self::assertSame('ezforms_information_collection', $infoCollectionType->getName());
     }
 
     public function testBuildFormWithoutDataWrapperMustThrowException()
@@ -51,17 +51,17 @@ class InformationCollectionTypeTest extends TestCase
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
-        $options = array('data' => 'data');
+        $options = ['data' => 'data'];
 
         $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
         $infoCollectionType->buildForm($formBuilder, $options);
@@ -74,17 +74,17 @@ class InformationCollectionTypeTest extends TestCase
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
-        $options = array('data' => new DataWrapper('payload'));
+        $options = ['data' => new DataWrapper('payload')];
 
         $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
         $infoCollectionType->buildForm($formBuilder, $options);
@@ -97,19 +97,19 @@ class InformationCollectionTypeTest extends TestCase
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $infoStruct = new InformationCollectionStruct();
 
-        $options = array('data' => new DataWrapper($infoStruct));
+        $options = ['data' => new DataWrapper($infoStruct)];
 
         $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
         $infoCollectionType->buildForm($formBuilder, $options);
@@ -119,37 +119,37 @@ class InformationCollectionTypeTest extends TestCase
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('setDataMapper'))
+            ->setMethods(['setDataMapper'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('setDataMapper');
 
         $infoStruct = new InformationCollectionStruct();
 
         $contentType = new ContentType(
-            array(
+            [
                 'id' => 123,
-                'fieldDefinitions' => array(
+                'fieldDefinitions' => [
                     new FieldDefinition(
-                        array(
+                        [
                             'id' => 'id',
                             'identifier' => 'identifier',
                             'isInfoCollector' => false,
-                        )
+                        ]
                     ),
-                ),
-            )
+                ],
+            ]
         );
 
-        $options = array('data' => new DataWrapper($infoStruct, $contentType));
+        $options = ['data' => new DataWrapper($infoStruct, $contentType)];
 
         $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
         $infoCollectionType->buildForm($formBuilder, $options);
@@ -159,38 +159,38 @@ class InformationCollectionTypeTest extends TestCase
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('setDataMapper'))
+            ->setMethods(['setDataMapper'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('setDataMapper');
 
         $infoStruct = new InformationCollectionStruct();
 
         $contentType = new ContentType(
-            array(
+            [
                 'id' => 123,
-                'fieldDefinitions' => array(
+                'fieldDefinitions' => [
                     new FieldDefinition(
-                        array(
+                        [
                             'id' => 'id',
                             'identifier' => 'identifier',
                             'fieldTypeIdentifier' => 'ezuser',
                             'isInfoCollector' => false,
-                        )
+                        ]
                     ),
-                ),
-            )
+                ],
+            ]
         );
 
-        $options = array('data' => new DataWrapper($infoStruct, $contentType));
+        $options = ['data' => new DataWrapper($infoStruct, $contentType)];
 
         $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
         $infoCollectionType->buildForm($formBuilder, $options);
@@ -200,18 +200,18 @@ class InformationCollectionTypeTest extends TestCase
     {
         $fieldTypeHandler = $this->getMockBuilder(FieldTypeHandler::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('buildFieldCreateForm'))
+            ->setMethods(['buildFieldCreateForm'])
             ->getMockForAbstractClass();
 
-        $fieldTypeHandler->expects($this->once())
+        $fieldTypeHandler->expects(self::once())
             ->method('buildFieldCreateForm');
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('get'))
+            ->setMethods(['get'])
             ->getMock();
 
-        $handlerRegistry->expects($this->once())
+        $handlerRegistry->expects(self::once())
             ->method('get')
             ->willReturn($fieldTypeHandler);
 
@@ -219,32 +219,32 @@ class InformationCollectionTypeTest extends TestCase
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $infoStruct = new InformationCollectionStruct();
 
         $contentType = new ContentType(
-            array(
+            [
                 'id' => 123,
                 'mainLanguageCode' => 'eng-GB',
-                'names' => array('eng-GB'),
-                'fieldDefinitions' => array(
+                'names' => ['eng-GB'],
+                'fieldDefinitions' => [
                     new FieldDefinition(
-                        array(
+                        [
                             'id' => 'id',
                             'identifier' => 'identifier',
                             'isInfoCollector' => true,
-                        )
+                        ]
                     ),
-                ),
-            )
+                ],
+            ]
         );
 
-        $options = array('data' => new DataWrapper($infoStruct, $contentType));
+        $options = ['data' => new DataWrapper($infoStruct, $contentType)];
 
         $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
-        $infoCollectionType->setLanguages(array('eng-GB'));
+        $infoCollectionType->setLanguages(['eng-GB']);
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 
@@ -252,18 +252,18 @@ class InformationCollectionTypeTest extends TestCase
     {
         $fieldTypeHandler = $this->getMockBuilder(FieldTypeHandler::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('buildFieldCreateForm'))
+            ->setMethods(['buildFieldCreateForm'])
             ->getMockForAbstractClass();
 
-        $fieldTypeHandler->expects($this->once())
+        $fieldTypeHandler->expects(self::once())
             ->method('buildFieldCreateForm');
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('get'))
+            ->setMethods(['get'])
             ->getMock();
 
-        $handlerRegistry->expects($this->once())
+        $handlerRegistry->expects(self::once())
             ->method('get')
             ->willReturn($fieldTypeHandler);
 
@@ -271,32 +271,32 @@ class InformationCollectionTypeTest extends TestCase
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $infoStruct = new InformationCollectionStruct();
 
         $contentType = new ContentType(
-            array(
+            [
                 'id' => 123,
                 'mainLanguageCode' => 'eng-GB',
-                'names' => array('fre-FR' => 'fre-FR'),
-                'fieldDefinitions' => array(
+                'names' => ['fre-FR' => 'fre-FR'],
+                'fieldDefinitions' => [
                     new FieldDefinition(
-                        array(
+                        [
                             'id' => 'id',
                             'identifier' => 'identifier',
                             'isInfoCollector' => true,
-                        )
+                        ]
                     ),
-                ),
-            )
+                ],
+            ]
         );
 
-        $options = array('data' => new DataWrapper($infoStruct, $contentType));
+        $options = ['data' => new DataWrapper($infoStruct, $contentType)];
 
         $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
-        $infoCollectionType->setLanguages(array('fre-CH'));
+        $infoCollectionType->setLanguages(['fre-CH']);
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 }

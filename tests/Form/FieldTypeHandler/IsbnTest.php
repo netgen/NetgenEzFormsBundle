@@ -15,7 +15,7 @@ class IsbnTest extends TestCase
     {
         $isbn = new Isbn();
 
-        $this->assertInstanceOf(FieldTypeHandler::class, $isbn);
+        self::assertInstanceOf(FieldTypeHandler::class, $isbn);
     }
 
     public function testConvertFieldValueToForm()
@@ -25,7 +25,7 @@ class IsbnTest extends TestCase
 
         $returnedValue = $isbn->convertFieldValueToForm($isbnValue);
 
-        $this->assertEquals('5367GBMK', $returnedValue);
+        self::assertSame('5367GBMK', $returnedValue);
     }
 
     public function testConvertFieldValueFromForm()
@@ -35,7 +35,7 @@ class IsbnTest extends TestCase
 
         $returnedValue = $isbn->convertFieldValueFromForm('5367GBMK');
 
-        $this->assertEquals($isbnValue, $returnedValue);
+        self::assertSame($isbnValue->isbn, $returnedValue->isbn);
     }
 
     public function testConvertFieldValueFromFormWhenDataIsEmpty()
@@ -45,28 +45,28 @@ class IsbnTest extends TestCase
 
         $returnedValue = $isbn->convertFieldValueFromForm('');
 
-        $this->assertEquals($isbnValue, $returnedValue);
+        self::assertSame($isbnValue->isbn, $returnedValue->isbn);
     }
 
     public function testBuildFieldCreateForm()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('add');
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
                 'defaultValue' => new IsbnValue('5367GBMK'),
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-            )
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+            ]
         );
 
         $languageCode = 'eng-GB';
@@ -79,24 +79,24 @@ class IsbnTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('add');
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
                 'defaultValue' => new IsbnValue('5367GBMK'),
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-                'fieldSettings' => array(
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+                'fieldSettings' => [
                     'isISBN13' => true,
-                ),
-            )
+                ],
+            ]
         );
 
         $languageCode = 'eng-GB';

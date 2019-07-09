@@ -11,27 +11,27 @@ class MapTypeTest extends TestCase
 {
     public function testItExtendsAbstractType()
     {
-        $this->assertInstanceOf(AbstractType::class, new MapType());
+        self::assertInstanceOf(AbstractType::class, new MapType());
     }
 
     public function testItAddsFormFields()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->exactly(3))
+        $formBuilder->expects(self::exactly(3))
             ->method('add');
 
         $url = new MapType();
-        $url->buildForm($formBuilder, array());
+        $url->buildForm($formBuilder, []);
     }
 
     public function testItReturnsValidFormName()
     {
         $url = new MapType();
 
-        $this->assertEquals('ezforms_map', $url->getName());
+        self::assertSame('ezforms_map', $url->getName());
     }
 }

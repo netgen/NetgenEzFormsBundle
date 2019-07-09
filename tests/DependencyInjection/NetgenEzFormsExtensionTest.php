@@ -9,19 +9,19 @@ class NetgenEzFormsExtensionTest extends AbstractExtensionTestCase
 {
     public function testItSetsValidContainerParameters(): void
     {
-        $this->container->setParameter('ezpublish.siteaccess.list', array());
+        $this->container->setParameter('ezpublish.siteaccess.list', []);
         $this->load();
     }
 
     protected function getContainerExtensions(): array
     {
-        return array(
+        return [
             new NetgenEzFormsExtension(),
-        );
+        ];
     }
 
     protected function getMinimalConfiguration(): array
     {
-        return array();
+        return [];
     }
 }

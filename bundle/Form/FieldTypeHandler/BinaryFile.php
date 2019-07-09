@@ -29,7 +29,7 @@ class BinaryFile extends FieldTypeHandler
     /**
      * {@inheritdoc}
      *
-     * @param null|\Symfony\Component\HttpFoundation\File\UploadedFile $data
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile|null $data
      */
     public function convertFieldValueFromForm($data)
     {
@@ -37,11 +37,11 @@ class BinaryFile extends FieldTypeHandler
             return null;
         }
 
-        $fileData = array(
+        $fileData = [
             'inputUri' => $data->getRealPath(),
             'fileName' => $data->getClientOriginalName(),
             'fileSize' => $data->getSize(),
-        );
+        ];
 
         return new FileValue($fileData);
     }
@@ -60,9 +60,9 @@ class BinaryFile extends FieldTypeHandler
 
         if ($maxFileSize !== false) {
             $options['constraints'][] = new Constraints\File(
-                array(
+                [
                     'maxSize' => $maxFileSize * Constraints\FileValidator::MB_BYTES,
-                )
+                ]
             );
         }
 

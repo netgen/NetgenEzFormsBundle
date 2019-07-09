@@ -23,105 +23,105 @@ class SelectionTest extends TestCase
 
     public function testAssertInstanceOfFieldTypeHandler()
     {
-        $this->assertInstanceOf(FieldTypeHandler::class, $this->handler);
+        self::assertInstanceOf(FieldTypeHandler::class, $this->handler);
     }
 
     public function testConvertFieldValueToFormWithIdentifiersArrayEmpty()
     {
-        $identifiers = array();
+        $identifiers = [];
         $selection = new SelectionValue($identifiers);
         $fieldDefinition = new FieldDefinition(
-            array(
-                'fieldSettings' => array(
+            [
+                'fieldSettings' => [
                     'isMultiple' => false,
-                ),
-            )
+                ],
+            ]
         );
 
         $converted = $this->handler->convertFieldValueToForm($selection, $fieldDefinition);
 
-        $this->assertEquals('', $converted);
+        self::assertSame('', $converted);
     }
 
     public function testConvertFieldValueToFormWithFieldDefinitionMultiple()
     {
-        $identifiers = array('identifier1', 'identifier2');
+        $identifiers = ['identifier1', 'identifier2'];
         $selection = new SelectionValue($identifiers);
         $fieldDefinition = new FieldDefinition(
-            array(
-                'fieldSettings' => array(
+            [
+                'fieldSettings' => [
                     'isMultiple' => true,
-                ),
-            )
+                ],
+            ]
         );
 
         $converted = $this->handler->convertFieldValueToForm($selection, $fieldDefinition);
 
-        $this->assertEquals($identifiers, $converted);
+        self::assertSame($identifiers, $converted);
     }
 
     public function testConvertFieldValueToFormWithFieldDefinitionSingle()
     {
-        $identifiers = array('identifier1', 'identifier2');
+        $identifiers = ['identifier1', 'identifier2'];
         $selection = new SelectionValue($identifiers);
         $fieldDefinition = new FieldDefinition(
-            array(
-                'fieldSettings' => array(
+            [
+                'fieldSettings' => [
                     'isMultiple' => false,
-                ),
-            )
+                ],
+            ]
         );
 
         $converted = $this->handler->convertFieldValueToForm($selection, $fieldDefinition);
 
-        $this->assertEquals($identifiers[0], $converted);
+        self::assertSame($identifiers[0], $converted);
     }
 
     public function testConvertFieldValueToForm()
     {
         $selection = new Selection();
-        $selectionValue = new SelectionValue(array(1));
+        $selectionValue = new SelectionValue([1]);
 
         $returnedValue = $selection->convertFieldValueToForm($selectionValue);
 
-        $this->assertEquals(array(1), $returnedValue);
+        self::assertSame([1], $returnedValue);
     }
 
     public function testConvertFieldValueFromForm()
     {
         $selection = new Selection();
-        $selectionValue = new SelectionValue(array(1));
+        $selectionValue = new SelectionValue([1]);
 
         $returnedValue = $selection->convertFieldValueFromForm(1);
 
-        $this->assertEquals($selectionValue, $returnedValue);
+        self::assertSame($selectionValue->selection, $returnedValue->selection);
     }
 
     public function testBuildFieldCreateForm()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('add');
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-                'fieldSettings' => array(
-                    'options' => array(
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+                'fieldSettings' => [
+                    'options' => [
                         1 => 'Selection 1',
                         2 => 'Selection 2',
-                    ),
+                    ],
                     'isMultiple' => true,
-                ),
-            )
+                ],
+            ]
         );
 
         $languageCode = 'eng-GB';

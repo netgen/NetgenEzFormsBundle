@@ -33,45 +33,45 @@ class UserCreateType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $emailOptions = array(
+        $emailOptions = [
             'label' => 'E-mail address',
-            'constraints' => array(
+            'constraints' => [
                 new Constraints\NotBlank(),
                 new Constraints\Email(),
-            ),
-        );
-        $usernameOptions = array(
+            ],
+        ];
+        $usernameOptions = [
             'label' => 'Username',
-            'constraints' => array(
+            'constraints' => [
                 new Constraints\NotBlank(),
-            ),
-        );
+            ],
+        ];
 
-        $passwordConstraints = array(
+        $passwordConstraints = [
             new Constraints\NotBlank(),
-        );
+        ];
 
         if ($this->minimumPasswordLength > 0) {
             $passwordConstraints[] = new Constraints\Length(
-                array(
+                [
                     'min' => $this->minimumPasswordLength,
-                )
+                ]
             );
         }
 
-        $passwordOptions = array(
+        $passwordOptions = [
             'type' => PasswordType::class,
             'invalid_message' => 'Both passwords must match.',
-            'options' => array(
+            'options' => [
                 'constraints' => $passwordConstraints,
-            ),
-            'first_options' => array(
+            ],
+            'first_options' => [
                 'label' => 'Password',
-            ),
-            'second_options' => array(
+            ],
+            'second_options' => [
                 'label' => 'Repeat password',
-            ),
-        );
+            ],
+        ];
 
         $builder
             ->add('email', EmailType::class, $emailOptions)

@@ -15,7 +15,7 @@ class TextLineTest extends TestCase
     {
         $text = new TextLine();
 
-        $this->assertInstanceOf(FieldTypeHandler::class, $text);
+        self::assertInstanceOf(FieldTypeHandler::class, $text);
     }
 
     public function testConvertFieldValueToForm()
@@ -25,7 +25,7 @@ class TextLineTest extends TestCase
 
         $returnedValue = $text->convertFieldValueToForm($textValue);
 
-        $this->assertEquals('Some text', $returnedValue);
+        self::assertSame('Some text', $returnedValue);
     }
 
     public function testConvertFieldValueFromForm()
@@ -35,7 +35,7 @@ class TextLineTest extends TestCase
 
         $returnedValue = $text->convertFieldValueFromForm('Some text');
 
-        $this->assertEquals($textValue, $returnedValue);
+        self::assertSame($textValue->text, $returnedValue->text);
     }
 
     public function testConvertFieldValueFromFormWhenDataIsEmpty()
@@ -45,33 +45,33 @@ class TextLineTest extends TestCase
 
         $returnedValue = $text->convertFieldValueFromForm('');
 
-        $this->assertEquals($textValue, $returnedValue);
+        self::assertSame($textValue->text, $returnedValue->text);
     }
 
     public function testBuildFieldCreateForm()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('add');
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-                'validatorConfiguration' => array(
-                    'StringLengthValidator' => array(
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+                'validatorConfiguration' => [
+                    'StringLengthValidator' => [
                         'minStringLength' => 4,
                         'maxStringLength' => 100,
-                    ),
-                ),
-            )
+                    ],
+                ],
+            ]
         );
 
         $languageCode = 'eng-GB';
@@ -84,26 +84,26 @@ class TextLineTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('add');
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-                'validatorConfiguration' => array(
-                    'StringLengthValidator' => array(
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+                'validatorConfiguration' => [
+                    'StringLengthValidator' => [
                         'minStringLength' => null,
                         'maxStringLength' => null,
-                    ),
-                ),
-            )
+                    ],
+                ],
+            ]
         );
 
         $languageCode = 'eng-GB';

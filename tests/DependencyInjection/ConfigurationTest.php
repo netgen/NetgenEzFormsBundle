@@ -13,9 +13,9 @@ class ConfigurationTest extends TestCase
     public function testConfigurationValuesAreOkAndValid(): void
     {
         $this->assertConfigurationIsValid(
-            array(
-                'netgen_netgen_ez_forms' => array(),
-            )
+            [
+                'netgen_netgen_ez_forms' => [],
+            ]
         );
     }
 

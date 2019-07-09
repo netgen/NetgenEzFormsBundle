@@ -14,32 +14,32 @@ class UrlTypeTest extends TestCase
 {
     public function testItExtendsAbstractType()
     {
-        $this->assertInstanceOf(AbstractType::class, new UrlType());
+        self::assertInstanceOf(AbstractType::class, new UrlType());
     }
 
     public function testItAddsFormFields()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->at(0))
+        $formBuilder->expects(self::at(0))
             ->method('add')
-            ->with('url', CoreUrlType::class, array('constraints' => new Assert\Url()));
+            ->with('url', CoreUrlType::class, ['constraints' => new Assert\Url()]);
 
-        $formBuilder->expects($this->at(1))
+        $formBuilder->expects(self::at(1))
             ->method('add')
             ->with('text', TextType::class);
 
         $url = new UrlType();
-        $url->buildForm($formBuilder, array());
+        $url->buildForm($formBuilder, []);
     }
 
     public function testItReturnsValidFormName()
     {
         $url = new UrlType();
 
-        $this->assertEquals('ezforms_url', $url->getName());
+        self::assertSame('ezforms_url', $url->getName());
     }
 }

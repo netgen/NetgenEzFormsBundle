@@ -12,21 +12,21 @@ class InformationCollectionStructTest extends TestCase
         $struct = new InformationCollectionStruct();
         $struct->setCollectedFieldValue('some_field', 'some_value');
 
-        $this->assertEquals('some_value', $struct->getCollectedFieldValue('some_field'));
-        $this->assertEquals(null, $struct->getCollectedFieldValue('some_field_not_existing'));
+        self::assertSame('some_value', $struct->getCollectedFieldValue('some_field'));
+        self::assertNull($struct->getCollectedFieldValue('some_field_not_existing'));
     }
 
     public function testGetCollectedFields()
     {
-        $fields = array(
+        $fields = [
             'some_field_1' => 'some_value_1',
             'some_field_2' => 'some_value_2',
-        );
+        ];
 
         $struct = new InformationCollectionStruct();
         $struct->setCollectedFieldValue('some_field_1', 'some_value_1');
         $struct->setCollectedFieldValue('some_field_2', 'some_value_2');
 
-        $this->assertEquals($fields, $struct->getCollectedFields());
+        self::assertSame($fields, $struct->getCollectedFields());
     }
 }

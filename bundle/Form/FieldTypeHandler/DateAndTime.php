@@ -10,7 +10,6 @@ use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class DateAndTime extends FieldTypeHandler

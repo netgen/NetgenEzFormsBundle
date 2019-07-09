@@ -20,11 +20,11 @@ class UpdateContentMapper extends DataMapper
      */
     protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
-        /** @var $contentUpdateStruct \eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct */
+        /** @var \eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct $contentUpdateStruct */
         $contentUpdateStruct = $data->payload;
-        /** @var $content \eZ\Publish\API\Repository\Values\Content\Content */
+        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
         $content = $data->target;
-        /** @var $contentType \eZ\Publish\API\Repository\Values\ContentType\ContentType */
+        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $data->definition;
 
         $fieldDefinitionIdentifier = (string) $propertyPath;
@@ -55,9 +55,9 @@ class UpdateContentMapper extends DataMapper
      */
     protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
     {
-        /** @var $contentUpdateStruct \eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct */
+        /** @var \eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct $contentUpdateStruct */
         $contentUpdateStruct = $data->payload;
-        /** @var $contentType \eZ\Publish\API\Repository\Values\ContentType\ContentType */
+        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $data->definition;
 
         $fieldDefinitionIdentifier = (string) $propertyPath;

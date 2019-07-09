@@ -5,22 +5,22 @@ namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\SPI\FieldType\Value;
 use eZ\Publish\Core\FieldType\RelationList\Value as RelationListValue;
 use eZ\Publish\Core\Helper\TranslationHelper;
+use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class RelationList extends FieldTypeHandler
 {
-    const BROWSE = 0;
-    const DROPDOWN = 1;
-    const LIST_RADIO = 2;
-    const LIST_CHECK = 3;
-    const MULTIPLE_SELECTION = 4;
-    const TPLBASED_MULTI = 5;
-    const TPLBASED_SINGLE = 6;
+    public const BROWSE = 0;
+    public const DROPDOWN = 1;
+    public const LIST_RADIO = 2;
+    public const LIST_CHECK = 3;
+    public const MULTIPLE_SELECTION = 4;
+    public const TPLBASED_MULTI = 5;
+    public const TPLBASED_SINGLE = 6;
 
     /**
      * @var Repository
@@ -35,10 +35,23 @@ class RelationList extends FieldTypeHandler
     public function __construct(
         Repository $repository,
         TranslationHelper $translationHelper
-    )
-    {
+    ) {
         $this->repository = $repository;
         $this->translationHelper = $translationHelper;
+    }
+
+    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
+    {
+        if (empty($value->destinationContentIds)) {
+            return null;
+        }
+
+        return $value->destinationContentIds;
+    }
+
+    public function convertFieldValueFromForm($data)
+    {
+        return new RelationListValue($data);
     }
 
     protected function buildFieldForm(
@@ -46,8 +59,7 @@ class RelationList extends FieldTypeHandler
         FieldDefinition $fieldDefinition,
         $languageCode,
         Content $content = null
-    )
-    {
+    ) {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $fieldSettings = $fieldDefinition->getFieldSettings();
@@ -66,7 +78,7 @@ class RelationList extends FieldTypeHandler
 
                 $choices = [];
                 foreach ($locationList->locations as $child) {
-                    /** @var Location $child */
+                    /* @var Location $child */
                     $choices[$this->translationHelper->getTranslatedContentNameByContentInfo($child->contentInfo)] = $child->contentInfo->id;
                 }
 
@@ -75,6 +87,7 @@ class RelationList extends FieldTypeHandler
                     'expanded' => false,
                     'multiple' => true,
                 ], $options);
+
                 break;
             default:
                 $locationService = $this->repository->getLocationService();
@@ -83,7 +96,7 @@ class RelationList extends FieldTypeHandler
 
                 $choices = [];
                 foreach ($locationList->locations as $child) {
-                    /** @var Location $child */
+                    /* @var Location $child */
                     $choices[$this->translationHelper->getTranslatedContentNameByContentInfo($child->contentInfo)] = $child->contentInfo->id;
                 }
 
@@ -92,21 +105,8 @@ class RelationList extends FieldTypeHandler
                     'expanded' => false,
                     'multiple' => false,
                 ], $options);
+
                 break;
         }
-    }
-
-    public function convertFieldValueToForm(Value $value, FieldDefinition $fieldDefinition = null)
-    {
-        if (empty($value->destinationContentIds)) {
-            return null;
-        }
-
-        return $value->destinationContentIds;
-    }
-
-    public function convertFieldValueFromForm($data)
-    {
-        return new RelationListValue($data);
     }
 }

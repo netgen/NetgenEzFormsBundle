@@ -71,7 +71,7 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
      * @param \Symfony\Component\Form\FormBuilderInterface $formBuilder
      * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
      * @param string $languageCode
-     * @param null|\eZ\Publish\API\Repository\Values\Content\Content $content
+     * @param \eZ\Publish\API\Repository\Values\Content\Content|null $content
      */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
@@ -87,7 +87,7 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
      *
      * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
      * @param string $languageCode
-     * @param null|\eZ\Publish\API\Repository\Values\Content\Content $content
+     * @param \eZ\Publish\API\Repository\Values\Content\Content|null $content
      *
      * @return array
      */
@@ -96,7 +96,7 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
         $languageCode,
         Content $content = null
     ) {
-        $options = array();
+        $options = [];
 
         $options['label'] = $fieldDefinition->getName($languageCode);
         $options['required'] = $fieldDefinition->isRequired;
@@ -108,7 +108,7 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
             $options['ezforms']['content'] = $content;
         }
 
-        $options['constraints'] = array();
+        $options['constraints'] = [];
         if ($fieldDefinition->isRequired) {
             $options['constraints'][] = new Constraints\NotBlank();
         }
@@ -125,10 +125,10 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
      */
     protected function skipEmptyUpdate(FormBuilderInterface $formBuilder, $fieldDefinitionIdentifier)
     {
-        $options = array(
+        $options = [
             'mapped' => false,
             'data' => 'yes',
-        );
+        ];
 
         $formBuilder->add(
             "ezforms_skip_empty_update_{$fieldDefinitionIdentifier}",

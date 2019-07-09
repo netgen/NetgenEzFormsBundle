@@ -17,17 +17,17 @@ class MapType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('address', TextType::class, array(
+        $builder->add('address', TextType::class, [
             'label' => 'ezforms.form.map.address.label',
-        ));
+        ]);
 
-        $builder->add('latitude', NumberType::class, array(
+        $builder->add('latitude', NumberType::class, [
             'label' => 'ezforms.form.map.latitude.label',
-        ));
+        ]);
 
-        $builder->add('longitude', NumberType::class, array(
+        $builder->add('longitude', NumberType::class, [
             'label' => 'ezforms.form.map.longitude.label',
-        ));
+        ]);
     }
 
     /**

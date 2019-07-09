@@ -51,9 +51,9 @@ class Isbn extends FieldTypeHandler
 
         if ($fieldDefinition->fieldSettings['isISBN13']) {
             $options['constraints'][] = new Constraints\Isbn(
-                array(
+                [
                     'type' => 'isbn13',
-                )
+                ]
             );
         } else {
             $options['constraints'][] = new Constraints\Isbn();

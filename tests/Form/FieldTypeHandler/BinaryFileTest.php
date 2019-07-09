@@ -17,7 +17,7 @@ class BinaryFileTest extends TestCase
     {
         $binaryFile = new BinaryFile();
 
-        $this->assertInstanceOf(FieldTypeHandler::class, $binaryFile);
+        self::assertInstanceOf(FieldTypeHandler::class, $binaryFile);
     }
 
     public function testConvertFieldValueToForm()
@@ -27,7 +27,7 @@ class BinaryFileTest extends TestCase
 
         $returnedValue = $binaryFile->convertFieldValueToForm($binaryFileValue);
 
-        $this->assertNull($returnedValue);
+        self::assertNull($returnedValue);
     }
 
     public function testConvertFieldValueFromForm()
@@ -37,7 +37,7 @@ class BinaryFileTest extends TestCase
 
         $returnedData = $binaryFile->convertFieldValueFromForm($data);
 
-        $this->assertInstanceOf(FileValue::class, $returnedData);
+        self::assertInstanceOf(FileValue::class, $returnedData);
     }
 
     public function testConvertFieldValueFromFormWhenDataIsNull()
@@ -46,27 +46,27 @@ class BinaryFileTest extends TestCase
 
         $returnedData = $binaryFile->convertFieldValueFromForm(null);
 
-        $this->assertNull($returnedData);
+        self::assertNull($returnedData);
     }
 
     public function testBuildFieldCreateForm()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->exactly(2))
+        $formBuilder->expects(self::exactly(2))
             ->method('add');
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-            )
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+            ]
         );
 
         $languageCode = 'eng-GB';

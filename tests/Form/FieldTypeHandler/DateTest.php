@@ -16,7 +16,7 @@ class DateTest extends TestCase
     {
         $date = new Date();
 
-        $this->assertInstanceOf(FieldTypeHandler::class, $date);
+        self::assertInstanceOf(FieldTypeHandler::class, $date);
     }
 
     public function testConvertFieldValueToForm()
@@ -26,8 +26,8 @@ class DateTest extends TestCase
         $dateValue = new DateValue\Value($dateTime);
 
         $returnedDate = $date->convertFieldValueToForm($dateValue);
-        $dateTime->setTime(0, 0, 0);
-        $this->assertEquals($dateTime, $returnedDate);
+        $dateTime->setTime(0, 0);
+        self::assertSame($dateTime->format('Y-m-d'), $returnedDate->format('Y-m-d'));
     }
 
     public function testConvertFieldValueFromForm()
@@ -38,27 +38,27 @@ class DateTest extends TestCase
 
         $returnedDate = $date->convertFieldValueFromForm($dateTime);
 
-        $this->assertEquals($dateValue, $returnedDate);
+        self::assertSame((string) $dateValue, (string) $returnedDate);
     }
 
     public function testBuildFieldCreateForm()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('add');
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-            )
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+            ]
         );
 
         $languageCode = 'eng-GB';
@@ -72,22 +72,22 @@ class DateTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('add');
 
         $content = new Content();
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
                 'isRequired' => true,
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-            )
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+            ]
         );
 
         $languageCode = 'eng-GB';

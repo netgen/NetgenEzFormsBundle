@@ -45,7 +45,7 @@ abstract class DataMapper implements DataMapperInterface
      */
     public function mapDataToForms($data, $forms)
     {
-        $empty = null === $data || array() === $data;
+        $empty = null === $data || [] === $data;
 
         if (!$empty && !is_array($data) && !is_object($data)) {
             throw new UnexpectedTypeException($data, 'object, array or empty');
@@ -100,6 +100,7 @@ abstract class DataMapper implements DataMapperInterface
             if ($data instanceof DataWrapper) {
                 /* @var $data \Netgen\Bundle\EzFormsBundle\Form\DataWrapper */
                 $this->mapFromForm($form, $data, $propertyPath);
+
                 continue;
             }
 

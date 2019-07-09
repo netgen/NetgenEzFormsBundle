@@ -15,7 +15,7 @@ class EmailTest extends TestCase
     {
         $email = new Email();
 
-        $this->assertInstanceOf(FieldTypeHandler::class, $email);
+        self::assertInstanceOf(FieldTypeHandler::class, $email);
     }
 
     public function testConvertFieldValueToForm()
@@ -25,7 +25,7 @@ class EmailTest extends TestCase
 
         $returnedEmail = $email->convertFieldValueToForm($emailValue);
 
-        $this->assertEquals('some@email.test', $returnedEmail);
+        self::assertSame('some@email.test', $returnedEmail);
     }
 
     public function testConvertFieldValueFromForm()
@@ -35,28 +35,28 @@ class EmailTest extends TestCase
 
         $returnedEmail = $email->convertFieldValueFromForm('some@email.test');
 
-        $this->assertEquals($emailValue, $returnedEmail);
+        self::assertSame($emailValue->email, $returnedEmail->email);
     }
 
     public function testBuildFieldCreateForm()
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(array('add'))
+            ->setMethods(['add'])
             ->getMock();
 
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(self::once())
             ->method('add');
 
         $fieldDefinition = new FieldDefinition(
-            array(
+            [
                 'id' => 'id',
                 'identifier' => 'identifier',
-                'validatorConfiguration' => array('EmailAddressValidator' => true),
+                'validatorConfiguration' => ['EmailAddressValidator' => true],
                 'isRequired' => true,
-                'descriptions' => array('fre-FR' => 'fre-FR'),
-                'names' => array('fre-FR' => 'fre-FR'),
-            )
+                'descriptions' => ['fre-FR' => 'fre-FR'],
+                'names' => ['fre-FR' => 'fre-FR'],
+            ]
         );
 
         $languageCode = 'eng-GB';

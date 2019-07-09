@@ -12,10 +12,12 @@ class UrlType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('url', CoreUrlType::class,
-            array(
+        $builder->add(
+            'url',
+            CoreUrlType::class,
+            [
                 'constraints' => new Assert\Url(),
-            )
+            ]
         );
 
         $builder->add('text', TextType::class);

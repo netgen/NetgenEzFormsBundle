@@ -71,7 +71,7 @@ class IntegerHandler extends FieldTypeHandler
         }
 
         if (!empty($fieldDefinition->getValidatorConfiguration()['IntegerValueValidator'])) {
-            $rangeConstraints = array();
+            $rangeConstraints = [];
 
             $min = $fieldDefinition->getValidatorConfiguration()['IntegerValueValidator']['minIntegerValue'];
             $max = $fieldDefinition->getValidatorConfiguration()['IntegerValueValidator']['maxIntegerValue'];

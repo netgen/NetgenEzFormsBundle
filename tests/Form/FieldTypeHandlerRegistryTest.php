@@ -2,11 +2,11 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form;
 
-use RuntimeException;
-use OutOfBoundsException;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Date;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
+use OutOfBoundsException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class FieldTypeHandlerRegistryTest extends TestCase
 {
@@ -14,7 +14,7 @@ class FieldTypeHandlerRegistryTest extends TestCase
     {
         $this->expectException(OutOfBoundsException::class);
 
-        $registry = new FieldTypeHandlerRegistry(array());
+        $registry = new FieldTypeHandlerRegistry([]);
         $registry->get('some_handler');
     }
 
@@ -22,7 +22,7 @@ class FieldTypeHandlerRegistryTest extends TestCase
     {
         $this->expectException(RuntimeException::class);
 
-        $registry = new FieldTypeHandlerRegistry(array('some_handler' => 'handler'));
+        $registry = new FieldTypeHandlerRegistry(['some_handler' => 'handler']);
         $registry->get('some_handler');
     }
 
@@ -30,8 +30,8 @@ class FieldTypeHandlerRegistryTest extends TestCase
     {
         $this->expectException(RuntimeException::class);
 
-        $registry = new FieldTypeHandlerRegistry(array('some_handler' => function () {
-        }));
+        $registry = new FieldTypeHandlerRegistry(['some_handler' => static function () {
+        }]);
         $registry->get('some_handler');
     }
 
@@ -39,37 +39,37 @@ class FieldTypeHandlerRegistryTest extends TestCase
     {
         $handler = $this->getMockBuilder(Date::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
-        $registry = new FieldTypeHandlerRegistry(array('some_handler' => $handler));
+        $registry = new FieldTypeHandlerRegistry(['some_handler' => $handler]);
 
-        $this->assertSame($handler, $registry->get('some_handler'));
+        self::assertSame($handler, $registry->get('some_handler'));
     }
 
     public function testItSetsHandler()
     {
         $handler = $this->getMockBuilder(Date::class)
             ->disableOriginalConstructor()
-            ->setMethods(array())
+            ->setMethods([])
             ->getMock();
 
         $registry = new FieldTypeHandlerRegistry();
         $registry->register('some_handler', $handler);
 
-        $this->assertSame($handler, $registry->get('some_handler'));
+        self::assertSame($handler, $registry->get('some_handler'));
     }
 
     public function testItReturnsValidHandlerWithoutException()
     {
         $handlerData = new Date();
 
-        $handler = function () {
-            return new Date();
+        $handler = static function () use ($handlerData) {
+            return $handlerData;
         };
 
-        $registry = new FieldTypeHandlerRegistry(array('some_handler' => $handler));
+        $registry = new FieldTypeHandlerRegistry(['some_handler' => $handler]);
 
-        $this->assertEquals($handlerData, $registry->get('some_handler'));
+        self::assertSame($handlerData, $registry->get('some_handler'));
     }
 }
