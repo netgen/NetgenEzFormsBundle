@@ -104,7 +104,6 @@ class Country extends FieldTypeHandler
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $options['expanded'] = false;
-        $options['choices_as_values'] = true;
         $options['multiple'] = $fieldDefinition->getFieldSettings()['isMultiple'];
 
         $options['choices'] = array_flip($this->filteredCountryData);

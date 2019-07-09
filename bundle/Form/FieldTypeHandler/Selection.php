@@ -60,7 +60,6 @@ class Selection extends FieldTypeHandler
         $values = $fieldDefinition->getFieldSettings()['options'];
 
         $options['expanded'] = false;
-        $options['choices_as_values'] = true;
         $options['multiple'] = $fieldDefinition->getFieldSettings()['isMultiple'];
 
         $options['choices'] = array_flip($values);

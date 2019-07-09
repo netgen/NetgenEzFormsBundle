@@ -26,7 +26,7 @@ class RelationList extends FieldTypeHandler
      * @var Repository
      */
     private $repository;
-    
+
     /**
      * @var TranslationHelper
      */
@@ -56,7 +56,7 @@ class RelationList extends FieldTypeHandler
 
         $defaultLocation = $fieldSettings['selectionDefaultLocation'];
         $contentTypes = $fieldSettings['selectionContentTypes'];
-        
+
         /* TODO: implement different selection methods */
         switch ($fieldSettings['selectionMethod']) {
             case self::MULTIPLE_SELECTION:
@@ -74,7 +74,6 @@ class RelationList extends FieldTypeHandler
                     'choices' => $choices,
                     'expanded' => false,
                     'multiple' => true,
-                    'choices_as_values' => true,
                 ], $options);
                 break;
             default:
@@ -92,7 +91,6 @@ class RelationList extends FieldTypeHandler
                     'choices' => $choices,
                     'expanded' => false,
                     'multiple' => false,
-                    'choices_as_values' => true,
                 ], $options);
                 break;
         }

@@ -71,7 +71,6 @@ class Relation extends FieldTypeHandler
             'choices' => $choices,
             'expanded' => false,
             'multiple' => false,
-            'choices_as_values' => true,
         ));
     }
 }
