@@ -2,6 +2,7 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
+use RuntimeException;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\Core\Repository\Values\User\UserCreateStruct;
@@ -43,12 +44,11 @@ class CreateUserTypeTest extends TestCase
         $this->assertEquals('ezforms_create_user', $updateUserType->getName());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Data must be an instance of Netgen\EzFormsBundle\Form\DataWrapper
-     */
     public function testBuildFormWithoutDataWrapperMustThrowException()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Data must be an instance of Netgen\EzFormsBundle\Form\DataWrapper');
+
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
             ->setMethods(array())
@@ -67,12 +67,11 @@ class CreateUserTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Data payload must be an instance of eZ\Publish\API\Repository\Values\User\User
-     */
     public function testBuildFormDataWrapperTargetMustBeUser()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Data payload must be an instance of eZ\Publish\API\Repository\Values\User\User');
+
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
             ->setMethods(array())

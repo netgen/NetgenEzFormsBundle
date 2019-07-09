@@ -2,6 +2,7 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\DataMapper;
 
+use RuntimeException;
 use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use eZ\Publish\Core\Repository\Values\Content\Content;
 use eZ\Publish\Core\Repository\Values\Content\ContentUpdateStruct;
@@ -135,11 +136,10 @@ class UpdateContentMapperTest extends TestCase
         $this->mapper->mapDataToForms($data, array($form));
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testMapDataToFormsWithInvalidFieldDefinition()
     {
+        $this->expectException(RuntimeException::class);
+
         $contentType = new ContentType(
             array(
                 'id' => 123,
@@ -196,11 +196,10 @@ class UpdateContentMapperTest extends TestCase
         $this->mapper->mapDataToForms($data, array($form));
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testMapFormsToDataWithInvalidFieldDefinition()
     {
+        $this->expectException(RuntimeException::class);
+
         $contentType = new ContentType(
             array(
                 'id' => 123,

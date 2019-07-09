@@ -2,6 +2,7 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
+use InvalidArgumentException;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\LocationList;
 use eZ\Publish\Core\FieldType\Relation\Value as RelationValue;
@@ -179,12 +180,11 @@ class RelationTest extends TestCase
         $selection->buildFieldCreateForm($formBuilder, $fieldDefinition, 'eng-GB');
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage SelectionRoot must be defined
-     */
     public function testBuildFieldCreateFormNullSelectionRoot()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('SelectionRoot must be defined');
+
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
             ->setMethods(array('add'))

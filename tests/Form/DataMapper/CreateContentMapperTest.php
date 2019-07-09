@@ -2,6 +2,7 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\DataMapper;
 
+use RuntimeException;
 use eZ\Publish\Core\FieldType\TextLine\Value;
 use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct;
@@ -10,6 +11,7 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\CreateContentMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormConfigBuilder;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
@@ -70,19 +72,17 @@ class CreateContentMapperTest extends TestCase
         $this->assertInstanceOf('\Symfony\Component\Form\DataMapperInterface', $this->mapper);
     }
 
-    /**
-     * @expectedException \Symfony\Component\Form\Exception\UnexpectedTypeException
-     */
     public function testMapDataToFormsShouldThrowUnexpectedTypeException()
     {
+        $this->expectException(UnexpectedTypeException::class);
+
         $this->mapper->mapDataToForms('data', 'form');
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testMapDataToFormsWithoutValidFieldDefinition()
     {
+        $this->expectException(RuntimeException::class);
+
         $contentType = new ContentType(
             array(
                 'id' => 123,
@@ -333,11 +333,10 @@ class CreateContentMapperTest extends TestCase
         $this->mapper->mapFormsToData(array($form), $data);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testMapFormsToDataWithInvalidFieldDefinition()
     {
+        $this->expectException(RuntimeException::class);
+
         $contentType = new ContentType(
             array(
                 'id' => 123,
@@ -505,11 +504,10 @@ class CreateContentMapperTest extends TestCase
         $this->mapper->mapFormsToData(array($form), $data);
     }
 
-    /**
-     * @expectedException \Symfony\Component\Form\Exception\UnexpectedTypeException
-     */
     public function testMapFormsToDataUnexpectedData()
     {
+        $this->expectException(UnexpectedTypeException::class);
+
         $someNumber = 42;
 
         $this->mapper->mapFormsToData(array(), $someNumber);

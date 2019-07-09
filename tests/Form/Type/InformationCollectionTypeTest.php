@@ -2,6 +2,7 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
+use RuntimeException;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
@@ -43,12 +44,11 @@ class InformationCollectionTypeTest extends TestCase
         $this->assertEquals('ezforms_information_collection', $infoCollectionType->getName());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Data must be an instance of Netgen\EzFormsBundle\Form\DataWrapper
-     */
     public function testBuildFormWithoutDataWrapperMustThrowException()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Data must be an instance of Netgen\EzFormsBundle\Form\DataWrapper');
+
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
             ->setMethods(array())
@@ -67,12 +67,11 @@ class InformationCollectionTypeTest extends TestCase
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Data payload must be an instance of Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct
-     */
     public function testBuildFormDataWrapperPayloadMustBeInformationCollectionStruct()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Data payload must be an instance of Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct');
+
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
             ->setMethods(array())
@@ -91,12 +90,11 @@ class InformationCollectionTypeTest extends TestCase
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Data definition must be an instance of eZ\Publish\API\Repository\Values\ContentType\ContentType
-     */
     public function testBuildFormDataWrapperDefinitionMustBeContentType()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Data definition must be an instance of eZ\Publish\API\Repository\Values\ContentType\ContentType');
+
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
             ->setMethods(array())

@@ -2,6 +2,7 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
+use RuntimeException;
 use eZ\Publish\Core\Repository\Values\Content\Content;
 use eZ\Publish\Core\Repository\Values\Content\ContentUpdateStruct;
 use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
@@ -46,12 +47,11 @@ class UpdateContentTypeTest extends TestCase
         $this->assertEquals('ezforms_update_content', $updateUserType->getName());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Data must be an instance of Netgen\EzFormsBundle\Form\DataWrapper
-     */
     public function testBuildFormWithoutDataWrapperMustThrowException()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Data must be an instance of Netgen\EzFormsBundle\Form\DataWrapper');
+
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
             ->setMethods(array())
@@ -70,12 +70,11 @@ class UpdateContentTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Data payload must be an instance of eZ\Publish\API\Repository\Values\Content\Content
-     */
     public function testBuildFormDataWrapperTargetMustBeUser()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Data payload must be an instance of eZ\Publish\API\Repository\Values\Content\Content');
+
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
             ->setMethods(array())
@@ -94,12 +93,11 @@ class UpdateContentTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Data payload must be an instance of eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct
-     */
     public function testBuildFormDataWrapperPayloadMustBeUserUpdateStruct()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Data payload must be an instance of eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct');
+
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
             ->setMethods(array())
@@ -120,12 +118,11 @@ class UpdateContentTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Data definition must be an instance of eZ\Publish\API\Repository\Values\ContentType\ContentType
-     */
     public function testBuildFormDataWrapperDefinitionMustBeContentType()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Data definition must be an instance of eZ\Publish\API\Repository\Values\ContentType\ContentType');
+
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
             ->setMethods(array())
@@ -147,12 +144,11 @@ class UpdateContentTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Data definition (ContentType) does not correspond to the data target (Content)
-     */
     public function testBuildFormContentTypeIdsMustMatch()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Data definition (ContentType) does not correspond to the data target (Content)');
+
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
             ->setMethods(array())

@@ -2,6 +2,7 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\DataMapper;
 
+use RuntimeException;
 use eZ\Publish\API\Repository\Values\User\UserUpdateStruct;
 use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use eZ\Publish\Core\Repository\Values\Content\Content;
@@ -211,11 +212,11 @@ class UpdateUserMapperTest extends TestCase
         $this->mapper->mapDataToForms($data, array($form));
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testMapDataToFormsWithInvalidFieldDefinition()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage("Data payload does not contain expected FieldDefinition 'name'");
+
         $contentType = new ContentType(
             array(
                 'id' => 123,
@@ -454,11 +455,10 @@ class UpdateUserMapperTest extends TestCase
         $this->mapper->mapFormsToData(array($form), $data);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testMapFormsToDataWithInvalidFieldIdentifier()
     {
+        $this->expectException(RuntimeException::class);
+
         $contentType = new ContentType(
             array(
                 'id' => 123,
