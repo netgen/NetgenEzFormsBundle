@@ -33,7 +33,6 @@ class TimeTest extends TestCase
     {
         $time = new Time();
         $timeValue = new TimeValue(null);
-        $dateTime = new \DateTime();
 
         $returnedValue = $time->convertFieldValueToForm($timeValue);
 
