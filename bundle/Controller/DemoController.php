@@ -42,7 +42,7 @@ class DemoController extends Controller
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $rootLocation = $locationService->loadLocation(2);
 
             try {
@@ -105,7 +105,7 @@ class DemoController extends Controller
         //$form = $this->createForm(UpdateContentType::class, $data);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $repository->beginTransaction();
 
@@ -172,7 +172,7 @@ class DemoController extends Controller
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             /** @todo ensure that user can create 'user' type under required UserGroup Location */
             $userGroup = $userService->loadUserGroup(13);
 
@@ -257,7 +257,7 @@ class DemoController extends Controller
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $user = $userService->updateUser($user, $userUpdateStruct);
 
             return $this->redirect(
@@ -303,7 +303,7 @@ class DemoController extends Controller
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             /** @var InformationCollectionStruct $data */
             $data = $form->getData()->payload;
             // save data to database
