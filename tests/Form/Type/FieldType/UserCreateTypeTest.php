@@ -84,10 +84,4 @@ class UserCreateTypeTest extends TestCase
         $userCreateType = new UserCreateType(10);
         $userCreateType->buildForm($formBuilder, []);
     }
-
-    public function testGetName(): void
-    {
-        $userCreateType = new UserCreateType(10);
-        self::assertSame('ezforms_ezuser_create', $userCreateType->getName());
-    }
 }

@@ -32,20 +32,6 @@ class CreateContentTypeTest extends TestCase
         self::assertInstanceOf(AbstractType::class, $updateUserType);
     }
 
-    public function testGetName(): void
-    {
-        $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
-            ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
-
-        $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
-
-        $updateUserType = new CreateContentType($handlerRegistry, $dataMapper);
-
-        self::assertSame('ezforms_create_content', $updateUserType->getName());
-    }
-
     public function testBuildFormWithoutDataWrapperMustThrowException(): void
     {
         $this->expectException(RuntimeException::class);

@@ -32,20 +32,6 @@ class InformationCollectionTypeTest extends TestCase
         self::assertInstanceOf(AbstractType::class, $infoCollectionType);
     }
 
-    public function testGetName(): void
-    {
-        $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
-            ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
-
-        $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
-
-        $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
-
-        self::assertSame('ezforms_information_collection', $infoCollectionType->getName());
-    }
-
     public function testBuildFormWithoutDataWrapperMustThrowException(): void
     {
         $this->expectException(RuntimeException::class);

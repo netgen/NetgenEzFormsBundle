@@ -69,10 +69,4 @@ class UserUpdateTypeTest extends TestCase
         $userCreateType = new UserUpdateType(10);
         $userCreateType->buildForm($formBuilder, []);
     }
-
-    public function testGetName(): void
-    {
-        $updateUserType = new UserUpdateType(10);
-        self::assertSame('ezforms_ezuser_update', $updateUserType->getName());
-    }
 }
