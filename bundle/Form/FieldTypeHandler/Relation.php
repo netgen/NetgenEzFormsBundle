@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use eZ\Publish\API\Repository\Repository;
@@ -8,10 +10,10 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
 use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\SPI\FieldType\Value;
+use InvalidArgumentException;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use InvalidArgumentException;
 
 class Relation extends FieldTypeHandler
 {

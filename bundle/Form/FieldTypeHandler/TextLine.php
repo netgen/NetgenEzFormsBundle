@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -13,7 +15,6 @@ use Symfony\Component\Validator\Constraints;
 
 class TextLine extends FieldTypeHandler
 {
-
     public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): string
     {
         return $value->text;

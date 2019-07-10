@@ -21,7 +21,7 @@ return PhpCsFixer\Config::create()
         'yoda_style' => false,
 
         // Additional rules
-        // 'declare_strict_types' => true,
+        'declare_strict_types' => true,
         'list_syntax' => ['syntax' => 'short'],
         'mb_str_functions' => true,
         'static_lambda' => true,

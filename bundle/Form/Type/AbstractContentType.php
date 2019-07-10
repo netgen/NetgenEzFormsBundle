@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Form\Type;
 
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;

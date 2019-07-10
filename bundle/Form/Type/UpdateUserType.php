@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Form\Type;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
