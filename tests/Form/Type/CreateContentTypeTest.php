@@ -112,12 +112,13 @@ class CreateContentTypeTest extends TestCase
                         [
                             'id' => 'id',
                             'identifier' => 'identifier',
+                            'fieldTypeIdentifier' => 'field_type',
                         ]
                     ),
                 ],
             ]
         );
-        $contentUpdateStruct = new ContentCreateStruct(['contentType' => $contentType]);
+        $contentUpdateStruct = new ContentCreateStruct(['contentType' => $contentType, 'mainLanguageCode' => 'eng-GB']);
 
         $options = ['data' => new DataWrapper($contentUpdateStruct)];
 
@@ -165,7 +166,7 @@ class CreateContentTypeTest extends TestCase
                 ],
             ]
         );
-        $contentUpdateStruct = new ContentCreateStruct(['contentType' => $contentType]);
+        $contentUpdateStruct = new ContentCreateStruct(['contentType' => $contentType, 'mainLanguageCode' => 'eng-GB']);
 
         $options = ['data' => new DataWrapper($contentUpdateStruct)];
 

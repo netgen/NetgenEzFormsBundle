@@ -37,11 +37,4 @@ class UrlTypeTest extends TestCase
         $url = new UrlType();
         $url->buildForm($formBuilder, []);
     }
-
-    public function testItReturnsValidFormName(): void
-    {
-        $url = new UrlType();
-
-        self::assertSame('ezforms_url', $url->getName());
-    }
 }

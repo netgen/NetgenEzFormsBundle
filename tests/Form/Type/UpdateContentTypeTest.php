@@ -163,6 +163,7 @@ class UpdateContentTypeTest extends TestCase
                         [
                             'id' => 'id',
                             'identifier' => 'identifier',
+                            'fieldTypeIdentifier' => 'field_type',
                         ]
                     ),
                 ],
@@ -219,6 +220,7 @@ class UpdateContentTypeTest extends TestCase
                         [
                             'id' => 'id',
                             'identifier' => 'identifier',
+                            'fieldTypeIdentifier' => 'field_type',
                         ]
                     ),
                 ],

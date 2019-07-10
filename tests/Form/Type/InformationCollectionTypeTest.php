@@ -130,6 +130,7 @@ class InformationCollectionTypeTest extends TestCase
                         [
                             'id' => 'id',
                             'identifier' => 'identifier',
+                            'fieldTypeIdentifier' => 'field_type',
                             'isInfoCollector' => false,
                         ]
                     ),
@@ -222,6 +223,7 @@ class InformationCollectionTypeTest extends TestCase
                         [
                             'id' => 'id',
                             'identifier' => 'identifier',
+                            'fieldTypeIdentifier' => 'field_type',
                             'isInfoCollector' => true,
                         ]
                     ),
@@ -274,6 +276,7 @@ class InformationCollectionTypeTest extends TestCase
                         [
                             'id' => 'id',
                             'identifier' => 'identifier',
+                            'fieldTypeIdentifier' => 'field_type',
                             'isInfoCollector' => true,
                         ]
                     ),

@@ -29,11 +29,4 @@ class MapTypeTest extends TestCase
         $url = new MapType();
         $url->buildForm($formBuilder, []);
     }
-
-    public function testItReturnsValidFormName(): void
-    {
-        $url = new MapType();
-
-        self::assertSame('ezforms_map', $url->getName());
-    }
 }

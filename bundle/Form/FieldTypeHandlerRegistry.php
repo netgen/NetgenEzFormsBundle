@@ -10,7 +10,7 @@ use RuntimeException;
 class FieldTypeHandlerRegistry
 {
     /**
-     * Map of registered callable or FieldTypeHandler objects.
+     * Map of registered callable or FieldTypeHandlerInterface objects.
      *
      * @var array
      */
@@ -34,7 +34,7 @@ class FieldTypeHandlerRegistry
      * Register a $service for FieldType $identifier.
      *
      * @param string $identifier FieldType identifier
-     * @param mixed $handler Callable or FieldTypeHandler instance
+     * @param mixed $handler Callable or FieldTypeHandlerInterface instance
      */
     public function register(string $identifier, $handler): void
     {
@@ -42,12 +42,12 @@ class FieldTypeHandlerRegistry
     }
 
     /**
-     * Returns a FieldTypeHandler for FieldType $identifier.
+     * Returns a FieldTypeHandlerInterface for FieldType $identifier.
      *
      * @throws \OutOfBoundsException
      * @throws \RuntimeException When type is not a FieldTypeHandler instance nor a callable factory
      */
-    public function get(string $identifier): FieldTypeHandler
+    public function get(string $identifier): FieldTypeHandlerInterface
     {
         if (!isset($this->map[$identifier])) {
             throw new OutOfBoundsException("No handler registered for FieldType '{$identifier}'.");

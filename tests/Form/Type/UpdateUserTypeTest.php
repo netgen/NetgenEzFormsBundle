@@ -166,6 +166,7 @@ class UpdateUserTypeTest extends TestCase
                         [
                             'id' => 'id',
                             'identifier' => 'identifier',
+                            'fieldTypeIdentifier' => 'field_type',
                         ]
                     ),
                 ],
@@ -224,6 +225,7 @@ class UpdateUserTypeTest extends TestCase
                         [
                             'id' => 'id',
                             'identifier' => 'identifier',
+                            'fieldTypeIdentifier' => 'field_type',
                         ]
                     ),
                 ],

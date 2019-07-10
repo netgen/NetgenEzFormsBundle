@@ -112,12 +112,13 @@ class CreateUserTypeTest extends TestCase
                         [
                             'id' => 'id',
                             'identifier' => 'identifier',
+                            'fieldTypeIdentifier' => 'field_type',
                         ]
                     ),
                 ],
             ]
         );
-        $userUpdateStruct = new UserCreateStruct(['contentType' => $contentType]);
+        $userUpdateStruct = new UserCreateStruct(['contentType' => $contentType, 'mainLanguageCode' => 'eng-GB']);
 
         $options = ['data' => new DataWrapper($userUpdateStruct)];
 
