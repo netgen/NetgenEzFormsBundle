@@ -16,49 +16,49 @@
 {% endblock form_row %}
 
 {% block __ezforms_update_image_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {{ ez_render_field(
             form.vars.ezforms.content,
             form.vars.ezforms.fielddefinition.identifier,
             { 'parameters': {'alias': 'articlethumbnail'} }
         ) }}
         {{ block('form_widget_simple') }}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock __ezforms_update_image_widget %}
 
 {% block _ezforms_update_content_ezforms_image_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {{ block('__ezforms_update_image_widget') }}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock _ezforms_update_content_ezforms_image_widget %}
 
 {% block _ezforms_update_user_ezforms_image_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {{ block('__ezforms_update_image_widget') }}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock _ezforms_update_user_ezforms_image_widget %}
 
 {# BinaryFile update field custom rendering #}
 {% block __ezforms_update_file_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {{ ez_render_field(
             form.vars.ezforms.content,
             form.vars.ezforms.fielddefinition.identifier
         ) }}
         {{ block('form_widget_simple') }}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock __ezforms_update_file_widget %}
 
 {% block _ezforms_update_content_ezforms_binary_file_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {{ block('__ezforms_update_file_widget') }}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock _ezforms_update_content_ezforms_binary_file_widget %}
 {# END of BinaryFile update field custom rendering #}
 
 {# MapLocation fieldtype handler #}
 {% block __ezforms_map_location_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div id="{{ id ~ '_map' }}" style="margin: 0; padding: 0; height: 400px; width: 600px;">
 
         </div>
@@ -236,18 +236,18 @@
             }
 
         </script>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock __ezforms_map_location_widget %}
 
 {% block _ezforms_create_content_ezforms_map_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {{ block('__ezforms_map_location_widget') }}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock _ezforms_create_content_ezforms_map_widget %}
 
 {% block _ezforms_update_content_ezforms_map_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {{ block('__ezforms_map_location_widget') }}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock _ezforms_update_content_ezforms_map_widget %}
 {# END of MapLocation fieldtype handler #}
