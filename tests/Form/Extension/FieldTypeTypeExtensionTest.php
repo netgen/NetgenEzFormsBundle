@@ -13,11 +13,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FieldTypeTypeExtensionTest extends TestCase
 {
-    public function testGetExtendedType(): void
+    public function testGetExtendedTypes(): void
     {
         $extension = new FieldTypeTypeExtension();
 
-        self::assertSame(FormType::class, $extension->getExtendedType());
+        self::assertSame([FormType::class], $extension->getExtendedTypes());
     }
 
     public function testSetDefaultOptions(): void

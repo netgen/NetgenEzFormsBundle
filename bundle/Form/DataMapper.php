@@ -2,6 +2,7 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form;
 
+use DateTime;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormInterface;
@@ -10,8 +11,6 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 /**
- * Class BaseMapper.
- *
  * A data mapper using property paths to read/write data.
  */
 abstract class DataMapper implements DataMapperInterface
@@ -40,10 +39,7 @@ abstract class DataMapper implements DataMapperInterface
         $this->propertyAccessor = $propertyAccessor ?: PropertyAccess::createPropertyAccessor();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function mapDataToForms($data, $forms)
+    public function mapDataToForms($data, $forms): void
     {
         $empty = null === $data || [] === $data;
 
@@ -66,10 +62,7 @@ abstract class DataMapper implements DataMapperInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function mapFormsToData($forms, &$data)
+    public function mapFormsToData($forms, &$data): void
     {
         if (null === $data) {
             return;
@@ -107,7 +100,7 @@ abstract class DataMapper implements DataMapperInterface
             // If the field is of type DateTime and the data is the same skip the update to
             // keep the original object hash
             if (
-                $form->getData() instanceof \DateTime &&
+                $form->getData() instanceof DateTime &&
                 $form->getData() === $this->propertyAccessor->getValue($data, $propertyPath)
             ) {
                 continue;
@@ -129,29 +122,21 @@ abstract class DataMapper implements DataMapperInterface
 
     /**
      * Maps data from eZ Publish structure to the form.
-     *
-     * @param \Symfony\Component\Form\FormInterface $form
-     * @param \Netgen\Bundle\EzFormsBundle\Form\DataWrapper $data
-     * @param \Symfony\Component\PropertyAccess\PropertyPathInterface $propertyPath
      */
     abstract protected function mapToForm(
         FormInterface $form,
         DataWrapper $data,
         PropertyPathInterface $propertyPath
-    );
+    ): void;
 
     /**
      * Maps data from form to the eZ Publish structure.
-     *
-     * @param \Symfony\Component\Form\FormInterface $form
-     * @param \Netgen\Bundle\EzFormsBundle\Form\DataWrapper $data
-     * @param \Symfony\Component\PropertyAccess\PropertyPathInterface $propertyPath
      */
     abstract protected function mapFromForm(
         FormInterface $form,
         DataWrapper $data,
         PropertyPathInterface $propertyPath
-    );
+    ): void;
 
     /**
      * Returns if the update should be skipped for empty value.
@@ -162,7 +147,7 @@ abstract class DataMapper implements DataMapperInterface
      *
      * @return bool
      */
-    protected function shouldSkipForEmptyUpdate(FormInterface $form, $value, $fieldDefinitionIdentifier)
+    protected function shouldSkipForEmptyUpdate(FormInterface $form, $value, string $fieldDefinitionIdentifier): bool
     {
         return
             $value === null &&

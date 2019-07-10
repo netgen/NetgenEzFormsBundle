@@ -11,27 +11,16 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 
-/**
- * Class BinaryFile.
- */
 class BinaryFile extends FieldTypeHandler
 {
-    /**
-     * {@inheritdoc}
-     *
-     * @param \eZ\Publish\Core\FieldType\Image\Value $value
-     */
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): void
     {
-        return null;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile|null $data
      */
-    public function convertFieldValueFromForm($data)
+    public function convertFieldValueFromForm($data): ?FileValue
     {
         if ($data === null) {
             return null;
@@ -46,15 +35,12 @@ class BinaryFile extends FieldTypeHandler
         return new FileValue($fileData);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
         $maxFileSize = $fieldDefinition->validatorConfiguration['FileSizeValidator']['maxFileSize'];
 

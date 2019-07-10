@@ -18,9 +18,6 @@ interface FieldTypeHandlerInterface
      * @see buildFieldCreateForm
      * @see buildFieldUpdateForm
      *
-     * @param \eZ\Publish\SPI\FieldType\Value $value
-     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition|null $fieldDefinition
-     *
      * @return mixed
      */
     public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null);
@@ -39,29 +36,20 @@ interface FieldTypeHandlerInterface
 
     /**
      * Builds the form the given $fieldDefinition and $languageCode for creating.
-     *
-     * @param \Symfony\Component\Form\FormBuilderInterface $formBuilder
-     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
-     * @param string $languageCode
      */
     public function buildFieldCreateForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode
-    );
+        string $languageCode
+    ): void;
 
     /**
      * Builds the form the given $fieldDefinition and $languageCode for updating.
-     *
-     * @param \Symfony\Component\Form\FormBuilderInterface $formBuilder
-     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
-     * @param \eZ\Publish\API\Repository\Values\Content\Content $content
-     * @param string $languageCode
      */
     public function buildFieldUpdateForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         Content $content,
-        $languageCode
-    );
+        string $languageCode
+    ): void;
 }

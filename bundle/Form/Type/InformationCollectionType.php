@@ -8,9 +8,6 @@ use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
 use RuntimeException;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * Class InformationCollectionType.
- */
 class InformationCollectionType extends AbstractContentType
 {
     /**
@@ -20,38 +17,18 @@ class InformationCollectionType extends AbstractContentType
 
     /**
      * Sets system available array of languages.
-     *
-     * @param array $languages
      */
-    public function setLanguages(array $languages)
+    public function setLanguages(array $languages): void
     {
         $this->languages = $languages;
     }
 
-    /**
-     * Returns the name of this type.
-     *
-     * @return string The name of this type
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    /**
-     * Returns the prefix of the template block name for this type.
-     *
-     * @return string The prefix of the template block name
-     */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ezforms_information_collection';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         /** @var DataWrapper $dataWrapper */
         $dataWrapper = $options['data'];
@@ -98,12 +75,8 @@ class InformationCollectionType extends AbstractContentType
 
     /**
      * If ContentType language code is in languages array then use it, else use first available one.
-     *
-     * @param ContentType $contentType
-     *
-     * @return string
      */
-    protected function getLanguageCode(ContentType $contentType)
+    protected function getLanguageCode(ContentType $contentType): string
     {
         $contentTypeLanguages = array_keys($contentType->getNames());
 

@@ -2,9 +2,6 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form\Payload;
 
-/**
- * Class InformationCollectionStruct.
- */
 class InformationCollectionStruct
 {
     /**
@@ -15,25 +12,19 @@ class InformationCollectionStruct
     /**
      * Returns value for $fieldDefIdentifier.
      *
-     * @param $fieldDefIdentifier
+     * @param string $fieldDefIdentifier
      *
      * @return mixed
      */
-    public function getCollectedFieldValue($fieldDefIdentifier)
+    public function getCollectedFieldValue(string $fieldDefIdentifier)
     {
-        if (isset($this->collectedData[$fieldDefIdentifier])) {
-            return $this->collectedData[$fieldDefIdentifier];
-        }
-
-        return null;
+        return $this->collectedData[$fieldDefIdentifier] ?? null;
     }
 
     /**
      * This method returns the complete fields collection.
-     *
-     * @return array
      */
-    public function getCollectedFields()
+    public function getCollectedFields(): array
     {
         return $this->collectedData;
     }
@@ -43,10 +34,8 @@ class InformationCollectionStruct
      *
      * @param string $fieldDefIdentifier
      * @param mixed $value
-     *
-     * @return mixed
      */
-    public function setCollectedFieldValue($fieldDefIdentifier, $value)
+    public function setCollectedFieldValue(string $fieldDefIdentifier, $value): void
     {
         $this->collectedData[$fieldDefIdentifier] = $value;
     }

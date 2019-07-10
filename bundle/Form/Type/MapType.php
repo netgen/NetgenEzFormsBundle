@@ -7,15 +7,9 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * Class MapType.
- */
 class MapType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('address', TextType::class, [
             'label' => 'ezforms.form.map.address.label',
@@ -30,22 +24,7 @@ class MapType extends AbstractType
         ]);
     }
 
-    /**
-     * Returns the name of this type.
-     *
-     * @return string The name of this type
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    /**
-     * Returns the prefix of the template block name for this type.
-     *
-     * @return string The prefix of the template block name
-     */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ezforms_map';
     }

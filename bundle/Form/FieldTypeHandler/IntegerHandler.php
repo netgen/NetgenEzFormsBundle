@@ -15,36 +15,21 @@ use Symfony\Component\Validator\Constraints as Assert;
 class IntegerHandler extends FieldTypeHandler
 {
     /**
-     * @var FieldHelper
+     * @var \eZ\Publish\Core\Helper\FieldHelper
      */
     protected $fieldHelper;
 
-    /**
-     * Integer constructor.
-     *
-     * @param FieldHelper $fieldHelper
-     */
     public function __construct(FieldHelper $fieldHelper)
     {
         $this->fieldHelper = $fieldHelper;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return int
-     */
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): int
     {
         return (int) $value->value;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return IntegerValue\Value
-     */
-    public function convertFieldValueFromForm($data)
+    public function convertFieldValueFromForm($data): IntegerValue\Value
     {
         if (!is_int($data)) {
             $data = null;
@@ -53,21 +38,16 @@ class IntegerHandler extends FieldTypeHandler
         return new IntegerValue\Value($data);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        if ($fieldDefinition->defaultValue instanceof IntegerValue\Value) {
-            if (!$content instanceof Content) {
-                $options['data'] = (int) $fieldDefinition->defaultValue->value;
-            }
+        if (!$content instanceof Content && $fieldDefinition->defaultValue instanceof IntegerValue\Value) {
+            $options['data'] = (int) $fieldDefinition->defaultValue->value;
         }
 
         if (!empty($fieldDefinition->getValidatorConfiguration()['IntegerValueValidator'])) {

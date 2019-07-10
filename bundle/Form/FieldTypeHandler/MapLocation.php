@@ -10,15 +10,9 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\Type\MapType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * Class MapLocation.
- */
 class MapLocation extends FieldTypeHandler
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): array
     {
         return [
             'latitude' => empty($value->latitude) ? null : $value->latitude,
@@ -27,10 +21,7 @@ class MapLocation extends FieldTypeHandler
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function convertFieldValueFromForm($data)
+    public function convertFieldValueFromForm($data): ?MapLocationValue\Value
     {
         if (!is_array($data)) {
             return null;
@@ -45,15 +36,12 @@ class MapLocation extends FieldTypeHandler
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $options['block_name'] = 'ezforms_map';

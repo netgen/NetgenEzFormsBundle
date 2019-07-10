@@ -26,13 +26,7 @@ class Country extends FieldTypeHandler
      */
     protected $filteredCountryData;
 
-    /**
-     * Constructor
-     * Set information data from Service Container for countries.
-     *
-     * @param array $countryData
-     */
-    public function __construct($countryData)
+    public function __construct(array $countryData)
     {
         $this->countryData = $countryData;
 
@@ -42,8 +36,6 @@ class Country extends FieldTypeHandler
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return array|string
      */
     public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
@@ -67,12 +59,7 @@ class Country extends FieldTypeHandler
         return array_keys($value->countries);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return CountryValue;
-     */
-    public function convertFieldValueFromForm($data)
+    public function convertFieldValueFromForm($data): CountryValue
     {
         $country = [];
 
@@ -83,24 +70,19 @@ class Country extends FieldTypeHandler
                     $country[$countryCode] = $this->countryData[$countryCode];
                 }
             }
-        } else {
-            if (array_key_exists($data, $this->countryData)) {
-                $country[$data] = $this->countryData[$data];
-            }
+        } elseif (array_key_exists($data, $this->countryData)) {
+            $country[$data] = $this->countryData[$data];
         }
 
-        return new CountryValue((array) $country);
+        return new CountryValue($country);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $options['expanded'] = false;

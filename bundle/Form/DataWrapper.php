@@ -2,9 +2,6 @@
 
 namespace Netgen\Bundle\EzFormsBundle\Form;
 
-/**
- * Class DataWrapper.
- */
 class DataWrapper
 {
     /**

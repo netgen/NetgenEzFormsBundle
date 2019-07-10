@@ -14,55 +14,35 @@ use Symfony\Component\Form\FormBuilderInterface;
 class Checkbox extends FieldTypeHandler
 {
     /**
-     * @var FieldHelper
+     * @var \eZ\Publish\Core\Helper\FieldHelper
      */
     protected $fieldHelper;
 
-    /**
-     * Integer constructor.
-     *
-     * @param FieldHelper $fieldHelper
-     */
     public function __construct(FieldHelper $fieldHelper)
     {
         $this->fieldHelper = $fieldHelper;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return bool
-     */
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): bool
     {
         return $value->bool;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return CheckboxValue\Value
-     */
-    public function convertFieldValueFromForm($data)
+    public function convertFieldValueFromForm($data): CheckBoxValue\Value
     {
         return new CheckboxValue\Value($data);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        if ($fieldDefinition->defaultValue instanceof CheckboxValue\Value) {
-            if (!$content instanceof Content) {
-                $options['data'] = $fieldDefinition->defaultValue->bool;
-            }
+        if (!$content instanceof Content && $fieldDefinition->defaultValue instanceof CheckboxValue\Value) {
+            $options['data'] = $fieldDefinition->defaultValue->bool;
         }
 
         $formBuilder->add($fieldDefinition->identifier, CheckboxType::class, $options);

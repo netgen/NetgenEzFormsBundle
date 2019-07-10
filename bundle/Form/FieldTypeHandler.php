@@ -10,29 +10,18 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 
-/**
- * Class FieldTypeHandler.
- */
 abstract class FieldTypeHandler implements FieldTypeHandlerInterface
 {
     protected $fieldTypeRegistry;
 
-    /**
-     * {@inheritdoc}
-     */
     abstract public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null);
 
-    /**
-     * {@inheritdoc}
-     */
     public function convertFieldValueFromForm($data)
     {
         return $data;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * In most cases this will be the same as {@link self::buildUpdateFieldForm()}.
      * For this reason default implementation falls back to the internal method
      * {@link self::buildFieldForm()}, which should be implemented as needed.
@@ -40,14 +29,12 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
     public function buildFieldCreateForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode
-    ) {
+        string $languageCode
+    ): void {
         $this->buildFieldForm($formBuilder, $fieldDefinition, $languageCode);
     }
 
     /**
-     * {@inheritdoc}
-     *
      * In most cases this will be the same as {@link self::buildCreateFieldForm()}.
      * For this reason default implementation falls back to the internal method
      * {@link self::buildFieldForm()}, which should be implemented as needed.
@@ -56,8 +43,8 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         Content $content,
-        $languageCode
-    ) {
+        string $languageCode
+    ): void {
         $this->buildFieldForm($formBuilder, $fieldDefinition, $languageCode, $content);
     }
 
@@ -67,35 +54,24 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
      * handler implementation of those falls back to this method.
      *
      * Implement as needed.
-     *
-     * @param \Symfony\Component\Form\FormBuilderInterface $formBuilder
-     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
-     * @param string $languageCode
-     * @param \eZ\Publish\API\Repository\Values\Content\Content|null $content
      */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         throw new RuntimeException('Not implemented.');
     }
 
     /**
      * Returns default field options, created from given $fieldDefinition and $languageCode.
-     *
-     * @param \eZ\Publish\API\Repository\Values\ContentType\FieldDefinition $fieldDefinition
-     * @param string $languageCode
-     * @param \eZ\Publish\API\Repository\Values\Content\Content|null $content
-     *
-     * @return array
      */
     protected function getDefaultFieldOptions(
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): array {
         $options = [];
 
         $options['label'] = $fieldDefinition->getName($languageCode);
@@ -119,11 +95,8 @@ abstract class FieldTypeHandler implements FieldTypeHandlerInterface
     /**
      * Adds a hidden field to the from, indicating that empty value passed
      * for update should be ignored.
-     *
-     * @param \Symfony\Component\Form\FormBuilderInterface $formBuilder
-     * @param string $fieldDefinitionIdentifier
      */
-    protected function skipEmptyUpdate(FormBuilderInterface $formBuilder, $fieldDefinitionIdentifier)
+    protected function skipEmptyUpdate(FormBuilderInterface $formBuilder, string $fieldDefinitionIdentifier): void
     {
         $options = [
             'mapped' => false,

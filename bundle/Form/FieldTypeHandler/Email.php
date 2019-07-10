@@ -13,35 +13,22 @@ use Symfony\Component\Validator\Constraints;
 
 class Email extends FieldTypeHandler
 {
-    /**
-     * {@inheritdoc}
-     *
-     * @return string
-     */
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): string
     {
         return $value->email;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return \eZ\Publish\Core\FieldType\EmailAddress\Value
-     */
-    public function convertFieldValueFromForm($data)
+    public function convertFieldValueFromForm($data): EmailAddress\Value
     {
         return new EmailAddress\Value($data);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         if (!empty($fieldDefinition->validatorConfiguration['EmailAddressValidator'])) {

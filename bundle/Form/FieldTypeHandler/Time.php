@@ -14,12 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class Time extends FieldTypeHandler
 {
-    /**
-     * {@inheritdoc}
-     *
-     * @return int|null
-     */
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): DateTime
     {
         $time = $value->time;
         if (is_int($time)) {
@@ -29,12 +24,7 @@ class Time extends FieldTypeHandler
         return new DateTime();
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return TimeValue
-     */
-    public function convertFieldValueFromForm($data)
+    public function convertFieldValueFromForm($data): TimeValue
     {
         if ($data instanceof DateTime) {
             return TimeValue::fromDateTime($data);
@@ -47,15 +37,12 @@ class Time extends FieldTypeHandler
         return new TimeValue(null);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $useSeconds = $fieldDefinition->getFieldSettings()['useSeconds'];

@@ -10,42 +10,29 @@ use Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserCreateType;
 use Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserUpdateType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * Class User.
- */
 class User extends FieldTypeHandler
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): void
     {
-        // Returning null here because user data is mapped in mapper as an exceptional case
-        return null;
+        // Returning nothing here because user data is mapped in mapper as an exceptional case
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildFieldCreateForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode
-    ) {
+        string $languageCode
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode);
 
         $formBuilder->add($fieldDefinition->identifier, UserCreateType::class, $options);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildFieldUpdateForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
         Content $content,
-        $languageCode
-    ) {
+        string $languageCode
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $formBuilder->add($fieldDefinition->identifier, UserUpdateType::class, $options);

@@ -7,35 +7,14 @@ use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use RuntimeException;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * Class EzPublishCreateUserType.
- */
 class CreateUserType extends AbstractContentType
 {
-    /**
-     * Returns the name of this type.
-     *
-     * @return string The name of this type
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    /**
-     * Returns the prefix of the template block name for this type.
-     *
-     * @return string The prefix of the template block name
-     */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ezforms_create_user';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         /** @var \Netgen\Bundle\EzFormsBundle\Form\DataWrapper $dataWrapper */
         $dataWrapper = $options['data'];

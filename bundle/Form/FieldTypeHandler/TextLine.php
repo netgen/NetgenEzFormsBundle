@@ -11,23 +11,15 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 
-/**
- * Class TextLine.
- */
 class TextLine extends FieldTypeHandler
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
+
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): string
     {
         return $value->text;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function convertFieldValueFromForm($data)
+    public function convertFieldValueFromForm($data): TextLineValue
     {
         if (empty($data)) {
             $data = '';
@@ -36,15 +28,12 @@ class TextLine extends FieldTypeHandler
         return new TextLineValue($data);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         if (!empty($fieldDefinition->validatorConfiguration['StringLengthValidator'])) {

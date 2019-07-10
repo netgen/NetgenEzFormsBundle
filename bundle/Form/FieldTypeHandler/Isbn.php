@@ -11,25 +11,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 
-/**
- * Class Isbn.
- */
 class Isbn extends FieldTypeHandler
 {
-    /**
-     * {@inheritdoc}
-     *
-     * @param IsbnValue $value
-     */
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): string
     {
         return $value->isbn;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function convertFieldValueFromForm($data)
+    public function convertFieldValueFromForm($data): IsbnValue
     {
         if (empty($data)) {
             $data = '';
@@ -38,15 +27,12 @@ class Isbn extends FieldTypeHandler
         return new IsbnValue($data);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         if ($fieldDefinition->fieldSettings['isISBN13']) {

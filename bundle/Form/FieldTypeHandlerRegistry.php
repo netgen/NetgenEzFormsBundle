@@ -5,9 +5,6 @@ namespace Netgen\Bundle\EzFormsBundle\Form;
 use OutOfBoundsException;
 use RuntimeException;
 
-/**
- * Class FieldTypeHandlerRegistry.
- */
 class FieldTypeHandlerRegistry
 {
     /**
@@ -37,7 +34,7 @@ class FieldTypeHandlerRegistry
      * @param string $identifier FieldType identifier
      * @param mixed $handler Callable or FieldTypeHandler instance
      */
-    public function register($identifier, $handler)
+    public function register(string $identifier, $handler): void
     {
         $this->map[$identifier] = $handler;
     }
@@ -45,14 +42,10 @@ class FieldTypeHandlerRegistry
     /**
      * Returns a FieldTypeHandler for FieldType $identifier.
      *
-     * @param string $identifier The FieldType identifier
-     *
      * @throws \OutOfBoundsException
      * @throws \RuntimeException When type is not a FieldTypeHandler instance nor a callable factory
-     *
-     * @return \Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler
      */
-    public function get($identifier)
+    public function get(string $identifier): FieldTypeHandler
     {
         if (!isset($this->map[$identifier])) {
             throw new OutOfBoundsException("No handler registered for FieldType '{$identifier}'.");
@@ -63,7 +56,7 @@ class FieldTypeHandlerRegistry
             }
 
             $factory = $this->map[$identifier];
-            $this->map[$identifier] = call_user_func($factory);
+            $this->map[$identifier] = $factory();
 
             if (!$this->map[$identifier] instanceof FieldTypeHandler) {
                 throw new RuntimeException(

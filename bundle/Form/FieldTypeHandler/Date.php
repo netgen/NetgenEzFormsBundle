@@ -14,35 +14,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class Date extends FieldTypeHandler
 {
-    /**
-     * {@inheritdoc}
-     *
-     * @return DateTime
-     */
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): DateTime
     {
         return $value->date;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return DateValue\Value
-     */
-    public function convertFieldValueFromForm($data)
+    public function convertFieldValueFromForm($data): DateValue\Value
     {
         return new DateValue\Value($data);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $options['input'] = 'datetime';

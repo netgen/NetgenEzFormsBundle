@@ -16,16 +16,17 @@ use RuntimeException;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DemoController extends Controller
 {
-    public function demoCreateContentAction(Request $request)
+    public function demoCreateContentAction(Request $request): Response
     {
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
         $locationService = $repository->getLocationService();
         // @todo for demo purpose, user should have necessary permissions by itself
-        $repository->setCurrentUser(
+        $repository->getPermissionResolver()->setCurrentUserReference(
             $repository->getUserService()->loadUserByLogin('admin')
         );
         $contentType = $repository->getContentTypeService()->loadContentTypeByIdentifier('test_type');
@@ -81,11 +82,11 @@ class DemoController extends Controller
         );
     }
 
-    public function demoUpdateContentAction(Request $request)
+    public function demoUpdateContentAction(Request $request): Response
     {
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
-        $repository->setCurrentUser(
+        $repository->getPermissionResolver()->setCurrentUserReference(
             $repository->getUserService()->loadUserByLogin('admin')
         );
         $content = $contentService->loadContent(137);
@@ -140,12 +141,12 @@ class DemoController extends Controller
         );
     }
 
-    public function demoCreateUserAction(Request $request)
+    public function demoCreateUserAction(Request $request): Response
     {
         /** @todo check that user really is anonymous, otherwise it does not make sense to allow registration */
         $repository = $this->getRepository();
         $userService = $repository->getUserService();
-        $repository->setCurrentUser(
+        $repository->getPermissionResolver()->setCurrentUserReference(
             // @todo anonymous requires additional permissions to create new user
             $userService->loadUserByLogin('admin')
         );
@@ -227,14 +228,14 @@ class DemoController extends Controller
         );
     }
 
-    public function demoUpdateUserAction(Request $request)
+    public function demoUpdateUserAction(Request $request): Response
     {
         $repository = $this->getRepository();
         $userService = $repository->getUserService();
         $contentService = $repository->getContentService();
 
         // @todo check that user is really logged in, it should have permissions to self edit
-        $repository->setCurrentUser(
+        $repository->getPermissionResolver()->setCurrentUserReference(
             $repository->getUserService()->loadUserByLogin('admin')
         );
 
@@ -277,12 +278,12 @@ class DemoController extends Controller
         );
     }
 
-    public function demoInformationCollectionAction(Request $request)
+    public function demoInformationCollectionAction(Request $request): Response
     {
         $repository = $this->getRepository();
         $contentService = $repository->getContentService();
         // @todo for demo purpose, user should have necessary permissions by itself
-        $repository->setCurrentUser(
+        $repository->getPermissionResolver()->setCurrentUserReference(
             $repository->getUserService()->loadUserByLogin('admin')
         );
 

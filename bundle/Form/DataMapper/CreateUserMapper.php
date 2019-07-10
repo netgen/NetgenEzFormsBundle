@@ -9,16 +9,11 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 /**
- * Class CreateUserMapper.
- *
  * A data mapper using property paths to read/write data.
  */
 class CreateUserMapper extends DataMapper
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
+    protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath): void
     {
         /** @var \eZ\Publish\Core\Repository\Values\User\UserCreateStruct $userCreateStruct */
         $userCreateStruct = $data->payload;
@@ -44,10 +39,7 @@ class CreateUserMapper extends DataMapper
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
+    protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath): void
     {
         /** @var \eZ\Publish\API\Repository\Values\User\UserCreateStruct $userCreateStruct */
         $userCreateStruct = $data->payload;

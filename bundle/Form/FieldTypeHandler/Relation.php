@@ -11,25 +11,20 @@ use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use InvalidArgumentException;
 
 class Relation extends FieldTypeHandler
 {
     /**
-     * @var Repository
+     * @var \eZ\Publish\API\Repository\Repository
      */
     private $repository;
 
     /**
-     * @var TranslationHelper
+     * @var \eZ\Publish\Core\Helper\TranslationHelper
      */
     private $translationHelper;
 
-    /**
-     * ObjectRelation constructor.
-     *
-     * @param Repository $repository
-     * @param TranslationHelper $translationHelper
-     */
     public function __construct(Repository $repository, TranslationHelper $translationHelper)
     {
         $this->repository = $repository;
@@ -48,13 +43,13 @@ class Relation extends FieldTypeHandler
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $selectionRoot = $fieldDefinition->getFieldSettings()['selectionRoot'];
 
         if (empty($selectionRoot)) {
-            throw new \InvalidArgumentException('SelectionRoot must be defined');
+            throw new InvalidArgumentException('SelectionRoot must be defined');
         }
 
         $locationService = $this->repository->getLocationService();

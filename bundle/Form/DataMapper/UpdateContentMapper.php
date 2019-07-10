@@ -9,16 +9,11 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
 /**
- * Class UpdateContentMapper.
- *
  * A data mapper using property paths to read/write data.
  */
 class UpdateContentMapper extends DataMapper
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
+    protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath): void
     {
         /** @var \eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct $contentUpdateStruct */
         $contentUpdateStruct = $data->payload;
@@ -50,10 +45,7 @@ class UpdateContentMapper extends DataMapper
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath)
+    protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath): void
     {
         /** @var \eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct $contentUpdateStruct */
         $contentUpdateStruct = $data->payload;

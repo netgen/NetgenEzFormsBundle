@@ -12,21 +12,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class Selection extends FieldTypeHandler
 {
-    /**
-     * {@inheritdoc}
-     *
-     * @return SelectionValue\Value
-     */
-    public function convertFieldValueFromForm($value)
+    public function convertFieldValueFromForm($value): SelectionValue\Value
     {
         return new SelectionValue\Value((array) $value);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return array
-     */
     public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
     {
         $isMultiple = true;
@@ -46,15 +36,12 @@ class Selection extends FieldTypeHandler
         return $value->selection;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $values = $fieldDefinition->getFieldSettings()['options'];

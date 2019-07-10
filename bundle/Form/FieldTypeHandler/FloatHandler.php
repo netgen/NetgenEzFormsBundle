@@ -15,36 +15,21 @@ use Symfony\Component\Validator\Constraints as Assert;
 class FloatHandler extends FieldTypeHandler
 {
     /**
-     * @var FieldHelper
+     * @var \eZ\Publish\Core\Helper\FieldHelper
      */
     protected $fieldHelper;
 
-    /**
-     * Integer constructor.
-     *
-     * @param FieldHelper $fieldHelper
-     */
     public function __construct(FieldHelper $fieldHelper)
     {
         $this->fieldHelper = $fieldHelper;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return float
-     */
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): float
     {
         return $value->value;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return FloatValue\Value
-     */
-    public function convertFieldValueFromForm($data)
+    public function convertFieldValueFromForm($data): FloatValue\Value
     {
         if (!is_numeric($data)) {
             $data = null;
@@ -53,15 +38,12 @@ class FloatHandler extends FieldTypeHandler
         return new FloatValue\Value($data);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         if (!empty($fieldDefinition->getValidatorConfiguration()['FloatValueValidator'])) {
@@ -83,10 +65,8 @@ class FloatHandler extends FieldTypeHandler
             }
         }
 
-        if ($fieldDefinition->defaultValue instanceof FloatValue\Value) {
-            if (!$content instanceof Content) {
-                $options['data'] = (float) $fieldDefinition->defaultValue->value;
-            }
+        if (!$content instanceof Content && $fieldDefinition->defaultValue instanceof FloatValue\Value) {
+            $options['data'] = (float) $fieldDefinition->defaultValue->value;
         }
 
         $formBuilder->add($fieldDefinition->identifier, NumberType::class, $options);

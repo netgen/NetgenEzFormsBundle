@@ -9,9 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 
-/**
- * Class UserUpdateType.
- */
 class UserUpdateType extends AbstractType
 {
     /**
@@ -19,18 +16,12 @@ class UserUpdateType extends AbstractType
      */
     protected $minimumPasswordLength;
 
-    /**
-     * @param int $minimumPasswordLength
-     */
-    public function __construct($minimumPasswordLength)
+    public function __construct(int $minimumPasswordLength)
     {
         $this->minimumPasswordLength = $minimumPasswordLength;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $emailOptions = [
             'label' => 'E-mail address',
@@ -71,22 +62,7 @@ class UserUpdateType extends AbstractType
             ->add('password', RepeatedType::class, $passwordOptions);
     }
 
-    /**
-     * Returns the name of this type.
-     *
-     * @return string The name of this type
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    /**
-     * Returns the prefix of the template block name for this type.
-     *
-     * @return string The prefix of the template block name
-     */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ezforms_ezuser_update';
     }

@@ -9,10 +9,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class FieldTypeHandlerRegistryPass implements CompilerPassInterface
 {
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('netgen.ezforms.form.fieldtype_handler_registry')) {
             return;

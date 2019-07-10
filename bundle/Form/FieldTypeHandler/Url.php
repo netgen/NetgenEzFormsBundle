@@ -12,22 +12,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class Url extends FieldTypeHandler
 {
-    /**
-     * {@inheritdoc}
-     *
-     * @return array
-     */
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): array
     {
         return ['url' => $value->link, 'text' => $value->text];
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @return UrlValue\Value
-     */
-    public function convertFieldValueFromForm($data)
+    public function convertFieldValueFromForm($data): UrlValue\Value
     {
         if (!is_array($data)) {
             $data = [];
@@ -38,15 +28,12 @@ class Url extends FieldTypeHandler
         return new UrlValue\Value($data['url'], $data['text']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $formBuilder->add($fieldDefinition->identifier, UrlType::class, $options);

@@ -10,23 +10,16 @@ use RuntimeException;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-/**
- * Class InformationCollectionMapper.
- */
 class InformationCollectionMapper extends DataMapper
 {
     /**
      * Maps data from eZ Publish structure to the form.
-     *
-     * @param \Symfony\Component\Form\FormInterface $form
-     * @param \Netgen\Bundle\EzFormsBundle\Form\DataWrapper $data
-     * @param \Symfony\Component\PropertyAccess\PropertyPathInterface $propertyPath
      */
     protected function mapToForm(
         FormInterface $form,
         DataWrapper $data,
         PropertyPathInterface $propertyPath
-    ) {
+    ): void {
         /** @var ContentType $contentType */
         $contentType = $data->definition;
 
@@ -53,16 +46,12 @@ class InformationCollectionMapper extends DataMapper
 
     /**
      * Maps data from form to the eZ Publish structure.
-     *
-     * @param \Symfony\Component\Form\FormInterface $form
-     * @param \Netgen\Bundle\EzFormsBundle\Form\DataWrapper $data
-     * @param \Symfony\Component\PropertyAccess\PropertyPathInterface $propertyPath
      */
     protected function mapFromForm(
         FormInterface $form,
         DataWrapper $data,
         PropertyPathInterface $propertyPath
-    ) {
+    ): void {
         /** @var InformationCollectionStruct $payload */
         $payload = $data->payload;
         /** @var ContentType $contentType */

@@ -8,24 +8,15 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * Class FieldTypeTypeExtension.
- */
 class FieldTypeTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getExtendedType()
+    public function getExtendedTypes(): iterable
     {
         // Returning 'form' extends all form types
-        return FormType::class;
+        return [FormType::class];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefined(
             [
@@ -34,10 +25,7 @@ class FieldTypeTypeExtension extends AbstractTypeExtension
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $ezFormsVars = [];
 

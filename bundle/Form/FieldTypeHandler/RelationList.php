@@ -23,12 +23,12 @@ class RelationList extends FieldTypeHandler
     public const TPLBASED_SINGLE = 6;
 
     /**
-     * @var Repository
+     * @var \eZ\Publish\API\Repository\Repository
      */
     private $repository;
 
     /**
-     * @var TranslationHelper
+     * @var \eZ\Publish\Core\Helper\TranslationHelper
      */
     private $translationHelper;
 
@@ -40,7 +40,7 @@ class RelationList extends FieldTypeHandler
         $this->translationHelper = $translationHelper;
     }
 
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): ?array
     {
         if (empty($value->destinationContentIds)) {
             return null;
@@ -49,7 +49,7 @@ class RelationList extends FieldTypeHandler
         return $value->destinationContentIds;
     }
 
-    public function convertFieldValueFromForm($data)
+    public function convertFieldValueFromForm($data): RelationListValue
     {
         return new RelationListValue($data);
     }
@@ -57,9 +57,9 @@ class RelationList extends FieldTypeHandler
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $fieldSettings = $fieldDefinition->getFieldSettings();
@@ -73,12 +73,12 @@ class RelationList extends FieldTypeHandler
         switch ($fieldSettings['selectionMethod']) {
             case self::MULTIPLE_SELECTION:
                 $locationService = $this->repository->getLocationService();
-                $location = $locationService->loadLocation($defaultLocation ? $defaultLocation : 2);
+                $location = $locationService->loadLocation($defaultLocation ?: 2);
                 $locationList = $locationService->loadLocationChildren($location);
 
                 $choices = [];
+                /** @var \eZ\Publish\API\Repository\Values\Content\Location $child */
                 foreach ($locationList->locations as $child) {
-                    /* @var Location $child */
                     $choices[$this->translationHelper->getTranslatedContentNameByContentInfo($child->contentInfo)] = $child->contentInfo->id;
                 }
 
@@ -91,12 +91,12 @@ class RelationList extends FieldTypeHandler
                 break;
             default:
                 $locationService = $this->repository->getLocationService();
-                $location = $locationService->loadLocation($defaultLocation ? $defaultLocation : 2);
+                $location = $locationService->loadLocation($defaultLocation ?: 2);
                 $locationList = $locationService->loadLocationChildren($location);
 
                 $choices = [];
+                /** @var \eZ\Publish\API\Repository\Values\Content\Location $child */
                 foreach ($locationList->locations as $child) {
-                    /* @var Location $child */
                     $choices[$this->translationHelper->getTranslatedContentNameByContentInfo($child->contentInfo)] = $child->contentInfo->id;
                 }
 

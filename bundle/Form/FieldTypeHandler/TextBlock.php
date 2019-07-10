@@ -10,23 +10,14 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * Class TextBlock.
- */
 class TextBlock extends FieldTypeHandler
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): string
     {
         return $value->text;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function convertFieldValueFromForm($data)
+    public function convertFieldValueFromForm($data): TextBlockValue
     {
         if (empty($data)) {
             $data = '';
@@ -35,15 +26,12 @@ class TextBlock extends FieldTypeHandler
         return new TextBlockValue($data);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function buildFieldForm(
         FormBuilderInterface $formBuilder,
         FieldDefinition $fieldDefinition,
-        $languageCode,
+        string $languageCode,
         ?Content $content = null
-    ) {
+    ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
         $options['attr']['rows'] = $fieldDefinition->fieldSettings['textRows'];
