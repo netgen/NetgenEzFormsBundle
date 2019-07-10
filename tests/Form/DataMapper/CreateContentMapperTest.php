@@ -44,7 +44,7 @@ class CreateContentMapperTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcherInterface')
+        $this->dispatcher = $this->getMockBuilder('Symfony\Contracts\EventDispatcher\EventDispatcherInterface')
             ->disableOriginalConstructor()
             ->setMethods([])
             ->getMock();
