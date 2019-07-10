@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Payload;
 
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
@@ -7,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class InformationCollectionStructTest extends TestCase
 {
-    public function testGetCollectedFieldValue()
+    public function testGetCollectedFieldValue(): void
     {
         $struct = new InformationCollectionStruct();
         $struct->setCollectedFieldValue('some_field', 'some_value');
@@ -16,7 +18,7 @@ class InformationCollectionStructTest extends TestCase
         self::assertNull($struct->getCollectedFieldValue('some_field_not_existing'));
     }
 
-    public function testGetCollectedFields()
+    public function testGetCollectedFields(): void
     {
         $fields = [
             'some_field_1' => 'some_value_1',

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\FieldType\TextBlock\Value as TextBlockValue;
@@ -11,14 +13,14 @@ use Symfony\Component\Form\FormBuilder;
 
 class TextBlockTest extends TestCase
 {
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $text = new TextBlock();
 
         self::assertInstanceOf(FieldTypeHandler::class, $text);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $text = new TextBlock();
         $textValue = new TextBlockValue('Some text');
@@ -28,7 +30,7 @@ class TextBlockTest extends TestCase
         self::assertSame('Some text', $returnedValue);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
         $text = new TextBlock();
         $textValue = new TextBlockValue('Some text');
@@ -38,7 +40,7 @@ class TextBlockTest extends TestCase
         self::assertSame($textValue->text, $returnedValue->text);
     }
 
-    public function testConvertFieldValueFromFormWhenDataIsEmpty()
+    public function testConvertFieldValueFromFormWhenDataIsEmpty(): void
     {
         $text = new TextBlock();
         $textValue = new TextBlockValue('');
@@ -48,7 +50,7 @@ class TextBlockTest extends TestCase
         self::assertSame($textValue->text, $returnedValue->text);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()

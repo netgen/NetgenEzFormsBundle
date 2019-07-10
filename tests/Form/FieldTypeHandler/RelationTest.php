@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
@@ -85,14 +87,14 @@ class RelationTest extends TestCase
             ->getMock();
     }
 
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $relation = new Relation($this->repository, $this->translationHelper);
 
         self::assertInstanceOf(FieldTypeHandler::class, $relation);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $relation = new Relation($this->repository, $this->translationHelper);
         $relationValue = new RelationValue(2);
@@ -102,7 +104,7 @@ class RelationTest extends TestCase
         self::assertSame(2, $returnedValue);
     }
 
-    public function testConvertFieldValueToFormNullDestinationContentId()
+    public function testConvertFieldValueToFormNullDestinationContentId(): void
     {
         $relation = new Relation($this->repository, $this->translationHelper);
         $relationValue = new RelationValue(null);
@@ -112,7 +114,7 @@ class RelationTest extends TestCase
         self::assertNull($returnedValue);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
         $relation = new Relation($this->repository, $this->translationHelper);
 
@@ -121,7 +123,7 @@ class RelationTest extends TestCase
         self::assertSame(23, $returnedValue);
     }
 
-    public function testConvertFieldValueFromFormWhenDataIsNull()
+    public function testConvertFieldValueFromFormWhenDataIsNull(): void
     {
         $relation = new Relation($this->repository, $this->translationHelper);
 
@@ -130,7 +132,7 @@ class RelationTest extends TestCase
         self::assertNull($returnedValue);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
@@ -180,7 +182,7 @@ class RelationTest extends TestCase
         $selection->buildFieldCreateForm($formBuilder, $fieldDefinition, 'eng-GB');
     }
 
-    public function testBuildFieldCreateFormNullSelectionRoot()
+    public function testBuildFieldCreateFormNullSelectionRoot(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('SelectionRoot must be defined');

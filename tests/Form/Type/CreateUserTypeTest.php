@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
@@ -17,7 +19,7 @@ use Symfony\Component\Form\FormBuilder;
 
 class CreateUserTypeTest extends TestCase
 {
-    public function testItExtendsAbstractType()
+    public function testItExtendsAbstractType(): void
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
@@ -30,7 +32,7 @@ class CreateUserTypeTest extends TestCase
         self::assertInstanceOf(AbstractType::class, $updateUserType);
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
@@ -44,7 +46,7 @@ class CreateUserTypeTest extends TestCase
         self::assertSame('ezforms_create_user', $updateUserType->getName());
     }
 
-    public function testBuildFormWithoutDataWrapperMustThrowException()
+    public function testBuildFormWithoutDataWrapperMustThrowException(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data must be an instance of Netgen\EzFormsBundle\Form\DataWrapper');
@@ -67,7 +69,7 @@ class CreateUserTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormDataWrapperTargetMustBeUser()
+    public function testBuildFormDataWrapperTargetMustBeUser(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data payload must be an instance of eZ\Publish\API\Repository\Values\User\User');
@@ -90,7 +92,7 @@ class CreateUserTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildForm()
+    public function testBuildForm(): void
     {
         $fieldTypeHandler = $this->getMockBuilder(FieldTypeHandler::class)
             ->disableOriginalConstructor()

@@ -1,7 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
+use DateTime;
+use DateTimeInterface;
 use eZ\Publish\Core\FieldType\Time\Value as TimeValue;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
@@ -11,38 +15,38 @@ use Symfony\Component\Form\FormBuilder;
 
 class TimeTest extends TestCase
 {
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $time = new Time();
 
         self::assertInstanceOf(FieldTypeHandler::class, $time);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $time = new Time();
         $timeValue = new TimeValue(500);
-        $dateTime = new \DateTime('@500');
+        $dateTime = new DateTime('@500');
 
         $returnedValue = $time->convertFieldValueToForm($timeValue);
 
         self::assertSame($dateTime->format('H:i:s'), $returnedValue->format('H:i:s'));
     }
 
-    public function testConvertFieldValueToFormWithoutTime()
+    public function testConvertFieldValueToFormWithoutTime(): void
     {
         $time = new Time();
         $timeValue = new TimeValue(null);
 
         $returnedValue = $time->convertFieldValueToForm($timeValue);
 
-        self::assertInstanceOf(\DateTimeInterface::class, $returnedValue);
+        self::assertInstanceOf(DateTimeInterface::class, $returnedValue);
     }
 
-    public function testConvertFieldValueFromFormWhenDataInstanceOfDateTime()
+    public function testConvertFieldValueFromFormWhenDataInstanceOfDateTime(): void
     {
         $time = new Time();
-        $dateTime = new \DateTime();
+        $dateTime = new DateTime();
         $timeValue = TimeValue::fromDateTime($dateTime);
 
         $returnedValue = $time->convertFieldValueFromForm($dateTime);
@@ -50,7 +54,7 @@ class TimeTest extends TestCase
         self::assertSame($timeValue->time, $returnedValue->time);
     }
 
-    public function testConvertFieldValueFromFormWhenDataIsInt()
+    public function testConvertFieldValueFromFormWhenDataIsInt(): void
     {
         $time = new Time();
         $timeValue = new TimeValue(500);
@@ -60,7 +64,7 @@ class TimeTest extends TestCase
         self::assertSame($timeValue->time, $returnedValue->time);
     }
 
-    public function testConvertFieldValueFromFormWhenDataIsString()
+    public function testConvertFieldValueFromFormWhenDataIsString(): void
     {
         $time = new Time();
         $timeValue = new TimeValue(null);
@@ -70,7 +74,7 @@ class TimeTest extends TestCase
         self::assertSame($timeValue->time, $returnedValue->time);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()

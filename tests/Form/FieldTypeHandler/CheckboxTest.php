@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\FieldType\Checkbox\Value as CheckboxValue;
@@ -61,14 +63,14 @@ class CheckboxTest extends TestCase
         ];
     }
 
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $checkboxHandler = new Checkbox($this->fieldHelper);
 
         self::assertInstanceOf(FieldTypeHandler::class, $checkboxHandler);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $checkboxHandler = new Checkbox($this->fieldHelper);
         $checkboxValue = new CheckboxValue(true);
@@ -78,7 +80,7 @@ class CheckboxTest extends TestCase
         self::assertTrue($returnedBool);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
         $checkboxHandler = new Checkbox($this->fieldHelper);
         $checkboxValue = new CheckboxValue(true);
@@ -88,7 +90,7 @@ class CheckboxTest extends TestCase
         self::assertSame($checkboxValue->bool, $returnedBool->bool);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
 
@@ -115,7 +117,7 @@ class CheckboxTest extends TestCase
         $checkboxHandler->buildFieldCreateForm($this->formBuilder, $fieldDefinition, 'eng-GB');
     }
 
-    public function testBuildFieldUpdateForm()
+    public function testBuildFieldUpdateForm(): void
     {
         $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
 
@@ -140,7 +142,7 @@ class CheckboxTest extends TestCase
         $checkboxHandler->buildFieldUpdateForm($this->formBuilder, $fieldDefinition, $this->content, 'eng-GB');
     }
 
-    public function testBuildFieldUpdateFormIfDefaultValueIsNotSet()
+    public function testBuildFieldUpdateFormIfDefaultValueIsNotSet(): void
     {
         $fieldDefinitionParameters = $this->fieldDefinitionParameters;
         $fieldDefinitionParameters['defaultValue'] = null;

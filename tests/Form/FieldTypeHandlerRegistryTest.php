@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form;
 
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Date;
@@ -10,7 +12,7 @@ use RuntimeException;
 
 class FieldTypeHandlerRegistryTest extends TestCase
 {
-    public function testItThrowsOutOfBoundExceptionWhenGettingNonExistentHandler()
+    public function testItThrowsOutOfBoundExceptionWhenGettingNonExistentHandler(): void
     {
         $this->expectException(OutOfBoundsException::class);
 
@@ -18,7 +20,7 @@ class FieldTypeHandlerRegistryTest extends TestCase
         $registry->get('some_handler');
     }
 
-    public function testItThrowsOutOfRuntimeExceptionWhenHandlerIsNotCallable()
+    public function testItThrowsOutOfRuntimeExceptionWhenHandlerIsNotCallable(): void
     {
         $this->expectException(RuntimeException::class);
 
@@ -26,7 +28,7 @@ class FieldTypeHandlerRegistryTest extends TestCase
         $registry->get('some_handler');
     }
 
-    public function testItThrowsOutOfRuntimeExceptionWhenHandlerIsNotInstanceOfHandler()
+    public function testItThrowsOutOfRuntimeExceptionWhenHandlerIsNotInstanceOfHandler(): void
     {
         $this->expectException(RuntimeException::class);
 
@@ -35,7 +37,7 @@ class FieldTypeHandlerRegistryTest extends TestCase
         $registry->get('some_handler');
     }
 
-    public function testItReturnsValidHandler()
+    public function testItReturnsValidHandler(): void
     {
         $handler = $this->getMockBuilder(Date::class)
             ->disableOriginalConstructor()
@@ -47,7 +49,7 @@ class FieldTypeHandlerRegistryTest extends TestCase
         self::assertSame($handler, $registry->get('some_handler'));
     }
 
-    public function testItSetsHandler()
+    public function testItSetsHandler(): void
     {
         $handler = $this->getMockBuilder(Date::class)
             ->disableOriginalConstructor()
@@ -60,7 +62,7 @@ class FieldTypeHandlerRegistryTest extends TestCase
         self::assertSame($handler, $registry->get('some_handler'));
     }
 
-    public function testItReturnsValidHandlerWithoutException()
+    public function testItReturnsValidHandlerWithoutException(): void
     {
         $handlerData = new Date();
 

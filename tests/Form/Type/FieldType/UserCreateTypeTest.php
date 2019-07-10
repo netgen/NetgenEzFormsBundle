@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type\FieldType;
 
 use Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserCreateType;
@@ -14,13 +16,13 @@ use Symfony\Component\Validator\Constraints;
 
 class UserCreateTypeTest extends TestCase
 {
-    public function testItExtendsAbstractType()
+    public function testItExtendsAbstractType(): void
     {
         $userCreateType = new UserCreateType(10);
         self::assertInstanceOf(AbstractType::class, $userCreateType);
     }
 
-    public function testBuildForm()
+    public function testBuildForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
@@ -83,7 +85,7 @@ class UserCreateTypeTest extends TestCase
         $userCreateType->buildForm($formBuilder, []);
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
         $userCreateType = new UserCreateType(10);
         self::assertSame('ezforms_ezuser_create', $userCreateType->getName());

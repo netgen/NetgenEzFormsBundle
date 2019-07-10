@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\FieldType\Integer\Value as IntegerValue;
@@ -58,14 +60,14 @@ class IntegerHandlerTest extends TestCase
         ];
     }
 
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $integer = new IntegerHandler($this->fieldHelper);
 
         self::assertInstanceOf(FieldTypeHandler::class, $integer);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $integer = new IntegerHandler($this->fieldHelper);
         $integerValue = new IntegerValue(5);
@@ -75,7 +77,7 @@ class IntegerHandlerTest extends TestCase
         self::assertSame(5, $returnedValue);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
         $integer = new IntegerHandler($this->fieldHelper);
         $integerValue = new IntegerValue(5);
@@ -85,7 +87,7 @@ class IntegerHandlerTest extends TestCase
         self::assertSame($integerValue->value, $returnedValue->value);
     }
 
-    public function testConvertFieldValueFromFormWhenDataIsNotNumeric()
+    public function testConvertFieldValueFromFormWhenDataIsNotNumeric(): void
     {
         $integer = new IntegerHandler($this->fieldHelper);
         $integerValue = new IntegerValue(null);
@@ -95,7 +97,7 @@ class IntegerHandlerTest extends TestCase
         self::assertSame($integerValue->value, $returnedValue->value);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
 
@@ -129,7 +131,7 @@ class IntegerHandlerTest extends TestCase
         $integerHandler->buildFieldCreateForm($this->formBuilder, $fieldDefinition, $languageCode);
     }
 
-    public function testBuildFieldUpdateForm()
+    public function testBuildFieldUpdateForm(): void
     {
         $content = $this->getMockBuilder(Content::class)
             ->disableOriginalConstructor()
@@ -163,7 +165,7 @@ class IntegerHandlerTest extends TestCase
         $integerHandler->buildFieldUpdateForm($this->formBuilder, $fieldDefinition, $content, $languageCode);
     }
 
-    public function testBuildFieldUpdateFormIfDefaultValueIsNotSet()
+    public function testBuildFieldUpdateFormIfDefaultValueIsNotSet(): void
     {
         $fieldDefinitionParameters = $this->fieldDefinitionParameters;
         $fieldDefinitionParameters['defaultValue'] = null;

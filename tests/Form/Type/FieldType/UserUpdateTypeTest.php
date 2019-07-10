@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type\FieldType;
 
 use Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserUpdateType;
@@ -13,13 +15,13 @@ use Symfony\Component\Validator\Constraints;
 
 class UserUpdateTypeTest extends TestCase
 {
-    public function testItExtendsAbstractType()
+    public function testItExtendsAbstractType(): void
     {
         $updateUserType = new UserUpdateType(10);
         self::assertInstanceOf(AbstractType::class, $updateUserType);
     }
 
-    public function testBuildForm()
+    public function testBuildForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
@@ -68,7 +70,7 @@ class UserUpdateTypeTest extends TestCase
         $userCreateType->buildForm($formBuilder, []);
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
         $updateUserType = new UserUpdateType(10);
         self::assertSame('ezforms_ezuser_update', $updateUserType->getName());

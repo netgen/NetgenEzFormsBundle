@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\FieldType\Float\Value as FloatValue;
@@ -66,14 +68,14 @@ class FloatHandlerTest extends TestCase
         ];
     }
 
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $float = new FloatHandler($this->fieldHelper);
 
         self::assertInstanceOf(FieldTypeHandler::class, $float);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $float = new FloatHandler($this->fieldHelper);
         $floatValue = new FloatValue(4.74);
@@ -83,7 +85,7 @@ class FloatHandlerTest extends TestCase
         self::assertSame(4.74, $returnedValue);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
         $float = new FloatHandler($this->fieldHelper);
         $floatValue = new FloatValue(4.74);
@@ -93,7 +95,7 @@ class FloatHandlerTest extends TestCase
         self::assertSame($floatValue->value, $returnedValue->value);
     }
 
-    public function testConvertFieldValueFromFormWhenDataIsNotNumeric()
+    public function testConvertFieldValueFromFormWhenDataIsNotNumeric(): void
     {
         $float = new FloatHandler($this->fieldHelper);
         $floatValue = new FloatValue(null);
@@ -103,7 +105,7 @@ class FloatHandlerTest extends TestCase
         self::assertSame($floatValue->value, $returnedValue->value);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
 
@@ -133,7 +135,7 @@ class FloatHandlerTest extends TestCase
         $floatHandler->buildFieldCreateForm($this->formBuilder, $fieldDefinition, 'eng-GB');
     }
 
-    public function testBuildFieldUpdateForm()
+    public function testBuildFieldUpdateForm(): void
     {
         $fieldDefinition = new FieldDefinition($this->fieldDefinitionParameters);
 
@@ -161,7 +163,7 @@ class FloatHandlerTest extends TestCase
         $floatHandler->buildFieldUpdateForm($this->formBuilder, $fieldDefinition, $this->content, 'eng-GB');
     }
 
-    public function testBuildFieldUpdateFormIfDefaultValueIsNotSet()
+    public function testBuildFieldUpdateFormIfDefaultValueIsNotSet(): void
     {
         $fieldDefinitionParameters = $this->fieldDefinitionParameters;
         $fieldDefinitionParameters['defaultValue'] = null;

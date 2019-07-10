@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
+use DateTime;
 use eZ\Publish\Core\FieldType\Date as DateValue;
 use eZ\Publish\Core\Repository\Values\Content\Content;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
@@ -12,16 +15,16 @@ use Symfony\Component\Form\FormBuilder;
 
 class DateTest extends TestCase
 {
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $date = new Date();
 
         self::assertInstanceOf(FieldTypeHandler::class, $date);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
-        $dateTime = new \DateTime();
+        $dateTime = new DateTime();
         $date = new Date();
         $dateValue = new DateValue\Value($dateTime);
 
@@ -30,9 +33,9 @@ class DateTest extends TestCase
         self::assertSame($dateTime->format('Y-m-d'), $returnedDate->format('Y-m-d'));
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
-        $dateTime = new \DateTime();
+        $dateTime = new DateTime();
         $date = new Date();
         $dateValue = new DateValue\Value($dateTime);
 
@@ -41,7 +44,7 @@ class DateTest extends TestCase
         self::assertSame((string) $dateValue, (string) $returnedDate);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
@@ -68,7 +71,7 @@ class DateTest extends TestCase
         $date->buildFieldCreateForm($formBuilder, $fieldDefinition, $languageCode);
     }
 
-    public function testBuildFieldUpdateForm()
+    public function testBuildFieldUpdateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()

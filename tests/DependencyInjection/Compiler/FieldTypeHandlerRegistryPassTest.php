@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
@@ -32,7 +34,7 @@ class FieldTypeHandlerRegistryPassTest extends AbstractCompilerPassTestCase
         );
     }
 
-    public function testCompilerPassMustThrowExceptionIfHandlerServiceHasntGotAlias(): void
+    public function testCompilerPassMustThrowExceptionIfHandlerServiceDoesNotHaveAlias(): void
     {
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage("'netgen.ezforms.form.fieldtype_handler' service tag needs an 'alias' attribute to identify the field type. None given.");

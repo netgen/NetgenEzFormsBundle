@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\DataMapper;
 
 use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
@@ -10,6 +12,7 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\UpdateContentMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Symfony\Component\Form\FormConfigBuilder;
@@ -57,12 +60,12 @@ class UpdateContentMapperTest extends TestCase
         $this->mapper = new UpdateContentMapper($this->registry, $this->propertyAccessor);
     }
 
-    public function testInstanceOfDataMapper()
+    public function testInstanceOfDataMapper(): void
     {
         self::assertInstanceOf(DataMapper::class, $this->mapper);
     }
 
-    public function testMapDataToForms()
+    public function testMapDataToForms(): void
     {
         $contentType = new ContentType(
             [
@@ -136,7 +139,7 @@ class UpdateContentMapperTest extends TestCase
         $this->mapper->mapDataToForms($data, [$form]);
     }
 
-    public function testMapDataToFormsWithInvalidFieldDefinition()
+    public function testMapDataToFormsWithInvalidFieldDefinition(): void
     {
         $this->expectException(RuntimeException::class);
 
@@ -196,7 +199,7 @@ class UpdateContentMapperTest extends TestCase
         $this->mapper->mapDataToForms($data, [$form]);
     }
 
-    public function testMapFormsToDataWithInvalidFieldDefinition()
+    public function testMapFormsToDataWithInvalidFieldDefinition(): void
     {
         $this->expectException(RuntimeException::class);
 
@@ -264,7 +267,7 @@ class UpdateContentMapperTest extends TestCase
         $this->mapper->mapFormsToData([$form], $data);
     }
 
-    public function testMapFormsToData()
+    public function testMapFormsToData(): void
     {
         $contentType = new ContentType(
             [
@@ -349,7 +352,7 @@ class UpdateContentMapperTest extends TestCase
         $this->mapper->mapFormsToData([$form], $data);
     }
 
-    private function getForm()
+    private function getForm(): MockObject
     {
         return $this->getMockBuilder('Symfony\Component\Form\Form')
             ->disableOriginalConstructor()

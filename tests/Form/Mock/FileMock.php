@@ -1,20 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Mock;
 
 class FileMock
 {
-    public function getRealPath()
+    public function getRealPath(): string
     {
         return '/some/path';
     }
 
-    public function getClientOriginalName()
+    public function getClientOriginalName(): string
     {
         return 'file_name';
     }
 
-    public function getSize()
+    public function getSize(): int
     {
         return 123;
     }

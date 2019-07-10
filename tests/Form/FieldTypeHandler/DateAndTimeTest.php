@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
+use DateTime;
 use eZ\Publish\Core\FieldType\DateAndTime as DTValue;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
@@ -11,17 +14,17 @@ use Symfony\Component\Form\FormBuilder;
 
 class DateAndTimeTest extends TestCase
 {
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $dateAndTime = new DateAndTime();
 
         self::assertInstanceOf(FieldTypeHandler::class, $dateAndTime);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $dateAndTime = new DateAndTime();
-        $dateTime = new \DateTime();
+        $dateTime = new DateTime();
         $dateValue = new DTValue\Value($dateTime);
 
         $returnedDate = $dateAndTime->convertFieldValueToForm($dateValue);
@@ -29,9 +32,9 @@ class DateAndTimeTest extends TestCase
         self::assertSame($dateTime, $returnedDate);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
-        $dateTime = new \DateTime();
+        $dateTime = new DateTime();
         $dateAndTime = new DateAndTime();
         $dateValue = new DTValue\Value($dateTime);
 
@@ -40,7 +43,7 @@ class DateAndTimeTest extends TestCase
         self::assertSame((string) $dateValue, (string) $returnedDate);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()

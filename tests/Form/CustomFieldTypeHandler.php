@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form;
 
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
@@ -8,7 +10,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
 class CustomFieldTypeHandler extends FieldTypeHandler
 {
-    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
+    public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): void
     {
     }
 }

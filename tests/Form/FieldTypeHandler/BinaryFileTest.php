@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\FieldType\BinaryFile\Value as FileValue;
@@ -13,14 +15,14 @@ use Symfony\Component\Form\FormBuilder;
 
 class BinaryFileTest extends TestCase
 {
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $binaryFile = new BinaryFile();
 
         self::assertInstanceOf(FieldTypeHandler::class, $binaryFile);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $binaryFile = new BinaryFile();
         $binaryFileValue = $this->getMockForAbstractClass(Value::class);
@@ -30,7 +32,7 @@ class BinaryFileTest extends TestCase
         self::assertNull($returnedValue);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
         $binaryFile = new BinaryFile();
         $data = new FileMock();
@@ -40,7 +42,7 @@ class BinaryFileTest extends TestCase
         self::assertInstanceOf(FileValue::class, $returnedData);
     }
 
-    public function testConvertFieldValueFromFormWhenDataIsNull()
+    public function testConvertFieldValueFromFormWhenDataIsNull(): void
     {
         $binaryFile = new BinaryFile();
 
@@ -49,7 +51,7 @@ class BinaryFileTest extends TestCase
         self::assertNull($returnedData);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()

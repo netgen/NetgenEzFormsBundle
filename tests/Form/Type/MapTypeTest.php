@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
 use Netgen\Bundle\EzFormsBundle\Form\Type\MapType;
@@ -9,12 +11,12 @@ use Symfony\Component\Form\FormBuilder;
 
 class MapTypeTest extends TestCase
 {
-    public function testItExtendsAbstractType()
+    public function testItExtendsAbstractType(): void
     {
         self::assertInstanceOf(AbstractType::class, new MapType());
     }
 
-    public function testItAddsFormFields()
+    public function testItAddsFormFields(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
@@ -28,7 +30,7 @@ class MapTypeTest extends TestCase
         $url->buildForm($formBuilder, []);
     }
 
-    public function testItReturnsValidFormName()
+    public function testItReturnsValidFormName(): void
     {
         $url = new MapType();
 

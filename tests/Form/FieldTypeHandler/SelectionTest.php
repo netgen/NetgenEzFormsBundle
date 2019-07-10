@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\FieldType\Selection\Value as SelectionValue;
@@ -21,12 +23,12 @@ class SelectionTest extends TestCase
         $this->handler = new Selection();
     }
 
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         self::assertInstanceOf(FieldTypeHandler::class, $this->handler);
     }
 
-    public function testConvertFieldValueToFormWithIdentifiersArrayEmpty()
+    public function testConvertFieldValueToFormWithIdentifiersArrayEmpty(): void
     {
         $identifiers = [];
         $selection = new SelectionValue($identifiers);
@@ -43,7 +45,7 @@ class SelectionTest extends TestCase
         self::assertSame('', $converted);
     }
 
-    public function testConvertFieldValueToFormWithFieldDefinitionMultiple()
+    public function testConvertFieldValueToFormWithFieldDefinitionMultiple(): void
     {
         $identifiers = ['identifier1', 'identifier2'];
         $selection = new SelectionValue($identifiers);
@@ -60,7 +62,7 @@ class SelectionTest extends TestCase
         self::assertSame($identifiers, $converted);
     }
 
-    public function testConvertFieldValueToFormWithFieldDefinitionSingle()
+    public function testConvertFieldValueToFormWithFieldDefinitionSingle(): void
     {
         $identifiers = ['identifier1', 'identifier2'];
         $selection = new SelectionValue($identifiers);
@@ -77,7 +79,7 @@ class SelectionTest extends TestCase
         self::assertSame($identifiers[0], $converted);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $selection = new Selection();
         $selectionValue = new SelectionValue([1]);
@@ -87,7 +89,7 @@ class SelectionTest extends TestCase
         self::assertSame([1], $returnedValue);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
         $selection = new Selection();
         $selectionValue = new SelectionValue([1]);
@@ -97,7 +99,7 @@ class SelectionTest extends TestCase
         self::assertSame($selectionValue->selection, $returnedValue->selection);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()

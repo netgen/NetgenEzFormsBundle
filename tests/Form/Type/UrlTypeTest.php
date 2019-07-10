@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
 use Netgen\Bundle\EzFormsBundle\Form\Type\UrlType;
@@ -12,12 +14,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class UrlTypeTest extends TestCase
 {
-    public function testItExtendsAbstractType()
+    public function testItExtendsAbstractType(): void
     {
         self::assertInstanceOf(AbstractType::class, new UrlType());
     }
 
-    public function testItAddsFormFields()
+    public function testItAddsFormFields(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
@@ -36,7 +38,7 @@ class UrlTypeTest extends TestCase
         $url->buildForm($formBuilder, []);
     }
 
-    public function testItReturnsValidFormName()
+    public function testItReturnsValidFormName(): void
     {
         $url = new UrlType();
 

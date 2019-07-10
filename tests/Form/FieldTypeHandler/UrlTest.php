@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\FieldType\Url\Value as UrlValue;
@@ -11,14 +13,14 @@ use Symfony\Component\Form\FormBuilder;
 
 class UrlTest extends TestCase
 {
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $url = new Url();
 
         self::assertInstanceOf(FieldTypeHandler::class, $url);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $url = new Url();
         $timeValue = new UrlValue('link', 'text');
@@ -28,7 +30,7 @@ class UrlTest extends TestCase
         self::assertSame(['url' => 'link', 'text' => 'text'], $returnedValue);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
         $url = new Url();
         $timeValue = new UrlValue('link', 'text');
@@ -39,7 +41,7 @@ class UrlTest extends TestCase
         self::assertSame($timeValue->text, $returnedValue->text);
     }
 
-    public function testConvertFieldValueFromFormWhenDataIsNotArray()
+    public function testConvertFieldValueFromFormWhenDataIsNotArray(): void
     {
         $url = new Url();
         $timeValue = new UrlValue(null, null);
@@ -50,7 +52,7 @@ class UrlTest extends TestCase
         self::assertSame($timeValue->text, $returnedValue->text);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()

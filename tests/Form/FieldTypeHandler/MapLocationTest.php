@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\FieldType\MapLocation\Value as MapLocationValue;
@@ -11,14 +13,14 @@ use Symfony\Component\Form\FormBuilder;
 
 class MapLocationTest extends TestCase
 {
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $map = new MapLocation();
 
         self::assertInstanceOf(FieldTypeHandler::class, $map);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $map = new MapLocation();
         $data = ['latitude' => 34, 'longitude' => 123, 'address' => null];
@@ -29,7 +31,7 @@ class MapLocationTest extends TestCase
         self::assertSame($data, $returnedValue);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
         $map = new MapLocation();
         $data = ['latitude' => 34, 'longitude' => 123, 'address' => null];
@@ -42,7 +44,7 @@ class MapLocationTest extends TestCase
         self::assertSame($mapValue->address, $returnedValue->address);
     }
 
-    public function testConvertFieldValueFromFormWhenDataIsNotArray()
+    public function testConvertFieldValueFromFormWhenDataIsNotArray(): void
     {
         $map = new MapLocation();
 
@@ -51,7 +53,7 @@ class MapLocationTest extends TestCase
         self::assertNull($returnedValue);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()

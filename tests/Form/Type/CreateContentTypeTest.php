@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
 use eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct;
@@ -17,7 +19,7 @@ use Symfony\Component\Form\FormBuilder;
 
 class CreateContentTypeTest extends TestCase
 {
-    public function testItExtendsAbstractType()
+    public function testItExtendsAbstractType(): void
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
@@ -30,7 +32,7 @@ class CreateContentTypeTest extends TestCase
         self::assertInstanceOf(AbstractType::class, $updateUserType);
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
@@ -44,7 +46,7 @@ class CreateContentTypeTest extends TestCase
         self::assertSame('ezforms_create_content', $updateUserType->getName());
     }
 
-    public function testBuildFormWithoutDataWrapperMustThrowException()
+    public function testBuildFormWithoutDataWrapperMustThrowException(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data must be an instance of Netgen\EzFormsBundle\Form\DataWrapper');
@@ -67,7 +69,7 @@ class CreateContentTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormDataWrapperPayloadMustBeContentCreateStruct()
+    public function testBuildFormDataWrapperPayloadMustBeContentCreateStruct(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data payload must be an instance of eZ\Publish\API\Repository\Values\Content\ContentCreateStruct');
@@ -90,7 +92,7 @@ class CreateContentTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildForm()
+    public function testBuildForm(): void
     {
         $fieldTypeHandler = $this->getMockBuilder(FieldTypeHandler::class)
             ->disableOriginalConstructor()
@@ -137,7 +139,7 @@ class CreateContentTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormContinueIfFieldIdentifierIsEzUser()
+    public function testBuildFormContinueIfFieldIdentifierIsEzUser(): void
     {
         $fieldTypeHandler = $this->getMockBuilder(FieldTypeHandler::class)
             ->disableOriginalConstructor()

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Extension;
 
 use Netgen\Bundle\EzFormsBundle\Form\Extension\FieldTypeTypeExtension;
@@ -11,14 +13,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FieldTypeTypeExtensionTest extends TestCase
 {
-    public function testGetExtendedType()
+    public function testGetExtendedType(): void
     {
         $extension = new FieldTypeTypeExtension();
 
         self::assertSame(FormType::class, $extension->getExtendedType());
     }
 
-    public function testSetDefaultOptions()
+    public function testSetDefaultOptions(): void
     {
         $resolver = $this->getMockBuilder(OptionsResolver::class)
             ->disableOriginalConstructor()
@@ -32,7 +34,7 @@ class FieldTypeTypeExtensionTest extends TestCase
         $extension->configureOptions($resolver);
     }
 
-    public function testBuildView()
+    public function testBuildView(): void
     {
         $formView = $this->getMockBuilder(FormView::class)
             ->disableOriginalConstructor()

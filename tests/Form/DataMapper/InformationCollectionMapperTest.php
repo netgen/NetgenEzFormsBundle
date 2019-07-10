@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\DataMapper;
 
 use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
@@ -8,6 +10,7 @@ use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\InformationCollectionMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
@@ -53,12 +56,12 @@ class InformationCollectionMapperTest extends TestCase
         $this->mapper = new InformationCollectionMapper($this->registry, $this->propertyAccessor);
     }
 
-    public function testInstanceOfDataMapper()
+    public function testInstanceOfDataMapper(): void
     {
         self::assertInstanceOf('\Netgen\Bundle\EzFormsBundle\Form\DataMapper', $this->mapper);
     }
 
-    public function testMapFormsToData()
+    public function testMapFormsToData(): void
     {
         $contentType = new ContentType(
             [
@@ -135,7 +138,7 @@ class InformationCollectionMapperTest extends TestCase
         $this->mapper->mapFormsToData([$form], $data);
     }
 
-    public function testMapFormsToDataWithoutValidFieldDefinition()
+    public function testMapFormsToDataWithoutValidFieldDefinition(): void
     {
         $this->expectException(RuntimeException::class);
 
@@ -201,7 +204,7 @@ class InformationCollectionMapperTest extends TestCase
         $this->mapper->mapFormsToData([$form], $data);
     }
 
-    public function testMapDataToForms()
+    public function testMapDataToForms(): void
     {
         $contentType = new ContentType(
             [
@@ -265,7 +268,7 @@ class InformationCollectionMapperTest extends TestCase
         $this->mapper->mapDataToForms($data, [$form]);
     }
 
-    public function testMapDataToFormsWithInvalidFieldDefinition()
+    public function testMapDataToFormsWithInvalidFieldDefinition(): void
     {
         $this->expectException(RuntimeException::class);
 
@@ -319,7 +322,7 @@ class InformationCollectionMapperTest extends TestCase
         $this->mapper->mapDataToForms($data, [$form]);
     }
 
-    private function getForm()
+    private function getForm(): MockObject
     {
         return $this->getMockBuilder('Symfony\Component\Form\Form')
             ->disableOriginalConstructor()

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\Repository\Values\Content\Content;
@@ -12,14 +14,14 @@ use Symfony\Component\Form\FormBuilder;
 
 class UserTest extends TestCase
 {
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $user = new User();
 
         self::assertInstanceOf(FieldTypeHandler::class, $user);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $user = new User();
         $userValue = $this->getMockForAbstractClass(Value::class);
@@ -29,7 +31,7 @@ class UserTest extends TestCase
         self::assertNull($returnedValue);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
         $user = new User();
 
@@ -38,7 +40,7 @@ class UserTest extends TestCase
         self::assertSame(['data'], $returnedValue);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
@@ -64,7 +66,7 @@ class UserTest extends TestCase
         $user->buildFieldCreateForm($formBuilder, $fieldDefinition, $languageCode);
     }
 
-    public function testBuildFieldUpdateForm()
+    public function testBuildFieldUpdateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()

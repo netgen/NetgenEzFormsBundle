@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
 use eZ\Publish\Core\Repository\Values\Content\Content;
@@ -20,7 +22,7 @@ use Symfony\Component\Form\FormBuilder;
 
 class UpdateContentTypeTest extends TestCase
 {
-    public function testItExtendsAbstractType()
+    public function testItExtendsAbstractType(): void
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
@@ -33,7 +35,7 @@ class UpdateContentTypeTest extends TestCase
         self::assertInstanceOf(AbstractType::class, $updateUserType);
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
@@ -47,7 +49,7 @@ class UpdateContentTypeTest extends TestCase
         self::assertSame('ezforms_update_content', $updateUserType->getName());
     }
 
-    public function testBuildFormWithoutDataWrapperMustThrowException()
+    public function testBuildFormWithoutDataWrapperMustThrowException(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data must be an instance of Netgen\EzFormsBundle\Form\DataWrapper');
@@ -70,7 +72,7 @@ class UpdateContentTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormDataWrapperTargetMustBeUser()
+    public function testBuildFormDataWrapperTargetMustBeUser(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data payload must be an instance of eZ\Publish\API\Repository\Values\Content\Content');
@@ -93,7 +95,7 @@ class UpdateContentTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormDataWrapperPayloadMustBeUserUpdateStruct()
+    public function testBuildFormDataWrapperPayloadMustBeUserUpdateStruct(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data payload must be an instance of eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct');
@@ -118,7 +120,7 @@ class UpdateContentTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormDataWrapperDefinitionMustBeContentType()
+    public function testBuildFormDataWrapperDefinitionMustBeContentType(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data definition must be an instance of eZ\Publish\API\Repository\Values\ContentType\ContentType');
@@ -144,7 +146,7 @@ class UpdateContentTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormContentTypeIdsMustMatch()
+    public function testBuildFormContentTypeIdsMustMatch(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data definition (ContentType) does not correspond to the data target (Content)');
@@ -187,7 +189,7 @@ class UpdateContentTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildForm()
+    public function testBuildForm(): void
     {
         $fieldTypeHandler = $this->getMockBuilder(FieldTypeHandler::class)
             ->disableOriginalConstructor()
@@ -243,7 +245,7 @@ class UpdateContentTypeTest extends TestCase
         $updateUserType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormContinueIfFieldIdentifierIsEzUser()
+    public function testBuildFormContinueIfFieldIdentifierIsEzUser(): void
     {
         $fieldTypeHandler = $this->getMockBuilder(FieldTypeHandler::class)
             ->disableOriginalConstructor()

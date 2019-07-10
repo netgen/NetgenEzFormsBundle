@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\FieldType\EmailAddress;
@@ -11,14 +13,14 @@ use Symfony\Component\Form\FormBuilder;
 
 class EmailTest extends TestCase
 {
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $email = new Email();
 
         self::assertInstanceOf(FieldTypeHandler::class, $email);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $email = new Email();
         $emailValue = new EmailAddress\Value('some@email.test');
@@ -28,7 +30,7 @@ class EmailTest extends TestCase
         self::assertSame('some@email.test', $returnedEmail);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
         $email = new Email();
         $emailValue = new EmailAddress\Value('some@email.test');
@@ -38,7 +40,7 @@ class EmailTest extends TestCase
         self::assertSame($emailValue->email, $returnedEmail->email);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\FieldType\Country\Value as CountryValue;
@@ -11,7 +13,7 @@ use Symfony\Component\Form\FormBuilder;
 
 class CountryTest extends TestCase
 {
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $countries = [
             'HR' => [
@@ -25,7 +27,7 @@ class CountryTest extends TestCase
         self::assertInstanceOf(FieldTypeHandler::class, $country);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $countries = [
             'HR' => [
@@ -42,7 +44,7 @@ class CountryTest extends TestCase
         self::assertSame(['HR'], $returnedValue);
     }
 
-    public function testConvertFieldValueToFormMultipleValues()
+    public function testConvertFieldValueToFormMultipleValues(): void
     {
         $fieldDefinition = new FieldDefinition(
             [
@@ -91,7 +93,7 @@ class CountryTest extends TestCase
         self::assertSame(['HR', 'BB'], $returnedValue);
     }
 
-    public function testConvertFieldValueToFormSingleValue()
+    public function testConvertFieldValueToFormSingleValue(): void
     {
         $fieldDefinition = new FieldDefinition(
             [
@@ -135,7 +137,7 @@ class CountryTest extends TestCase
         self::assertSame('HR', $returnedValue);
     }
 
-    public function testConvertFieldValueToFormWithNoneSelected()
+    public function testConvertFieldValueToFormWithNoneSelected(): void
     {
         $fieldDefinition = new FieldDefinition(
             [
@@ -173,7 +175,7 @@ class CountryTest extends TestCase
         self::assertSame('', $returnedValue);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
         $countries = [
             'HR' => [
@@ -189,7 +191,7 @@ class CountryTest extends TestCase
         self::assertSame($countryValue->countries, $returnedData->countries);
     }
 
-    public function testConvertFieldValueFromFormWithCountryArray()
+    public function testConvertFieldValueFromFormWithCountryArray(): void
     {
         $countries = [
             'HR' => [
@@ -205,7 +207,7 @@ class CountryTest extends TestCase
         self::assertSame($countryValue->countries, $returnedData->countries);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()

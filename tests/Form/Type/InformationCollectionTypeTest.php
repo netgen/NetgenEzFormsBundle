@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
@@ -17,7 +19,7 @@ use Symfony\Component\Form\FormBuilder;
 
 class InformationCollectionTypeTest extends TestCase
 {
-    public function testItExtendsAbstractType()
+    public function testItExtendsAbstractType(): void
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
@@ -30,7 +32,7 @@ class InformationCollectionTypeTest extends TestCase
         self::assertInstanceOf(AbstractType::class, $infoCollectionType);
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
@@ -44,7 +46,7 @@ class InformationCollectionTypeTest extends TestCase
         self::assertSame('ezforms_information_collection', $infoCollectionType->getName());
     }
 
-    public function testBuildFormWithoutDataWrapperMustThrowException()
+    public function testBuildFormWithoutDataWrapperMustThrowException(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data must be an instance of Netgen\EzFormsBundle\Form\DataWrapper');
@@ -67,7 +69,7 @@ class InformationCollectionTypeTest extends TestCase
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormDataWrapperPayloadMustBeInformationCollectionStruct()
+    public function testBuildFormDataWrapperPayloadMustBeInformationCollectionStruct(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data payload must be an instance of Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct');
@@ -90,7 +92,7 @@ class InformationCollectionTypeTest extends TestCase
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormDataWrapperDefinitionMustBeContentType()
+    public function testBuildFormDataWrapperDefinitionMustBeContentType(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data definition must be an instance of eZ\Publish\API\Repository\Values\ContentType\ContentType');
@@ -115,7 +117,7 @@ class InformationCollectionTypeTest extends TestCase
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormIfFieldIsNotInfoCollectorSkipIt()
+    public function testBuildFormIfFieldIsNotInfoCollectorSkipIt(): void
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
@@ -155,7 +157,7 @@ class InformationCollectionTypeTest extends TestCase
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormIfFieldUserSkipIt()
+    public function testBuildFormIfFieldUserSkipIt(): void
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
@@ -196,7 +198,7 @@ class InformationCollectionTypeTest extends TestCase
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildForm()
+    public function testBuildForm(): void
     {
         $fieldTypeHandler = $this->getMockBuilder(FieldTypeHandler::class)
             ->disableOriginalConstructor()
@@ -248,7 +250,7 @@ class InformationCollectionTypeTest extends TestCase
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 
-    public function testBuildFormTriggerMainLanguageCodeFromContentType()
+    public function testBuildFormTriggerMainLanguageCodeFromContentType(): void
     {
         $fieldTypeHandler = $this->getMockBuilder(FieldTypeHandler::class)
             ->disableOriginalConstructor()

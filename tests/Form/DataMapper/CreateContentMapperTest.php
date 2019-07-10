@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\DataMapper;
 
+use DateTime;
 use eZ\Publish\Core\FieldType\TextLine\Value;
 use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct;
@@ -9,8 +12,10 @@ use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\CreateContentMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
+use stdClass;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormConfigBuilder;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
@@ -67,19 +72,19 @@ class CreateContentMapperTest extends TestCase
         $this->mapper = new CreateContentMapper($this->registry, $this->propertyAccessor);
     }
 
-    public function testInstanceOfDataMapper()
+    public function testInstanceOfDataMapper(): void
     {
         self::assertInstanceOf('\Symfony\Component\Form\DataMapperInterface', $this->mapper);
     }
 
-    public function testMapDataToFormsShouldThrowUnexpectedTypeException()
+    public function testMapDataToFormsShouldThrowUnexpectedTypeException(): void
     {
         $this->expectException(UnexpectedTypeException::class);
 
         $this->mapper->mapDataToForms('data', 'form');
     }
 
-    public function testMapDataToFormsWithoutValidFieldDefinition()
+    public function testMapDataToFormsWithoutValidFieldDefinition(): void
     {
         $this->expectException(RuntimeException::class);
 
@@ -133,7 +138,7 @@ class CreateContentMapperTest extends TestCase
         $this->mapper->mapDataToForms($data, [$form]);
     }
 
-    public function testMapDataToForms()
+    public function testMapDataToForms(): void
     {
         $contentType = new ContentType(
             [
@@ -197,9 +202,9 @@ class CreateContentMapperTest extends TestCase
         $this->mapper->mapDataToForms($data, [$form]);
     }
 
-    public function testMapDataToFormsWithoutDataWrapper()
+    public function testMapDataToFormsWithoutDataWrapper(): void
     {
-        $data = new \stdClass();
+        $data = new stdClass();
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
@@ -231,9 +236,9 @@ class CreateContentMapperTest extends TestCase
         $this->mapper->mapDataToForms($data, [$form]);
     }
 
-    public function testMapDataToFormsDefault()
+    public function testMapDataToFormsDefault(): void
     {
-        $data = new \stdClass();
+        $data = new stdClass();
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
@@ -256,7 +261,7 @@ class CreateContentMapperTest extends TestCase
         $this->mapper->mapDataToForms($data, [$form]);
     }
 
-    public function testMapFormsToData()
+    public function testMapFormsToData(): void
     {
         $contentType = new ContentType(
             [
@@ -333,7 +338,7 @@ class CreateContentMapperTest extends TestCase
         $this->mapper->mapFormsToData([$form], $data);
     }
 
-    public function testMapFormsToDataWithInvalidFieldDefinition()
+    public function testMapFormsToDataWithInvalidFieldDefinition(): void
     {
         $this->expectException(RuntimeException::class);
 
@@ -399,15 +404,15 @@ class CreateContentMapperTest extends TestCase
         $this->mapper->mapFormsToData([$form], $data);
     }
 
-    public function testMapFormsToDataWhenDataIsNull()
+    public function testMapFormsToDataWhenDataIsNull(): void
     {
         $data = null;
         $this->mapper->mapFormsToData([], $data);
     }
 
-    public function testMapFormsToDataWhenDataIsNotDataWrapper()
+    public function testMapFormsToDataWhenDataIsNotDataWrapper(): void
     {
-        $data = new \stdClass();
+        $data = new stdClass();
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
@@ -452,10 +457,10 @@ class CreateContentMapperTest extends TestCase
         $this->mapper->mapFormsToData([$form], $data);
     }
 
-    public function testMapFormsToDataWhenDataIsNotDataWrapperSecondCase()
+    public function testMapFormsToDataWhenDataIsNotDataWrapperSecondCase(): void
     {
-        $data = new \stdClass();
-        $date = new \DateTime();
+        $data = new stdClass();
+        $date = new DateTime();
 
         $this->propertyAccessor->expects(self::once())
             ->method('getValue')
@@ -504,7 +509,7 @@ class CreateContentMapperTest extends TestCase
         $this->mapper->mapFormsToData([$form], $data);
     }
 
-    public function testMapFormsToDataUnexpectedData()
+    public function testMapFormsToDataUnexpectedData(): void
     {
         $this->expectException(UnexpectedTypeException::class);
 
@@ -513,9 +518,9 @@ class CreateContentMapperTest extends TestCase
         $this->mapper->mapFormsToData([], $someNumber);
     }
 
-    public function testMapFormsToDataWhenFormIsNotSynchronized()
+    public function testMapFormsToDataWhenFormIsNotSynchronized(): void
     {
-        $data = new \stdClass();
+        $data = new stdClass();
 
         $this->propertyAccessor->expects(self::never())
             ->method('getValue');
@@ -561,24 +566,8 @@ class CreateContentMapperTest extends TestCase
         $this->mapper->mapFormsToData([$form], $data);
     }
 
-    public function testMapFormsToDataWithDataSameAsValueInData()
+    public function testMapFormsToDataWithDataSameAsValueInData(): void
     {
-        $contentType = new ContentType(
-            [
-                'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'name',
-                            'fieldTypeIdentifier' => 'eztext',
-                            'defaultValue' => new Value('Some name'),
-                        ]
-                    ),
-                ],
-            ]
-        );
-
         $this->registry->expects(self::any())
             ->method('get')
             ->with('eztext')
@@ -588,9 +577,7 @@ class CreateContentMapperTest extends TestCase
             ->method('convertFieldValueFromForm')
             ->willReturn(new TextLineValue('Some name'));
 
-        $contentCreateStruct = new ContentCreateStruct(['contentType' => $contentType]);
-
-        $data = new \stdClass();
+        $data = new stdClass();
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
@@ -647,7 +634,7 @@ class CreateContentMapperTest extends TestCase
         $this->mapper->mapFormsToData([$form], $data);
     }
 
-    private function getForm()
+    private function getForm(): MockObject
     {
         return $this->getMockBuilder('Symfony\Component\Form\Form')
             ->disableOriginalConstructor()

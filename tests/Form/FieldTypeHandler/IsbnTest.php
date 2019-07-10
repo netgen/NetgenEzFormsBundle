@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\FieldType\ISBN\Value as IsbnValue;
@@ -11,14 +13,14 @@ use Symfony\Component\Form\FormBuilder;
 
 class IsbnTest extends TestCase
 {
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $isbn = new Isbn();
 
         self::assertInstanceOf(FieldTypeHandler::class, $isbn);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $isbn = new Isbn();
         $isbnValue = new IsbnValue('5367GBMK');
@@ -28,7 +30,7 @@ class IsbnTest extends TestCase
         self::assertSame('5367GBMK', $returnedValue);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
         $isbn = new Isbn();
         $isbnValue = new IsbnValue('5367GBMK');
@@ -38,7 +40,7 @@ class IsbnTest extends TestCase
         self::assertSame($isbnValue->isbn, $returnedValue->isbn);
     }
 
-    public function testConvertFieldValueFromFormWhenDataIsEmpty()
+    public function testConvertFieldValueFromFormWhenDataIsEmpty(): void
     {
         $isbn = new Isbn();
         $isbnValue = new IsbnValue('');
@@ -48,7 +50,7 @@ class IsbnTest extends TestCase
         self::assertSame($isbnValue->isbn, $returnedValue->isbn);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
@@ -75,7 +77,7 @@ class IsbnTest extends TestCase
         $isbn->buildFieldCreateForm($formBuilder, $fieldDefinition, $languageCode);
     }
 
-    public function testBuildFieldCreateFormIsbn13()
+    public function testBuildFieldCreateFormIsbn13(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()

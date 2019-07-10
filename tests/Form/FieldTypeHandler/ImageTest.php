@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use eZ\Publish\Core\FieldType\Image\Value as ImageValue;
@@ -12,14 +14,14 @@ use Symfony\Component\Form\FormBuilder;
 
 class ImageTest extends TestCase
 {
-    public function testAssertInstanceOfFieldTypeHandler()
+    public function testAssertInstanceOfFieldTypeHandler(): void
     {
         $image = new Image();
 
         self::assertInstanceOf(FieldTypeHandler::class, $image);
     }
 
-    public function testConvertFieldValueToForm()
+    public function testConvertFieldValueToForm(): void
     {
         $image = new Image();
         $imageValue = new ImageValue(['fileName' => 'picture.jpeg']);
@@ -29,7 +31,7 @@ class ImageTest extends TestCase
         self::assertNull($returnedValue);
     }
 
-    public function testConvertFieldValueFromForm()
+    public function testConvertFieldValueFromForm(): void
     {
         $image = new Image();
         $data = new FileMock();
@@ -39,7 +41,7 @@ class ImageTest extends TestCase
         self::assertInstanceOf(ImageValue::class, $returnedData);
     }
 
-    public function testConvertFieldValueFromFormWhenDataIsNull()
+    public function testConvertFieldValueFromFormWhenDataIsNull(): void
     {
         $image = new Image();
         $returnedData = $image->convertFieldValueFromForm(null);
@@ -47,7 +49,7 @@ class ImageTest extends TestCase
         self::assertNull($returnedData);
     }
 
-    public function testBuildFieldCreateForm()
+    public function testBuildFieldCreateForm(): void
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()

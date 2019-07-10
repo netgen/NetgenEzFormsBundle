@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form;
 
 use eZ\Publish\API\Repository\Values\Content\Content;
@@ -10,7 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class CustomFieldTypeHandlerTest extends TestCase
 {
-    public function testBuildFieldUpdateFormWhenNoImplementedHandler()
+    public function testBuildFieldUpdateFormWhenNoImplementedHandler(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not implemented.');
