@@ -1,4 +1,4 @@
 Documentation
 =============
 
-Please check [Petar's blog post](http://www.netgenlabs.com/Blog/Creating-and-updating-eZ-Publish-Content-via-Symfony-s-Form-component).
+Please check [Petar's blog post](https://netgen.io/blog/creating-and-updating-ez-publish-content-via-symfony-s-form-component).
