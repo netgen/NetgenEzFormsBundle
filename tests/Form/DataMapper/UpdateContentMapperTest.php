@@ -44,17 +44,14 @@ class UpdateContentMapperTest extends TestCase
     {
         $this->propertyAccessor = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyAccessorInterface')
             ->disableOriginalConstructor()
-            ->setMethods([])
             ->getMock();
 
         $this->registry = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry')
             ->disableOriginalConstructor()
-            ->setMethods([])
             ->getMock();
 
         $this->handler = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerInterface')
             ->disableOriginalConstructor()
-            ->setMethods([])
             ->getMock();
 
         $this->mapper = new UpdateContentMapper($this->registry, $this->propertyAccessor);
@@ -163,7 +160,6 @@ class UpdateContentMapperTest extends TestCase
 
         $content = $this->getMockBuilder(Content::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
             ->getMock();
 
         $data = new DataWrapper($contentUpdateStruct, $contentType, $content);

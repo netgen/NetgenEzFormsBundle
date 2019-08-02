@@ -47,17 +47,14 @@ class UpdateUserMapperTest extends TestCase
     {
         $this->propertyAccessor = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyAccessorInterface')
             ->disableOriginalConstructor()
-            ->setMethods([])
             ->getMock();
 
         $this->registry = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry')
             ->disableOriginalConstructor()
-            ->setMethods([])
             ->getMock();
 
         $this->handler = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerInterface')
             ->disableOriginalConstructor()
-            ->setMethods([])
             ->getMock();
 
         $this->mapper = new UpdateUserMapper($this->registry, $this->propertyAccessor);

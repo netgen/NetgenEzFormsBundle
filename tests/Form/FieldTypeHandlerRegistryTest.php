@@ -41,7 +41,6 @@ class FieldTypeHandlerRegistryTest extends TestCase
     {
         $handler = $this->getMockBuilder(Date::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
             ->getMock();
 
         $registry = new FieldTypeHandlerRegistry(['some_handler' => $handler]);
@@ -53,7 +52,6 @@ class FieldTypeHandlerRegistryTest extends TestCase
     {
         $handler = $this->getMockBuilder(Date::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
             ->getMock();
 
         $registry = new FieldTypeHandlerRegistry();

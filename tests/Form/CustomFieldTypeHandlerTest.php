@@ -20,7 +20,6 @@ class CustomFieldTypeHandlerTest extends TestCase
         $formBuilder = $this->getMockForAbstractClass(FormBuilderInterface::class);
         $fieldDefinition = $this->getMockBuilder(FieldDefinition::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
             ->getMock();
 
         $content = $this->getMockForAbstractClass(Content::class);

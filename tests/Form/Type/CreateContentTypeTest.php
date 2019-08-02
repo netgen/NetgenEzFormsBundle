@@ -23,8 +23,7 @@ class CreateContentTypeTest extends TestCase
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
@@ -39,15 +38,13 @@ class CreateContentTypeTest extends TestCase
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $options = ['data' => 'data'];
 
@@ -62,15 +59,13 @@ class CreateContentTypeTest extends TestCase
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $options = ['data' => new DataWrapper('payload')];
 

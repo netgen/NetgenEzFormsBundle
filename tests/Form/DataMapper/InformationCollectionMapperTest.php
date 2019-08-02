@@ -40,18 +40,15 @@ class InformationCollectionMapperTest extends TestCase
     {
         $this->propertyAccessor = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyAccessorInterface')
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $this->registry = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry')
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $this->handler = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerInterface')
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $this->mapper = new InformationCollectionMapper($this->registry, $this->propertyAccessor);
     }

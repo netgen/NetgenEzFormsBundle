@@ -23,8 +23,7 @@ class InformationCollectionTypeTest extends TestCase
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
@@ -39,15 +38,13 @@ class InformationCollectionTypeTest extends TestCase
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $options = ['data' => 'data'];
 
@@ -62,15 +59,13 @@ class InformationCollectionTypeTest extends TestCase
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $options = ['data' => new DataWrapper('payload')];
 
@@ -85,15 +80,13 @@ class InformationCollectionTypeTest extends TestCase
 
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $infoStruct = new InformationCollectionStruct();
 
@@ -107,8 +100,7 @@ class InformationCollectionTypeTest extends TestCase
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
@@ -148,8 +140,7 @@ class InformationCollectionTypeTest extends TestCase
     {
         $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
@@ -208,8 +199,7 @@ class InformationCollectionTypeTest extends TestCase
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $infoStruct = new InformationCollectionStruct();
 
@@ -261,8 +251,7 @@ class InformationCollectionTypeTest extends TestCase
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                        ->getMock();
 
         $infoStruct = new InformationCollectionStruct();
 
