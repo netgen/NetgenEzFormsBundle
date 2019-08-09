@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
+use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\ContentInfo;
 use eZ\Publish\API\Repository\Values\Content\LocationList;
 use eZ\Publish\Core\FieldType\Relation\Value as RelationValue;
@@ -12,7 +13,6 @@ use eZ\Publish\Core\Repository\ContentService;
 use eZ\Publish\Core\Repository\LocationService;
 use eZ\Publish\Core\Repository\Values\Content\Location;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\SignalSlot\Repository;
 use InvalidArgumentException;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Relation;
