@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class DemoController extends Controller
+final class DemoController extends Controller
 {
     public function demoCreateContentAction(Request $request): Response
     {

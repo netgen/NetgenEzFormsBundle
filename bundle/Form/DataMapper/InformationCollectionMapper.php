@@ -12,7 +12,7 @@ use RuntimeException;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-class InformationCollectionMapper extends DataMapper
+final class InformationCollectionMapper extends DataMapper
 {
     /**
      * Maps data from eZ Publish structure to the form.

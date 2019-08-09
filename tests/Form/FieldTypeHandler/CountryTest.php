@@ -11,7 +11,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Country;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class CountryTest extends TestCase
+final class CountryTest extends TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler(): void
     {
@@ -211,7 +211,7 @@ class CountryTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $formBuilder->expects(self::once())

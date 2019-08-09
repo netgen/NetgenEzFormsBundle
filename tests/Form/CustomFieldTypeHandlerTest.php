@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class CustomFieldTypeHandlerTest extends TestCase
+final class CustomFieldTypeHandlerTest extends TestCase
 {
     public function testBuildFieldUpdateFormWhenNoImplementedHandler(): void
     {

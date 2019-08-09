@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form;
 
-use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Date;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
+use Netgen\Bundle\EzFormsBundle\Tests\Stubs\Handler;
 use OutOfBoundsException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-class FieldTypeHandlerRegistryTest extends TestCase
+final class FieldTypeHandlerRegistryTest extends TestCase
 {
     public function testItThrowsOutOfBoundExceptionWhenGettingNonExistentHandler(): void
     {
@@ -39,9 +39,7 @@ class FieldTypeHandlerRegistryTest extends TestCase
 
     public function testItReturnsValidHandler(): void
     {
-        $handler = $this->getMockBuilder(Date::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $handler = new Handler();
 
         $registry = new FieldTypeHandlerRegistry(['some_handler' => $handler]);
 
@@ -50,9 +48,7 @@ class FieldTypeHandlerRegistryTest extends TestCase
 
     public function testItSetsHandler(): void
     {
-        $handler = $this->getMockBuilder(Date::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $handler = new Handler();
 
         $registry = new FieldTypeHandlerRegistry();
         $registry->register('some_handler', $handler);
@@ -62,7 +58,7 @@ class FieldTypeHandlerRegistryTest extends TestCase
 
     public function testItReturnsValidHandlerWithoutException(): void
     {
-        $handlerData = new Date();
+        $handlerData = new Handler();
 
         $handler = static function () use ($handlerData) {
             return $handlerData;

@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints;
 
-class CheckboxTest extends TestCase
+final class CheckboxTest extends TestCase
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject
@@ -40,12 +40,12 @@ class CheckboxTest extends TestCase
     {
         $this->fieldHelper = $this->getMockBuilder(FieldHelper::class)
             ->disableOriginalConstructor()
-            ->setMethods(['isFieldEmpty'])
+            ->onlyMethods(['isFieldEmpty'])
             ->getMock();
 
         $this->formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $this->content = $this->getMockBuilder('eZ\Publish\API\Repository\Values\Content\Content')

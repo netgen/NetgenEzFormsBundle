@@ -12,7 +12,7 @@ use Netgen\Bundle\EzFormsBundle\Tests\Form\Mock\FileMock;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class ImageTest extends TestCase
+final class ImageTest extends TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler(): void
     {
@@ -53,7 +53,7 @@ class ImageTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $formBuilder->expects(self::exactly(2))

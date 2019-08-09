@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 
-class UserUpdateType extends AbstractType
+final class UserUpdateType extends AbstractType
 {
     /**
      * @var int

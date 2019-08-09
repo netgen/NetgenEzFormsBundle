@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 
-class UserCreateType extends AbstractType
+final class UserCreateType extends AbstractType
 {
     /**
      * @var int

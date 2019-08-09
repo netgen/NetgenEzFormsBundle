@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
-class MapTypeTest extends TestCase
+final class MapTypeTest extends TestCase
 {
     public function testItExtendsAbstractType(): void
     {
@@ -20,7 +20,7 @@ class MapTypeTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $formBuilder->expects(self::exactly(3))

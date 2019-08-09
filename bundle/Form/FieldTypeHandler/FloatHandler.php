@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class FloatHandler extends FieldTypeHandler
+final class FloatHandler extends FieldTypeHandler
 {
     /**
      * @var \eZ\Publish\Core\Helper\FieldHelper

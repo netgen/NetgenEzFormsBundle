@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Exception\LogicException;
 use Symfony\Component\DependencyInjection\Reference;
 
-class FieldTypeHandlerRegistryPassTest extends AbstractCompilerPassTestCase
+final class FieldTypeHandlerRegistryPassTest extends AbstractCompilerPassTestCase
 {
     public function testCompilerPassCollectsValidServices(): void
     {

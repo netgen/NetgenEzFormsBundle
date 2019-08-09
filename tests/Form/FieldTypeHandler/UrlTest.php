@@ -11,7 +11,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Url;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class UrlTest extends TestCase
+final class UrlTest extends TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler(): void
     {
@@ -56,7 +56,7 @@ class UrlTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $formBuilder->expects(self::once())

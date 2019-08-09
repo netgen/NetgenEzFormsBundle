@@ -7,7 +7,7 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Netgen\Bundle\EzFormsBundle\DependencyInjection\NetgenEzFormsExtension;
 
-class NetgenEzFormsExtensionTest extends AbstractExtensionTestCase
+final class NetgenEzFormsExtensionTest extends AbstractExtensionTestCase
 {
     public function testItSetsValidContainerParameters(): void
     {

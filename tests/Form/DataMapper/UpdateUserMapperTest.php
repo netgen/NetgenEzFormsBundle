@@ -14,6 +14,7 @@ use eZ\Publish\Core\Repository\Values\User\User;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\UpdateUserMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
+use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
@@ -21,7 +22,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormConfigBuilder;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-class UpdateUserMapperTest extends TestCase
+final class UpdateUserMapperTest extends TestCase
 {
     /**
      * @var UpdateUserMapper
@@ -29,7 +30,7 @@ class UpdateUserMapperTest extends TestCase
     private $mapper;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var \Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry
      */
     private $registry;
 
@@ -49,13 +50,13 @@ class UpdateUserMapperTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->registry = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry')
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->handler = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerInterface')
             ->disableOriginalConstructor()
             ->getMock();
+
+        $this->registry = new FieldTypeHandlerRegistry();
+        $this->registry->register('eztext', $this->handler);
+        $this->registry->register('ezuser', $this->handler);
 
         $this->mapper = new UpdateUserMapper($this->registry, $this->propertyAccessor);
     }
@@ -83,11 +84,6 @@ class UpdateUserMapperTest extends TestCase
             ]
         );
 
-        $this->registry->expects(self::once())
-            ->method('get')
-            ->with('eztext')
-            ->willReturn($this->handler);
-
         $this->handler->expects(self::once())
             ->method('convertFieldValueToForm')
             ->willReturn('Some name');
@@ -102,7 +98,7 @@ class UpdateUserMapperTest extends TestCase
 
         $user = $this->getMockBuilder(User::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getFieldValue'])
+            ->onlyMethods(['getFieldValue'])
             ->getMock();
 
         $user->expects(self::once())
@@ -113,7 +109,7 @@ class UpdateUserMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -122,7 +118,7 @@ class UpdateUserMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -173,14 +169,14 @@ class UpdateUserMapperTest extends TestCase
 
         $user = $this->getMockBuilder(User::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getFieldValue'])
+            ->onlyMethods(['getFieldValue'])
             ->getMock();
 
         $data = new DataWrapper($userUpdateStruct, $contentType, $user);
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -189,7 +185,7 @@ class UpdateUserMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -243,14 +239,14 @@ class UpdateUserMapperTest extends TestCase
 
         $user = $this->getMockBuilder(User::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getFieldValue'])
+            ->onlyMethods(['getFieldValue'])
             ->getMock();
 
         $data = new DataWrapper($userUpdateStruct, $contentType, $user);
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -259,7 +255,7 @@ class UpdateUserMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -297,11 +293,6 @@ class UpdateUserMapperTest extends TestCase
             ]
         );
 
-        $this->registry->expects(self::once())
-            ->method('get')
-            ->with('eztext')
-            ->willReturn($this->handler);
-
         $this->handler->expects(self::once())
             ->method('convertFieldValueFromForm')
             ->willReturn(new TextLineValue('Some name'));
@@ -316,14 +307,14 @@ class UpdateUserMapperTest extends TestCase
 
         $user = $this->getMockBuilder(User::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getFieldValue'])
+            ->onlyMethods(['getFieldValue'])
             ->getMock();
 
         $data = new DataWrapper($userUpdateStruct, $contentType, $user);
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -332,7 +323,7 @@ class UpdateUserMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -388,11 +379,6 @@ class UpdateUserMapperTest extends TestCase
             'password' => 'passw0rd',
         ];
 
-        $this->registry->expects(self::once())
-            ->method('get')
-            ->with('ezuser')
-            ->willReturn($this->handler);
-
         $this->handler->expects(self::once())
             ->method('convertFieldValueFromForm')
             ->willReturn($formData);
@@ -407,14 +393,14 @@ class UpdateUserMapperTest extends TestCase
 
         $user = $this->getMockBuilder(User::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getFieldValue'])
+            ->onlyMethods(['getFieldValue'])
             ->getMock();
 
         $data = new DataWrapper($userUpdateStruct, $contentType, $user);
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -423,7 +409,7 @@ class UpdateUserMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -479,14 +465,14 @@ class UpdateUserMapperTest extends TestCase
 
         $content = $this->getMockBuilder(Content::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getFieldValue'])
+            ->onlyMethods(['getFieldValue'])
             ->getMock();
 
         $data = new DataWrapper($contentUpdateStruct, $contentType, $content);
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -495,7 +481,7 @@ class UpdateUserMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -545,11 +531,6 @@ class UpdateUserMapperTest extends TestCase
             ]
         );
 
-        $this->registry->expects(self::once())
-            ->method('get')
-            ->with('eztext')
-            ->willReturn($this->handler);
-
         $contentUpdateStruct = new ContentUpdateStruct();
 
         $userUpdateStruct = new UserUpdateStruct(
@@ -560,14 +541,14 @@ class UpdateUserMapperTest extends TestCase
 
         $user = $this->getMockBuilder(User::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getFieldValue'])
+            ->onlyMethods(['getFieldValue'])
             ->getMock();
 
         $data = new DataWrapper($userUpdateStruct, $contentType, $user);
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -576,7 +557,7 @@ class UpdateUserMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -585,7 +566,7 @@ class UpdateUserMapperTest extends TestCase
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')
             ->disableOriginalConstructor()
-            ->setMethods(
+            ->onlyMethods(
                 [
                     'getData', 'setData', 'getPropertyPath', 'getConfig', 'isSubmitted', 'isSynchronized', 'isDisabled', 'getRoot',
                 ]
@@ -594,7 +575,7 @@ class UpdateUserMapperTest extends TestCase
 
         $internalForm = $this->getMockBuilder(Form::class)
             ->disableOriginalConstructor()
-            ->setMethods(['get', 'has'])
+            ->onlyMethods(['get', 'has'])
             ->getMock();
 
         $internalForm->expects(self::any())
@@ -603,7 +584,7 @@ class UpdateUserMapperTest extends TestCase
 
         $internalFormSecond = $this->getMockBuilder(Form::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getData'])
+            ->onlyMethods(['getData'])
             ->getMock();
 
         $internalFormSecond->expects(self::once())
@@ -644,7 +625,7 @@ class UpdateUserMapperTest extends TestCase
     {
         return $this->getMockBuilder('Symfony\Component\Form\Form')
             ->disableOriginalConstructor()
-            ->setMethods(
+            ->onlyMethods(
                 [
                     'getData', 'setData', 'getPropertyPath', 'getConfig', 'isSubmitted', 'isSynchronized', 'isDisabled',
                 ]

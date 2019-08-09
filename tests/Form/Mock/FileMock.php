@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Mock;
 
-class FileMock
+final class FileMock
 {
     public function getRealPath(): string
     {

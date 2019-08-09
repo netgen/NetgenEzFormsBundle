@@ -13,7 +13,7 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 /**
  * A data mapper using property paths to read/write data.
  */
-class UpdateContentMapper extends DataMapper
+final class UpdateContentMapper extends DataMapper
 {
     protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath): void
     {

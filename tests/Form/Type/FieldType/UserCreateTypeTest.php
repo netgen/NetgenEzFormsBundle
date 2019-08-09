@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints;
 
-class UserCreateTypeTest extends TestCase
+final class UserCreateTypeTest extends TestCase
 {
     public function testItExtendsAbstractType(): void
     {
@@ -26,7 +26,7 @@ class UserCreateTypeTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $emailOptions = [

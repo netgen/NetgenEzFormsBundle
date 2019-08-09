@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints;
 
-class FloatHandlerTest extends TestCase
+final class FloatHandlerTest extends TestCase
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject
@@ -40,12 +40,12 @@ class FloatHandlerTest extends TestCase
     {
         $this->fieldHelper = $this->getMockBuilder(FieldHelper::class)
             ->disableOriginalConstructor()
-            ->setMethods(['isFieldEmpty'])
+            ->onlyMethods(['isFieldEmpty'])
             ->getMock();
 
         $this->formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $this->content = $this->getMockBuilder('eZ\Publish\API\Repository\Values\Content\Content')

@@ -11,7 +11,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Isbn;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class IsbnTest extends TestCase
+final class IsbnTest extends TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler(): void
     {
@@ -54,7 +54,7 @@ class IsbnTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $formBuilder->expects(self::once())
@@ -81,7 +81,7 @@ class IsbnTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $formBuilder->expects(self::once())

@@ -11,7 +11,7 @@ use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use RuntimeException;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class UpdateContentType extends AbstractContentType
+final class UpdateContentType extends AbstractContentType
 {
     public function getBlockPrefix(): string
     {

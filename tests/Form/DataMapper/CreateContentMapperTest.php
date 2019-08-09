@@ -12,6 +12,7 @@ use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\CreateContentMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
+use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
@@ -20,7 +21,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormConfigBuilder;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-class CreateContentMapperTest extends TestCase
+final class CreateContentMapperTest extends TestCase
 {
     /**
      * @var CreateContentMapper
@@ -33,7 +34,7 @@ class CreateContentMapperTest extends TestCase
     private $dispatcher;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var \Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry
      */
     private $registry;
 
@@ -57,13 +58,12 @@ class CreateContentMapperTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->registry = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry')
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->handler = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerInterface')
             ->disableOriginalConstructor()
             ->getMock();
+
+        $this->registry = new FieldTypeHandlerRegistry();
+        $this->registry->register('eztext', $this->handler);
 
         $this->mapper = new CreateContentMapper($this->registry, $this->propertyAccessor);
     }
@@ -105,7 +105,7 @@ class CreateContentMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -114,7 +114,7 @@ class CreateContentMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -152,11 +152,6 @@ class CreateContentMapperTest extends TestCase
             ]
         );
 
-        $this->registry->expects(self::once())
-            ->method('get')
-            ->with('eztext')
-            ->willReturn($this->handler);
-
         $this->handler->expects(self::once())
             ->method('convertFieldValueToForm')
             ->willReturn('Some name');
@@ -166,7 +161,7 @@ class CreateContentMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -175,7 +170,7 @@ class CreateContentMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -204,7 +199,7 @@ class CreateContentMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -213,7 +208,7 @@ class CreateContentMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $form = $this->getForm();
@@ -238,7 +233,7 @@ class CreateContentMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $form = $this->getForm();
@@ -275,11 +270,6 @@ class CreateContentMapperTest extends TestCase
             ]
         );
 
-        $this->registry->expects(self::once())
-            ->method('get')
-            ->with('eztext')
-            ->willReturn($this->handler);
-
         $this->handler->expects(self::once())
             ->method('convertFieldValueFromForm')
             ->willReturn(new TextLineValue('Some name'));
@@ -289,7 +279,7 @@ class CreateContentMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -298,7 +288,7 @@ class CreateContentMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -359,7 +349,7 @@ class CreateContentMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -368,7 +358,7 @@ class CreateContentMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -412,7 +402,7 @@ class CreateContentMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -421,7 +411,7 @@ class CreateContentMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $form = $this->getForm();
@@ -464,7 +454,7 @@ class CreateContentMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -473,7 +463,7 @@ class CreateContentMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $form = $this->getForm();
@@ -523,7 +513,7 @@ class CreateContentMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -532,7 +522,7 @@ class CreateContentMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $form = $this->getForm();
@@ -564,11 +554,6 @@ class CreateContentMapperTest extends TestCase
 
     public function testMapFormsToDataWithDataSameAsValueInData(): void
     {
-        $this->registry->expects(self::any())
-            ->method('get')
-            ->with('eztext')
-            ->willReturn($this->handler);
-
         $this->handler->expects(self::never())
             ->method('convertFieldValueFromForm')
             ->willReturn(new TextLineValue('Some name'));
@@ -577,7 +562,7 @@ class CreateContentMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped', 'getByReference'])
+            ->onlyMethods(['getMapped', 'getByReference'])
             ->getMock();
 
         $config->expects(self::once())
@@ -590,7 +575,7 @@ class CreateContentMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::never())
@@ -634,7 +619,7 @@ class CreateContentMapperTest extends TestCase
     {
         return $this->getMockBuilder('Symfony\Component\Form\Form')
             ->disableOriginalConstructor()
-            ->setMethods([
+            ->onlyMethods([
                 'getData',
                 'setData',
                 'getPropertyPath',

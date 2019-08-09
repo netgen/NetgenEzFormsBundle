@@ -13,7 +13,7 @@ use Netgen\Bundle\EzFormsBundle\Tests\Form\Mock\FileMock;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class BinaryFileTest extends TestCase
+final class BinaryFileTest extends TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler(): void
     {
@@ -55,7 +55,7 @@ class BinaryFileTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $formBuilder->expects(self::exactly(2))

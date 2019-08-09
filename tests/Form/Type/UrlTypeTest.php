@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType as CoreUrlType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class UrlTypeTest extends TestCase
+final class UrlTypeTest extends TestCase
 {
     public function testItExtendsAbstractType(): void
     {
@@ -23,7 +23,7 @@ class UrlTypeTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $formBuilder->expects(self::at(0))

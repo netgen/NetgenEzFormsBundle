@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\LogicException;
 use Symfony\Component\DependencyInjection\Reference;
 
-class FieldTypeHandlerRegistryPass implements CompilerPassInterface
+final class FieldTypeHandlerRegistryPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {

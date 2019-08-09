@@ -11,13 +11,14 @@ use eZ\Publish\Core\Repository\Values\User\UserCreateStruct;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\CreateUserMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
+use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Symfony\Component\Form\FormConfigBuilder;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
 
-class CreateUserMapperTest extends TestCase
+final class CreateUserMapperTest extends TestCase
 {
     /**
      * @var CreateUserMapper
@@ -25,7 +26,7 @@ class CreateUserMapperTest extends TestCase
     private $mapper;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var \Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry
      */
     private $registry;
 
@@ -45,13 +46,13 @@ class CreateUserMapperTest extends TestCase
             ->disableOriginalConstructor()
                         ->getMock();
 
-        $this->registry = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry')
-            ->disableOriginalConstructor()
-                        ->getMock();
-
         $this->handler = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerInterface')
             ->disableOriginalConstructor()
                         ->getMock();
+
+        $this->registry = new FieldTypeHandlerRegistry();
+        $this->registry->register('eztext', $this->handler);
+        $this->registry->register('ezuser', $this->handler);
 
         $this->mapper = new CreateUserMapper($this->registry, $this->propertyAccessor);
     }
@@ -79,11 +80,6 @@ class CreateUserMapperTest extends TestCase
             ]
         );
 
-        $this->registry->expects(self::once())
-            ->method('get')
-            ->with('eztext')
-            ->willReturn($this->handler);
-
         $this->handler->expects(self::once())
             ->method('convertFieldValueToForm')
             ->willReturn('Some name');
@@ -93,7 +89,7 @@ class CreateUserMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -102,7 +98,7 @@ class CreateUserMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -150,7 +146,7 @@ class CreateUserMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -159,7 +155,7 @@ class CreateUserMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -197,11 +193,6 @@ class CreateUserMapperTest extends TestCase
             ]
         );
 
-        $this->registry->expects(self::once())
-            ->method('get')
-            ->with('eztext')
-            ->willReturn($this->handler);
-
         $this->handler->expects(self::once())
             ->method('convertFieldValueFromForm')
             ->willReturn(new TextLineValue('Some name'));
@@ -211,7 +202,7 @@ class CreateUserMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -220,7 +211,7 @@ class CreateUserMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -274,11 +265,6 @@ class CreateUserMapperTest extends TestCase
             ]
         );
 
-        $this->registry->expects(self::once())
-            ->method('get')
-            ->with('ezuser')
-            ->willReturn($this->handler);
-
         $formData = [
             'username' => 'username',
             'email' => 'email@test.com',
@@ -294,7 +280,7 @@ class CreateUserMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -303,7 +289,7 @@ class CreateUserMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -364,7 +350,7 @@ class CreateUserMapperTest extends TestCase
 
         $config = $this->getMockBuilder(FormConfigBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -373,7 +359,7 @@ class CreateUserMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder(PropertyPathInterface::class)
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -409,7 +395,7 @@ class CreateUserMapperTest extends TestCase
     {
         return $this->getMockBuilder('Symfony\Component\Form\Form')
             ->disableOriginalConstructor()
-            ->setMethods(['getData', 'setData', 'getPropertyPath', 'getConfig', 'isSubmitted', 'isSynchronized', 'isDisabled'])
+            ->onlyMethods(['getData', 'setData', 'getPropertyPath', 'getConfig', 'isSubmitted', 'isSynchronized', 'isDisabled'])
             ->getMock();
     }
 }

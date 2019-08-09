@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FieldTypeTypeExtensionTest extends TestCase
+final class FieldTypeTypeExtensionTest extends TestCase
 {
     public function testGetExtendedTypes(): void
     {
@@ -24,7 +24,7 @@ class FieldTypeTypeExtensionTest extends TestCase
     {
         $resolver = $this->getMockBuilder(OptionsResolver::class)
             ->disableOriginalConstructor()
-            ->setMethods(['setDefined'])
+            ->onlyMethods(['setDefined'])
             ->getMock();
 
         $resolver->expects(self::once())

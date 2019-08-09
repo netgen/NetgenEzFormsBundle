@@ -11,7 +11,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\TextBlock;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class TextBlockTest extends TestCase
+final class TextBlockTest extends TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler(): void
     {
@@ -54,7 +54,7 @@ class TextBlockTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $formBuilder->expects(self::once())

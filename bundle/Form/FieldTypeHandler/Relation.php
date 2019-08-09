@@ -15,7 +15,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class Relation extends FieldTypeHandler
+final class Relation extends FieldTypeHandler
 {
     /**
      * @var \eZ\Publish\API\Repository\Repository

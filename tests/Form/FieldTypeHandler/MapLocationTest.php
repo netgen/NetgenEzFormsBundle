@@ -11,7 +11,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\MapLocation;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class MapLocationTest extends TestCase
+final class MapLocationTest extends TestCase
 {
     public function testAssertInstanceOfFieldTypeHandler(): void
     {
@@ -57,7 +57,7 @@ class MapLocationTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $formBuilder->expects(self::once())

@@ -12,7 +12,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\Type\MapType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class MapLocation extends FieldTypeHandler
+final class MapLocation extends FieldTypeHandler
 {
     public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): array
     {

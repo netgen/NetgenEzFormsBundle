@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form\Payload;
 
-class InformationCollectionStruct
+final class InformationCollectionStruct
 {
     /**
      * @var mixed[] An array of field values like[$fieldDefIdentifier]
      */
-    protected $collectedData;
+    private $collectedData;
 
     /**
      * Returns value for $fieldDefIdentifier.

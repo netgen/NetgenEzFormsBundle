@@ -12,7 +12,7 @@ use Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserCreateType;
 use Netgen\Bundle\EzFormsBundle\Form\Type\FieldType\UserUpdateType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class User extends FieldTypeHandler
+final class User extends FieldTypeHandler
 {
     public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): void
     {

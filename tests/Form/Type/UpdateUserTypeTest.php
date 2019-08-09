@@ -22,13 +22,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormBuilder;
 
-class UpdateUserTypeTest extends TestCase
+final class UpdateUserTypeTest extends TestCase
 {
     public function testItExtendsAbstractType(): void
     {
-        $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $handlerRegistry = new FieldTypeHandlerRegistry();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
@@ -41,9 +39,7 @@ class UpdateUserTypeTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data must be an instance of Netgen\EzFormsBundle\Form\DataWrapper');
 
-        $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $handlerRegistry = new FieldTypeHandlerRegistry();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
@@ -62,9 +58,7 @@ class UpdateUserTypeTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data payload must be an instance of eZ\Publish\API\Repository\Values\User\User');
 
-        $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $handlerRegistry = new FieldTypeHandlerRegistry();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
@@ -83,9 +77,7 @@ class UpdateUserTypeTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data payload must be an instance of eZ\Publish\API\Repository\Values\User\UserUpdateStruct');
 
-        $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $handlerRegistry = new FieldTypeHandlerRegistry();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
@@ -106,9 +98,7 @@ class UpdateUserTypeTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data definition must be an instance of eZ\Publish\API\Repository\Values\ContentType\ContentType');
 
-        $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $handlerRegistry = new FieldTypeHandlerRegistry();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
@@ -130,15 +120,13 @@ class UpdateUserTypeTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Data definition (ContentType) does not correspond to the data target (Content)');
 
-        $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $handlerRegistry = new FieldTypeHandlerRegistry();
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['setDataMapper'])
+            ->onlyMethods(['setDataMapper'])
             ->getMock();
 
         $contentInfo = new ContentInfo(['contentTypeId' => 123]);
@@ -173,26 +161,20 @@ class UpdateUserTypeTest extends TestCase
     {
         $fieldTypeHandler = $this->getMockBuilder(FieldTypeHandler::class)
             ->disableOriginalConstructor()
-            ->setMethods(['buildFieldUpdateForm'])
+            ->onlyMethods(['buildFieldUpdateForm'])
             ->getMockForAbstractClass();
 
         $fieldTypeHandler->expects(self::once())
             ->method('buildFieldUpdateForm');
 
-        $handlerRegistry = $this->getMockBuilder(FieldTypeHandlerRegistry::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['get'])
-            ->getMock();
-
-        $handlerRegistry->expects(self::once())
-            ->method('get')
-            ->willReturn($fieldTypeHandler);
+        $handlerRegistry = new FieldTypeHandlerRegistry();
+        $handlerRegistry->register('field_type', $fieldTypeHandler);
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['setDataMapper'])
+            ->onlyMethods(['setDataMapper'])
             ->getMock();
 
         $contentInfo = new ContentInfo(['contentTypeId' => 123]);

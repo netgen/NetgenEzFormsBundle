@@ -12,7 +12,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class Selection extends FieldTypeHandler
+final class Selection extends FieldTypeHandler
 {
     public function convertFieldValueFromForm($value): SelectionValue\Value
     {

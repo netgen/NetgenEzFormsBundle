@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints;
 
-class UserUpdateTypeTest extends TestCase
+final class UserUpdateTypeTest extends TestCase
 {
     public function testItExtendsAbstractType(): void
     {
@@ -25,7 +25,7 @@ class UserUpdateTypeTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $emailOptions = [

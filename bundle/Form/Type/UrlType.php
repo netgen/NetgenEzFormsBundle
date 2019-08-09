@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType as CoreUrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class UrlType extends AbstractType
+final class UrlType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

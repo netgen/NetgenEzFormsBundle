@@ -12,7 +12,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class Country extends FieldTypeHandler
+final class Country extends FieldTypeHandler
 {
     /**
      * Country codes.

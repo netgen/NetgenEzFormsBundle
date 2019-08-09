@@ -10,7 +10,7 @@ use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
 use RuntimeException;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class InformationCollectionType extends AbstractContentType
+final class InformationCollectionType extends AbstractContentType
 {
     /**
      * @var array

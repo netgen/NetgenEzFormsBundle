@@ -19,7 +19,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Relation;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormBuilder;
 
-class RelationTest extends TestCase
+final class RelationTest extends TestCase
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject
@@ -60,7 +60,7 @@ class RelationTest extends TestCase
     {
         $this->translationHelper = $this->getMockBuilder(TranslationHelper::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getTranslatedContentNameByContentInfo'])
+            ->onlyMethods(['getTranslatedContentNameByContentInfo'])
             ->getMock();
 
         $this->contentService = $this->getMockBuilder(ContentService::class)
@@ -83,7 +83,7 @@ class RelationTest extends TestCase
 
         $this->formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
     }
 
@@ -136,7 +136,7 @@ class RelationTest extends TestCase
     {
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $formBuilder->expects(self::once())
@@ -189,7 +189,7 @@ class RelationTest extends TestCase
 
         $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->disableOriginalConstructor()
-            ->setMethods(['add'])
+            ->onlyMethods(['add'])
             ->getMock();
 
         $formBuilder->expects(self::never())

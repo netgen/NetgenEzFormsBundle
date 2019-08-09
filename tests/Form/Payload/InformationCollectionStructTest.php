@@ -7,7 +7,7 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Payload;
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
 use PHPUnit\Framework\TestCase;
 
-class InformationCollectionStructTest extends TestCase
+final class InformationCollectionStructTest extends TestCase
 {
     public function testGetCollectedFieldValue(): void
     {

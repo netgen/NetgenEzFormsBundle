@@ -8,7 +8,7 @@ use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-class DataWrapperTest extends TestCase
+final class DataWrapperTest extends TestCase
 {
     public function testSetValuesCorrectly(): void
     {

@@ -9,12 +9,13 @@ use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\InformationCollectionMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
+use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-class InformationCollectionMapperTest extends TestCase
+final class InformationCollectionMapperTest extends TestCase
 {
     /**
      * @var InformationCollectionMapper
@@ -22,7 +23,7 @@ class InformationCollectionMapperTest extends TestCase
     private $mapper;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var \Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry
      */
     private $registry;
 
@@ -42,13 +43,12 @@ class InformationCollectionMapperTest extends TestCase
             ->disableOriginalConstructor()
                         ->getMock();
 
-        $this->registry = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry')
-            ->disableOriginalConstructor()
-                        ->getMock();
-
         $this->handler = $this->getMockBuilder('Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerInterface')
             ->disableOriginalConstructor()
                         ->getMock();
+
+        $this->registry = new FieldTypeHandlerRegistry();
+        $this->registry->register('eztext', $this->handler);
 
         $this->mapper = new InformationCollectionMapper($this->registry, $this->propertyAccessor);
     }
@@ -76,11 +76,6 @@ class InformationCollectionMapperTest extends TestCase
             ]
         );
 
-        $this->registry->expects(self::once())
-            ->method('get')
-            ->with('eztext')
-            ->willReturn($this->handler);
-
         $this->handler->expects(self::once())
             ->method('convertFieldValueFromForm')
             ->willReturn(new TextLineValue('Some name'));
@@ -90,7 +85,7 @@ class InformationCollectionMapperTest extends TestCase
 
         $config = $this->getMockBuilder('Symfony\Component\Form\FormConfigBuilder')
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -99,7 +94,7 @@ class InformationCollectionMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyPathInterface')
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -160,7 +155,7 @@ class InformationCollectionMapperTest extends TestCase
 
         $config = $this->getMockBuilder('Symfony\Component\Form\FormConfigBuilder')
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -169,7 +164,7 @@ class InformationCollectionMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyPathInterface')
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -219,11 +214,6 @@ class InformationCollectionMapperTest extends TestCase
             ]
         );
 
-        $this->registry->expects(self::once())
-            ->method('get')
-            ->with('eztext')
-            ->willReturn($this->handler);
-
         $this->handler->expects(self::once())
             ->method('convertFieldValueToForm')
             ->willReturn('Some name');
@@ -233,7 +223,7 @@ class InformationCollectionMapperTest extends TestCase
 
         $config = $this->getMockBuilder('Symfony\Component\Form\FormConfigBuilder')
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -242,7 +232,7 @@ class InformationCollectionMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyPathInterface')
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -290,7 +280,7 @@ class InformationCollectionMapperTest extends TestCase
 
         $config = $this->getMockBuilder('Symfony\Component\Form\FormConfigBuilder')
             ->disableOriginalConstructor()
-            ->setMethods(['getMapped'])
+            ->onlyMethods(['getMapped'])
             ->getMock();
 
         $config->expects(self::once())
@@ -299,7 +289,7 @@ class InformationCollectionMapperTest extends TestCase
 
         $propertyPath = $this->getMockBuilder('Symfony\Component\PropertyAccess\PropertyPathInterface')
             ->disableOriginalConstructor()
-            ->setMethods(['__toString'])
+            ->onlyMethods(['__toString'])
             ->getMockForAbstractClass();
 
         $propertyPath->expects(self::once())
@@ -323,7 +313,7 @@ class InformationCollectionMapperTest extends TestCase
     {
         return $this->getMockBuilder('Symfony\Component\Form\Form')
             ->disableOriginalConstructor()
-            ->setMethods(['getData', 'setData', 'getPropertyPath', 'getConfig', 'isSubmitted', 'isSynchronized', 'isDisabled'])
+            ->onlyMethods(['getData', 'setData', 'getPropertyPath', 'getConfig', 'isSubmitted', 'isSynchronized', 'isDisabled'])
             ->getMock();
     }
 }

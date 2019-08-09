@@ -10,7 +10,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FieldTypeTypeExtension extends AbstractTypeExtension
+final class FieldTypeTypeExtension extends AbstractTypeExtension
 {
     public function getExtendedTypes(): iterable
     {

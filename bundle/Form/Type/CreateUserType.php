@@ -9,7 +9,7 @@ use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use RuntimeException;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class CreateUserType extends AbstractContentType
+final class CreateUserType extends AbstractContentType
 {
     public function getBlockPrefix(): string
     {

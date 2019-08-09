@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form;
 
-class DataWrapper
+final class DataWrapper
 {
     /**
      * One of the eZ Publish structs, like ContentCreateStruct, UserUpdateStruct and so on.

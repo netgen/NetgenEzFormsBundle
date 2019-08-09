@@ -14,7 +14,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class RelationList extends FieldTypeHandler
+final class RelationList extends FieldTypeHandler
 {
     public const BROWSE = 0;
     public const DROPDOWN = 1;

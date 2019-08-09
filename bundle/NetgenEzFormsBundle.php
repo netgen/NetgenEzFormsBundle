@@ -8,7 +8,7 @@ use Netgen\Bundle\EzFormsBundle\DependencyInjection\Compiler\FieldTypeHandlerReg
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class NetgenEzFormsBundle extends Bundle
+final class NetgenEzFormsBundle extends Bundle
 {
     public function build(ContainerBuilder $container): void
     {

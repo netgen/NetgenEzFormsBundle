@@ -12,7 +12,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class Url extends FieldTypeHandler
+final class Url extends FieldTypeHandler
 {
     public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null): array
     {

@@ -13,7 +13,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class Checkbox extends FieldTypeHandler
+final class Checkbox extends FieldTypeHandler
 {
     /**
      * @var \eZ\Publish\Core\Helper\FieldHelper
