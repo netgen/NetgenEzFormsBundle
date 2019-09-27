@@ -1,7 +1,7 @@
 imports:
-    - { resource: form_fieldtype_handlers.yml }
-    - { resource: fieldtype_form_types.yml }
-    - { resource: form_types.yml }
+    - { resource: form_fieldtype_handlers.yaml }
+    - { resource: fieldtype_form_types.yaml }
+    - { resource: form_types.yaml }
 
 services:
     # Services tagged with 'netgen.ezforms.form.fieldtype_handler' will be registered
