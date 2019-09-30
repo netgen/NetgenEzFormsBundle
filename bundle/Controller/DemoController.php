@@ -77,7 +77,7 @@ final class DemoController extends Controller
         }
 
         return $this->render(
-            'NetgenEzFormsBundle::demo_form.html.twig',
+            '@NetgenEzForms/demo_form.html.twig',
             [
                 'form' => $form->createView(),
             ]
@@ -136,7 +136,7 @@ final class DemoController extends Controller
         }
 
         return $this->render(
-            'NetgenEzFormsBundle::demo_form.html.twig',
+            '@NetgenEzForms/demo_form.html.twig',
             [
                 'form' => $form->createView(),
             ]
@@ -223,7 +223,7 @@ final class DemoController extends Controller
         }
 
         return $this->render(
-            'NetgenEzFormsBundle::demo_form.html.twig',
+            '@NetgenEzForms/demo_form.html.twig',
             [
                 'form' => $form->createView(),
             ]
@@ -273,7 +273,7 @@ final class DemoController extends Controller
         }
 
         return $this->render(
-            'NetgenEzFormsBundle::demo_form.html.twig',
+            '@NetgenEzForms/demo_form.html.twig',
             [
                 'form' => $form->createView(),
             ]
@@ -315,7 +315,7 @@ final class DemoController extends Controller
         }
 
         return $this->render(
-            'NetgenEzFormsBundle::demo_form.html.twig',
+            '@NetgenEzForms/demo_form.html.twig',
             [
                 'form' => $form->createView(),
             ]
