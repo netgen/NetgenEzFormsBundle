@@ -8,7 +8,6 @@ use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\Values\Content\Content;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\Helper\TranslationHelper;
 use eZ\Publish\SPI\FieldType\Value;
 use InvalidArgumentException;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
@@ -22,15 +21,9 @@ final class Relation extends FieldTypeHandler
      */
     private $repository;
 
-    /**
-     * @var \eZ\Publish\Core\Helper\TranslationHelper
-     */
-    private $translationHelper;
-
-    public function __construct(Repository $repository, TranslationHelper $translationHelper)
+    public function __construct(Repository $repository)
     {
         $this->repository = $repository;
-        $this->translationHelper = $translationHelper;
     }
 
     public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null)
@@ -61,7 +54,7 @@ final class Relation extends FieldTypeHandler
         $choices = [];
         foreach ($locationList->locations as $child) {
             /* @var Location $child */
-            $choices[$this->translationHelper->getTranslatedContentNameByContentInfo($child->contentInfo)] = $child->contentInfo->id;
+            $choices[$child->getContent()->getName()] = $child->contentInfo->id;
         }
 
         $formBuilder->add($fieldDefinition->identifier, ChoiceType::class, [

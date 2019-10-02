@@ -93,7 +93,6 @@ services:
         class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Relation
         arguments:
           - "@ezpublish.api.repository"
-          - "@ezpublish.translation_helper"
         tags:
             - { name: netgen.ezforms.form.fieldtype_handler, alias: ezobjectrelation }
             
@@ -101,6 +100,5 @@ services:
         class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\RelationList
         arguments:
           - "@ezpublish.api.repository"
-          - "@ezpublish.translation_helper"
         tags:
             - { name: netgen.ezforms.form.fieldtype_handler, alias: ezobjectrelationlist }
