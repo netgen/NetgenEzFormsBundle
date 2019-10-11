@@ -1,19 +1,19 @@
 _createcontent_route:
     path:   /democreatecontent
-    defaults:   { _controller: NetgenEzFormsBundle:Demo:demoCreateContent }
+    controller: Netgen\Bundle\EzFormsBundle\Controller\DemoController::demoCreateContentAction
 
 _createuser_route:
     path:   /democreateuser
-    defaults:   { _controller: NetgenEzFormsBundle:Demo:demoCreateUser }
+    controller: Netgen\Bundle\EzFormsBundle\Controller\DemoController::demoCreateUserAction
 
 _updatecontent_route:
     path:   /demoupdatecontent
-    defaults:   { _controller: NetgenEzFormsBundle:Demo:demoUpdateContent }
+    controller: Netgen\Bundle\EzFormsBundle\Controller\DemoController::demoUpdateContentAction
 
 _updateuser_route:
     path:   /demoupdateuser
-    defaults:   { _controller: NetgenEzFormsBundle:Demo:demoUpdateUser }
+    controller: Netgen\Bundle\EzFormsBundle\Controller\DemoController::demoUpdateUserAction
 
 _informationcollection_route:
     path: /demoinformationcollection
-    defaults: { _controller: NetgenEzFormsBundle:Demo:demoInformationCollection }
+    controller: Netgen\Bundle\EzFormsBundle\Controller\DemoController::demoInformationCollectionAction
