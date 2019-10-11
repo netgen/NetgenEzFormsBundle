@@ -1,17 +1,17 @@
 _createcontent_route:
-    path:   /democreatecontent
+    path: /democreatecontent
     controller: Netgen\Bundle\EzFormsBundle\Controller\DemoController::demoCreateContentAction
 
 _createuser_route:
-    path:   /democreateuser
+    path: /democreateuser
     controller: Netgen\Bundle\EzFormsBundle\Controller\DemoController::demoCreateUserAction
 
 _updatecontent_route:
-    path:   /demoupdatecontent
+    path: /demoupdatecontent
     controller: Netgen\Bundle\EzFormsBundle\Controller\DemoController::demoUpdateContentAction
 
 _updateuser_route:
-    path:   /demoupdateuser
+    path: /demoupdateuser
     controller: Netgen\Bundle\EzFormsBundle\Controller\DemoController::demoUpdateUserAction
 
 _informationcollection_route:
