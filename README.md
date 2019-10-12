@@ -9,7 +9,7 @@ NetgenEzFormsBundle
 [![License](https://img.shields.io/github/license/netgen/NetgenEzFormsBundle.svg?style=flat-square)](LICENSE)
 [![PHP](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://secure.php.net/)
 
-Integration of Symfony's Form component with eZ Publish 5 Public API
+Integration of Symfony's Form component with eZ Platform Public API
 
 Currently implemented forms:
 

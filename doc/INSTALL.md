@@ -1,16 +1,7 @@
 Installation instructions
 =========================
 
-Requirements
-------------
-
-* eZ Platform 1.0+
-* eZ Publish 5
-
-Installation steps
-------------------
-
-### Use Composer
+## Use Composer
 
 Run the following from your website root folder to install NetgenEzFormsBundle:
 
@@ -18,7 +9,7 @@ Run the following from your website root folder to install NetgenEzFormsBundle:
 $ composer require netgen/ez-forms-bundle
 ```
 
-### Activate the bundle
+## Activate the bundle
 
 Activate required bundles in `app/AppKernel.php` file by adding them to the `$bundles` array in `registerBundles` method:
 
@@ -32,10 +23,10 @@ public function registerBundles()
 }
 ```
 
-### Clear the caches
+## Clear the caches
 
-Clear the eZ Publish caches with the following command:
+Clear the eZ Platform caches with the following command:
 
 ```bash
-$ php app/console cache:clear
+$ php bin/console cache:clear
 ```
