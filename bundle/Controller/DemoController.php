@@ -74,7 +74,7 @@ final class DemoController extends Controller
                     [
                         'location' => $locationService->loadLocation(
                             $content->contentInfo->mainLocationId
-                        )
+                        ),
                     ]
                 )
             );
@@ -136,7 +136,7 @@ final class DemoController extends Controller
                     [
                         'location' => $this->getRepository()->getLocationService()->loadLocation(
                             $content->contentInfo->mainLocationId
-                        )
+                        ),
                     ]
                 )
             );
@@ -200,7 +200,7 @@ final class DemoController extends Controller
                         [
                             'location' => $this->getRepository()->getLocationService()->loadLocation(
                                 $user->contentInfo->mainLocationId
-                            )
+                            ),
                         ]
                     )
                 );
@@ -279,7 +279,7 @@ final class DemoController extends Controller
                     [
                         'location' => $this->getRepository()->getLocationService()->loadLocation(
                             $user->contentInfo->mainLocationId
-                        )
+                        ),
                     ]
                 )
             );

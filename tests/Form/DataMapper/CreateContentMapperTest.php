@@ -153,7 +153,7 @@ final class CreateContentMapperTest extends TestCase
                             ]
                         ),
                     ]
-                )
+                ),
             ]
         );
 
