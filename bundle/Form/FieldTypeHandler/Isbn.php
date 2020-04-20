@@ -37,7 +37,7 @@ final class Isbn extends FieldTypeHandler
     ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        if ($fieldDefinition->fieldSettings['isISBN13']) {
+        if ($fieldDefinition->fieldSettings['isISBN13'] ?? true) {
             $options['constraints'][] = new Constraints\Isbn(
                 [
                     'type' => 'isbn13',

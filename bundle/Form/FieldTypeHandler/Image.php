@@ -42,7 +42,7 @@ final class Image extends FieldTypeHandler
     ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        $maxFileSize = $fieldDefinition->validatorConfiguration['FileSizeValidator']['maxFileSize'];
+        $maxFileSize = $fieldDefinition->validatorConfiguration['FileSizeValidator']['maxFileSize'] ?? false;
 
         if ($maxFileSize !== false) {
             $options['constraints'][] = new Constraints\File(

@@ -79,7 +79,7 @@ final class RelationList extends FieldTypeHandler
                     'choices' => $choices,
                     'expanded' => false,
                     'multiple' => true,
-                ], $options);
+                ] + $options);
 
                 break;
             default:
@@ -97,7 +97,7 @@ final class RelationList extends FieldTypeHandler
                     'choices' => $choices,
                     'expanded' => false,
                     'multiple' => false,
-                ], $options);
+                ] + $options);
 
                 break;
         }

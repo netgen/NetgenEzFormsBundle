@@ -9,6 +9,7 @@ use eZ\Publish\Core\Repository\Values\Content\ContentUpdateStruct;
 use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use eZ\Publish\SPI\Persistence\Content\ContentInfo;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
@@ -136,15 +137,17 @@ final class UpdateContentTypeTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 654,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'identifier',
-                            'fieldTypeIdentifier' => 'field_type',
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'identifier',
+                                'fieldTypeIdentifier' => 'field_type',
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 
@@ -187,15 +190,17 @@ final class UpdateContentTypeTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'identifier',
-                            'fieldTypeIdentifier' => 'field_type',
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'identifier',
+                                'fieldTypeIdentifier' => 'field_type',
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 
@@ -237,15 +242,17 @@ final class UpdateContentTypeTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'identifier',
-                            'fieldTypeIdentifier' => 'ezuser',
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'identifier',
+                                'fieldTypeIdentifier' => 'ezuser',
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 

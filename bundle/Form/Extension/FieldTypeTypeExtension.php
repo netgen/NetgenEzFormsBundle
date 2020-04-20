@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class FieldTypeTypeExtension extends AbstractTypeExtension
 {
-    public function getExtendedTypes(): iterable
+    public static function getExtendedTypes(): iterable
     {
         // Returning 'form' extends all form types
         return [FormType::class];

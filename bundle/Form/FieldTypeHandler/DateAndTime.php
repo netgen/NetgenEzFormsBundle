@@ -34,7 +34,7 @@ final class DateAndTime extends FieldTypeHandler
     ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        $useSeconds = $fieldDefinition->getFieldSettings()['useSeconds'];
+        $useSeconds = $fieldDefinition->getFieldSettings()['useSeconds'] ?? false;
         $options['input'] = 'datetime';
         $options['date_widget'] = 'choice';
         $options['time_widget'] = 'choice';

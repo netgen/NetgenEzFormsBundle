@@ -10,6 +10,7 @@ use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
 use eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\CreateContentMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
@@ -87,16 +88,18 @@ final class CreateContentMapperTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'test',
-                            'fieldTypeIdentifier' => 'eztext',
-                            'defaultValue' => new Value('Some name'),
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'test',
+                                'fieldTypeIdentifier' => 'eztext',
+                                'defaultValue' => new Value('Some name'),
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 
@@ -139,16 +142,18 @@ final class CreateContentMapperTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'name',
-                            'fieldTypeIdentifier' => 'eztext',
-                            'defaultValue' => new Value('Some name'),
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'name',
+                                'fieldTypeIdentifier' => 'eztext',
+                                'defaultValue' => new Value('Some name'),
+                            ]
+                        ),
+                    ]
+                )
             ]
         );
 
@@ -257,16 +262,18 @@ final class CreateContentMapperTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'name',
-                            'fieldTypeIdentifier' => 'eztext',
-                            'defaultValue' => new Value('Some name'),
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'name',
+                                'fieldTypeIdentifier' => 'eztext',
+                                'defaultValue' => new Value('Some name'),
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 
@@ -331,16 +338,18 @@ final class CreateContentMapperTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'test',
-                            'fieldTypeIdentifier' => 'eztext',
-                            'defaultValue' => new Value('Some name'),
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'test',
+                                'fieldTypeIdentifier' => 'eztext',
+                                'defaultValue' => new Value('Some name'),
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 

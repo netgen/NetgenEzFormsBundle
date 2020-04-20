@@ -6,6 +6,7 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
@@ -107,16 +108,18 @@ final class InformationCollectionTypeTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'identifier',
-                            'fieldTypeIdentifier' => 'field_type',
-                            'isInfoCollector' => false,
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'identifier',
+                                'fieldTypeIdentifier' => 'field_type',
+                                'isInfoCollector' => false,
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 
@@ -145,16 +148,18 @@ final class InformationCollectionTypeTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'identifier',
-                            'fieldTypeIdentifier' => 'ezuser',
-                            'isInfoCollector' => false,
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'identifier',
+                                'fieldTypeIdentifier' => 'ezuser',
+                                'isInfoCollector' => false,
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 
@@ -190,16 +195,18 @@ final class InformationCollectionTypeTest extends TestCase
                 'id' => 123,
                 'mainLanguageCode' => 'eng-GB',
                 'names' => ['eng-GB'],
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'identifier',
-                            'fieldTypeIdentifier' => 'field_type',
-                            'isInfoCollector' => true,
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'identifier',
+                                'fieldTypeIdentifier' => 'field_type',
+                                'isInfoCollector' => true,
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 
@@ -236,16 +243,18 @@ final class InformationCollectionTypeTest extends TestCase
                 'id' => 123,
                 'mainLanguageCode' => 'eng-GB',
                 'names' => ['fre-FR' => 'fre-FR'],
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'identifier',
-                            'fieldTypeIdentifier' => 'field_type',
-                            'isInfoCollector' => true,
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'identifier',
+                                'fieldTypeIdentifier' => 'field_type',
+                                'isInfoCollector' => true,
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 

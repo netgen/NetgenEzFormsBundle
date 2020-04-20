@@ -18,20 +18,20 @@
         }
     ],
     "require": {
-        "symfony/config": "^4.3",
-        "symfony/dependency-injection": "^4.3",
-        "symfony/form": "^4.3",
-        "symfony/http-foundation": "^4.3",
-        "symfony/http-kernel": "^4.3",
-        "symfony/options-resolver": "^4.3",
-        "symfony/property-access": "^4.3",
-        "symfony/validator": "^4.3",
-        "ezsystems/ezpublish-kernel": "^8.0"
+        "symfony/config": "^5.0",
+        "symfony/dependency-injection": "^5.0",
+        "symfony/form": "^5.0",
+        "symfony/http-foundation": "^5.0",
+        "symfony/http-kernel": "^5.0",
+        "symfony/options-resolver": "^5.0",
+        "symfony/property-access": "^5.0",
+        "symfony/validator": "^5.0",
+        "ezsystems/ezplatform-kernel": "^1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.3",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.0",
-        "matthiasnoback/symfony-config-test": "^4.0.1"
+        "phpunit/phpunit": "^8.5",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "matthiasnoback/symfony-config-test": "^4.1"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

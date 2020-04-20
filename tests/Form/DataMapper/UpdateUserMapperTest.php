@@ -10,6 +10,7 @@ use eZ\Publish\Core\Repository\Values\Content\Content;
 use eZ\Publish\Core\Repository\Values\Content\ContentUpdateStruct;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use eZ\Publish\Core\Repository\Values\User\User;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\UpdateUserMapper;
@@ -71,16 +72,18 @@ final class UpdateUserMapperTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'name',
-                            'fieldTypeIdentifier' => 'eztext',
-                            'defaultValue' => new TextLineValue('Some name'),
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'name',
+                                'fieldTypeIdentifier' => 'eztext',
+                                'defaultValue' => new TextLineValue('Some name'),
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 
@@ -146,16 +149,18 @@ final class UpdateUserMapperTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'name',
-                            'fieldTypeIdentifier' => 'ezuser',
-                            'defaultValue' => new TextLineValue('Some name'),
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'name',
+                                'fieldTypeIdentifier' => 'ezuser',
+                                'defaultValue' => new TextLineValue('Some name'),
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 
@@ -216,16 +221,18 @@ final class UpdateUserMapperTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'test',
-                            'fieldTypeIdentifier' => 'ezuser',
-                            'defaultValue' => new TextLineValue('Some name'),
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'test',
+                                'fieldTypeIdentifier' => 'ezuser',
+                                'defaultValue' => new TextLineValue('Some name'),
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 
@@ -280,16 +287,18 @@ final class UpdateUserMapperTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'name',
-                            'fieldTypeIdentifier' => 'eztext',
-                            'defaultValue' => new TextLineValue('Some name'),
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'name',
+                                'fieldTypeIdentifier' => 'eztext',
+                                'defaultValue' => new TextLineValue('Some name'),
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 
@@ -360,16 +369,18 @@ final class UpdateUserMapperTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'name',
-                            'fieldTypeIdentifier' => 'ezuser',
-                            'defaultValue' => new TextLineValue('Some name'),
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'name',
+                                'fieldTypeIdentifier' => 'ezuser',
+                                'defaultValue' => new TextLineValue('Some name'),
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 
@@ -448,16 +459,18 @@ final class UpdateUserMapperTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'test',
-                            'fieldTypeIdentifier' => 'eztext',
-                            'defaultValue' => new TextLineValue('Some name'),
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'test',
+                                'fieldTypeIdentifier' => 'eztext',
+                                'defaultValue' => new TextLineValue('Some name'),
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 
@@ -518,16 +531,18 @@ final class UpdateUserMapperTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'name',
-                            'fieldTypeIdentifier' => 'eztext',
-                            'defaultValue' => new TextLineValue('Some name'),
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'name',
+                                'fieldTypeIdentifier' => 'eztext',
+                                'defaultValue' => new TextLineValue('Some name'),
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
 

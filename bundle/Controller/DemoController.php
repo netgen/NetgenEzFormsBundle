@@ -7,6 +7,7 @@ namespace Netgen\Bundle\EzFormsBundle\Controller;
 use Exception;
 use eZ\Bundle\EzPublishCoreBundle\Controller;
 use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
+use eZ\Publish\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
 use Netgen\Bundle\EzFormsBundle\Form\Type\CreateContentType;
@@ -69,9 +70,12 @@ final class DemoController extends Controller
 
             return $this->redirect(
                 $this->generateUrl(
-                    $locationService->loadLocation(
-                        $content->contentInfo->mainLocationId
-                    )
+                    UrlAliasRouter::URL_ALIAS_ROUTE_NAME,
+                    [
+                        'location' => $locationService->loadLocation(
+                            $content->contentInfo->mainLocationId
+                        )
+                    ]
                 )
             );
         }
@@ -128,9 +132,12 @@ final class DemoController extends Controller
 
             return $this->redirect(
                 $this->generateUrl(
-                    $this->getRepository()->getLocationService()->loadLocation(
-                        $content->contentInfo->mainLocationId
-                    )
+                    UrlAliasRouter::URL_ALIAS_ROUTE_NAME,
+                    [
+                        'location' => $this->getRepository()->getLocationService()->loadLocation(
+                            $content->contentInfo->mainLocationId
+                        )
+                    ]
                 )
             );
         }
@@ -189,9 +196,12 @@ final class DemoController extends Controller
 
                 return $this->redirect(
                     $this->generateUrl(
-                        $this->getRepository()->getLocationService()->loadLocation(
-                            $user->contentInfo->mainLocationId
-                        )
+                        UrlAliasRouter::URL_ALIAS_ROUTE_NAME,
+                        [
+                            'location' => $this->getRepository()->getLocationService()->loadLocation(
+                                $user->contentInfo->mainLocationId
+                            )
+                        ]
                     )
                 );
             } catch (InvalidArgumentException $e) {
@@ -265,9 +275,12 @@ final class DemoController extends Controller
 
             return $this->redirect(
                 $this->generateUrl(
-                    $this->getRepository()->getLocationService()->loadLocation(
-                        $user->contentInfo->mainLocationId
-                    )
+                    UrlAliasRouter::URL_ALIAS_ROUTE_NAME,
+                    [
+                        'location' => $this->getRepository()->getLocationService()->loadLocation(
+                            $user->contentInfo->mainLocationId
+                        )
+                    ]
                 )
             );
         }

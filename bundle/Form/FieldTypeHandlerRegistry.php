@@ -14,7 +14,7 @@ final class FieldTypeHandlerRegistry
      *
      * @var array
      */
-    private $map = [];
+    private $map;
 
     /**
      * Creates a service registry.

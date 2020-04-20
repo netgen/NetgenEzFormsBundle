@@ -7,6 +7,7 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 use eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct;
 use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
 use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
@@ -90,15 +91,17 @@ final class CreateContentTypeTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'identifier',
-                            'fieldTypeIdentifier' => 'field_type',
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'identifier',
+                                'fieldTypeIdentifier' => 'field_type',
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
         $contentUpdateStruct = new ContentCreateStruct(['contentType' => $contentType, 'mainLanguageCode' => 'eng-GB']);
@@ -131,15 +134,17 @@ final class CreateContentTypeTest extends TestCase
         $contentType = new ContentType(
             [
                 'id' => 123,
-                'fieldDefinitions' => [
-                    new FieldDefinition(
-                        [
-                            'id' => 'id',
-                            'identifier' => 'identifier',
-                            'fieldTypeIdentifier' => 'ezuser',
-                        ]
-                    ),
-                ],
+                'fieldDefinitions' => new FieldDefinitionCollection(
+                    [
+                        new FieldDefinition(
+                            [
+                                'id' => 'id',
+                                'identifier' => 'identifier',
+                                'fieldTypeIdentifier' => 'ezuser',
+                            ]
+                        ),
+                    ]
+                ),
             ]
         );
         $contentUpdateStruct = new ContentCreateStruct(['contentType' => $contentType, 'mainLanguageCode' => 'eng-GB']);
