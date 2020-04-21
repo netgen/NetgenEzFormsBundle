@@ -71,7 +71,6 @@ services:
         arguments:
             - "@netgen.ezforms.form.fieldtype_handler_registry"
             - "@netgen.ezforms.form.data_mapper.info_collection"
-        calls:
-            - [setLanguages, [$languages$]]
+            - "@ezpublish.config.resolver"
         tags:
             - { name: form.type, alias: ezforms_information_collection }

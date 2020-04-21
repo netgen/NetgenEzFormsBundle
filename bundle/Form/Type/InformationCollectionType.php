@@ -5,24 +5,29 @@ declare(strict_types=1);
 namespace Netgen\Bundle\EzFormsBundle\Form\Type;
 
 use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
+use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
 use RuntimeException;
+use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 final class InformationCollectionType extends AbstractContentType
 {
     /**
-     * @var array
+     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
      */
-    protected $languages;
+    protected $configResolver;
 
-    /**
-     * Sets system available array of languages.
-     */
-    public function setLanguages(array $languages): void
-    {
-        $this->languages = $languages;
+    public function __construct(
+        FieldTypeHandlerRegistry $fieldTypeHandlerRegistry,
+        DataMapperInterface $dataMapper,
+        ConfigResolverInterface $configResolver
+    ) {
+        parent::__construct($fieldTypeHandlerRegistry, $dataMapper);
+
+        $this->configResolver = $configResolver;
     }
 
     public function getBlockPrefix(): string
@@ -82,7 +87,7 @@ final class InformationCollectionType extends AbstractContentType
     {
         $contentTypeLanguages = array_keys($contentType->getNames());
 
-        foreach ($this->languages as $languageCode) {
+        foreach ($this->configResolver->getParameter('languages') as $languageCode) {
             if (in_array($languageCode, $contentTypeLanguages, true)) {
                 return $languageCode;
             }
