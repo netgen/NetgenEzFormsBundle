@@ -12,6 +12,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
 use Netgen\Bundle\EzFormsBundle\Form\Type\InformationCollectionType;
+use Netgen\Bundle\EzFormsBundle\Tests\Stubs\ConfigResolverStub;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Symfony\Component\Form\AbstractType;
@@ -26,7 +27,12 @@ final class InformationCollectionTypeTest extends TestCase
 
         $dataMapper = $this->getMockForAbstractClass(DataMapperInterface::class);
 
-        $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
+        $infoCollectionType = new InformationCollectionType(
+            $handlerRegistry,
+            $dataMapper,
+            new ConfigResolverStub()
+        );
+
         self::assertInstanceOf(AbstractType::class, $infoCollectionType);
     }
 
@@ -45,7 +51,12 @@ final class InformationCollectionTypeTest extends TestCase
 
         $options = ['data' => 'data'];
 
-        $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
+        $infoCollectionType = new InformationCollectionType(
+            $handlerRegistry,
+            $dataMapper,
+            new ConfigResolverStub()
+        );
+
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 
@@ -64,7 +75,12 @@ final class InformationCollectionTypeTest extends TestCase
 
         $options = ['data' => new DataWrapper('payload')];
 
-        $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
+        $infoCollectionType = new InformationCollectionType(
+            $handlerRegistry,
+            $dataMapper,
+            new ConfigResolverStub()
+        );
+
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 
@@ -85,7 +101,12 @@ final class InformationCollectionTypeTest extends TestCase
 
         $options = ['data' => new DataWrapper($infoStruct)];
 
-        $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
+        $infoCollectionType = new InformationCollectionType(
+            $handlerRegistry,
+            $dataMapper,
+            new ConfigResolverStub()
+        );
+
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 
@@ -125,7 +146,12 @@ final class InformationCollectionTypeTest extends TestCase
 
         $options = ['data' => new DataWrapper($infoStruct, $contentType)];
 
-        $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
+        $infoCollectionType = new InformationCollectionType(
+            $handlerRegistry,
+            $dataMapper,
+            new ConfigResolverStub()
+        );
+
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 
@@ -165,7 +191,12 @@ final class InformationCollectionTypeTest extends TestCase
 
         $options = ['data' => new DataWrapper($infoStruct, $contentType)];
 
-        $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
+        $infoCollectionType = new InformationCollectionType(
+            $handlerRegistry,
+            $dataMapper,
+            new ConfigResolverStub()
+        );
+
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 
@@ -212,8 +243,12 @@ final class InformationCollectionTypeTest extends TestCase
 
         $options = ['data' => new DataWrapper($infoStruct, $contentType)];
 
-        $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
-        $infoCollectionType->setLanguages(['eng-GB']);
+        $infoCollectionType = new InformationCollectionType(
+            $handlerRegistry,
+            $dataMapper,
+            new ConfigResolverStub(['ezsettings' => ['languages' => ['eng-GB']]])
+        );
+
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 
@@ -260,8 +295,12 @@ final class InformationCollectionTypeTest extends TestCase
 
         $options = ['data' => new DataWrapper($infoStruct, $contentType)];
 
-        $infoCollectionType = new InformationCollectionType($handlerRegistry, $dataMapper);
-        $infoCollectionType->setLanguages(['fre-CH']);
+        $infoCollectionType = new InformationCollectionType(
+            $handlerRegistry,
+            $dataMapper,
+            new ConfigResolverStub(['ezsettings' => ['languages' => ['fre-CH']]])
+        );
+
         $infoCollectionType->buildForm($formBuilder, $options);
     }
 }
