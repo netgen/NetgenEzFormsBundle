@@ -11,6 +11,11 @@ use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use function array_flip;
+use function array_key_exists;
+use function array_keys;
+use function is_array;
+use function reset;
 
 final class Country extends FieldTypeHandler
 {

@@ -13,6 +13,7 @@ use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use function is_numeric;
 
 final class FloatHandler extends FieldTypeHandler
 {

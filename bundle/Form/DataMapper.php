@@ -11,6 +11,8 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\PropertyAccess\PropertyPathInterface;
+use function is_array;
+use function is_object;
 
 /**
  * A data mapper using property paths to read/write data.

@@ -12,6 +12,8 @@ use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
 use RuntimeException;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use function array_keys;
+use function in_array;
 
 final class InformationCollectionType extends AbstractContentType
 {

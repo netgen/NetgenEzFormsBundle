@@ -11,6 +11,7 @@ use eZ\Publish\SPI\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
+use function is_array;
 
 final class Url extends FieldTypeHandler
 {

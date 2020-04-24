@@ -6,6 +6,8 @@ namespace Netgen\Bundle\EzFormsBundle\Form;
 
 use OutOfBoundsException;
 use RuntimeException;
+use function gettype;
+use function is_callable;
 
 final class FieldTypeHandlerRegistry
 {
