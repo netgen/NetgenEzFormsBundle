@@ -162,9 +162,9 @@ final class DemoController extends Controller
 
         $contentType = $repository->getContentTypeService()->loadContentTypeByIdentifier('user');
         $userCreateStruct = $userService->newUserCreateStruct(
-            null,
-            null,
-            null,
+            'login',
+            'email@example.com',
+            'password',
             'eng-GB',
             $contentType
         );
