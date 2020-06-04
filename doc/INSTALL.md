@@ -9,18 +9,20 @@ Run the following from your website root folder to install NetgenEzFormsBundle:
 $ composer require netgen/ez-forms-bundle
 ```
 
-## Activate the bundle
+### Activate the bundle
 
-Activate required bundles in `app/AppKernel.php` file by adding them to the `$bundles` array in `registerBundles` method:
+Activate the bundle in `config/bundles.php` file.
 
 ```php
-public function registerBundles()
-{
-    ...
-    $bundles[] = new Netgen\Bundle\EzFormsBundle\NetgenEzFormsBundle();
+<?php
 
-    return $bundles;
-}
+return [
+    ...,
+
+    Netgen\Bundle\EzFormsBundle\NetgenEzFormsBundle::class => ['all' => true],
+
+    ...
+];
 ```
 
 ## Clear the caches

@@ -6,7 +6,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [master]
+## [3.0.0] - 2020-04-06
+
+* Add support for eZ Platform v3
+* Drop support for eZ Platform v1 & v2
 
 ## [2.0.2] - 2018-25-09
 
