@@ -17,7 +17,7 @@ final class UserUpdateTypeTest extends TestCase
 {
     public function testItExtendsAbstractType(): void
     {
-        $updateUserType = new UserUpdateType(10);
+        $updateUserType = new UserUpdateType();
         self::assertInstanceOf(AbstractType::class, $updateUserType);
     }
 
@@ -36,18 +36,12 @@ final class UserUpdateTypeTest extends TestCase
             ],
         ];
 
-        $passwordConstraints[] = new Constraints\Length(
-            [
-                'min' => 10,
-            ]
-        );
-
         $passwordOptions = [
             'type' => PasswordType::class,
             'required' => false,
             'invalid_message' => 'Both passwords must match.',
             'options' => [
-                'constraints' => $passwordConstraints,
+                'constraints' => [],
             ],
             'first_options' => [
                 'label' => 'New password (leave empty to keep current password)',
@@ -66,7 +60,7 @@ final class UserUpdateTypeTest extends TestCase
             ->method('add')
             ->with('password', RepeatedType::class, $passwordOptions);
 
-        $userCreateType = new UserUpdateType(10);
+        $userCreateType = new UserUpdateType();
         $userCreateType->buildForm($formBuilder, []);
     }
 }

@@ -18,7 +18,7 @@ final class UserCreateTypeTest extends TestCase
 {
     public function testItExtendsAbstractType(): void
     {
-        $userCreateType = new UserCreateType(10);
+        $userCreateType = new UserCreateType();
         self::assertInstanceOf(AbstractType::class, $userCreateType);
     }
 
@@ -44,20 +44,13 @@ final class UserCreateTypeTest extends TestCase
             ],
         ];
 
-        $passwordConstraints = [
-            new Constraints\NotBlank(),
-            new Constraints\Length(
-                [
-                    'min' => 10,
-                ]
-            ),
-        ];
-
         $passwordOptions = [
             'type' => PasswordType::class,
             'invalid_message' => 'Both passwords must match.',
             'options' => [
-                'constraints' => $passwordConstraints,
+                'constraints' => [
+                    new Constraints\NotBlank(),
+                ],
             ],
             'first_options' => [
                 'label' => 'Password',
@@ -81,7 +74,7 @@ final class UserCreateTypeTest extends TestCase
             ->method('add')
             ->with('password', RepeatedType::class, $passwordOptions);
 
-        $userCreateType = new UserCreateType(10);
+        $userCreateType = new UserCreateType();
         $userCreateType->buildForm($formBuilder, []);
     }
 }

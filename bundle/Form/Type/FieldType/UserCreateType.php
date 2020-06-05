@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form\Type\FieldType;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -12,18 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 
-final class UserCreateType extends AbstractType
+final class UserCreateType extends UserType
 {
-    /**
-     * @var int
-     */
-    protected $minimumPasswordLength;
-
-    public function __construct(int $minimumPasswordLength)
-    {
-        $this->minimumPasswordLength = $minimumPasswordLength;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $emailOptions = [
@@ -33,6 +22,7 @@ final class UserCreateType extends AbstractType
                 new Constraints\Email(),
             ],
         ];
+
         $usernameOptions = [
             'label' => 'Username',
             'constraints' => [
@@ -40,23 +30,11 @@ final class UserCreateType extends AbstractType
             ],
         ];
 
-        $passwordConstraints = [
-            new Constraints\NotBlank(),
-        ];
-
-        if ($this->minimumPasswordLength > 0) {
-            $passwordConstraints[] = new Constraints\Length(
-                [
-                    'min' => $this->minimumPasswordLength,
-                ]
-            );
-        }
-
         $passwordOptions = [
             'type' => PasswordType::class,
             'invalid_message' => 'Both passwords must match.',
             'options' => [
-                'constraints' => $passwordConstraints,
+                'constraints' => $this->getPasswordConstraints($options['ezforms']['fielddefinition'] ?? null),
             ],
             'first_options' => [
                 'label' => 'Password',

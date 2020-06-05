@@ -4,25 +4,14 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form\Type\FieldType;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 
-final class UserUpdateType extends AbstractType
+final class UserUpdateType extends UserType
 {
-    /**
-     * @var int
-     */
-    protected $minimumPasswordLength;
-
-    public function __construct(int $minimumPasswordLength)
-    {
-        $this->minimumPasswordLength = $minimumPasswordLength;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $emailOptions = [
@@ -33,23 +22,13 @@ final class UserUpdateType extends AbstractType
             ],
         ];
 
-        $passwordConstraints = [];
-        if ($this->minimumPasswordLength > 0) {
-            $passwordConstraints[] = new Constraints\Length(
-                [
-                    'min' => $this->minimumPasswordLength,
-                ]
-            );
-        }
-
         $passwordOptions = [
             'type' => PasswordType::class,
-            // Setting required to false enables passing empty passwords for no update,
-            // while length constraint still applies if passwords are not empty
+            // Setting required to false enables passing empty passwords for no update
             'required' => false,
             'invalid_message' => 'Both passwords must match.',
             'options' => [
-                'constraints' => $passwordConstraints,
+                'constraints' => $this->getPasswordConstraints($options['ezforms']['fielddefinition'] ?? null, false),
             ],
             'first_options' => [
                 'label' => 'New password (leave empty to keep current password)',
