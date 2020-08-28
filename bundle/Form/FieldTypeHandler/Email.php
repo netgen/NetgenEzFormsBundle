@@ -33,7 +33,7 @@ final class Email extends FieldTypeHandler
     ): void {
         $options = $this->getDefaultFieldOptions($fieldDefinition, $languageCode, $content);
 
-        if (!empty($fieldDefinition->validatorConfiguration['EmailAddressValidator'])) {
+        if (isset($fieldDefinition->validatorConfiguration['EmailAddressValidator'])) {
             $options['constraints'][] = new Constraints\Email();
         }
 
