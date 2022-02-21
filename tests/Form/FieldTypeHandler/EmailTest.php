@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
-use eZ\Publish\Core\FieldType\EmailAddress;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\FieldType\EmailAddress;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Email;
 use PHPUnit\Framework\TestCase;

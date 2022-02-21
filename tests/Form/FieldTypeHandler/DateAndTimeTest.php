@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use DateTime;
-use eZ\Publish\Core\FieldType\DateAndTime as DTValue;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\FieldType\DateAndTime as DTValue;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\DateAndTime;
 use PHPUnit\Framework\TestCase;

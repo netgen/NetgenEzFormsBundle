@@ -6,8 +6,8 @@ namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
 use DateTime;
 use DateTimeInterface;
-use eZ\Publish\Core\FieldType\Time\Value as TimeValue;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\FieldType\Time\Value as TimeValue;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Time;
 use PHPUnit\Framework\TestCase;

@@ -17,7 +17,7 @@ final class CreateUserMapper extends DataMapper
 {
     protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath): void
     {
-        /** @var \eZ\Publish\Core\Repository\Values\User\UserCreateStruct $userCreateStruct */
+        /** @var \Ibexa\Core\Repository\Values\User\UserCreateStruct $userCreateStruct */
         $userCreateStruct = $data->payload;
         $contentType = $userCreateStruct->contentType;
 
@@ -43,7 +43,7 @@ final class CreateUserMapper extends DataMapper
 
     protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath): void
     {
-        /** @var \eZ\Publish\API\Repository\Values\User\UserCreateStruct $userCreateStruct */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\User\UserCreateStruct $userCreateStruct */
         $userCreateStruct = $data->payload;
         $contentType = $userCreateStruct->contentType;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
@@ -15,7 +15,7 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
 final class InformationCollectionMapper extends DataMapper
 {
     /**
-     * Maps data from eZ Publish structure to the form.
+     * Maps data from Ibexa Platform structure to the form.
      */
     protected function mapToForm(
         FormInterface $form,
@@ -47,7 +47,7 @@ final class InformationCollectionMapper extends DataMapper
     }
 
     /**
-     * Maps data from form to the eZ Publish structure.
+     * Maps data from form to the Ibexa Platform structure.
      */
     protected function mapFromForm(
         FormInterface $form,

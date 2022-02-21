@@ -17,11 +17,11 @@ final class UpdateContentMapper extends DataMapper
 {
     protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath): void
     {
-        /** @var \eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct $contentUpdateStruct */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\Content\ContentUpdateStruct $contentUpdateStruct */
         $contentUpdateStruct = $data->payload;
-        /** @var \eZ\Publish\API\Repository\Values\Content\Content $content */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $content */
         $content = $data->target;
-        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $data->definition;
 
         $fieldDefinitionIdentifier = (string) $propertyPath;
@@ -49,9 +49,9 @@ final class UpdateContentMapper extends DataMapper
 
     protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath): void
     {
-        /** @var \eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct $contentUpdateStruct */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\Content\ContentUpdateStruct $contentUpdateStruct */
         $contentUpdateStruct = $data->payload;
-        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $data->definition;
 
         $fieldDefinitionIdentifier = (string) $propertyPath;

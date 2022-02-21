@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\FieldType\Checkbox as CheckboxValue;
-use eZ\Publish\Core\Helper\FieldHelper;
-use eZ\Publish\SPI\FieldType\Value;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\FieldType\Checkbox as CheckboxValue;
+use Ibexa\Core\Helper\FieldHelper;
+use Ibexa\Contracts\Core\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 final class Checkbox extends FieldTypeHandler
 {
     /**
-     * @var \eZ\Publish\Core\Helper\FieldHelper
+     * @var \Ibexa\Core\Helper\FieldHelper
      */
     protected $fieldHelper;
 

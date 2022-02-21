@@ -125,7 +125,7 @@ abstract class DataMapper implements DataMapperInterface
     }
 
     /**
-     * Maps data from eZ Publish structure to the form.
+     * Maps data from Ibexa Platform structure to the form.
      */
     abstract protected function mapToForm(
         FormInterface $form,
@@ -134,7 +134,7 @@ abstract class DataMapper implements DataMapperInterface
     ): void;
 
     /**
-     * Maps data from form to the eZ Publish structure.
+     * Maps data from form to the Ibexa Platform structure.
      */
     abstract protected function mapFromForm(
         FormInterface $form,

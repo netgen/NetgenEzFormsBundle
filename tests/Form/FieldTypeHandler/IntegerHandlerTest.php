@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
-use eZ\Publish\Core\FieldType\Integer\Value as IntegerValue;
-use eZ\Publish\Core\Helper\FieldHelper;
-use eZ\Publish\Core\Repository\Values\Content\Content;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\FieldType\Integer\Value as IntegerValue;
+use Ibexa\Core\Helper\FieldHelper;
+use Ibexa\Core\Repository\Values\Content\Content;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\IntegerHandler;
 use PHPUnit\Framework\TestCase;

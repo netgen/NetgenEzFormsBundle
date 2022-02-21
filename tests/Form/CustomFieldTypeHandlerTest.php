@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form;
 
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Symfony\Component\Form\FormBuilderInterface;

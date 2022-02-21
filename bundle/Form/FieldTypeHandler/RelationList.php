@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
-use eZ\Publish\API\Repository\Repository;
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\FieldType\RelationList\Value as RelationListValue;
-use eZ\Publish\SPI\FieldType\Value;
+use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\FieldType\RelationList\Value as RelationListValue;
+use Ibexa\Contracts\Core\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,7 +24,7 @@ final class RelationList extends FieldTypeHandler
     public const TPLBASED_SINGLE = 6;
 
     /**
-     * @var \eZ\Publish\API\Repository\Repository
+     * @var \Ibexa\Contracts\Core\Repository\Repository
      */
     private $repository;
 
@@ -70,7 +70,7 @@ final class RelationList extends FieldTypeHandler
                 $locationList = $locationService->loadLocationChildren($location);
 
                 $choices = [];
-                /** @var \eZ\Publish\API\Repository\Values\Content\Location $child */
+                /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $child */
                 foreach ($locationList->locations as $child) {
                     $choices[$child->getContent()->getName()] = $child->contentInfo->id;
                 }
@@ -88,7 +88,7 @@ final class RelationList extends FieldTypeHandler
                 $locationList = $locationService->loadLocationChildren($location);
 
                 $choices = [];
-                /** @var \eZ\Publish\API\Repository\Values\Content\Location $child */
+                /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $child */
                 foreach ($locationList->locations as $child) {
                     $choices[$child->getContent()->getName()] = $child->contentInfo->id;
                 }

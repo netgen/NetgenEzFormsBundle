@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Netgen\Bundle\EzFormsBundle\Controller;
 
 use Exception;
-use eZ\Bundle\EzPublishCoreBundle\Controller;
-use eZ\Publish\API\Repository\Exceptions\InvalidArgumentException;
-use eZ\Publish\Core\MVC\Symfony\Routing\UrlAliasRouter;
+use Ibexa\Bundle\Core\Controller;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Core\MVC\Symfony\Routing\UrlAliasRouter;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
 use Netgen\Bundle\EzFormsBundle\Form\Type\CreateContentType;

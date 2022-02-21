@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
-use eZ\Publish\Core\FieldType\Float\Value as FloatValue;
-use eZ\Publish\Core\Helper\FieldHelper;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\FieldType\Float\Value as FloatValue;
+use Ibexa\Core\Helper\FieldHelper;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\FloatHandler;
 use PHPUnit\Framework\TestCase;
@@ -48,7 +48,7 @@ final class FloatHandlerTest extends TestCase
             ->onlyMethods(['add'])
             ->getMock();
 
-        $this->content = $this->getMockBuilder('eZ\Publish\API\Repository\Values\Content\Content')
+        $this->content = $this->getMockBuilder('Ibexa\Contracts\Core\Repository\Values\Content\Content')
             ->disableOriginalConstructor()
             ->getMock();
 

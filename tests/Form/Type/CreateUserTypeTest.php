@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
-use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
-use eZ\Publish\Core\Repository\Values\User\UserCreateStruct;
+use Ibexa\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
+use Ibexa\Core\Repository\Values\User\UserCreateStruct;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
@@ -52,7 +52,7 @@ final class CreateUserTypeTest extends TestCase
     public function testBuildFormDataWrapperTargetMustBeUser(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Data payload must be an instance of eZ\Publish\API\Repository\Values\User\User');
+        $this->expectExceptionMessage('Data payload must be an instance of Ibexa\Contracts\Core\Repository\Values\User\User');
 
         $handlerRegistry = new FieldTypeHandlerRegistry();
 

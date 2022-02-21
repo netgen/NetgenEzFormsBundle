@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\DataMapper;
 
-use eZ\Publish\API\Repository\Values\User\UserUpdateStruct;
-use eZ\Publish\Core\FieldType\TextLine\Value as TextLineValue;
-use eZ\Publish\Core\Repository\Values\Content\Content;
-use eZ\Publish\Core\Repository\Values\Content\ContentUpdateStruct;
-use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
-use eZ\Publish\Core\Repository\Values\User\User;
+use Ibexa\Contracts\Core\Repository\Values\User\UserUpdateStruct;
+use Ibexa\Core\FieldType\TextLine\Value as TextLineValue;
+use Ibexa\Core\Repository\Values\Content\Content;
+use Ibexa\Core\Repository\Values\Content\ContentUpdateStruct;
+use Ibexa\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
+use Ibexa\Core\Repository\Values\User\User;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataMapper\UpdateUserMapper;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;

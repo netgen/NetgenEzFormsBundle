@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form\Type;
 
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use eZ\Publish\API\Repository\Values\User\User;
-use eZ\Publish\API\Repository\Values\User\UserUpdateStruct;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Contracts\Core\Repository\Values\User\User;
+use Ibexa\Contracts\Core\Repository\Values\User\UserUpdateStruct;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use RuntimeException;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -33,7 +33,7 @@ final class UpdateUserType extends AbstractContentType
 
         if (!$user instanceof User) {
             throw new RuntimeException(
-                'Data payload must be an instance of eZ\\Publish\\API\\Repository\\Values\\User\\User'
+                'Data payload must be an instance of Ibexa\\Contracts\\Core\\Repository\\Values\\User\\User'
             );
         }
 
@@ -41,7 +41,7 @@ final class UpdateUserType extends AbstractContentType
 
         if (!$userUpdateStruct instanceof UserUpdateStruct) {
             throw new RuntimeException(
-                'Data payload must be an instance of eZ\\Publish\\API\\Repository\\Values\\User\\UserUpdateStruct'
+                'Data payload must be an instance of Ibexa\\Contracts\\Core\\Repository\\Values\\User\\UserUpdateStruct'
             );
         }
 
@@ -49,7 +49,7 @@ final class UpdateUserType extends AbstractContentType
 
         if (!$contentType instanceof ContentType) {
             throw new RuntimeException(
-                'Data definition must be an instance of eZ\\Publish\\API\\Repository\\Values\\ContentType\\ContentType'
+                'Data definition must be an instance of Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType'
             );
         }
 

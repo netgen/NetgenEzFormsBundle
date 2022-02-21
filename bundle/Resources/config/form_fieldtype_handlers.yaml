@@ -31,7 +31,7 @@ services:
 
     netgen.ezforms.form.fieldtype_handler.ezboolean:
         class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Checkbox
-        arguments: [ "@ezpublish.field_helper" ]
+        arguments: [ "@Ibexa\\Core\\Helper\\FieldHelper" ]
         tags:
             - { name: netgen.ezforms.form.fieldtype_handler, alias: ezboolean }
 
@@ -47,13 +47,13 @@ services:
 
     netgen.ezforms.form.fieldtype_handler.ezinteger:
         class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\IntegerHandler
-        arguments: [ "@ezpublish.field_helper" ]
+        arguments: [ "@Ibexa\\Core\\Helper\\FieldHelper" ]
         tags:
             - {name: netgen.ezforms.form.fieldtype_handler, alias: ezinteger}
 
     netgen.ezforms.form.fieldtype_handler.ezfloat:
         class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\FloatHandler
-        arguments: [ "@ezpublish.field_helper" ]
+        arguments: [ "@Ibexa\\Core\\Helper\\FieldHelper" ]
         tags:
             - { name: netgen.ezforms.form.fieldtype_handler, alias: ezfloat }
 
@@ -65,7 +65,7 @@ services:
     netgen.ezforms.form.fieldtype_handler.ezcountry:
         class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Country
         arguments:
-            - "%ezpublish.fieldType.ezcountry.data%"
+            - "%ibexa.field_type.country.data%"
         tags:
             - { name: netgen.ezforms.form.fieldtype_handler, alias: ezcountry }
 
@@ -92,13 +92,13 @@ services:
     netgen.ezforms.form.fieldtype_handler.ezobjectrelation:
         class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Relation
         arguments:
-          - "@ezpublish.api.repository"
+          - "@ibexa.api.repository"
         tags:
             - { name: netgen.ezforms.form.fieldtype_handler, alias: ezobjectrelation }
-            
+
     netgen.ezforms.form.fieldtype_handler.ezobjectrelationlist:
         class: Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\RelationList
         arguments:
-          - "@ezpublish.api.repository"
+          - "@ibexa.api.repository"
         tags:
             - { name: netgen.ezforms.form.fieldtype_handler, alias: ezobjectrelationlist }

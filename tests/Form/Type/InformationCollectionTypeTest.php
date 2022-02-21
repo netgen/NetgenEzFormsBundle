@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
-use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
+use Ibexa\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
@@ -87,7 +87,7 @@ final class InformationCollectionTypeTest extends TestCase
     public function testBuildFormDataWrapperDefinitionMustBeContentType(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Data definition must be an instance of eZ\Publish\API\Repository\Values\ContentType\ContentType');
+        $this->expectExceptionMessage('Data definition must be an instance of Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType');
 
         $handlerRegistry = new FieldTypeHandlerRegistry();
 
@@ -246,7 +246,7 @@ final class InformationCollectionTypeTest extends TestCase
         $infoCollectionType = new InformationCollectionType(
             $handlerRegistry,
             $dataMapper,
-            new ConfigResolverStub(['ezsettings' => ['languages' => ['eng-GB']]])
+            new ConfigResolverStub(['ibexa.site_access.config' => ['languages' => ['eng-GB']]])
         );
 
         $infoCollectionType->buildForm($formBuilder, $options);
@@ -298,7 +298,7 @@ final class InformationCollectionTypeTest extends TestCase
         $infoCollectionType = new InformationCollectionType(
             $handlerRegistry,
             $dataMapper,
-            new ConfigResolverStub(['ezsettings' => ['languages' => ['fre-CH']]])
+            new ConfigResolverStub(['ibexa.site_access.config' => ['languages' => ['fre-CH']]])
         );
 
         $infoCollectionType->buildForm($formBuilder, $options);

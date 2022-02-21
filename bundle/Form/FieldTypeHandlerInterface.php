@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form;
 
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\SPI\FieldType\Value;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Contracts\Core\FieldType\Value;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -15,7 +15,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 interface FieldTypeHandlerInterface
 {
     /**
-     * Converts the eZ Publish FieldType value to a format that can be accepted by the form.
+     * Converts the Ibexa Platform FieldType value to a format that can be accepted by the form.
      *
      * @see buildFieldCreateForm
      * @see buildFieldUpdateForm
@@ -25,7 +25,7 @@ interface FieldTypeHandlerInterface
     public function convertFieldValueToForm(Value $value, ?FieldDefinition $fieldDefinition = null);
 
     /**
-     * Converts the form data to a format that can be accepted by eZ Publish FieldType.
+     * Converts the form data to a format that can be accepted by Ibexa Platform FieldType.
      *
      * @see buildFieldCreateForm
      * @see buildFieldUpdateForm

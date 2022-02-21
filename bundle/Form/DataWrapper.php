@@ -7,7 +7,7 @@ namespace Netgen\Bundle\EzFormsBundle\Form;
 final class DataWrapper
 {
     /**
-     * One of the eZ Publish structs, like ContentCreateStruct, UserUpdateStruct and so on.
+     * One of the Ibexa Platform structs, like ContentCreateStruct, UserUpdateStruct and so on.
      *
      * @var mixed
      */

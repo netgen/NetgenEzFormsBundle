@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form\Type;
 
-use eZ\Publish\API\Repository\Values\Content\ContentCreateStruct;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentCreateStruct;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use RuntimeException;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,7 +31,7 @@ final class CreateContentType extends AbstractContentType
 
         if (!$contentCreateStruct instanceof ContentCreateStruct) {
             throw new RuntimeException(
-                'Data payload must be an instance of eZ\\Publish\\API\\Repository\\Values\\Content\\ContentCreateStruct'
+                'Data payload must be an instance of Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\ContentCreateStruct'
             );
         }
 

@@ -1,10 +1,10 @@
 {
     "name": "netgen/ez-forms-bundle",
-    "description": "Integration of Symfony's Form component with eZ Platform Public API",
-    "type": "ezplatform-bundle",
+    "description": "Integration of Symfony's Form component with Ibexa Platform Public API",
+    "type": "ibexa-bundle",
     "license": "GPL-2.0-only",
     "keywords": [
-        "ezplatform",
+        "ibexa",
         "forms",
         "netgen",
         "ezforms",
@@ -18,15 +18,15 @@
         }
     ],
     "require": {
-        "symfony/config": "^5.0",
-        "symfony/dependency-injection": "^5.0",
-        "symfony/form": "^5.0",
-        "symfony/http-foundation": "^5.0",
-        "symfony/http-kernel": "^5.0",
-        "symfony/options-resolver": "^5.0",
-        "symfony/property-access": "^5.0",
-        "symfony/validator": "^5.0",
-        "ezsystems/ezplatform-kernel": "^1.0"
+        "symfony/config": "^5.4",
+        "symfony/dependency-injection": "^5.4",
+        "symfony/form": "^5.4",
+        "symfony/http-foundation": "^5.4",
+        "symfony/http-kernel": "^5.4",
+        "symfony/options-resolver": "^5.4",
+        "symfony/property-access": "^5.4",
+        "symfony/validator": "^5.4",
+        "ibexa/core": "^4.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5",
@@ -50,7 +50,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.x-dev"
+            "dev-master": "4.x-dev"
         }
     }
 }

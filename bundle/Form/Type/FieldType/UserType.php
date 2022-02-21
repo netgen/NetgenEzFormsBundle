@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form\Type\FieldType;
 
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Validator\Constraints;
 

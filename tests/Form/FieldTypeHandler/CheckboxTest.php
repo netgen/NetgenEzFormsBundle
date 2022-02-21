@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
-use eZ\Publish\Core\FieldType\Checkbox\Value as CheckboxValue;
-use eZ\Publish\Core\Helper\FieldHelper;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\FieldType\Checkbox\Value as CheckboxValue;
+use Ibexa\Core\Helper\FieldHelper;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\Checkbox;
 use PHPUnit\Framework\TestCase;
@@ -48,7 +48,7 @@ final class CheckboxTest extends TestCase
             ->onlyMethods(['add'])
             ->getMock();
 
-        $this->content = $this->getMockBuilder('eZ\Publish\API\Repository\Values\Content\Content')
+        $this->content = $this->getMockBuilder('Ibexa\Contracts\Core\Repository\Values\Content\Content')
             ->disableOriginalConstructor()
             ->getMock();
 

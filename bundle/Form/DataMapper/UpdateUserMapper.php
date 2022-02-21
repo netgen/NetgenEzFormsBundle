@@ -17,11 +17,11 @@ final class UpdateUserMapper extends DataMapper
 {
     protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath): void
     {
-        /** @var \eZ\Publish\API\Repository\Values\User\UserUpdateStruct $userUpdateStruct */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\User\UserUpdateStruct $userUpdateStruct */
         $userUpdateStruct = $data->payload;
-        /** @var \eZ\Publish\API\Repository\Values\User\User $user */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\User\User $user */
         $user = $data->target;
-        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $data->definition;
 
         $fieldDefinitionIdentifier = (string) $propertyPath;
@@ -59,9 +59,9 @@ final class UpdateUserMapper extends DataMapper
 
     protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath): void
     {
-        /** @var \eZ\Publish\API\Repository\Values\User\UserUpdateStruct $userUpdateStruct */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\User\UserUpdateStruct $userUpdateStruct */
         $userUpdateStruct = $data->payload;
-        /** @var \eZ\Publish\API\Repository\Values\ContentType\ContentType $contentType */
+        /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $data->definition;
 
         $fieldDefinitionIdentifier = (string) $propertyPath;
@@ -88,7 +88,7 @@ final class UpdateUserMapper extends DataMapper
             // Creating users through Content context is not allowed,
             // so we map dummy data to make it non-empty
             // This will be ignored during actual user update
-            // @todo this should be improved on eZ side
+            // @todo this should be improved on Ibexa side
             $userUpdateStruct->contentUpdateStruct->setField(
                 $fieldDefinitionIdentifier,
                 [

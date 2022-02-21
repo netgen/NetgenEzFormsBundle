@@ -17,7 +17,7 @@
 
 {% block __ezforms_update_image_widget %}
     {% apply spaceless %}
-        {{ ez_render_field(
+        {{ ibexa_render_field(
             form.vars.ezforms.content,
             form.vars.ezforms.fielddefinition.identifier,
             { 'parameters': {'alias': 'articlethumbnail'} }
@@ -41,7 +41,7 @@
 {# BinaryFile update field custom rendering #}
 {% block __ezforms_update_file_widget %}
     {% apply spaceless %}
-        {{ ez_render_field(
+        {{ ibexa_render_field(
             form.vars.ezforms.content,
             form.vars.ezforms.fielddefinition.identifier
         ) }}

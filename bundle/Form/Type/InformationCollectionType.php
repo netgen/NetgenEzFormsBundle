@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form\Type;
 
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
 use Netgen\Bundle\EzFormsBundle\Form\Payload\InformationCollectionStruct;
@@ -18,7 +18,7 @@ use function in_array;
 final class InformationCollectionType extends AbstractContentType
 {
     /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
+     * @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface
      */
     protected $configResolver;
 
@@ -62,7 +62,7 @@ final class InformationCollectionType extends AbstractContentType
 
         if (!$contentType instanceof ContentType) {
             throw new RuntimeException(
-                'Data definition must be an instance of eZ\\Publish\\API\\Repository\\Values\\ContentType\\ContentType'
+                'Data definition must be an instance of Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType'
             );
         }
 

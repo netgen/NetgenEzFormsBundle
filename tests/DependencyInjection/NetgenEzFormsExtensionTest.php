@@ -11,7 +11,7 @@ final class NetgenEzFormsExtensionTest extends AbstractExtensionTestCase
 {
     public function testItSetsValidContainerParameters(): void
     {
-        $this->container->setParameter('ezpublish.siteaccess.list', []);
+        $this->container->setParameter('ibexa.site_access.list', []);
         $this->load();
     }
 

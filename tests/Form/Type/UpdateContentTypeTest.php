@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
-use eZ\Publish\Core\Repository\Values\Content\Content;
-use eZ\Publish\Core\Repository\Values\Content\ContentUpdateStruct;
-use eZ\Publish\Core\Repository\Values\Content\VersionInfo;
-use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
-use eZ\Publish\SPI\Persistence\Content\ContentInfo;
+use Ibexa\Core\Repository\Values\Content\Content;
+use Ibexa\Core\Repository\Values\Content\ContentUpdateStruct;
+use Ibexa\Core\Repository\Values\Content\VersionInfo;
+use Ibexa\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
+use Ibexa\Contracts\Core\Persistence\Content\ContentInfo;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
@@ -55,7 +55,7 @@ final class UpdateContentTypeTest extends TestCase
     public function testBuildFormDataWrapperTargetMustBeUser(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Data payload must be an instance of eZ\Publish\API\Repository\Values\Content\Content');
+        $this->expectExceptionMessage('Data payload must be an instance of Ibexa\Contracts\Core\Repository\Values\Content\Content');
 
         $handlerRegistry = new FieldTypeHandlerRegistry();
 
@@ -74,7 +74,7 @@ final class UpdateContentTypeTest extends TestCase
     public function testBuildFormDataWrapperPayloadMustBeUserUpdateStruct(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Data payload must be an instance of eZ\Publish\API\Repository\Values\Content\ContentUpdateStruct');
+        $this->expectExceptionMessage('Data payload must be an instance of Ibexa\Contracts\Core\Repository\Values\Content\ContentUpdateStruct');
 
         $handlerRegistry = new FieldTypeHandlerRegistry();
 
@@ -95,7 +95,7 @@ final class UpdateContentTypeTest extends TestCase
     public function testBuildFormDataWrapperDefinitionMustBeContentType(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Data definition must be an instance of eZ\Publish\API\Repository\Values\ContentType\ContentType');
+        $this->expectExceptionMessage('Data definition must be an instance of Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType');
 
         $handlerRegistry = new FieldTypeHandlerRegistry();
 

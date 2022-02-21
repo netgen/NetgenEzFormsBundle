@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
-use eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct;
-use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\Repository\Values\ContentType\FieldDefinitionCollection;
+use Ibexa\Core\Repository\Values\Content\ContentCreateStruct;
+use Ibexa\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;
@@ -52,7 +52,7 @@ final class CreateContentTypeTest extends TestCase
     public function testBuildFormDataWrapperPayloadMustBeContentCreateStruct(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Data payload must be an instance of eZ\Publish\API\Repository\Values\Content\ContentCreateStruct');
+        $this->expectExceptionMessage('Data payload must be an instance of Ibexa\Contracts\Core\Repository\Values\Content\ContentCreateStruct');
 
         $handlerRegistry = new FieldTypeHandlerRegistry();
 

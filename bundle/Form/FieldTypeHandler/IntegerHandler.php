@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
-use eZ\Publish\API\Repository\Values\Content\Content;
-use eZ\Publish\API\Repository\Values\ContentType\FieldDefinition;
-use eZ\Publish\Core\FieldType\Integer as IntegerValue;
-use eZ\Publish\Core\Helper\FieldHelper;
-use eZ\Publish\SPI\FieldType\Value;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
+use Ibexa\Core\FieldType\Integer as IntegerValue;
+use Ibexa\Core\Helper\FieldHelper;
+use Ibexa\Contracts\Core\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,7 +18,7 @@ use function is_int;
 final class IntegerHandler extends FieldTypeHandler
 {
     /**
-     * @var \eZ\Publish\Core\Helper\FieldHelper
+     * @var \Ibexa\Core\Helper\FieldHelper
      */
     protected $fieldHelper;
 

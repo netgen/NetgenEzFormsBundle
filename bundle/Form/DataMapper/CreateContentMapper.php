@@ -17,7 +17,7 @@ final class CreateContentMapper extends DataMapper
 {
     protected function mapToForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath): void
     {
-        /** @var \eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct $contentCreateStruct */
+        /** @var \Ibexa\Core\Repository\Values\Content\ContentCreateStruct $contentCreateStruct */
         $contentCreateStruct = $data->payload;
         $contentType = $contentCreateStruct->contentType;
 
@@ -43,7 +43,7 @@ final class CreateContentMapper extends DataMapper
 
     protected function mapFromForm(FormInterface $form, DataWrapper $data, PropertyPathInterface $propertyPath): void
     {
-        /** @var \eZ\Publish\Core\Repository\Values\Content\ContentCreateStruct $contentCreateStruct */
+        /** @var \Ibexa\Core\Repository\Values\Content\ContentCreateStruct $contentCreateStruct */
         $contentCreateStruct = $data->payload;
         $contentType = $contentCreateStruct->contentType;
 
