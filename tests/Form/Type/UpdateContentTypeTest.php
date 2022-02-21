@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\Type;
 
+use Ibexa\Contracts\Core\Persistence\Content\ContentInfo;
 use Ibexa\Core\Repository\Values\Content\Content;
 use Ibexa\Core\Repository\Values\Content\ContentUpdateStruct;
 use Ibexa\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
-use Ibexa\Contracts\Core\Persistence\Content\ContentInfo;
 use Netgen\Bundle\EzFormsBundle\Form\DataWrapper;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandlerRegistry;

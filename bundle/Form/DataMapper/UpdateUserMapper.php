@@ -19,8 +19,10 @@ final class UpdateUserMapper extends DataMapper
     {
         /** @var \Ibexa\Contracts\Core\Repository\Values\User\UserUpdateStruct $userUpdateStruct */
         $userUpdateStruct = $data->payload;
+
         /** @var \Ibexa\Contracts\Core\Repository\Values\User\User $user */
         $user = $data->target;
+
         /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $data->definition;
 
@@ -61,6 +63,7 @@ final class UpdateUserMapper extends DataMapper
     {
         /** @var \Ibexa\Contracts\Core\Repository\Values\User\UserUpdateStruct $userUpdateStruct */
         $userUpdateStruct = $data->payload;
+
         /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $data->definition;
 

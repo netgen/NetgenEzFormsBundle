@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
+use Ibexa\Contracts\Core\FieldType\Value;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Core\FieldType\RelationList\Value as RelationListValue;
-use Ibexa\Contracts\Core\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -70,6 +70,7 @@ final class RelationList extends FieldTypeHandler
                 $locationList = $locationService->loadLocationChildren($location);
 
                 $choices = [];
+
                 /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $child */
                 foreach ($locationList->locations as $child) {
                     $choices[$child->getContent()->getName()] = $child->contentInfo->id;
@@ -82,12 +83,14 @@ final class RelationList extends FieldTypeHandler
                 ] + $options);
 
                 break;
+
             default:
                 $locationService = $this->repository->getLocationService();
                 $location = $locationService->loadLocation($defaultLocation ?: 2);
                 $locationList = $locationService->loadLocationChildren($location);
 
                 $choices = [];
+
                 /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $child */
                 foreach ($locationList->locations as $child) {
                     $choices[$child->getContent()->getName()] = $child->contentInfo->id;

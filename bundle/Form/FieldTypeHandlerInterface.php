@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form;
 
+use Ibexa\Contracts\Core\FieldType\Value;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
-use Ibexa\Contracts\Core\FieldType\Value;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

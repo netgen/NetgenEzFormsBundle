@@ -83,11 +83,11 @@ abstract class DataMapper implements DataMapperInterface
             // Write-back is disabled if the form is not synchronized (transformation failed),
             // if the form was not submitted and if the form is disabled (modification not allowed)
             if (
-                null === $propertyPath ||
-                !$config->getMapped() ||
-                !$form->isSubmitted() ||
-                !$form->isSynchronized() ||
-                $form->isDisabled()
+                null === $propertyPath
+                || !$config->getMapped()
+                || !$form->isSubmitted()
+                || !$form->isSynchronized()
+                || $form->isDisabled()
             ) {
                 continue;
             }
@@ -104,8 +104,8 @@ abstract class DataMapper implements DataMapperInterface
             // If the field is of type DateTime and the data is the same skip the update to
             // keep the original object hash
             if (
-                $form->getData() instanceof DateTime &&
-                $form->getData() === $this->propertyAccessor->getValue($data, $propertyPath)
+                $form->getData() instanceof DateTime
+                && $form->getData() === $this->propertyAccessor->getValue($data, $propertyPath)
             ) {
                 continue;
             }
@@ -113,9 +113,9 @@ abstract class DataMapper implements DataMapperInterface
             // If the data is identical to the value in $data, we are
             // dealing with a reference
             if (
-                is_object($data) &&
-                $config->getByReference() &&
-                $form->getData() === $this->propertyAccessor->getValue($data, $propertyPath)
+                is_object($data)
+                && $config->getByReference()
+                && $form->getData() === $this->propertyAccessor->getValue($data, $propertyPath)
             ) {
                 continue;
             }
@@ -154,10 +154,10 @@ abstract class DataMapper implements DataMapperInterface
     protected function shouldSkipForEmptyUpdate(FormInterface $form, $value, string $fieldDefinitionIdentifier): bool
     {
         return
-            $value === null &&
-            (
-                $form->getRoot()->has("ezforms_skip_empty_update_{$fieldDefinitionIdentifier}") &&
-                $form->getRoot()->get("ezforms_skip_empty_update_{$fieldDefinitionIdentifier}")->getData() === 'yes'
+            $value === null
+            && (
+                $form->getRoot()->has("ezforms_skip_empty_update_{$fieldDefinitionIdentifier}")
+                && $form->getRoot()->get("ezforms_skip_empty_update_{$fieldDefinitionIdentifier}")->getData() === 'yes'
             )
         ;
     }

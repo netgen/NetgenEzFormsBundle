@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
+use Ibexa\Contracts\Core\FieldType\Value;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Core\FieldType\Url as UrlValue;
-use Ibexa\Contracts\Core\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;

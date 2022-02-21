@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Tests\Form\FieldTypeHandler;
 
+use Ibexa\Contracts\Core\FieldType\Value;
 use Ibexa\Core\FieldType\BinaryFile\Value as FileValue;
 use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
-use Ibexa\Contracts\Core\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler\BinaryFile;
 use Netgen\Bundle\EzFormsBundle\Tests\Form\Mock\FileMock;

@@ -19,8 +19,10 @@ final class UpdateContentMapper extends DataMapper
     {
         /** @var \Ibexa\Contracts\Core\Repository\Values\Content\ContentUpdateStruct $contentUpdateStruct */
         $contentUpdateStruct = $data->payload;
+
         /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $content */
         $content = $data->target;
+
         /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $data->definition;
 
@@ -51,6 +53,7 @@ final class UpdateContentMapper extends DataMapper
     {
         /** @var \Ibexa\Contracts\Core\Repository\Values\Content\ContentUpdateStruct $contentUpdateStruct */
         $contentUpdateStruct = $data->payload;
+
         /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType */
         $contentType = $data->definition;
 

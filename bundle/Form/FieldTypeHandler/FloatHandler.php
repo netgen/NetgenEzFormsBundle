@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 
+use Ibexa\Contracts\Core\FieldType\Value;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Core\FieldType\Float as FloatValue;
 use Ibexa\Core\Helper\FieldHelper;
-use Ibexa\Contracts\Core\FieldType\Value;
 use Netgen\Bundle\EzFormsBundle\Form\FieldTypeHandler;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;

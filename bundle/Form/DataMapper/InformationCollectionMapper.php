@@ -56,6 +56,7 @@ final class InformationCollectionMapper extends DataMapper
     ): void {
         /** @var InformationCollectionStruct $payload */
         $payload = $data->payload;
+
         /** @var ContentType $contentType */
         $contentType = $data->definition;
 
