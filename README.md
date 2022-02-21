@@ -19,34 +19,34 @@ Currently implemented forms:
 
 Currently supported FieldTypes:
 
-| FieldType             | Supported
-| ------------- | ---
-| Author         | no
-| BinaryFile     | yes
-| Checkbox       | yes
-| Country        | yes
-| Date           | yes
-| DateAndTime    | yes
-| EmailAddress   | yes
-| Float          | yes
-| Integer        | yes
-| Image          | yes
-| ISBN           | yes
-| Keyword        | no
-| Media          | no
-| MapLocation    | yes
-| Page           | no
-| Rating         | no
-| Relation       | yes
-| RelationList   | yes
-| RichText       | no
-| Selection      | yes
-| TextBlock      | yes
-| TextLine       | yes
-| Time           | yes
-| Url            | yes
-| User           | yes
-| XmlText        | no
+| FieldType    | Supported
+|--------------| ---
+| Author       | no
+| BinaryFile   | yes
+| Checkbox     | yes
+| Country      | yes
+| Date         | yes
+| DateAndTime  | yes
+| EmailAddress | yes
+| Float        | yes
+| Integer      | yes
+| Image        | yes
+| ISBN         | yes
+| Keyword      | no
+| Media        | no
+| MapLocation  | yes
+| Page         | no
+| Rating       | no
+| Relation     | yes
+| RelationList | yes
+| RichText     | no
+| Selection    | yes
+| TextBlock    | yes
+| TextLine     | yes
+| Time         | yes
+| Url          | yes
+| User         | yes
+| RichText     | no
 
 License, docs and installation instructions
 -------------------------------------------
